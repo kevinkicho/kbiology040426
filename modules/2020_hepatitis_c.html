@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2020 &middot; Hepatitis C Virus &mdash; kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css">
+<style>
+/* Module layout */
+.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
+.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
+.back-link:hover{color:var(--green);border-color:var(--green)}
+.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
+.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
+.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
+.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
+.mod-tab:hover{color:var(--text);background:var(--bg3)}
+.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
+.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
+.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
+
+/* Body layout */
+.mod-body{display:flex;min-height:calc(100vh - 100px)}
+.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
+.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Canvas */
+.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
+.canvas-wrap canvas{display:block;width:100%;height:240px}
+.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
+
+/* Mechanism panels */
+.mech-panels{display:flex;flex-direction:column;gap:10px}
+.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
+.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
+.mech-panel-body strong{color:var(--text)}
+.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+
+/* Molecules tab */
+.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
+.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
+.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
+.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
+.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
+.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
+
+/* Story tab */
+.story-content{max-width:720px}
+.story-block{margin-bottom:16px}
+.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
+
+/* Frontiers tab */
+.frontier-group{margin-bottom:20px}
+.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
+.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
+.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
+
+/* Connections tab */
+.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
+.connections-wrap canvas{display:block;width:100%;height:360px}
+
+/* Right sidebar */
+.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
+.rsb-mol-item:hover{color:var(--cyan)}
+.rsb-mol-icon{font-size:1rem;flex-shrink:0}
+.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
+.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
+</style>
+</head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#44ffcc;border-color:#44ffcc44;background:#44ffcc10">2020</span>
+    <div class="mod-title">Hepatitis C Virus</div>
+  </div>
+  <div class="mod-laureates">Harvey J. Alter, Michael Houghton &amp; Charles M. Rice &mdash; Nobel Prize in Physiology or Medicine 2020</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#44ffcc;border-color:#44ffcc44;background:#44ffcc10">Biotech</span>
+    <span class="mod-tag" style="color:#00ff99;border-color:#00ff9944;background:#00ff9910">Virology</span>
+    <span class="mod-tag" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">Pharmacology</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; HCV Attachment</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">Viral entry</span><span class="ctrl-val" id="lay-entry">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">Replication complex</span><span class="ctrl-val" id="lay-rep">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">DAA inhibitors</span><span class="ctrl-val" id="lay-daa">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> NS5B&rsquo;s closed hand conformation is unique among RdRps &mdash; explaining both its replication mechanism and why nucleoside inhibitors like sofosbuvir achieve &gt;10,000-fold selectivity over human polymerases.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; HCV Attachment &amp; IRES-Mediated Entry</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2020/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel Prize 2020 official announcement</div>
+      </a>
+      <a href="https://pubchem.ncbi.nlm.nih.gov/compound/45375808" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">PubChem</div>
+        <div class="ref-title">Sofosbuvir (CID 45375808)</div>
+      </a>
+      <a href="https://www.rcsb.org/structure/1QSY" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">RCSB PDB</div>
+        <div class="ref-title">NS5B RdRp (PDB: 1QSY)</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
+// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'ires': { term:'IRES (Internal Ribosome Entry Site)', level:'grad', def:'~340 nt structured RNA element at the HCV 5\' UTR. Recruits the 40S ribosomal subunit directly to the AUG start codon without 5\'-cap scanning \u2014 a cap-independent translation mechanism. HCV IRES is a drug target; flaviviral IRES share structural homology.' },
+  'svr12': { term:'SVR12 (Sustained Virologic Response)', level:'grad', def:'Undetectable HCV RNA (<15 IU/mL) 12 weeks post-treatment \u2014 operational definition of "cured." SVR12 = >99% durable: relapse after SVR12 is <1%. First DAA regimens (sofosbuvir/ledipasvir) achieved SVR12 >95% vs <50% with interferon.' },
+  'ns5a': { term:'NS5A (non-structural protein 5A)', level:'res', def:'HCV replication complex scaffold. No enzymatic activity, but essential for RNA replication and virion assembly. Hyperphosphorylation switch (basal \u2192 hyperphosphorylated) controls replication vs. assembly phase. NS5A inhibitors (daclatasvir, ledipasvir, velpatasvir) are the most potent DAA class (pM EC50).' },
+  'rdrp': { term:'NS5B RdRp (RNA-dependent RNA polymerase)', level:'res', def:'HCV\'s sole replicase. Palm-thumb-fingers domain architecture like HIV RT. Lacks proofreading \u2014 generates quasi-species diversity. Sofosbuvir (NI inhibitor at GTP site) and dasabuvir (NNI at thumb I/II) both target NS5B. Structural basis for broad-genotype coverage: catalytic GDD motif is invariant.' },
+  'pan_genotypic': { term:'Pan-genotypic DAA', level:'frontier', def:'Direct-acting antivirals active against all 6 major HCV genotypes (GT1-6). Glecaprevir/pibrentasvir (Mavyret) and sofosbuvir/velpatasvir (Epclusa) are approved pan-genotypic regimens achieving SVR12 >97% regardless of genotype. Enables simplified treatment without prior genotyping.' },
+});
+
+// ── Module molecules data ────────────────────────────────────────────────────
+const MODULE_MOLS = [
+  {
+    id:'ns5b', icon:'\uD83D\uDD35', color:'#44ffcc', type:'Protein \u00b7 RNA polymerase', is_protein:true,
+    name:'NS5B RdRp', sub:'PDB: 1QSY \u00b7 591 aa (catalytic domain)',
+    badges:[{text:'RdRp',color:'#44ffcc'},{text:'Sofosbuvir target',color:'#aa77ff'},{text:'Essential',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'1QSY',
+    nih_link:'https://www.rcsb.org/structure/1QSY',
+    mechanism:'HCV RNA-dependent RNA polymerase. Palm-thumb-fingers fold like all RdRps. Catalytic GDD motif (318-320) is invariant across all HCV genotypes \u2014 structural basis for pan-genotypic nucleoside inhibitors. Uniquely forms a closed hand conformation with the thumb fingertip loop occluding the active site, requiring conformational change for template entry. Lacks 3\'-to-5\' proofreading exonuclease \u2014 generates quasi-species diversity estimated at 10^5 mutants/day in an infected liver.',
+    properties:{'PDB':'1QSY','Resolution':'2.9 \u00c5 (X-ray)','Fold':'Right-hand RdRp','Catalytic':'GDD motif (318-320)','Genotype':'GT1b','MW':'~66 kDa','Inhibitors':'Sofosbuvir (NI), Dasabuvir (NNI)'},
+    property_flags:{'Resolution':'good','Catalytic':'good'},
+    interaction:{
+      title:'NS5B Replication Complex',
+      nodes:[
+        {id:'ns5b',x:220,y:150,r:36,color:'#44ffcc',label:'NS5B\nRdRp',    sub:'polymerase'},
+        {id:'rna', x:380,y:80, r:26,color:'#00e5ff',label:'(\u2212)RNA',   sub:'template'},
+        {id:'ns5a',x:380,y:220,r:26,color:'#ffd700',label:'NS5A',          sub:'scaffold'},
+        {id:'sof', x:80, y:80, r:22,color:'#aa77ff',label:'Sofosbuvir',    sub:'NI inhibitor'},
+        {id:'das', x:80, y:220,r:22,color:'#ff8844',label:'Dasabuvir',     sub:'NNI inhibitor'},
+      ],
+      edges:[
+        {from:'ns5b',to:'rna', color:'#44ffcc',label:'replicates',  dashed:false},
+        {from:'ns5a',to:'ns5b',color:'#ffd700',label:'scaffolds',   dashed:false},
+        {from:'sof', to:'ns5b',color:'#aa77ff',label:'chain term.', dashed:false},
+        {from:'das', to:'ns5b',color:'#ff8844',label:'allosteric',  dashed:true},
+      ]
+    },
+    papers:[
+      {year:'1999',journal:'Structure',impact:'IF 9',title:'Crystal structure of the RNA-dependent RNA polymerase of hepatitis C virus',abstract:'First NS5B crystal structure at 2.9\u00c5. Revealed closed right-hand fold with fingertip loop \u2014 unique among known RdRps. Structural basis for nucleoside inhibitor design.'},
+      {year:'2013',journal:'Science',impact:'IF 56',title:'Sofosbuvir (GS-7977) \u2014 potent pan-genotypic NS5B inhibitor',abstract:'Sofosbuvir as 2\'-F-2\'-C-Me uridine phosphoramidate prodrug. EC50 <1\u03bcM all genotypes; resistant mutations at S282T highly attenuating.'},
+    ],
+    rel_molecules:[
+      {icon:'\uD83D\uDFE2',name:'NS5A',role:'Replication\nscaffold',  id:'PDB: 4CL1'},
+      {icon:'\uD83D\uDFE3',name:'NS3/4A',role:'Serine\nprotease',     id:'PDB: 1A1R'},
+    ],
+    domains:[
+      {color:'#ff4488',name:'Fingers domain',    pos:'1\u2013190',    fn:'Template and NTP binding; fingertip loop contacts thumb, closing active site'},
+      {color:'#44ffcc',name:'Palm domain',        pos:'191\u2013370',  fn:'Catalytic GDD motif; site of nucleoside incorporation; sofosbuvir binds here'},
+      {color:'#ffd700',name:'Thumb domain',       pos:'371\u2013530',  fn:'NNI sites (thumb I at 423\u2013441, thumb II at 471\u2013482); dasabuvir/nesbuvir bind thumb I'},
+      {color:'#aa77ff',name:'C-terminal linker',  pos:'531\u2013591',  fn:'Membrane association; required for anchoring to ER replication complex'},
+    ]
+  },
+  {
+    id:'ns3', icon:'\uD83D\uDFE2', color:'#00ff99', type:'Protein \u00b7 Serine protease/Helicase', is_protein:true,
+    name:'NS3/4A Protease-Helicase', sub:'PDB: 1A1R \u00b7 NS3 (631 aa) + NS4A cofactor',
+    badges:[{text:'Protease',color:'#00ff99'},{text:'Helicase',color:'#ffd700'},{text:'Glecaprevir target',color:'#aa77ff'}],
+    pubchem_cid:null, pdb_id:'1A1R',
+    nih_link:'https://www.rcsb.org/structure/1A1R',
+    mechanism:'Bifunctional NS3 uses its serine protease (N-terminal; activated by NS4A cofactor) to cleave the viral polyprotein at 4 sites: NS3/4A, NS4A/4B, NS4B/5A, NS5A/5B. The chymotrypsin-like fold uses a Ser-His-Asp catalytic triad. NS3 also cleaves MAVS/TRIF \u2014 HCV immune evasion. C-terminal DExH helicase unwinds dsRNA. Macrocyclic NS3/4A inhibitors (glecaprevir, grazoprevir) have picomolar potency.',
+    properties:{'PDB':'1A1R','Resolution':'2.0 \u00c5','Fold':'Chymotrypsin-like','Catalytic':'Ser139-His57-Asp81','Cofactor':'NS4A (central \u03b2-strand)','MW':'~70 kDa','Inhibitor class':'Macrocyclic PIs'},
+    property_flags:{'Resolution':'good'},
+    interaction:{
+      title:'NS3/4A Polyprotein Processing',
+      nodes:[
+        {id:'ns3', x:220,y:150,r:36,color:'#00ff99',label:'NS3/4A',     sub:'protease'},
+        {id:'poly',x:380,y:100,r:28,color:'#ff4488',label:'Polyprotein', sub:'HCV precursor'},
+        {id:'mavs',x:380,y:220,r:26,color:'#00e5ff',label:'MAVS',       sub:'antiviral signal'},
+        {id:'glec',x:80, y:150,r:24,color:'#aa77ff',label:'Glecaprevir',sub:'macrocyclic PI'},
+      ],
+      edges:[
+        {from:'ns3',to:'poly',color:'#00ff99',label:'cleaves NS4B/5A\nNS5A/5B',   dashed:false},
+        {from:'ns3',to:'mavs',color:'#ff4444',label:'cleaves\nimmune evasion',    dashed:false},
+        {from:'glec',to:'ns3',color:'#aa77ff',label:'covalent-like\ninhibition',  dashed:false},
+      ]
+    },
+    papers:[
+      {year:'1998',journal:'Nat Struct Biol',impact:'IF 30',title:'NS3 protease domain structure reveals chymotrypsin fold with bound NS4A',abstract:'2.0\u00c5 structure \u2014 NS4A forms central \u03b2-strand completing the fold. Explains NS4A cofactor dependency. Template for all NS3 inhibitor drug design.'},
+      {year:'2017',journal:'NEJM',impact:'IF 176',title:'Glecaprevir\u2013Pibrentasvir for HCV genotype 1\u20136 (ENDURANCE trials)',abstract:'SVR12 >97% across all genotypes in 8-week pan-genotypic regimen. No resistance-associated substitutions affecting outcome.'},
+    ],
+    rel_molecules:[
+      {icon:'\uD83D\uDD35',name:'NS5B',role:'RdRp\npolymerase', id:'PDB: 1QSY'},
+      {icon:'\uD83D\uDFE1',name:'NS4B',role:'Membranous\nweb organizer',id:'No structure'},
+    ],
+    domains:[
+      {color:'#00ff99',name:'Serine protease (N-terminal)',pos:'1\u2013180',   fn:'Chymotrypsin fold; Ser139-His57-Asp81 catalytic triad; NS4A docks at \u03b21\u2013\u03b22'},
+      {color:'#ffd700',name:'Helicase (C-terminal)',       pos:'181\u2013631', fn:'DExH-box NTPase; unwinds dsRNA replication intermediates; 3\u2019\u21925\u2019 polarity'},
+    ]
+  },
+  {
+    id:'sofosbuvir', icon:'\uD83D\uDFE3', color:'#aa77ff', type:'Small Molecule \u00b7 Nucleotide prodrug', is_protein:false,
+    name:'Sofosbuvir (Sovaldi)', sub:'PubChem CID: 45375808 \u00b7 C22H29FN3O9P',
+    badges:[{text:'NS5B NI',color:'#aa77ff'},{text:'FDA 2013',color:'#00ff99'},{text:'Pan-genotypic',color:'#44ffcc'}],
+    pubchem_cid:45375808, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/45375808',
+    mechanism:'Phosphoramidate prodrug of 2\'-F-2\'-C-Me uridine monophosphate (PSI-7977). McGuigan ProTide technology delivers the nucleotide intracellularly, bypassing the first phosphorylation rate-limiting step. Active form (GS-461203 triphosphate) competes with UTP at NS5B active site. Chain terminator \u2014 no 3\'-OH for chain extension. Resistance mutation S282T highly attenuating in vivo.',
+    properties:{'MW':'529.4 g/mol','Formula':'C22H29FN3O9P','XLogP':'1.5','HBD':'2','HBA':'10','TPSA':'168 \u00c5\u00b2','pKa':'~10.2 (amine)','Bioavailability':'~80% oral'},
+    property_flags:{'XLogP':'good','Bioavailability':'good'},
+    interaction:{
+      title:'Sofosbuvir Mechanism of Action',
+      nodes:[
+        {id:'sof', x:100,y:120,r:26,color:'#aa77ff',label:'Sofosbuvir\nprodrug',       sub:'oral'},
+        {id:'tp',  x:280,y:100,r:24,color:'#ffd700',label:'GS-461203\ntriphosphate',   sub:'active form'},
+        {id:'ns5b',x:280,y:240,r:30,color:'#44ffcc',label:'NS5B\nGDD site',            sub:'polymerase'},
+        {id:'rna', x:420,y:170,r:22,color:'#ff4488',label:'RNA\nchain',                sub:'truncated'},
+      ],
+      edges:[
+        {from:'sof',to:'tp', color:'#ffd700',label:'hepatic\nactivation',  dashed:false},
+        {from:'tp', to:'ns5b',color:'#aa77ff',label:'competes\nwith UTP',  dashed:false},
+        {from:'ns5b',to:'rna',color:'#ff444488',label:'chain\nterminated', dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2013',journal:'NEJM',impact:'IF 176',title:'Sofosbuvir for Previously Untreated Chronic Hepatitis C Infection',abstract:'SVR12 89% GT1; 95% GT2/3 with ribavirin. Interferon-free cure first demonstrated. Breakthrough in 40 years of failed therapy.'},
+      {year:'2016',journal:'NEJM',impact:'IF 176',title:'Sofosbuvir-Velpatasvir for HCV Genotype 1, 2, 4, 5, 6 (ASTRAL-1)',abstract:'SVR12 99% across GT1,2,4,5,6 \u2014 first pan-genotypic single-tablet regimen. 12-week treatment.'},
+    ],
+    rel_molecules:[
+      {icon:'\uD83D\uDFE1',name:'Ledipasvir',role:'NS5A inhibitor\nHarvoni combo',  id:'CID 67505836'},
+      {icon:'\uD83D\uDFE2',name:'Velpatasvir',role:'Pan-GT NS5A\nEpclusa combo',    id:'CID 67683433'},
+    ]
+  },
+  {
+    id:'glecaprevir', icon:'\uD83D\uDFE1', color:'#ffd700', type:'Small Molecule \u00b7 Macrocyclic protease inhibitor', is_protein:false,
+    name:'Glecaprevir (Mavyret)', sub:'PubChem CID: 67683433 \u00b7 C38H46F4N6O9S',
+    badges:[{text:'NS3/4A PI',color:'#ffd700'},{text:'FDA 2017',color:'#00ff99'},{text:'Pan-genotypic',color:'#44ffcc'}],
+    pubchem_cid:67683433, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/67683433',
+    mechanism:'Macrocyclic non-covalent NS3/4A protease inhibitor. P1-P3 macrocycle constrains inhibitor conformation matching the enzyme active site \u2014 100\u00d7 better potency vs. linear analogs. Paired with pibrentasvir (NS5A inhibitor) in Mavyret (AbbVie). Pan-genotypic: glecaprevir/pibrentasvir achieves SVR12 >97% across GT1-6 in 8 weeks. Also active in GT3 \u2014 a historically difficult genotype.',
+    properties:{'MW':'838.9 g/mol','Formula':'C38H46F4N6O9S','XLogP':'4.4','HBD':'3','TPSA':'199 \u00c5\u00b2','P1-P3 macrocycle':'Yes','CYP':'P-gp substrate','SVR12 (pan-GT)':'>97%'},
+    property_flags:{'SVR12 (pan-GT)':'good'},
+    interaction:{
+      title:'Glecaprevir/Pibrentasvir DAA Combination',
+      nodes:[
+        {id:'glec',x:110,y:130,r:28,color:'#ffd700',label:'Glecaprevir', sub:'NS3 PI'},
+        {id:'pib', x:110,y:240,r:28,color:'#44ffcc',label:'Pibrentasvir',sub:'NS5A inh'},
+        {id:'ns3', x:300,y:100,r:30,color:'#00ff99',label:'NS3/4A',      sub:'protease'},
+        {id:'ns5a',x:300,y:240,r:30,color:'#ffd700',label:'NS5A',        sub:'scaffold'},
+        {id:'rna', x:440,y:170,r:22,color:'#ff4488',label:'HCV RNA',     sub:'blocked'},
+      ],
+      edges:[
+        {from:'glec',to:'ns3', color:'#ffd700',    label:'picomolar\nbinding',       dashed:false},
+        {from:'pib', to:'ns5a',color:'#44ffcc',    label:'pangenotypic\ninhibition', dashed:false},
+        {from:'ns3', to:'rna', color:'#ff444488',  label:'replication\nblocked',     dashed:true},
+        {from:'ns5a',to:'rna', color:'#ff444488',  label:'assembly\nblocked',        dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2017',journal:'NEJM',impact:'IF 176',title:'Glecaprevir and Pibrentasvir for Chronic HCV Genotype 1-6 (ENDURANCE-1)',abstract:'SVR12 99% GT1 (8 weeks). No resistance-associated substitutions affecting outcome in GT1.'},
+      {year:'2018',journal:'Lancet',impact:'IF 202',title:'Glecaprevir\u2013Pibrentasvir for 8 weeks in HCV treatment-naive patients',abstract:'SVR12 97.5% across GT1-6, 8-week treatment. Confirmed pan-genotypic efficacy enabling simplified national HCV elimination programs.'},
+    ],
+    rel_molecules:[
+      {icon:'\uD83D\uDFE3',name:'Sofosbuvir',role:'NS5B NI\nEpclusa/Harvoni',  id:'CID 45375808'},
+      {icon:'\uD83D\uDD35',name:'Paritaprevir',role:'Earlier-gen\nNS3 PI',      id:'CID 44599207'},
+    ]
+  },
+];
+
+// ── Mechanism phases ─────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 HCV Attachment & IRES-Mediated Entry', color:'#44ffcc', mol:'ns3'},
+  {label:'Phase 1 \u2014 Polyprotein Translation via IRES',     color:'#00ff99', mol:'ns3'},
+  {label:'Phase 2 \u2014 NS3/4A Polyprotein Processing',        color:'#ffd700', mol:'ns3'},
+  {label:'Phase 3 \u2014 NS5B Genome Replication',              color:'#aa77ff', mol:'ns5b'},
+  {label:'Phase 4 \u2014 Pan-Genotypic DAA Triple Blockade',    color:'#ff4488', mol:'sofosbuvir'},
+];
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+document.querySelectorAll('.mod-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.mod-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    tab.classList.add('active');
+    var panelId = 'panel-' + tab.dataset.tab;
+    var panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (tab.dataset.tab === 'connections') drawConnections();
+  });
+});
+
+// ── Mechanism canvas animation ────────────────────────────────────────────────
+var mechCv = document.getElementById('mech-canvas');
+var animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
+
+function mechDraw(phase, t) {
+  var cv = mechCv;
+  cv.width = cv.offsetWidth || 600;
+  cv.height = cv.offsetHeight || 240;
+  var ctx = cv.getContext('2d');
+  var W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e';
+  ctx.fillRect(0, 0, W, H);
+  var cx = W / 2, cy = H / 2;
+
+  if (phase === 0) {
+    // HCV virion approaching hepatocyte surface
+    // Hepatocyte membrane: horizontal bar at bottom
+    var memY = H - 48;
+    var grad = ctx.createLinearGradient(0, memY, 0, H);
+    grad.addColorStop(0, '#44ffcc22');
+    grad.addColorStop(1, '#44ffcc08');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, memY, W, H - memY);
+    ctx.strokeStyle = '#44ffcc66';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0, memY);
+    ctx.lineTo(W, memY);
+    ctx.stroke();
+
+    // Receptor labels on membrane
+    var receptors = ['SR-B1', 'CD81', 'CLDN1', 'OCLN'];
+    var rSpacing = W / (receptors.length + 1);
+    receptors.forEach(function(r, i) {
+      var rx = rSpacing * (i + 1);
+      ctx.strokeStyle = '#44ffcc88';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(rx, memY);
+      ctx.lineTo(rx, memY + 20);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(rx, memY + 28, 8, 0, Math.PI * 2);
+      ctx.fillStyle = '#44ffcc33';
+      ctx.fill();
+      ctx.strokeStyle = '#44ffcc';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.fillStyle = '#44ffcccc';
+      ctx.font = '8px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(r, rx, memY - 5);
+    });
+
+    // Virion: drifting down toward membrane
+    var virX = cx + Math.sin(t * 0.02) * 30;
+    var virY = 55 + Math.sin(t * 0.015) * 10;
+    // Spikes (E1/E2 glycoproteins)
+    var spikeCount = 10;
+    for (var s = 0; s < spikeCount; s++) {
+      var ang = (s / spikeCount) * Math.PI * 2 + t * 0.01;
+      ctx.strokeStyle = '#00ff9999';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(virX + 20 * Math.cos(ang), virY + 20 * Math.sin(ang));
+      ctx.lineTo(virX + 30 * Math.cos(ang), virY + 30 * Math.sin(ang));
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(virX + 32 * Math.cos(ang), virY + 32 * Math.sin(ang), 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#00ff9966';
+      ctx.fill();
+    }
+    ctx.beginPath();
+    ctx.arc(virX, virY, 20, 0, Math.PI * 2);
+    ctx.fillStyle = '#44ffcc22';
+    ctx.fill();
+    ctx.strokeStyle = '#44ffcc';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = '#44ffcccc';
+    ctx.font = 'bold 9px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('HCV', virX, virY + 3);
+
+    // Arrow toward membrane
+    var arrY = virY + 35;
+    ctx.strokeStyle = '#ffd70099';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(virX, arrY);
+    ctx.lineTo(virX, memY - 12);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ffd700cc';
+    ctx.beginPath();
+    ctx.moveTo(virX, memY - 4);
+    ctx.lineTo(virX - 5, memY - 14);
+    ctx.lineTo(virX + 5, memY - 14);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = '#8888b099';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('E1/E2 glycoproteins \u2192 sequential receptor engagement', cx, 22);
+
+  } else if (phase === 1) {
+    // ER membrane + IRES + ribosome + polyprotein
+    var erY = cy - 20;
+    ctx.strokeStyle = '#00ff9966';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(30, erY);
+    ctx.lineTo(W - 30, erY);
+    ctx.stroke();
+    ctx.fillStyle = '#00ff9944';
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('ER membrane', 35, erY - 6);
+
+    // IRES arc structure
+    var iresX = cx - 90;
+    ctx.strokeStyle = '#44ffcc';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(iresX, erY, 28, Math.PI, 0);
+    ctx.stroke();
+    // Domain labels
+    ctx.fillStyle = '#44ffccaa';
+    ctx.font = '8px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('IRES', iresX, erY - 32);
+    ctx.fillText('~340 nt', iresX, erY - 22);
+
+    // 40S ribosomal subunit
+    var ribX = iresX + 55;
+    ctx.beginPath();
+    ctx.arc(ribX, erY - 8, 22, 0, Math.PI * 2);
+    ctx.fillStyle = '#aa77ff33';
+    ctx.fill();
+    ctx.strokeStyle = '#aa77ff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = '#aa77ffcc';
+    ctx.font = 'bold 8px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('40S', ribX, erY - 5);
+
+    // Growing polyprotein chain below ER
+    var polyY = erY + 30;
+    var segs = [
+      {label:'NS3', color:'#00ff99'},
+      {label:'NS4A',color:'#ffd700'},
+      {label:'NS4B',color:'#ff8844'},
+      {label:'NS5A',color:'#44ffcc'},
+      {label:'NS5B',color:'#aa77ff'},
+    ];
+    var segW = 55, startX = cx - 30;
+    var visible = Math.min(segs.length, Math.floor(t / 18) + 1);
+    for (var i = 0; i < visible; i++) {
+      var sx = startX + i * (segW + 2);
+      ctx.fillStyle = segs[i].color + '44';
+      ctx.fillRect(sx, polyY, segW, 22);
+      ctx.strokeStyle = segs[i].color;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(sx, polyY, segW, 22);
+      ctx.fillStyle = segs[i].color;
+      ctx.font = '9px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(segs[i].label, sx + segW / 2, polyY + 14);
+    }
+    ctx.fillStyle = '#8888b099';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('Cap-independent IRES translation \u2014 40S \u2192 AUG direct recruitment', cx, 22);
+
+  } else if (phase === 2) {
+    // NS3/4A protease cutting polyprotein
+    // Full polyprotein bar
+    var barY = cy - 30;
+    var allSegs = [
+      {label:'NS3',  color:'#00ff99'},
+      {label:'NS4A', color:'#ffd700'},
+      {label:'NS4B', color:'#ff8844'},
+      {label:'NS5A', color:'#44ffcc'},
+      {label:'NS5B', color:'#aa77ff'},
+    ];
+    var bW = 58, bStart = 40;
+    allSegs.forEach(function(seg, i) {
+      var bx = bStart + i * (bW + 3);
+      ctx.fillStyle = seg.color + '33';
+      ctx.fillRect(bx, barY, bW, 28);
+      ctx.strokeStyle = seg.color;
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(bx, barY, bW, 28);
+      ctx.fillStyle = seg.color;
+      ctx.font = '9px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(seg.label, bx + bW / 2, barY + 17);
+    });
+
+    // Scissors/protease icon above cleavage sites
+    var cutSites = [1, 2, 3, 4];
+    cutSites.forEach(function(idx) {
+      var cutX = bStart + idx * (bW + 3) - 1;
+      // Animated bounce
+      var bounce = Math.abs(Math.sin(t * 0.08 + idx)) * 12;
+      var cutY = barY - 10 - bounce;
+      ctx.strokeStyle = '#ff4488';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cutX, barY - 4);
+      ctx.lineTo(cutX, barY + 28);
+      ctx.stroke();
+      // Scissors V shape
+      ctx.strokeStyle = '#ff4488cc';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(cutX - 7, cutY - 8);
+      ctx.lineTo(cutX, cutY);
+      ctx.lineTo(cutX + 7, cutY - 8);
+      ctx.stroke();
+    });
+
+    // NS3/4A enzyme label
+    ctx.fillStyle = '#00ff99cc';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('NS3/4A Protease', cx, barY - 32);
+
+    // Products below
+    var prodY = barY + 55;
+    allSegs.forEach(function(seg, i) {
+      var px = bStart + i * (bW + 3) + Math.sin(t * 0.03 + i) * 2;
+      ctx.beginPath();
+      ctx.arc(px + bW / 2, prodY, 14, 0, Math.PI * 2);
+      ctx.fillStyle = seg.color + '33';
+      ctx.fill();
+      ctx.strokeStyle = seg.color;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.fillStyle = seg.color;
+      ctx.font = '8px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(seg.label, px + bW / 2, prodY + 3);
+    });
+
+    ctx.fillStyle = '#8888b099';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('Cis/trans cleavage \u2014 4 sites \u2014 MAVS/TRIF immune evasion', cx, 22);
+
+  } else if (phase === 3) {
+    // Membranous web + NS5B replication
+    // ER-derived membranous web
+    var webX = cx - 80, webY = cy - 40, webW = 160, webH = 100;
+    ctx.strokeStyle = '#44ffcc44';
+    ctx.lineWidth = 1;
+    for (var wx = webX; wx < webX + webW; wx += 20) {
+      ctx.beginPath();
+      ctx.moveTo(wx, webY);
+      ctx.bezierCurveTo(wx + 10, webY + 25, wx - 5, webY + 50, wx + 8, webY + webH);
+      ctx.stroke();
+    }
+    ctx.strokeStyle = '#44ffcc88';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(webX, webY, webW, webH);
+    ctx.fillStyle = '#44ffcc44';
+    ctx.font = '8px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('Membranous Web (ER-derived)', cx, webY - 6);
+
+    // NS5B polymerase — right-hand shape
+    var ns5bX = cx + 30, ns5bY = cy - 10;
+    ctx.beginPath();
+    ctx.arc(ns5bX, ns5bY, 22, 0, Math.PI * 2);
+    ctx.fillStyle = '#44ffcc33';
+    ctx.fill();
+    ctx.strokeStyle = '#44ffcc';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = '#44ffcc';
+    ctx.font = 'bold 8px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('NS5B', ns5bX, ns5bY + 3);
+
+    // RNA strands (quasi-species diversity: slightly different colors)
+    var strandColors = ['#00e5ff', '#44ffcc', '#00ff99', '#aaffee'];
+    strandColors.forEach(function(col, i) {
+      var strandX = ns5bX + 25;
+      var strandY = ns5bY - 10 + i * 7;
+      var drift = Math.sin(t * 0.04 + i * 0.8) * 5;
+      ctx.strokeStyle = col + 'cc';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(strandX, strandY + drift);
+      for (var xi = 0; xi < 90; xi += 8) {
+        ctx.lineTo(strandX + xi, strandY + Math.sin((xi + t * 0.05) * 0.4 + i) * 6 + drift);
+      }
+      ctx.stroke();
+    });
+
+    ctx.fillStyle = '#aa77ffcc';
+    ctx.font = '8px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('(+)RNA strands', ns5bX + 75, ns5bY + 40);
+
+    ctx.fillStyle = '#8888b099';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('NS5B RdRp \u2014 10\u00b9\u00b2 virions/day, quasi-species diversity', cx, 22);
+
+  } else if (phase === 4) {
+    // Three targets with STOP blockade
+    var targets = [
+      {x: W * 0.22, y: cy, r: 28, color: '#00ff99', label: 'NS3/4A', drug: 'Glecaprevir', drugColor: '#ffd700'},
+      {x: W * 0.50, y: cy - 15, r: 28, color: '#44ffcc', label: 'NS5A', drug: 'Pibrentasvir', drugColor: '#44ffcc'},
+      {x: W * 0.78, y: cy, r: 28, color: '#aa77ff', label: 'NS5B', drug: 'Sofosbuvir', drugColor: '#aa77ff'},
+    ];
+
+    targets.forEach(function(tgt) {
+      // Target protein
+      ctx.beginPath();
+      ctx.arc(tgt.x, tgt.y, tgt.r, 0, Math.PI * 2);
+      ctx.fillStyle = tgt.color + '33';
+      ctx.fill();
+      ctx.strokeStyle = tgt.color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = tgt.color;
+      ctx.font = 'bold 9px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(tgt.label, tgt.x, tgt.y + 3);
+
+      // Inhibitor drug approaching
+      var drugAngle = t * 0.04;
+      var drugDist = 52 + Math.sin(t * 0.06) * 6;
+      var dx = tgt.x - drugDist * Math.cos(drugAngle + targets.indexOf(tgt));
+      var dy = tgt.y - drugDist * Math.sin(drugAngle + targets.indexOf(tgt) * 1.1);
+      ctx.beginPath();
+      ctx.arc(dx, dy, 14, 0, Math.PI * 2);
+      ctx.fillStyle = tgt.drugColor + '55';
+      ctx.fill();
+      ctx.strokeStyle = tgt.drugColor;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.fillStyle = tgt.drugColor;
+      ctx.font = '7px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(tgt.drug.split(' ')[0].substring(0, 8), dx, dy + 2);
+
+      // STOP indicator
+      var stopPulse = (Math.sin(t * 0.1) + 1) / 2;
+      ctx.fillStyle = 'rgba(255,68,68,' + (0.5 + stopPulse * 0.5) + ')';
+      ctx.font = 'bold 10px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('\u25a0 BLOCKED', tgt.x, tgt.y + tgt.r + 15);
+    });
+
+    // SVR12 indicator
+    ctx.fillStyle = '#00ff99cc';
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('SVR12 >97% \u2014 Pan-genotypic cure', cx, H - 20);
+
+    ctx.fillStyle = '#8888b099';
+    ctx.font = '10px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('Triple DAA blockade: NS3 PI + NS5A inh + NS5B NI', cx, 22);
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', function() {
+  animT = 0;
+  animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
+  animT = 0;
+  mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ───────────────────────────────────────────────────
+(function buildMechPanels() {
+  var container = document.getElementById('mech-panels');
+  var panelData = [
+    {
+      title: 'Phase 0 \u2014 HCV Attachment & IRES-Mediated Entry',
+      color: '#44ffcc', mol: 'ns3',
+      parts: [
+        {bold: false, text: 'HCV entry involves sequential receptor engagement: '},
+        {bold: true,  text: 'SR-B1'},
+        {bold: false, text: ' (lipoprotein receptor), '},
+        {bold: true,  text: 'CD81'},
+        {bold: false, text: ' (tetraspanin \u2014 E2 direct contact, K\u1d48 ~1nM), '},
+        {bold: true,  text: 'CLDN1/OCLN'},
+        {bold: false, text: ' (tight junction proteins). Virus co-internalizes with SR-B1/CD81 via clathrin-mediated endocytosis. pH-triggered E1/E2 fusion releases nucleocapsid. IRES-mediated translation begins immediately \u2014 no nuclear step required.'},
+      ]
+    },
+    {
+      title: 'Phase 1 \u2014 Polyprotein Translation via IRES',
+      color: '#00ff99', mol: 'ns3',
+      parts: [
+        {bold: false, text: 'HCV '},
+        {bold: true,  text: 'IRES (~340 nt)'},
+        {bold: false, text: ' folds into a 4-domain pseudoknot structure. Domain III directly contacts the 40S 18S rRNA helix 26; domain IV positions the AUG start codon. This cap-independent mechanism bypasses eIF4E entirely \u2014 explaining HCV resistance to 4E-BP1/mTOR-based innate antiviral defenses. Full-length '},
+        {bold: true,  text: '~3000 aa polyprotein'},
+        {bold: false, text: ' produced as single ORF.'},
+      ]
+    },
+    {
+      title: 'Phase 2 \u2014 NS3/4A Polyprotein Processing',
+      color: '#ffd700', mol: 'ns3',
+      parts: [
+        {bold: true,  text: 'NS3 serine protease'},
+        {bold: false, text: ' (N-terminal 180 aa) executes 4 cis/trans cleavages: NS3|4A (cis-autocatalytic), NS4A|4B, NS4B|5A, NS5A|5B. NS4A \u03b2-strand cofactor is essential \u2014 increases protease activity 10\u2013100\u00d7. NS3/4A also cleaves '},
+        {bold: true,  text: 'MAVS'},
+        {bold: false, text: ' (mitochondrial antiviral signaling) and '},
+        {bold: true,  text: 'TRIF'},
+        {bold: false, text: ' \u2014 disabling RIG-I and TLR3 pathways. First-generation NS3 PIs (telaprevir, boceprevir) had high pill burden and resistance; macrocyclic 3rd-gen glecaprevir lacks these issues.'},
+      ]
+    },
+    {
+      title: 'Phase 3 \u2014 NS5B Genome Replication',
+      color: '#aa77ff', mol: 'ns5b',
+      parts: [
+        {bold: true,  text: 'NS5B RdRp'},
+        {bold: false, text: ' initiates replication via terminal transferase activity (primer-independent). Negative-strand synthesis uses (+)RNA genomic template; positive strands amplified for translation and packaging. '},
+        {bold: true,  text: 'Closed hand conformation'},
+        {bold: false, text: ' unique to NS5B: fingertip loop (residues 443\u2013455) contacts thumb (amino acid 535) \u2014 different from picornavirus RdRps. This closed form requires dramatic opening for dsRNA template engagement. Generates '},
+        {bold: true,  text: '10\u00b9\u00b2 virions/day'},
+        {bold: false, text: ' with 10\u2075 mutation/genome/day quasi-species diversity.'},
+      ]
+    },
+    {
+      title: 'Phase 4 \u2014 Pan-Genotypic DAA Triple Blockade',
+      color: '#ff4488', mol: 'sofosbuvir',
+      parts: [
+        {bold: false, text: 'Pan-genotypic DAA triple-mechanism blockade: '},
+        {bold: true,  text: 'NS3/4A inhibition'},
+        {bold: false, text: ' (glecaprevir) prevents polyprotein processing; '},
+        {bold: true,  text: 'NS5A inhibition'},
+        {bold: false, text: ' (pibrentasvir/velpatasvir) disrupts replication complex assembly; '},
+        {bold: true,  text: 'NS5B NI'},
+        {bold: false, text: ' (sofosbuvir) causes chain termination. Barrier to resistance is high \u2014 each site alone can select mutations, but simultaneous triple escape is estimated at <10\u207b\u00b2\u2070. '},
+        {bold: true,  text: 'SVR12 >97%'},
+        {bold: false, text: ' across GT1-6 achieved with 8\u201312 week oral regimens. WHO 2030 HCV elimination target (90% treatment coverage) requires pan-genotypic access.'},
+      ]
+    },
+  ];
+
+  panelData.forEach(function(p) {
+    var panel = document.createElement('div');
+    panel.className = 'mech-panel';
+
+    var titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    var bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    var titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+
+    var body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    p.parts.forEach(function(part) {
+      if (part.bold) {
+        var s = document.createElement('strong');
+        s.textContent = part.text;
+        body.appendChild(s);
+      } else {
+        body.appendChild(document.createTextNode(part.text));
+      }
+    });
+
+    if (p.mol) {
+      var chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      var mol = MODULE_MOLS.find(function(m) { return m.id === p.mol; });
+      if (mol) {
+        var chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.type.toLowerCase().indexOf('protein') !== -1 ? ' protein' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', function() { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  var grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(function(mol) {
+    var card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    var icon = document.createElement('div');
+    icon.className = 'mol-card-icon';
+    icon.textContent = mol.icon;
+    var name = document.createElement('div');
+    name.className = 'mol-card-name';
+    name.textContent = mol.name;
+    name.style.color = mol.color;
+    var type = document.createElement('div');
+    type.className = 'mol-card-type';
+    type.textContent = mol.type;
+    var role = document.createElement('div');
+    role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(function(b) { return b.text; }).join(' \u00b7 ');
+    card.appendChild(icon);
+    card.appendChild(name);
+    card.appendChild(type);
+    card.appendChild(role);
+    card.addEventListener('click', function() { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ────────────────────────────────────────────────────────────
+(function buildStory() {
+  var container = document.getElementById('story-content');
+  var events = [
+    {year: '1975', text: 'Harvey Alter at NIH identifies post-transfusion hepatitis that is neither A nor B \u2014 "non-A, non-B hepatitis." Serologic exclusion of HAV/HBV in thousands of blood bank samples. Chimpanzee transmission experiments confirm infectious agent. Estimated 300,000 US cases/year from blood transfusions.'},
+    {year: '1989', text: 'Michael Houghton at Chiron Corporation (Kuo, Choo, Houghton) clone HCV from infected chimpanzee plasma using an expression library screened with patient convalescent serum. Novel positive-strand RNA flavivirus \u2014 first pathogen identified by molecular cloning without culture. Diagnostic test developed within months \u2014 eliminated transfusion HCV.'},
+    {year: '1997', text: 'Charles Rice at Washington University demonstrates that a cloned HCV genome with corrected 3\u2019 UTR and adaptive mutations is infectious in chimpanzees. Establishes the replicon system \u2014 first cell culture HCV replication model. Enables rational antiviral development.'},
+    {year: '2011', text: 'First NS3 inhibitors (telaprevir, boceprevir) approved \u2014 must be combined with PEG-interferon/ribavirin. SVR ~75% GT1 but 36-week triple therapy, significant side effects, high resistance rate.'},
+    {year: '2013', text: 'Sofosbuvir (Gilead) approved. First pan-genotypic NS5B nucleotide inhibitor. With ribavirin: 89\u201395% SVR, interferon-free. Nobel-worthy insight: the ProTide approach solved intracellular nucleotide delivery.'},
+    {year: '2017\u20132020', text: 'Pan-genotypic combinations (sofosbuvir/velpatasvir, glecaprevir/pibrentasvir) achieve >97% SVR in 8 weeks, no genotyping required. Effectively a cure for 95%+ patients. Alter, Houghton, Rice awarded Nobel Prize 2020.'},
+  ];
+  events.forEach(function(ev) {
+    var block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    var yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    var text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  var container = document.getElementById('frontiers-content');
+  var groups = [
+    {
+      title: 'Clinical Pipeline (2024\u20132026)',
+      items: [
+        {
+          title: 'WHO HCV Elimination 2030',
+          body: 'Global burden ~58M chronically infected. Only ~21% treated as of 2023. Generic DAA access programs (Medicines Patent Pool) enabling $40\u2013$60/course in LMICs. Egypt national program treated 4M patients 2018\u20132020 \u2014 prevalence dropped 4.2%\u21921.1% in 10 years.'
+        },
+        {
+          title: 'HCV Vaccines: Remains Elusive',
+          body: 'Extreme quasi-species diversity of E1/E2 and hypervariable region 1 (HVR1) enables immune escape. Broadly neutralizing antibody targets AR3/AR4 on E2 glycoprotein. Thomas et al. 2024 \u2014 viral vector prime/boost with AR3A nAb epitope shows protection in chimpanzees.'
+        },
+        {
+          title: 'HCV Reinfection After DAA Cure in PWIDs',
+          body: '~5\u201315% annual reinfection in high-risk populations. Raises cure durability questions and public health strategy debates. Ongoing PREVAIL and InC3 studies.'
+        },
+      ]
+    },
+    {
+      title: 'AI & Computational Approaches',
+      items: [
+        {
+          title: 'AlphaFold3 NS5B Conformational Dynamics',
+          body: 'AlphaFold3 predicted NS5B closed-to-open transition dynamics \u2014 provides structural snapshots of allosteric conformational states not resolved by static X-ray. Revealed novel allosteric pocket in fingertip region potentially druggable.'
+        },
+        {
+          title: 'ML-Based Resistance Prediction',
+          body: 'Trained on 10,000+ clinical NS3/NS5B sequences, deep learning models (ResNet architectures) predict SVR12 outcome from pretreatment viral sequence with >90% accuracy (Bartenschlager 2024).'
+        },
+      ]
+    },
+    {
+      title: 'Open Questions',
+      items: [
+        {
+          title: 'NS5B Closed Hand Conformation: Why Unique?',
+          body: 'Why does NS5B adopt a closed hand conformation unique among RdRps? Structural biology has not fully resolved the template loading mechanism \u2014 implication for RNA synthesis initiation fidelity.'
+        },
+        {
+          title: 'Occult HCV Infection (OCI) After SVR12',
+          body: 'HCV RNA detectable in liver tissue but not serum after SVR12 \u2014 clinical significance unclear. Role in HCC recurrence after cure in cirrhotic patients?'
+        },
+        {
+          title: 'HCV Pan-Genotypic Vaccine: E2 Antigen',
+          body: 'E2 antigenic site structure (NSSA epitope clusters) fully resolved 2023, but no broadly protective antigen identified.'
+        },
+      ]
+    },
+    {
+      title: 'Industry Applications',
+      items: [
+        {
+          title: 'HCV Cure as Platform: NS5B \u2192 SARS-CoV-2 nsp12',
+          body: 'Gilead\u2019s pan-genotypic DAA success (>$50B sofosbuvir revenue 2013\u20132023) validated RNA polymerase as drug target. NS5B structural pharmacology principles directly applied to SARS-CoV-2 nsp12 RdRp \u2014 molnupiravir and remdesivir share prodrug and chain-termination mechanisms.'
+        },
+        {
+          title: 'ProTide Technology: 15+ Clinical Antivirals',
+          body: 'McGuigan\u2019s phosphoramidate prodrug invention enabling sofosbuvir now applied to 15+ clinical antivirals. Tenofovir alafenamide (TAF) for HIV uses same phosphoramidate approach.'
+        },
+      ]
+    },
+  ];
+
+  groups.forEach(function(g) {
+    var section = document.createElement('div');
+    section.className = 'frontier-group';
+    var title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(function(item) {
+      var card = document.createElement('div');
+      card.className = 'frontier-item';
+      var it = document.createElement('div');
+      it.className = 'frontier-item-title';
+      it.textContent = item.title;
+      var ib = document.createElement('div');
+      ib.className = 'frontier-item-body';
+      ib.textContent = item.body;
+      card.appendChild(it);
+      card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ────────────────────────────────────────────────────────
+(function buildRsidebar() {
+  var molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(function(mol) {
+    var item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    var icon = document.createElement('div');
+    icon.className = 'rsb-mol-icon';
+    icon.textContent = mol.icon;
+    var nameCol = document.createElement('div');
+    nameCol.style.flex = '1';
+    var name = document.createElement('div');
+    name.className = 'rsb-mol-name';
+    name.textContent = mol.name;
+    var id = document.createElement('div');
+    id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name);
+    nameCol.appendChild(id);
+    item.appendChild(icon);
+    item.appendChild(nameCol);
+    item.addEventListener('click', function() { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  var paperList = document.getElementById('rsb-papers');
+  var papers = [
+    {year: '1989', journal: 'Science',  title: 'Isolation of a cDNA clone derived from a blood-borne non-A, non-B viral hepatitis genome \u2014 Choo, Kuo, Weiner, Overby, Bradley, Houghton'},
+    {year: '1997', journal: 'Science',  title: 'Transcription and replication of a chimeric HCV genome \u2014 Yanagi, Purcell, Emerson, Bukh, Rice et al.'},
+    {year: '2013', journal: 'NEJM',     title: 'Sofosbuvir for Previously Untreated Chronic Hepatitis C Infection'},
+    {year: '2017', journal: 'NEJM',     title: 'Glecaprevir and Pibrentasvir for Chronic HCV Genotype 1\u20136'},
+  ];
+  papers.forEach(function(p) {
+    var item = document.createElement('div');
+    item.className = 'ref-item';
+    var year = document.createElement('div');
+    year.className = 'ref-year';
+    year.textContent = p.year + ' \u00b7 ' + p.journal;
+    var title = document.createElement('div');
+    title.className = 'ref-title';
+    title.textContent = p.title;
+    item.appendChild(year);
+    item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas ─────────────────────────────────────────────────────────
+function drawConnections() {
+  var cv = document.getElementById('conn-canvas');
+  cv.width = cv.offsetWidth || 600;
+  cv.height = cv.offsetHeight || 360;
+  var ctx = cv.getContext('2d');
+  var W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e';
+  ctx.fillRect(0, 0, W, H);
+
+  var nodes = [
+    {id:'hcv',   x:W*0.50, y:H*0.50, r:38, color:'#44ffcc', label:'HCV\n2020',         sub:'Nobel 2020'},
+    {id:'mrna',  x:W*0.18, y:H*0.20, r:26, color:'#00ff99', label:'mRNA\nVaccines',     sub:'2023'},
+    {id:'hif',   x:W*0.82, y:H*0.20, r:24, color:'#ff8844', label:'HIF\nOxygen',        sub:'2019'},
+    {id:'imm',   x:W*0.15, y:H*0.72, r:24, color:'#ff4488', label:'Immuno-\ntherapy',   sub:'2018'},
+    {id:'ns3i',  x:W*0.80, y:H*0.55, r:22, color:'#ffd700', label:'NS3\nInhibitors',    sub:'clinical'},
+    {id:'ns5ai', x:W*0.78, y:H*0.80, r:22, color:'#44ffcc', label:'NS5A\nInhibitors',   sub:'clinical'},
+    {id:'prot',  x:W*0.50, y:H*0.90, r:20, color:'#aa77ff', label:'ProTide\nTech',      sub:'platform'},
+    {id:'vacc',  x:W*0.50, y:H*0.10, r:20, color:'#00e5ff', label:'HCV\nVaccine',       sub:'dev 2024'},
+  ];
+
+  var edges = [
+    {from:'hcv', to:'mrna', color:'#00ff9955', label:'RNA virus\nRdRp pharmacology'},
+    {from:'hcv', to:'hif',  color:'#ff884455', label:'Liver hypoxia\nin HCC'},
+    {from:'hcv', to:'imm',  color:'#ff448855', label:'HCC checkpoint\ntherapy'},
+    {from:'hcv', to:'ns3i', color:'#ffd70055', label:'NS3/4A PIs'},
+    {from:'hcv', to:'ns5ai',color:'#44ffcc55', label:'NS5A class'},
+    {from:'hcv', to:'prot', color:'#aa77ff55', label:'ProTide\nplatform'},
+    {from:'hcv', to:'vacc', color:'#00e5ff55', label:'Active\ndevelopment'},
+  ];
+
+  var ns = {};
+  nodes.forEach(function(n) { ns[n.id] = n; });
+
+  edges.forEach(function(e) {
+    var a = ns[e.from], b = ns[e.to];
+    if (!a || !b) return;
+    ctx.strokeStyle = e.color;
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    if (e.label) {
+      var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      ctx.fillStyle = e.color;
+      ctx.font = '8px monospace';
+      ctx.textAlign = 'center';
+      var lines = e.label.split('\n');
+      lines.forEach(function(ln, i) {
+        ctx.fillText(ln, mx, my + (i - lines.length / 2 + 0.5) * 11);
+      });
+    }
+  });
+
+  nodes.forEach(function(n) {
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fillStyle = n.color + '22';
+    ctx.fill();
+    ctx.strokeStyle = n.color;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = n.color;
+    ctx.font = 'bold 9px sans-serif';
+    ctx.textAlign = 'center';
+    var lines = n.label.split('\n');
+    lines.forEach(function(ln, i) {
+      ctx.fillText(ln, n.x, n.y + (i - lines.length / 2 + 0.5) * 12);
+    });
+    ctx.fillStyle = n.color + '99';
+    ctx.font = '8px monospace';
+    ctx.fillText(n.sub, n.x, n.y + n.r + 11);
+  });
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+</body>
+</html>
