@@ -1,0 +1,287 @@
+/* ═══════════════════════════════════════════════════════════════════
+   module-layout.css  —  shared layout for all kbiology module pages
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Module header ──────────────────────────────────────────────── */
+.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
+.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
+.back-link:hover{color:var(--green);border-color:var(--green)}
+.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
+.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
+.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
+.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
+.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
+.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
+.mod-tab:hover{color:var(--text);background:var(--bg3)}
+.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
+
+/* ── Three-column body ──────────────────────────────────────────── */
+.mod-body{display:flex;min-height:calc(100vh - 100px)}
+.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto;transition:width .3s,padding .3s,opacity .3s}
+.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto;transition:width .3s,padding .3s,opacity .3s}
+.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3);min-width:0}
+
+/* ── Tab panels ─────────────────────────────────────────────────── */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── Canvas wrap ────────────────────────────────────────────────── */
+.canvas-wrap{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-bottom:0;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .3s, box-shadow .3s;
+}
+.canvas-wrap:hover{
+  border-color:rgba(0,229,255,.25);
+  box-shadow:0 0 24px rgba(0,229,255,.06);
+}
+.canvas-wrap canvas{display:block;width:100%;height:420px}
+
+/* ── Canvas HUD (bottom overlay) ────────────────────────────────── */
+.viz-hud{
+  position:absolute;
+  bottom:0; left:0; right:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:28px 12px 8px;
+  background:linear-gradient(to top, rgba(5,5,15,.92) 0%, rgba(5,5,15,0) 100%);
+  pointer-events:none;
+}
+.viz-phase-name{
+  font-size:.72rem;
+  color:var(--dim);
+  font-family:monospace;
+  flex:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.viz-hud-btns{
+  display:flex;
+  gap:6px;
+  pointer-events:all;
+  flex-shrink:0;
+}
+.viz-icon-btn{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  color:var(--dim);
+  border-radius:5px;
+  width:26px; height:26px;
+  font-size:.85rem;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:.15s;
+  line-height:1;
+}
+.viz-icon-btn:hover{color:var(--cyan);border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.06)}
+
+/* ── Phase navigation strip ─────────────────────────────────────── */
+.phase-nav{
+  display:flex;
+  align-items:center;
+  gap:0;
+  padding:10px 14px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 10px 10px;
+  margin-bottom:14px;
+  position:relative;
+}
+.phase-dot-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  flex-shrink:0;
+  cursor:pointer;
+  position:relative;
+  padding:0 2px;
+}
+.phase-dot{
+  width:30px; height:30px;
+  border-radius:50%;
+  border:2px solid var(--border);
+  background:var(--bg);
+  color:var(--dim);
+  font-size:.65rem;
+  font-family:monospace;
+  font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+  transition:.2s;
+  position:relative;
+  z-index:1;
+}
+.phase-dot-wrap:hover .phase-dot{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 12px rgba(0,229,255,.25)}
+.phase-dot.active{color:#07071e !important;}
+.phase-dot-label{
+  font-size:.58rem;
+  color:var(--muted);
+  text-align:center;
+  max-width:72px;
+  line-height:1.3;
+  transition:.2s;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:70px;
+}
+.phase-dot-wrap:hover .phase-dot-label,
+.phase-dot-wrap.active .phase-dot-label{color:var(--dim)}
+.phase-dot-wrap.active .phase-dot-label{color:var(--text) !important}
+.phase-connector{
+  flex:1;
+  height:2px;
+  background:var(--border);
+  margin-bottom:22px;
+  position:relative;
+  overflow:hidden;
+  min-width:8px;
+}
+.phase-connector-fill{
+  position:absolute;
+  top:0; left:0;
+  height:100%;
+  width:0%;
+  transition:width .35s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Theater mode ──────────────────────────────────────────────── */
+.theater-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  z-index:8998;
+  backdrop-filter:blur(6px);
+  animation:theater-fade .22s ease;
+}
+@keyframes theater-fade{from{opacity:0}to{opacity:1}}
+
+/* Canvas-wrap becomes a full-viewport flex column */
+.canvas-wrap.theater-mode{
+  position:fixed;
+  inset:0;
+  z-index:8999;
+  margin:0;
+  border-radius:0;
+  border-color:transparent !important;
+  box-shadow:none !important;
+  background:#07071e;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+/* The canvas scales UP via CSS (no redraw) — preserves text readability */
+.canvas-wrap.theater-mode canvas{
+  /* Fill width, maintain aspect ratio → content looks bigger */
+  width:100% !important;
+  height:auto !important;
+  max-height:calc(100vh - 54px);
+  object-fit:contain;
+  flex-shrink:0;
+}
+.canvas-wrap.theater-mode .viz-hud{
+  padding:28px 20px 10px;
+}
+.canvas-wrap.theater-mode .viz-phase-name{
+  font-size:.85rem;
+  color:var(--text);
+}
+
+/* Theater control bar at very bottom of theater canvas */
+.viz-theater-bar{
+  display:none;
+  align-items:center;
+  gap:12px;
+  padding:8px 16px 10px;
+  background:rgba(5,5,15,.95);
+  border-top:1px solid var(--border);
+  flex-shrink:0;
+}
+.canvas-wrap.theater-mode .viz-theater-bar{display:flex}
+.viz-theater-bar .btn{font-size:.75rem;padding:5px 12px}
+.viz-theater-bar .phase-pill{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.viz-theater-bar .phase-pip{
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--border);
+  cursor:pointer;
+  transition:.15s;
+  flex-shrink:0;
+}
+.viz-theater-bar .phase-pip:hover{background:var(--cyan)}
+.viz-theater-bar .phase-pip.active{width:10px; height:10px}
+.viz-theater-bar .theater-phase-name{
+  font-size:.75rem;
+  font-family:monospace;
+  color:var(--dim);
+  flex:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.viz-theater-bar .speed-grp{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+}
+.viz-theater-bar .speed-grp span{font-size:.68rem;color:var(--muted)}
+.viz-theater-bar .speed-grp input{width:70px;accent-color:var(--green)}
+.viz-theater-bar .speed-val{font-size:.72rem;font-family:monospace;color:var(--green);min-width:22px}
+.viz-theater-bar .kbd-hint{font-size:.62rem;color:var(--muted);border:1px solid var(--border);padding:1px 5px;border-radius:3px;margin-left:4px}
+
+/* ── Mechanism panels ───────────────────────────────────────────── */
+.mech-panels{display:flex;flex-direction:column;gap:10px}
+.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
+.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
+.mech-panel-body strong{color:var(--text)}
+.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+
+/* ── Molecules tab ──────────────────────────────────────────────── */
+.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
+.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
+.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
+.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
+.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
+.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
+
+/* ── Story tab ──────────────────────────────────────────────────── */
+.story-content{max-width:720px}
+.story-block{margin-bottom:16px}
+.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
+
+/* ── Frontiers tab ──────────────────────────────────────────────── */
+.frontier-group{margin-bottom:20px}
+.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
+.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
+.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
+
+/* ── Connections tab ────────────────────────────────────────────── */
+.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
+.connections-wrap canvas{display:block;width:100%;height:360px}
+
+/* ── Right sidebar items ────────────────────────────────────────── */
+.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
+.rsb-mol-item:hover{color:var(--cyan)}
+.rsb-mol-icon{font-size:1rem;flex-shrink:0}
+.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
+.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}

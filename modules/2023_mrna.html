@@ -5,80 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2023 · mRNA Vaccines — kbiology Nobel Frontier</title>
 <link rel="stylesheet" href="../shared/theme.css">
-<link rel="stylesheet" href="../shared/molecule-modal.css">
-<style>
-/* Module layout */
-.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
-.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
-.back-link:hover{color:var(--green);border-color:var(--green)}
-.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
-.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
-.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
-.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
-.mod-tab:hover{color:var(--text);background:var(--bg3)}
-.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
-.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
-.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
-
-/* Body layout */
-.mod-body{display:flex;min-height:calc(100vh - 100px)}
-.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
-.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-
-/* Tab panels */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Canvas */
-.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
-.canvas-wrap canvas{display:block;width:100%;height:240px}
-.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
-
-/* Mechanism panels */
-.mech-panels{display:flex;flex-direction:column;gap:10px}
-.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
-.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
-.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
-.mech-panel-body strong{color:var(--text)}
-.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-
-/* Molecules tab */
-.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
-.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
-.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
-.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
-.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
-.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
-
-/* Story tab */
-.story-content{max-width:720px}
-.story-block{margin-bottom:16px}
-.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
-
-/* Frontiers tab */
-.frontier-group{margin-bottom:20px}
-.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
-.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
-.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
-
-/* Connections tab */
-.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
-.connections-wrap canvas{display:block;width:100%;height:360px}
-
-/* Right sidebar */
-.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
-.rsb-mol-item:hover{color:var(--cyan)}
-.rsb-mol-icon{font-size:1rem;flex-shrink:0}
-.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
-.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
-</style>
-</head>
+<link rel="stylesheet" href="../shared/module-layout.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css"></head>
 <body>
 <!-- Module header -->
 <div class="mod-hdr">
@@ -141,7 +69,7 @@
   <div class="main" id="main-content">
     <!-- Tab 1: Mechanism -->
     <div class="tab-panel active" id="panel-mechanism">
-      <div class="canvas-wrap">
+      <div class="canvas-wrap" id="canvas-wrap">
         <canvas id="mech-canvas"></canvas>
         <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; mRNA Design &amp; Codon Optimization</div>
       </div>
@@ -187,9 +115,9 @@
         <div class="ref-year">nobelprize.org</div>
         <div class="ref-title">Nobel Prize 2023 &#8212; official announcement</div>
       </a>
-      <a href="https://pubchem.ncbi.nlm.nih.gov/compound/135398513" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+      <a href="https://pubchem.ncbi.nlm.nih.gov/compound/99543" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
         <div class="ref-year">PubChem</div>
-        <div class="ref-title">N1-methylpseudouridine (CID 135398513)</div>
+        <div class="ref-title">N1-methylpseudouridine (CID 99543)</div>
       </a>
     </div>
   </div>
@@ -208,12 +136,12 @@ Object.assign(window.GLOSS, {
 });
 
 // ── Module molecules data ────────────────────────────────────────────────────
-const MODULE_MOLS = [
+window.MODULE_MOLS = [
   { id:'psu', icon:'\ud83d\udd35', color:'#00e5ff', type:'Small Molecule', is_protein:false,
-    name:'N1-Methylpseudouridine (m1\u03a8)', sub:'PubChem CID: 135398513 \u00b7 C\u2081\u2080H\u2081\u2084N\u2082O\u2086',
+    name:'N1-Methylpseudouridine (m1\u03a8)', sub:'PubChem CID: 99543 \u00b7 C\u2081\u2080H\u2081\u2084N\u2082O\u2086',
     badges:[{text:'mRNA mod',color:'#00e5ff'},{text:'TLR evasion',color:'#00ff99'},{text:'Nobel 2023',color:'#ffd700'}],
-    pubchem_cid:135398513, pdb_id:null,
-    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/135398513',
+    pubchem_cid:99543, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/99543',
     mechanism:'Replaces every uridine in therapeutic mRNA. N1-methyl group occludes TLR3/7/8 binding groove \u2014 abolishes innate immune activation while paradoxically increasing ribosome processivity ~10\u00d7. The Karik\u00f3/Weissman 2023 Nobel insight.',
     properties:{'MW':'258.23 g/mol','Formula':'C\u2081\u2080H\u2081\u2084N\u2082O\u2086','XLogP':'-2.1','HBD':'3','HBA':'7','TPSA':'119 \u00c5\u00b2','Lipinski':'Pass'},
     property_flags:{'XLogP':'good','Lipinski':'good'},
@@ -277,10 +205,10 @@ const MODULE_MOLS = [
     ]
   },
   { id:'sm102', icon:'\ud83d\udfe0', color:'#ff8844', type:'Lipid \u00b7 Ionizable', is_protein:false,
-    name:'SM-102 (ionizable lipid)', sub:'PubChem CID: 137500165 \u00b7 Moderna LNP core',
+    name:'SM-102 (ionizable lipid)', sub:'PubChem CID: 126697616 \u00b7 Moderna LNP core',
     badges:[{text:'Ionizable lipid',color:'#ff8844'},{text:'LNP delivery',color:'#aa77ff'},{text:'pKa ~6.6',color:'#00e5ff'}],
-    pubchem_cid:137500165, pdb_id:null,
-    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/137500165',
+    pubchem_cid:126697616, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/126697616',
     mechanism:'Neutral at pH 7.4 (low toxicity in circulation). Re-protonates in endosome (pH 5.5) causing membrane disruption and mRNA cytoplasmic release. pKa ~6.6 is the key design parameter matching the pH window between plasma and endosome.',
     properties:{'MW':'710.2 g/mol','Formula':'C\u2084\u2084H\u2088\u2087NO\u2085','pKa':'~6.6','pH 7.4 charge':'Neutral','pH 5.5 charge':'Cationic','XLogP':'~12','Biodegradable':'Yes (ester bonds)'},
     property_flags:{'pH 7.4 charge':'good','Biodegradable':'good','XLogP':'warn'},
@@ -303,7 +231,7 @@ const MODULE_MOLS = [
     ],
     rel_molecules:[
       {icon:'\ud83d\udfe1',name:'ALC-0315',  role:'Pfizer/BioNTech\nionizable lipid',id:'CID 2311914'},
-      {icon:'\ud83d\udd35',name:'DSPC',      role:'Helper lipid\nbilayer stability', id:'CID 5497103'},
+      {icon:'\ud83d\udd35',name:'DSPC',      role:'Helper lipid\nbilayer stability', id:'CID 94190'},
     ]
   },
 ];
@@ -336,84 +264,284 @@ let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
 
 function mechDraw(phase, t) {
   const cv = mechCv;
-  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 420;
   const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
   ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
   const cx = W / 2, cy = H / 2;
 
+  function mrna_label(text, x, y, col) {
+    ctx.textAlign = 'center'; ctx.font = '10px monospace';
+    const tw = ctx.measureText(text).width;
+    ctx.fillStyle = 'rgba(7,7,30,0.8)'; ctx.fillRect(x - tw/2-3, y-10, tw+6, 13);
+    ctx.fillStyle = col; ctx.fillText(text, x, y);
+  }
+  function mrna_particle(x, y, label, col) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, 7);
+    g.addColorStop(0, col + 'ee'); g.addColorStop(1, col + '00');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI*2); ctx.fillStyle = col; ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 5px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(label, x, y + 2);
+  }
+
   if (phase === 0) {
-    // mRNA strand with colored nucleosides
-    ctx.strokeStyle = '#00e5ff44'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(60, cy); ctx.lineTo(W - 60, cy); ctx.stroke();
-    for (let i = 0; i < 18; i++) {
-      const x = 60 + i * ((W - 120) / 17);
-      const col = (i % 3 === 1) ? '#00e5ff' : '#33335a'; // m1Psi highlighted
-      ctx.beginPath(); ctx.arc(x, cy, 8, 0, Math.PI * 2);
-      ctx.fillStyle = col + 'cc'; ctx.fill();
+    // ── Phase 0: mRNA design — cap + m1Ψ + codon optimization + 3'UTR ──
+    // mRNA backbone (horizontal)
+    const mY = cy + 10;
+    ctx.strokeStyle = 'rgba(0,229,255,0.3)'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(50, mY); ctx.lineTo(W - 50, mY); ctx.stroke();
+
+    // 5' cap
+    ctx.beginPath(); ctx.arc(50, mY, 9, 0, Math.PI*2);
+    ctx.fillStyle = '#00ff99'; ctx.fill();
+    ctx.fillStyle = '#000'; ctx.font = 'bold 5px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('m7G', 50, mY + 2);
+    ctx.fillStyle = '#00ff9977'; ctx.font = '7px monospace'; ctx.textAlign = 'left';
+    ctx.fillText("5' cap", 28, mY - 14);
+
+    // Nucleoside beads — alternating colors: m1Ψ (cyan) vs regular (grey)
+    const nBeads = 22;
+    for (let i = 0; i < nBeads; i++) {
+      const x = 66 + i * ((W - 130) / nBeads);
+      const isMod = (i % 3 !== 2); // most are m1Ψ-modified
+      const col = isMod ? '#00e5ff' : '#4444aa';
+      ctx.beginPath(); ctx.arc(x, mY, 7, 0, Math.PI*2);
+      ctx.fillStyle = col + 'aa'; ctx.fill();
       ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke();
+      if (isMod && i < 5) { // label first few
+        ctx.fillStyle = '#00e5ffaa'; ctx.font = '5px monospace'; ctx.textAlign = 'center';
+        ctx.fillText('m1Ψ', x, mY + 16);
+      }
     }
-    ctx.fillStyle = '#00e5ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('m1\u03a8-modified mRNA (codon-optimized)', cx, cy - 26);
+
+    // Kozak + AUG
+    const kozX = 100;
+    ctx.strokeStyle = '#ffd70077'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(kozX, mY); ctx.lineTo(kozX, mY - 30); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Kozak', kozX, mY - 40); ctx.fillText('AUG', kozX, mY - 30);
+
+    // 3' UTR + poly-A tail
+    const polyAX = W - 52;
+    ctx.fillStyle = '#aa77ff'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText("3'UTR", polyAX - 30, mY - 16);
+    // Poly-A as repeated A circles
+    for (let i = 0; i < 5; i++) {
+      ctx.beginPath(); ctx.arc(W - 48 + i * 10, mY, 4, 0, Math.PI*2);
+      ctx.fillStyle = '#aa77ffaa'; ctx.fill();
+    }
+    ctx.fillStyle = '#aa77ff77'; ctx.font = '6px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('poly-A', W - 50, mY + 16);
+
+    // Legend
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 8px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('● N1-methylpseudouridine (m1Ψ) — innate immune evasion + ↑translation', 16, H - 22);
+    mrna_label('Codon-optimized, m1Ψ-modified, capped mRNA encodes prefusion-locked spike', cx, H - 10, '#00e5ff77');
+
   } else if (phase === 1) {
-    // LNP circle with mRNA core
-    const r = 55; const angle = t * 0.02;
-    const grad = ctx.createRadialGradient(cx, cy, 8, cx, cy, r);
-    grad.addColorStop(0, '#ff884422'); grad.addColorStop(1, '#ff884410');
-    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = grad; ctx.fill();
+    // ── Phase 1: LNP formulation — ionizable lipid shell, mRNA inside ──
+    const lnpR = 62;
+    // PEG-lipid outer layer (dim halo)
+    ctx.beginPath(); ctx.arc(cx, cy, lnpR + 12, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(100,120,200,0.1)'; ctx.fill();
+    ctx.strokeStyle = 'rgba(100,120,200,0.3)'; ctx.lineWidth = 3; ctx.stroke();
+    ctx.fillStyle = 'rgba(120,140,220,0.5)'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('PEG-lipid (stealth)', cx, cy - lnpR - 18);
+    // DSPC + cholesterol bilayer
+    ctx.beginPath(); ctx.arc(cx, cy, lnpR, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,136,68,0.08)'; ctx.fill();
     ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
-    // Inner mRNA coil
-    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 1.5;
+    // Phospholipid heads on LNP surface
+    ctx.fillStyle = 'rgba(255,136,68,0.6)';
+    for (let i = 0; i < 16; i++) {
+      const a = (i / 16) * Math.PI * 2;
+      ctx.beginPath(); ctx.arc(cx + lnpR * Math.cos(a), cy + lnpR * Math.sin(a), 3.5, 0, Math.PI*2); ctx.fill();
+    }
+    // SM-102 ionizable lipid core
+    ctx.beginPath(); ctx.arc(cx, cy, lnpR - 14, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,100,40,0.2)'; ctx.fill();
+    ctx.strokeStyle = '#ff6622'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#ff6622'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('SM-102', cx, cy - 30); ctx.fillText('ionizable', cx, cy - 20); ctx.fillText('lipid core', cx, cy - 10);
+    ctx.fillText('pKa ~6.6', cx, cy); ctx.fillText('(cationic @pH 4)', cx, cy + 10);
+
+    // mRNA coil inside
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2;
     ctx.beginPath();
-    for (let a = 0; a < Math.PI * 4; a += 0.2) {
-      const x = cx + (15 + a * 2) * Math.cos(a + angle) / (Math.PI * 4) * 2.5;
-      const y = cy + 8 * Math.sin(a * 2.5);
+    const spin = t * 0.02;
+    for (let a = 0; a < Math.PI * 3; a += 0.15) {
+      const r2 = 8 + a * 2;
+      const x = cx + r2 * Math.cos(a + spin), y = cy + r2 * Math.sin(a * 1.3 + spin) * 0.5 + 20;
       a === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
     }
     ctx.stroke();
-    ctx.fillStyle = '#ff884499'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Lipid Nanoparticle (SM-102 core)', cx, cy + r + 16);
+    ctx.fillStyle = '#00e5ff66'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('mRNA cargo', cx, cy + 42);
+
+    // Size label
+    ctx.fillStyle = '#8888b077'; ctx.font = '8px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('~80–100 nm', W - 14, cy + lnpR + 20);
+    mrna_label('LNP: ionizable lipid + DSPC + cholesterol + PEG-lipid encapsulates mRNA', cx, H - 10, '#ff884477');
+
   } else if (phase === 2) {
-    // Endosomal escape
-    const esc = (Math.sin(t * 0.04) + 1) / 2;
-    // Endosome
-    ctx.beginPath(); ctx.arc(cx, cy, 65, 0, Math.PI * 2);
-    ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 2; ctx.setLineDash([4, 4]); ctx.stroke();
-    ctx.setLineDash([]);
-    // Escaping mRNA dot
-    const escX = cx + 90 * Math.cos(t * 0.05);
-    const escY = cy + 40 * Math.sin(t * 0.05);
-    ctx.beginPath(); ctx.arc(escX, escY, 8, 0, Math.PI * 2);
-    ctx.fillStyle = '#00e5ff'; ctx.fill();
-    ctx.fillStyle = '#ff448899'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Endosomal escape (~1-2% efficiency)', cx, cy + 85);
+    // ── Phase 2: Endosomal escape — pH drop protonates SM-102, disrupts membrane ──
+    // Endosome (acidifying)
+    const pHProgress = Math.min(1, t / 100);
+    const pH = 7.4 - pHProgress * 1.9; // 7.4 → 5.5
+    const endoColor = `rgba(${Math.round(200 + 55 * pHProgress)},${Math.round(50 - 30 * pHProgress)},80,`;
+    ctx.beginPath(); ctx.arc(cx, cy, 72, 0, Math.PI*2);
+    ctx.fillStyle = endoColor + '0.12)'; ctx.fill();
+    ctx.strokeStyle = endoColor + '0.8)'; ctx.lineWidth = 2.5;
+    ctx.setLineDash(pHProgress > 0.7 ? [4, 3] : []);
+    ctx.stroke(); ctx.setLineDash([]);
+    // pH badge
+    ctx.fillStyle = endoColor + '0.9)'; ctx.font = 'bold 11px monospace'; ctx.textAlign = 'right';
+    ctx.fillText(`pH ${pH.toFixed(1)}`, W - 14, 22);
+    ctx.fillStyle = endoColor + '0.6)'; ctx.font = '8px monospace';
+    ctx.fillText(pHProgress > 0.5 ? 'SM-102 reproto-nates' : 'endosomal acidification', W - 14, 34);
+
+    // H+ proton particles flooding in
+    for (let i = 0; i < 5; i++) {
+      const ha = (t * 0.06 + i * 1.26) % (Math.PI * 2);
+      const hr = 55 + 12 * Math.sin(t * 0.04 + i);
+      mrna_particle(cx + hr * Math.cos(ha), cy + hr * Math.sin(ha), 'H⁺', '#ff6644');
+    }
+
+    // LNP inside — becoming disruptive at low pH
+    const lnpScale = 1 + pHProgress * 0.15;
+    ctx.beginPath(); ctx.arc(cx, cy, 26 * lnpScale, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,136,68,0.2)'; ctx.fill();
+    ctx.strokeStyle = pHProgress > 0.6 ? '#ff4422' : '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('LNP', cx, cy - 4); ctx.fillText(pHProgress > 0.6 ? 'disrupting' : 'intact', cx, cy + 7);
+
+    // Escaped mRNA particles
+    if (pHProgress > 0.6) {
+      for (let i = 0; i < 2; i++) {
+        const esc = ((t * 0.04 + i * Math.PI) % (Math.PI * 2));
+        const er = 60 + 15 * pHProgress;
+        mrna_particle(cx + er * Math.cos(esc), cy + er * Math.sin(esc), 'mR', '#00e5ff');
+      }
+    }
+    const effTxt = pHProgress > 0.7 ? '~1–2% of LNPs escape, each releasing mRNA amplified 10³–10⁶× by ribosomes' : 'Endosome matures, pH drops → SM-102 cationic flip → non-bilayer disruption';
+    mrna_label(effTxt, cx, H - 10, '#ff448877');
+
   } else if (phase === 3) {
-    // Ribosome + spike biogenesis
-    const ribY = cy - 20;
-    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.arc(cx - 15, ribY - 8, 22, 0, Math.PI * 2); ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx + 15, ribY + 8, 18, 0, Math.PI * 2); ctx.stroke();
-    // Growing spike
-    const spikeH = 20 + (t % 80) * 0.8;
-    ctx.fillStyle = '#aa77ff'; ctx.beginPath();
-    ctx.moveTo(cx, ribY + 24); ctx.lineTo(cx - 12, ribY + 24 + spikeH); ctx.lineTo(cx + 12, ribY + 24 + spikeH); ctx.closePath(); ctx.fill();
-    ctx.fillStyle = '#aa77ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Ribosome translates mRNA \u2192 Spike protein', cx, cy + 80);
+    // ── Phase 3: Ribosome translation → spike protein biogenesis ──
+    const ribY = cy - 15;
+    // mRNA strand
+    ctx.strokeStyle = '#00e5ff44'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(30, ribY + 20); ctx.lineTo(W - 30, ribY + 20); ctx.stroke();
+    // Codons (triplets)
+    for (let i = 0; i < 14; i++) {
+      const cx2 = 36 + i * ((W - 70) / 14);
+      const col = i < 3 ? '#00e5ffaa' : '#33335a'; // ribosome is reading i=3 codon
+      ctx.beginPath(); ctx.arc(cx2, ribY + 20, 5, 0, Math.PI*2);
+      ctx.fillStyle = col; ctx.fill();
+    }
+
+    // 80S ribosome — large (60S) + small (40S) subunits
+    // 60S (large, top)
+    const ribCX = 36 + 3 * ((W - 70) / 14); // position over codon 3
+    ctx.beginPath(); ctx.ellipse(ribCX, ribY - 6, 30, 18, 0, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(170,119,255,0.2)'; ctx.fill();
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('60S', ribCX, ribY - 4);
+    // 40S (small, bottom, straddles mRNA)
+    ctx.beginPath(); ctx.ellipse(ribCX, ribY + 14, 22, 10, 0, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(170,119,255,0.15)'; ctx.fill();
+    ctx.strokeStyle = '#aa77ff99'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#aa77ff99'; ctx.font = '6px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('40S', ribCX, ribY + 17);
+
+    // tRNA in A-site and P-site
+    ctx.beginPath(); ctx.arc(ribCX - 10, ribY - 8, 6, 0, Math.PI*2);
+    ctx.fillStyle = '#00ff9966'; ctx.fill(); ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = '#00ff99'; ctx.font = '5px monospace'; ctx.textAlign = 'center'; ctx.fillText('P', ribCX - 10, ribY - 6);
+    ctx.beginPath(); ctx.arc(ribCX + 10, ribY - 8, 6, 0, Math.PI*2);
+    ctx.fillStyle = '#ffd70066'; ctx.fill(); ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.fillStyle = '#ffd700'; ctx.font = '5px monospace'; ctx.textAlign = 'center'; ctx.fillText('A', ribCX + 10, ribY - 6);
+
+    // Growing polypeptide chain (spike protein)
+    const spikeLen = Math.min(100, (t % 110) * 1.1);
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(ribCX, ribY - 24);
+    for (let s = 0; s < spikeLen; s += 8) {
+      const sx = ribCX - s * 0.3 + 8 * Math.sin(s * 0.5);
+      const sy = ribY - 24 - s;
+      ctx.lineTo(sx, sy);
+    }
+    ctx.stroke();
+    // Spike tip (prefusion crown)
+    const spikeTipX = ribCX - spikeLen * 0.3 + 8 * Math.sin(spikeLen * 0.5);
+    const spikeTipY = ribY - 24 - spikeLen;
+    if (spikeLen > 20) {
+      ctx.beginPath(); ctx.arc(spikeTipX, spikeTipY, 8, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(170,119,255,0.35)'; ctx.fill();
+      ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#aa77ff'; ctx.font = '6px monospace'; ctx.textAlign = 'center'; ctx.fillText('S1', spikeTipX, spikeTipY + 2);
+    }
+    ctx.fillStyle = '#aa77ff66'; ctx.font = '8px monospace'; ctx.textAlign = 'left'; ctx.fillText('Spike', ribCX + 34, ribY - 30);
+    mrna_label('80S ribosome translates mRNA → co-translational spike folding + glycosylation', cx, H - 10, '#aa77ff77');
+
   } else if (phase === 4) {
-    // Immune cells orbiting antigen
-    const orbit = 65;
-    ['#00e5ff','#00ff99','#ffd700'].forEach((col, i) => {
-      const a = t * 0.025 + i * (Math.PI * 2 / 3);
-      const x = cx + orbit * Math.cos(a), y = cy + orbit * Math.sin(a);
-      ctx.beginPath(); ctx.arc(x, y, 16, 0, Math.PI * 2);
-      ctx.fillStyle = col + '33'; ctx.fill();
-      ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.stroke();
-    });
-    ctx.beginPath(); ctx.arc(cx, cy, 20, 0, Math.PI * 2);
-    ctx.fillStyle = '#aa77ff33'; ctx.fill(); ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Ag', cx, cy + 4);
-    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('B cells + T cells primed by dendritic cell', cx, cy + 100);
+    // ── Phase 4: Adaptive immune priming — DC presents spike, B + T cells activated ──
+    // Dendritic cell center
+    ctx.beginPath(); ctx.arc(cx, cy, 28, 0, Math.PI*2);
+    const dcG = ctx.createRadialGradient(cx, cy, 4, cx, cy, 28);
+    dcG.addColorStop(0, 'rgba(255,215,0,0.35)'); dcG.addColorStop(1, 'rgba(255,215,0,0)');
+    ctx.fillStyle = dcG; ctx.fill();
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('DC', cx, cy - 4); ctx.fillText('(pMHC)', cx, cy + 7);
+    // Dendritic projections
+    for (let i = 0; i < 6; i++) {
+      const a = (i / 6) * Math.PI * 2 + t * 0.01;
+      ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(cx + 28 * Math.cos(a), cy + 28 * Math.sin(a));
+      ctx.lineTo(cx + 44 * Math.cos(a), cy + 44 * Math.sin(a)); ctx.stroke();
+    }
+
+    // B cell (top right) — binding spike antigen
+    const bX = cx + 120, bY = cy - 50;
+    ctx.beginPath(); ctx.arc(bX, bY, 22, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,229,255,0.15)'; ctx.fill();
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('B cell', bX, bY - 3); ctx.fillText('BCR', bX, bY + 7);
+    ctx.strokeStyle = '#00e5ff55'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(cx + 28, cy - 14); ctx.lineTo(bX - 22, bY + 8); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#00e5ff55'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('MHC-II\n→ Tfh', (cx + bX) / 2 - 10, (cy + bY) / 2 - 10);
+    // Antibody Y-shapes being produced (if active)
+    if (t > 40) {
+      for (let i = 0; i < 2; i++) {
+        const ay = bX + 28 + i * 22, ax2 = bY - 5;
+        ctx.strokeStyle = '#00e5ff66'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(ay, ax2 + 12); ctx.lineTo(ay, ax2); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ay, ax2); ctx.lineTo(ay - 9, ax2 - 10); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ay, ax2); ctx.lineTo(ay + 9, ax2 - 10); ctx.stroke();
+      }
+    }
+
+    // CD8+ T cell (bottom right) — CTL priming
+    const tX = cx + 120, tY = cy + 50;
+    ctx.beginPath(); ctx.arc(tX, tY, 22, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,255,153,0.15)'; ctx.fill();
+    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00ff99'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('CTL', tX, tY - 3); ctx.fillText('CD8+', tX, tY + 7);
+    ctx.strokeStyle = '#00ff9955'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(cx + 28, cy + 14); ctx.lineTo(tX - 22, tY - 8); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#00ff9955'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('MHC-I → CTL', (cx + tX) / 2 - 5, (cy + tY) / 2 + 8);
+
+    // Memory label
+    ctx.fillStyle = 'rgba(170,119,255,0.7)'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('→ Long-lived plasma cells + memory B/T', 16, H - 22);
+    mrna_label('DC pMHC-I drives CTL priming; pMHC-II + Tfh drives high-affinity IgG', cx, H - 10, '#ffd70066');
   }
 }
 
@@ -637,10 +765,7 @@ mechDraw(0, 0);
 // ── Connections canvas (force-directed network) ───────────────────────────────
 function drawConnections() {
   const cv = document.getElementById('conn-canvas');
-  cv.width = cv.offsetWidth || 600;
-  cv.height = cv.offsetHeight || 360;
-  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
-  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const W = cv.offsetWidth || 600, H = 360;
 
   const nodes = [
     {id:'mrna', x:W*.5,  y:H*.5,  r:32, color:'#44ffcc', label:'mRNA\nVaccines',     sub:'2023'},
@@ -658,33 +783,16 @@ function drawConnections() {
     {from:'mrna',to:'hcv', color:'#44ffcc55',label:'IRES vs\ncap-dep'},
   ];
 
-  const ns = {}; nodes.forEach(n => ns[n.id] = n);
-  edges.forEach(e => {
-    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
-    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
-    if(e.label) {
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
-      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
-    }
-  });
-  nodes.forEach(n => {
-    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-    ctx.fillStyle = n.color + '22'; ctx.fill();
-    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
-    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
-    ctx.fillText(n.sub, n.x, n.y+n.r+11);
-  });
+  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
 }
 </script>
 
 <!-- Shared infrastructure (load after module data) -->
 <script src="../shared/glossary-data.js"></script>
 <script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/connections.js"></script>
 <script src="../shared/molecule-modal.js"></script>
 <script src="../shared/auto-start.js"></script>
+<script src="../shared/mech-theater.js" defer></script>
 </body>
 </html>

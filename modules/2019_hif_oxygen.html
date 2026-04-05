@@ -5,80 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2019 · HIF / Oxygen Sensing — kbiology Nobel Frontier</title>
 <link rel="stylesheet" href="../shared/theme.css">
-<link rel="stylesheet" href="../shared/molecule-modal.css">
-<style>
-/* Module layout */
-.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
-.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
-.back-link:hover{color:var(--green);border-color:var(--green)}
-.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
-.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
-.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
-.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
-.mod-tab:hover{color:var(--text);background:var(--bg3)}
-.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
-.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
-.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
-
-/* Body layout */
-.mod-body{display:flex;min-height:calc(100vh - 100px)}
-.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
-.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-
-/* Tab panels */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Canvas */
-.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
-.canvas-wrap canvas{display:block;width:100%;height:240px}
-.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
-
-/* Mechanism panels */
-.mech-panels{display:flex;flex-direction:column;gap:10px}
-.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
-.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
-.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
-.mech-panel-body strong{color:var(--text)}
-.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-
-/* Molecules tab */
-.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
-.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
-.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
-.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
-.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
-.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
-
-/* Story tab */
-.story-content{max-width:720px}
-.story-block{margin-bottom:16px}
-.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
-
-/* Frontiers tab */
-.frontier-group{margin-bottom:20px}
-.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
-.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
-.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
-
-/* Connections tab */
-.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
-.connections-wrap canvas{display:block;width:100%;height:360px}
-
-/* Right sidebar */
-.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
-.rsb-mol-item:hover{color:var(--cyan)}
-.rsb-mol-icon{font-size:1rem;flex-shrink:0}
-.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
-.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
-</style>
-</head>
+<link rel="stylesheet" href="../shared/module-layout.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css"></head>
 <body>
 <!-- Module header -->
 <div class="mod-hdr">
@@ -141,7 +69,7 @@
   <div class="main" id="main-content">
     <!-- Tab 1: Mechanism -->
     <div class="tab-panel active" id="panel-mechanism">
-      <div class="canvas-wrap">
+      <div class="canvas-wrap" id="canvas-wrap">
         <canvas id="mech-canvas"></canvas>
         <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; Normoxia: PHD2 Active, HIF-1&alpha; Degraded</div>
       </div>
@@ -207,7 +135,7 @@ Object.assign(window.GLOSS, {
 });
 
 // ── Module molecules data ────────────────────────────────────────────────────
-const MODULE_MOLS = [
+window.MODULE_MOLS = [
   { id:'hif1a', icon:'\ud83d\udfe0', color:'#ff8844', type:'Protein \u00b7 bHLH-PAS TF', is_protein:true,
     name:'HIF-1\u03b1', sub:'PDB: 1LM8 \u00b7 826 aa \u00b7 oxygen-responsive TF',
     badges:[{text:'O2 sensor',color:'#ff8844'},{text:'Tumor driver',color:'#ff4444'},{text:'Nobel 2019',color:'#ffd700'}],
@@ -380,150 +308,246 @@ let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
 
 function mechDraw(phase, t) {
   const cv = mechCv;
-  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 420;
   const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
   ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
   const cx = W / 2, cy = H / 2;
 
+  function hif_label(text, x, y, col) {
+    ctx.textAlign = 'center'; ctx.font = '10px monospace';
+    const tw = ctx.measureText(text).width;
+    ctx.fillStyle = 'rgba(7,7,30,0.8)'; ctx.fillRect(x - tw/2 - 3, y - 10, tw + 6, 13);
+    ctx.fillStyle = col; ctx.fillText(text, x, y);
+  }
+  function o2_molecule(x, y, alpha) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, 10);
+    g.addColorStop(0, `rgba(0,229,255,${alpha})`); g.addColorStop(1, 'rgba(0,229,255,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, 6, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(0,229,255,${alpha * 0.8})`; ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 6px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('O₂', x, y + 2);
+  }
+  function hif_nucleus(nX, nY, nR) {
+    ctx.beginPath(); ctx.arc(nX, nY, nR, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(10,10,35,0.9)'; ctx.fill();
+    ctx.strokeStyle = '#ffd70033'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#ffd70033'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Nucleus', nX, nY - nR + 14);
+  }
+
   if (phase === 0) {
-    // Normoxia: O2 + PHD2 active, HIF-1a degraded rapidly
-    // PHD2 enzyme in center
-    ctx.beginPath(); ctx.arc(cx, cy, 30, 0, Math.PI * 2);
-    ctx.fillStyle = '#aa77ff22'; ctx.fill();
+    // ── Phase 0: Normoxia — O2 abundant, PHD2 active, HIF-1α continuously degraded ──
+    // O2 gradient bar (left=low, right=high)
+    const o2Grad = ctx.createLinearGradient(0, 0, W, 0);
+    o2Grad.addColorStop(0, 'rgba(0,229,255,0.04)'); o2Grad.addColorStop(1, 'rgba(0,229,255,0.14)');
+    ctx.fillStyle = o2Grad; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(0,229,255,0.7)'; ctx.font = 'bold 9px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('[O₂] = 21% (normoxia)', W - 14, 20);
+
+    // PHD2 enzyme — active central
+    const phd2G = ctx.createRadialGradient(cx, cy, 5, cx, cy, 34);
+    phd2G.addColorStop(0, 'rgba(170,119,255,0.3)'); phd2G.addColorStop(1, 'rgba(170,119,255,0)');
+    ctx.fillStyle = phd2G; ctx.beginPath(); ctx.arc(cx, cy, 34, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, 26, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(170,119,255,0.15)'; ctx.fill();
     ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.stroke();
     ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('PHD2', cx, cy - 3); ctx.fillText('ACTIVE', cx, cy + 9);
-    // O2 molecules orbiting
-    for (let i = 0; i < 4; i++) {
-      const a = (t * 0.03) + i * (Math.PI / 2);
-      const x = cx + 65 * Math.cos(a), y = cy + 40 * Math.sin(a);
-      ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2);
-      ctx.fillStyle = '#00e5ff33'; ctx.fill();
-      ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 1.5; ctx.stroke();
-      ctx.fillStyle = '#00e5ff'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
-      ctx.fillText('O\u2082', x, y + 3);
+    ctx.fillText('PHD2', cx, cy - 4); ctx.fillText('Fe²⁺/2-OG', cx, cy + 8);
+
+    // O2 molecules orbiting PHD2
+    for (let i = 0; i < 5; i++) {
+      const a = (t * 0.032) + i * (Math.PI * 2 / 5);
+      o2_molecule(cx + 58 * Math.cos(a), cy + 44 * Math.sin(a), 0.8);
     }
-    // HIF-1a being degraded
-    const fadeX = cx + 130, fadeY = cy;
-    const alpha = 0.3 + 0.3 * Math.abs(Math.sin(t * 0.04));
-    ctx.globalAlpha = alpha;
-    ctx.beginPath(); ctx.arc(fadeX, fadeY, 20, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff884422'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('HIF-1\u03b1', fadeX, fadeY + 3);
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = '#ff884455'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('t\u00bd < 5 min', fadeX, fadeY + 36);
-    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Normoxia: PHD2 uses O\u2082 \u2192 HIF-1\u03b1 continuously degraded', cx, H - 20);
-  } else if (phase === 1) {
-    // PHD2 hydroxylating HIF-1a Pro564
-    const pulse = (Math.sin(t * 0.05) + 1) / 2;
-    // PHD2
-    ctx.beginPath(); ctx.arc(cx - 80, cy - 20, 28, 0, Math.PI * 2);
-    ctx.fillStyle = '#aa77ff22'; ctx.fill(); ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('PHD2', cx - 80, cy - 23); ctx.fillText('Fe\u00b2\u207a / 2-OG', cx - 80, cy - 11);
-    // HIF-1a Pro564
-    ctx.beginPath(); ctx.arc(cx + 80, cy - 20, 28, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff884422'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('HIF-1\u03b1', cx + 80, cy - 23); ctx.fillText('Pro564', cx + 80, cy - 11);
-    // O2 arrow
-    const arrowX = cx;
-    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.setLineDash([3, 3]);
-    ctx.beginPath(); ctx.moveTo(cx - 52, cy - 20); ctx.lineTo(cx + 52, cy - 20); ctx.stroke();
+
+    // HIF-1α — rapidly fading (short half-life)
+    const decayAlpha = 0.25 + 0.4 * Math.abs(Math.sin(t * 0.045));
+    const hifX = cx + 130, hifY = cy;
+    ctx.beginPath(); ctx.arc(hifX, hifY, 22, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,136,68,${decayAlpha * 0.2})`; ctx.fill();
+    ctx.strokeStyle = `rgba(255,136,68,${decayAlpha})`; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = `rgba(255,136,68,${decayAlpha})`; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1α', hifX, hifY + 3);
+    ctx.fillStyle = `rgba(255,136,68,${decayAlpha * 0.7})`; ctx.font = '7px monospace';
+    ctx.fillText('t½ < 5 min', hifX, hifY + 36);
+    // Degradation arrow
+    ctx.strokeStyle = `rgba(255,68,68,${decayAlpha * 0.6})`; ctx.lineWidth = 1.5;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(cx + 30, cy); ctx.lineTo(hifX - 22, hifY); ctx.stroke();
     ctx.setLineDash([]);
-    // OH product pulsing
-    ctx.globalAlpha = 0.4 + 0.6 * pulse;
-    ctx.beginPath(); ctx.arc(cx + 80, cy + 30, 16, 0, Math.PI * 2);
-    ctx.fillStyle = '#00ff9944'; ctx.fill(); ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#00ff99'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('OH-Pro', cx + 80, cy + 33);
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('O\u2082 + 2-OG \u2192 4-hydroxyproline on Pro564 (and Pro402)', cx, H - 20);
-  } else if (phase === 2) {
-    // VHL recognizing OH-HIF-1a, ubiquitination
-    const ub_t = (t * 0.03) % (Math.PI * 2);
-    // VHL complex
-    ctx.beginPath(); ctx.arc(cx, cy, 34, 0, Math.PI * 2);
-    ctx.fillStyle = '#00e5ff22'; ctx.fill(); ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('pVHL', cx, cy - 4); ctx.fillText('E3 complex', cx, cy + 8);
-    // OH-HIF coming in
-    const hifX = cx - 120 + Math.min(t * 0.5, 80);
-    ctx.beginPath(); ctx.arc(hifX, cy, 22, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff884433'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 1.5; ctx.stroke();
+    hif_label('Normoxia: PHD2 continuously hydroxylates HIF-1α → rapid degradation', cx, H - 16, '#aa77ff77');
+
+  } else if (phase === 1) {
+    // ── Phase 1: PHD2 catalytic cycle — O2 + 2-OG + Fe²⁺ → 4-OH-Pro on HIF-1α ──
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+    // PHD2 active site
+    const pX = cx - 85, pY = cy - 10;
+    ctx.beginPath(); ctx.arc(pX, pY, 30, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(170,119,255,0.12)'; ctx.fill();
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PHD2', pX, pY - 6); ctx.fillText('Fe²⁺', pX, pY + 5); ctx.fillText('2-OG', pX, pY + 16);
+    // O2 substrate
+    o2_molecule(pX, pY - 50, 0.9);
+    ctx.strokeStyle = '#00e5ff55'; ctx.lineWidth = 1; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(pX, pY - 40); ctx.lineTo(pX, pY - 30); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // HIF-1α Pro564 segment
+    const hX = cx + 85, hY = cy - 10;
+    ctx.beginPath(); ctx.arc(hX, hY, 30, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,136,68,0.12)'; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
     ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('OH-HIF', hifX, cy - 2); ctx.fillText('1\u03b1', hifX, cy + 9);
-    // Ubiquitin chains
-    for (let i = 0; i < 4; i++) {
-      const a = ub_t + i * (Math.PI / 2);
-      const ux = cx + 80 * Math.cos(a), uy = cy + 50 * Math.sin(a);
-      ctx.beginPath(); ctx.arc(ux, uy, 10, 0, Math.PI * 2);
-      ctx.fillStyle = '#aa77ff33'; ctx.fill(); ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1; ctx.stroke();
-      ctx.fillStyle = '#aa77ffaa'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
-      ctx.fillText('Ub', ux, uy + 3);
+    ctx.fillText('HIF-1α', hX, hX > 0 ? hY - 6 : hY); ctx.fillText('Pro564', hX, hY + 5);
+
+    // Reaction arrow
+    ctx.strokeStyle = '#aa77ff66'; ctx.lineWidth = 2; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(pX + 30, pY); ctx.lineTo(hX - 30, hY); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#aa77ff77'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('O₂ + 2-OG →', cx, pY - 14); ctx.fillText('succinate + CO₂', cx, pY - 3);
+
+    // 4-OH-Pro product on HIF-1α
+    const ohAlpha = 0.3 + 0.7 * pulse;
+    ctx.beginPath(); ctx.arc(hX, hY + 44, 18, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(0,255,153,${ohAlpha * 0.25})`; ctx.fill();
+    ctx.strokeStyle = `rgba(0,255,153,${ohAlpha})`; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = `rgba(0,255,153,${ohAlpha})`; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('4-OH', hX, hY + 41); ctx.fillText('Pro564', hX, hY + 52);
+    ctx.strokeStyle = `rgba(255,136,68,${ohAlpha * 0.5})`; ctx.lineWidth = 1; ctx.setLineDash([2,2]);
+    ctx.beginPath(); ctx.moveTo(hX, hY + 30); ctx.lineTo(hX, hY + 26); ctx.stroke();
+    ctx.setLineDash([]);
+    hif_label('O₂ + 2-OG + Fe²⁺ → 4-hydroxyproline at Pro564 (and Pro402) of HIF-1α', cx, H - 16, '#aa77ff88');
+
+  } else if (phase === 2) {
+    // ── Phase 2: pVHL recognizes OH-Pro, Elongin-CullinRBX E3 polyubiquitinates HIF-1α ──
+    const prog = Math.min(1, t / 60);
+    const hifX = cx - 110 + prog * 75, hifY = cy;
+    // pVHL complex (center stage)
+    ctx.beginPath(); ctx.arc(cx, cy, 36, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,229,255,0.1)'; ctx.fill();
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('pVHL', cx, cy - 8); ctx.fillText('Elong.B/C', cx, cy + 3); ctx.fillText('Cullin2-RBX', cx, cy + 14);
+
+    // OH-HIF approaching pVHL
+    ctx.beginPath(); ctx.arc(hifX, hifY, 22, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,136,68,0.15)'; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('OH-HIF-1α', hifX, hifY - 2); ctx.fillText('Pro-OH', hifX, hifY + 9);
+    // Green OH dot on HIF showing hydroxylation
+    ctx.beginPath(); ctx.arc(hifX + 18, hifY - 14, 6, 0, Math.PI*2);
+    ctx.fillStyle = '#00ff99cc'; ctx.fill();
+    ctx.fillStyle = '#00ff99'; ctx.font = '5px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('OH', hifX + 18, hifY - 12);
+
+    // Ubiquitin chain growing on the right
+    const nUb = Math.floor(prog * 5) + 1;
+    const ubStartX = cx + 40, ubStartY = cy - 40;
+    for (let i = 0; i < nUb; i++) {
+      const ux = ubStartX + i * 20, uy = ubStartY - i * 10;
+      ctx.beginPath(); ctx.arc(ux, uy, 10, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(170,119,255,0.3)'; ctx.fill();
+      ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 6px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('Ub', ux, uy + 2);
+      if (i > 0) {
+        ctx.strokeStyle = '#aa77ff55'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(ux - 20, uy + 10); ctx.lineTo(ux - 10, uy + 5); ctx.stroke();
+      }
     }
-    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('pVHL recognizes OH-Pro (Kd ~1 \u00b5M) \u2192 polyubiquitination \u2192 26S proteasome', cx, H - 20);
+    hif_label(`pVHL binds OH-Pro564 (Kd ~1 μM) → K48-polyUb chain → 26S proteasome`, cx, H - 16, '#00e5ff77');
+
   } else if (phase === 3) {
-    // Hypoxia: PHD2 inactive, HIF-1a accumulates and translocates
-    // Low O2 indicator
-    ctx.fillStyle = '#00e5ff44'; ctx.font = 'bold 11px monospace'; ctx.textAlign = 'left';
-    ctx.fillText('[O\u2082] < 5%', 20, 30);
-    ctx.fillStyle = '#00e5ff22'; ctx.font = '9px monospace';
-    ctx.fillText('PHD2 inactive \u2014 no substrate', 20, 45);
-    // PHD2 crossed out
-    ctx.beginPath(); ctx.arc(cx - 90, cy, 26, 0, Math.PI * 2);
-    ctx.fillStyle = '#aa77ff11'; ctx.fill(); ctx.strokeStyle = '#aa77ff44'; ctx.lineWidth = 2; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
-    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(cx - 114, cy - 20); ctx.lineTo(cx - 66, cy + 20); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx - 66, cy - 20); ctx.lineTo(cx - 114, cy + 20); ctx.stroke();
-    ctx.fillStyle = '#aa77ff44'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('PHD2', cx - 90, cy + 3);
-    // HIF-1a building up
-    const scale = Math.min(1, (t % 100) / 50);
-    const r = 20 + 14 * scale;
-    ctx.beginPath(); ctx.arc(cx + 60, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff884433'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    // ── Phase 3: Hypoxia — PHD2 stalls, HIF-1α accumulates, translocates to nucleus ──
+    // Hypoxia gradient (dark O2-depleted left, lighter right)
+    const hypGrad = ctx.createLinearGradient(0, 0, W, 0);
+    hypGrad.addColorStop(0, 'rgba(20,0,0,0.5)'); hypGrad.addColorStop(1, 'rgba(0,0,30,0.1)');
+    ctx.fillStyle = hypGrad; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = 'rgba(255,80,40,0.8)'; ctx.font = 'bold 9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('[O₂] < 2% (hypoxia)', 16, 20);
+
+    // PHD2 — stalled / crossed out
+    const phd2X = cx - 105, phd2Y = cy;
+    ctx.beginPath(); ctx.arc(phd2X, phd2Y, 26, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(170,119,255,0.05)'; ctx.fill();
+    ctx.strokeStyle = '#aa77ff33'; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(phd2X-18, phd2Y-18); ctx.lineTo(phd2X+18, phd2Y+18); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(phd2X+18, phd2Y-18); ctx.lineTo(phd2X-18, phd2Y+18); ctx.stroke();
+    ctx.fillStyle = '#aa77ff33'; ctx.font = 'bold 8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('PHD2', phd2X, phd2Y - 34); ctx.fillText('stalled', phd2X, phd2Y - 23);
+    // No O2 available
+    for (let i = 0; i < 2; i++) {
+      o2_molecule(phd2X + (i - 0.5) * 30, phd2Y - 55, 0.25);
+    }
+    ctx.fillStyle = 'rgba(255,68,68,0.5)'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('O₂ depleted', phd2X, phd2Y - 70);
+
+    // HIF-1α accumulating (growing)
+    const growR = 20 + 14 * Math.min(1, (t % 100) / 50);
+    const hifAccX = cx + 40, hifAccY = cy;
+    const hifG = ctx.createRadialGradient(hifAccX, hifAccY, 4, hifAccX, hifAccY, growR + 10);
+    hifG.addColorStop(0, 'rgba(255,136,68,0.4)'); hifG.addColorStop(1, 'rgba(255,136,68,0)');
+    ctx.fillStyle = hifG; ctx.beginPath(); ctx.arc(hifAccX, hifAccY, growR + 10, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(hifAccX, hifAccY, growR, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,136,68,0.2)'; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2.5; ctx.stroke();
     ctx.fillStyle = '#ff8844'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('HIF-1\u03b1', cx + 60, cy - 2); ctx.fillText('\u2191\u2191 accumulates', cx + 60, cy + 12);
-    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Hypoxia \u2192 PHD2 stalls \u2192 HIF-1\u03b1 escapes degradation (t\u00bd > 30 min)', cx, H - 20);
+    ctx.fillText('HIF-1α', hifAccX, hifAccY - 3); ctx.fillText('↑↑ builds', hifAccX, hifAccY + 9);
+    // Arrow toward nucleus
+    hif_nucleus(cx + 140, cy, 30);
+    ctx.strokeStyle = '#ff884466'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(hifAccX + growR, hifAccY); ctx.lineTo(cx + 108, cy); ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.beginPath();
+    ctx.moveTo(cx+108, cy); ctx.lineTo(cx+100, cy-5); ctx.lineTo(cx+100, cy+5); ctx.closePath(); ctx.fill();
+    hif_label('Hypoxia: no O₂ for PHD2 → HIF-1α t½ >30 min → nuclear translocation', cx, H - 16, '#ff884488');
+
   } else if (phase === 4) {
-    // HIF target gene transcription: nucleus with HRE
-    const orbit = 60;
-    // Nucleus
-    ctx.beginPath(); ctx.arc(cx, cy, orbit, 0, Math.PI * 2);
-    ctx.fillStyle = '#05050f'; ctx.fill(); ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 2; ctx.setLineDash([6,3]); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = '#ffd70066'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Nucleus', cx, cy - orbit + 14);
-    // HRE sequence
-    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('5\'-RCGTG-3\' (HRE)', cx, cy - 6);
-    // HIF-1a/HIF-1b dimer on DNA
-    ctx.beginPath(); ctx.arc(cx - 18, cy + 18, 14, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff884433'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.fillStyle = '#ff8844'; ctx.font = '7px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('HIF-1\u03b1', cx - 18, cy + 21);
-    ctx.beginPath(); ctx.arc(cx + 18, cy + 18, 14, 0, Math.PI * 2);
-    ctx.fillStyle = '#00ff9933'; ctx.fill(); ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.fillStyle = '#00ff99'; ctx.font = '7px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('HIF-1\u03b2', cx + 18, cy + 21);
-    // Target gene labels orbiting
+    // ── Phase 4: HIF-1α/β heterodimer binds HRE → VEGF-A, EPO, LDHA, PDK1 ──
+    hif_nucleus(cx, cy, 68);
+    // HRE DNA
+    const dnaY = cy + 20;
+    ctx.strokeStyle = '#ffd70055'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx - 55, dnaY); ctx.lineTo(cx + 55, dnaY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx - 48, dnaY + 6); ctx.lineTo(cx + 48, dnaY + 6); ctx.stroke();
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText("5'-RCGTG-3' (HRE)", cx, dnaY + 18);
+    // HIF-1α and HIF-1β heterodimer on DNA
+    ctx.beginPath(); ctx.arc(cx - 18, cy - 8, 16, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,136,68,0.25)'; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1α', cx - 18, cy - 5);
+    ctx.beginPath(); ctx.arc(cx + 18, cy - 8, 16, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,255,153,0.2)'; ctx.fill();
+    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00ff99'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1β', cx + 18, cy - 5);
+    ctx.strokeStyle = '#ff884466'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx - 2, cy - 8); ctx.lineTo(cx + 2, cy - 8); ctx.stroke();
+
+    // Target genes orbiting the nucleus
     const genes = ['VEGF-A', 'EPO', 'LDHA', 'PDK1'];
+    const gColors = ['#ff4488', '#00e5ff', '#ffd700', '#00ff99'];
     genes.forEach((gene, i) => {
-      const a = (t * 0.02) + i * (Math.PI / 2);
-      const gx = cx + (orbit + 38) * Math.cos(a), gy = cy + (orbit + 38) * Math.sin(a);
-      ctx.beginPath(); ctx.arc(gx, gy, 18, 0, Math.PI * 2);
-      ctx.fillStyle = '#00ff9922'; ctx.fill(); ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 1.5; ctx.stroke();
-      ctx.fillStyle = '#00ff99'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+      const a = (t * 0.018) + i * (Math.PI / 2);
+      const gx = cx + 104 * Math.cos(a), gy = cy + 104 * Math.sin(a);
+      ctx.beginPath(); ctx.arc(gx, gy, 18, 0, Math.PI*2);
+      ctx.fillStyle = gColors[i] + '22'; ctx.fill();
+      ctx.strokeStyle = gColors[i] + '88'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = gColors[i]; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
       ctx.fillText(gene, gx, gy + 3);
+      // mRNA arrows from nucleus
+      ctx.strokeStyle = gColors[i] + '44'; ctx.lineWidth = 1; ctx.setLineDash([2,3]);
+      ctx.beginPath(); ctx.moveTo(cx + 68 * Math.cos(a), cy + 68 * Math.sin(a));
+      ctx.lineTo(gx - 18 * Math.cos(a), gy - 18 * Math.sin(a)); ctx.stroke();
+      ctx.setLineDash([]);
     });
-    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('HIF-1\u03b1/\u03b2 dimer binds HRE \u2192 VEGF-A, EPO, LDHA, PDK1, >100 targets', cx, H - 20);
+    hif_label('HIF-1α/β binds HRE 5\'-RCGTG-3\' → VEGF-A, EPO, LDHA, PDK1 (>100 targets)', cx, H - 16, '#ffd70077');
   }
 }
 
@@ -740,10 +764,7 @@ mechDraw(0, 0);
 // ── Connections canvas (force-directed network) ───────────────────────────────
 function drawConnections() {
   const cv = document.getElementById('conn-canvas');
-  cv.width = cv.offsetWidth || 600;
-  cv.height = cv.offsetHeight || 360;
-  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
-  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const W = cv.offsetWidth || 600, H = 360;
 
   const nodes = [
     {id:'hif',   x:W*.5,  y:H*.5,  r:32, color:'#ff8844', label:'HIF\nO2 Sensing',  sub:'2019'},
@@ -761,33 +782,16 @@ function drawConnections() {
     {from:'hif',to:'hcv',  color:'#44ffcc44',label:'HIF-1\u03b1 in\nviral hepatitis'},
   ];
 
-  const ns = {}; nodes.forEach(n => ns[n.id] = n);
-  edges.forEach(e => {
-    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
-    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
-    if(e.label) {
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
-      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
-    }
-  });
-  nodes.forEach(n => {
-    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-    ctx.fillStyle = n.color + '22'; ctx.fill();
-    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
-    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
-    ctx.fillText(n.sub, n.x, n.y+n.r+11);
-  });
+  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
 }
 </script>
 
 <!-- Shared infrastructure (load after module data) -->
 <script src="../shared/glossary-data.js"></script>
 <script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/connections.js"></script>
 <script src="../shared/molecule-modal.js"></script>
 <script src="../shared/auto-start.js"></script>
+<script src="../shared/mech-theater.js" defer></script>
 </body>
 </html>

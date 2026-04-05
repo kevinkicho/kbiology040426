@@ -5,80 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2021 · TRP Channels — kbiology Nobel Frontier</title>
 <link rel="stylesheet" href="../shared/theme.css">
-<link rel="stylesheet" href="../shared/molecule-modal.css">
-<style>
-/* Module layout */
-.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
-.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
-.back-link:hover{color:var(--green);border-color:var(--green)}
-.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
-.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
-.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
-.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
-.mod-tab:hover{color:var(--text);background:var(--bg3)}
-.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
-.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
-.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
-
-/* Body layout */
-.mod-body{display:flex;min-height:calc(100vh - 100px)}
-.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
-.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-
-/* Tab panels */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Canvas */
-.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
-.canvas-wrap canvas{display:block;width:100%;height:240px}
-.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
-
-/* Mechanism panels */
-.mech-panels{display:flex;flex-direction:column;gap:10px}
-.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
-.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
-.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
-.mech-panel-body strong{color:var(--text)}
-.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-
-/* Molecules tab */
-.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
-.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
-.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
-.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
-.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
-.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
-
-/* Story tab */
-.story-content{max-width:720px}
-.story-block{margin-bottom:16px}
-.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
-
-/* Frontiers tab */
-.frontier-group{margin-bottom:20px}
-.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
-.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
-.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
-
-/* Connections tab */
-.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
-.connections-wrap canvas{display:block;width:100%;height:360px}
-
-/* Right sidebar */
-.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
-.rsb-mol-item:hover{color:var(--cyan)}
-.rsb-mol-icon{font-size:1rem;flex-shrink:0}
-.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
-.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
-</style>
-</head>
+<link rel="stylesheet" href="../shared/module-layout.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css"></head>
 <body>
 <!-- Module header -->
 <div class="mod-hdr">
@@ -141,7 +69,7 @@
   <div class="main" id="main-content">
     <!-- Tab 1: Mechanism -->
     <div class="tab-panel active" id="panel-mechanism">
-      <div class="canvas-wrap">
+      <div class="canvas-wrap" id="canvas-wrap">
         <canvas id="mech-canvas"></canvas>
         <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; Resting TRPV1: Closed Channel State</div>
       </div>
@@ -187,9 +115,9 @@
         <div class="ref-year">nobelprize.org</div>
         <div class="ref-title">Nobel Prize 2021 &#8212; official announcement</div>
       </a>
-      <a href="https://www.rcsb.org/structure/5GGS" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+      <a href="https://www.rcsb.org/structure/3J5P" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
         <div class="ref-year">RCSB PDB</div>
-        <div class="ref-title">PDB: TRPV1 (5GGS)</div>
+        <div class="ref-title">PDB: TRPV1 (3J5P)</div>
       </a>
     </div>
   </div>
@@ -207,14 +135,14 @@ Object.assign(window.GLOSS, {
 });
 
 // ── Module molecules data ────────────────────────────────────────────────────
-const MODULE_MOLS = [
+window.MODULE_MOLS = [
   { id:'trpv1', icon:'\ud83d\udd34', color:'#ff8844', type:'Protein \u00b7 TRP channel tetramer', is_protein:true,
-    name:'TRPV1', sub:'PDB: 5GGS \u00b7 838 aa/subunit \u00b7 heat + capsaicin gated',
+    name:'TRPV1', sub:'PDB: 3J5P \u00b7 838 aa/subunit \u00b7 heat + capsaicin gated',
     badges:[{text:'Heat sensor >43\u00b0C',color:'#ff8844'},{text:'Capsaicin receptor',color:'#ffd700'},{text:'Nobel 2021',color:'#ffd700'}],
-    pubchem_cid:null, pdb_id:'5GGS',
-    nih_link:'https://www.rcsb.org/structure/5GGS',
+    pubchem_cid:null, pdb_id:'3J5P',
+    nih_link:'https://www.rcsb.org/structure/3J5P',
     mechanism:'Tetrameric nonselective cation channel (Ca\u00b2\u207a > Na\u207a > K\u207a, PCa/PNa ~10). Gated by: heat >43\u00b0C (membrane conformational change in S4-S5 linker), capsaicin (vanilloid pocket TM4-TM5), protons (pH <6, E600 key residue), and endocannabinoids (anandamide). Ca\u00b2\u207a influx \u2192 membrane depolarization \u2192 Nav1.8 action potential in C-fiber nociceptor \u2192 pain signal. Identified 1997 by Julius lab via cDNA expression screen in capsaicin-responsive cells.',
-    properties:{'PDB':'5GGS (capsaicin-bound)','Subunits':'4 identical (homotetrameric)','Ion selectivity':'Ca\u00b2\u207a:Na\u207a ~10:1','Temperature threshold':'43\u00b0C','Capsaicin EC50':'~300 nM (rat)','RTX EC50':'~40 pM','Pain relevance':'Inflammatory hyperalgesia; cancer pain; DRG expression'},
+    properties:{'PDB':'3J5P (apo, cryo-EM)','Subunits':'4 identical (homotetrameric)','Ion selectivity':'Ca\u00b2\u207a:Na\u207a ~10:1','Temperature threshold':'43\u00b0C','Capsaicin EC50':'~300 nM (rat)','RTX EC50':'~40 pM','Pain relevance':'Inflammatory hyperalgesia; cancer pain; DRG expression'},
     property_flags:{'Pain relevance':'warn'},
     interaction:{ title:'TRPV1 Multi-Modal Gating',
       nodes:[
@@ -347,7 +275,7 @@ const MODULE_MOLS = [
     ],
     rel_molecules:[
       {icon:'\ud83c\udf36\ufe0f',name:'Capsaicin',   role:'Parent vanilloid\n10,000\u00d7 less potent',  id:'CID 1548943'},
-      {icon:'\ud83d\udd34',name:'TRPV1',       role:'Sole target\nvanilloid receptor',         id:'PDB: 5GGS'},
+      {icon:'\ud83d\udd34',name:'TRPV1',       role:'Sole target\nvanilloid receptor',         id:'PDB: 3J5P'},
     ]
   },
 ];
@@ -378,133 +306,483 @@ document.querySelectorAll('.mod-tab').forEach(tab => {
 const mechCv = document.getElementById('mech-canvas');
 let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
 
+// roundRect polyfill for older browsers
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    r = Math.min(r, w/2, h/2);
+    this.beginPath();
+    this.moveTo(x + r, y);
+    this.lineTo(x + w - r, y); this.arcTo(x+w, y, x+w, y+r, r);
+    this.lineTo(x+w, y+h-r); this.arcTo(x+w, y+h, x+w-r, y+h, r);
+    this.lineTo(x+r, y+h); this.arcTo(x, y+h, x, y+h-r, r);
+    this.lineTo(x, y+r); this.arcTo(x, y, x+r, y, r);
+    this.closePath();
+  };
+}
+
+// ── Shared drawing helpers ──────────────────────────────────────────────────
+function drawMembrane(ctx, W, cy, thickness, wobble) {
+  // Lipid bilayer: outer leaflet above cy, inner leaflet below
+  const outerY = cy - thickness / 2;
+  const innerY = cy + thickness / 2;
+  // Outer leaflet headgroups
+  const og = ctx.createLinearGradient(0, outerY - 10, 0, outerY + 4);
+  og.addColorStop(0, 'rgba(80,120,200,0)');
+  og.addColorStop(0.5, 'rgba(80,120,200,0.35)');
+  og.addColorStop(1, 'rgba(80,120,200,0.15)');
+  ctx.fillStyle = og;
+  ctx.fillRect(0, outerY - 10, W, 14);
+  // Inner leaflet headgroups
+  const ig = ctx.createLinearGradient(0, innerY - 4, 0, innerY + 10);
+  ig.addColorStop(0, 'rgba(80,120,200,0.15)');
+  ig.addColorStop(0.5, 'rgba(80,120,200,0.35)');
+  ig.addColorStop(1, 'rgba(80,120,200,0)');
+  ctx.fillStyle = ig;
+  ctx.fillRect(0, innerY - 4, W, 14);
+  // Hydrophobic core
+  const hg = ctx.createLinearGradient(0, outerY + 4, 0, innerY - 4);
+  hg.addColorStop(0, 'rgba(30,30,80,0.7)');
+  hg.addColorStop(0.5, 'rgba(20,20,60,0.9)');
+  hg.addColorStop(1, 'rgba(30,30,80,0.7)');
+  ctx.fillStyle = hg;
+  ctx.fillRect(0, outerY + 4, W, innerY - outerY - 8);
+  // Phospholipid heads — small circles along both leaflets
+  ctx.fillStyle = 'rgba(110,150,220,0.5)';
+  for (let x = 12; x < W; x += 20) {
+    const wx = wobble ? Math.sin(x * 0.05 + wobble) * 1.5 : 0;
+    ctx.beginPath(); ctx.arc(x, outerY + wx, 3.5, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x, innerY + wx, 3.5, 0, Math.PI * 2); ctx.fill();
+  }
+  // Fatty acid tails — faint vertical lines inside core
+  ctx.strokeStyle = 'rgba(60,80,150,0.18)';
+  ctx.lineWidth = 1;
+  for (let x = 12; x < W; x += 20) {
+    ctx.beginPath(); ctx.moveTo(x, outerY + 6); ctx.lineTo(x, cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, innerY - 6); ctx.lineTo(x, cy); ctx.stroke();
+  }
+}
+
+function drawTRPV1Channel(ctx, cx, cy, thick, poreOpen, highlight) {
+  // Channel barrel cross-section: 4 TM helices on each side flanking a central pore
+  const halfW = 22, poreR = poreOpen ? 6 : 2.5;
+  const top = cy - thick / 2 - 6, bot = cy + thick / 2 + 6;
+  // Left helix bundle (2 helices)
+  for (let i = 0; i < 2; i++) {
+    const hx = cx - halfW - 10 + i * 10;
+    const hg = ctx.createLinearGradient(hx - 5, top, hx + 5, bot);
+    hg.addColorStop(0, highlight || '#ff7722');
+    hg.addColorStop(1, '#331100');
+    ctx.fillStyle = hg;
+    ctx.beginPath();
+    ctx.roundRect(hx - 5, top, 10, bot - top, 3);
+    ctx.fill();
+    ctx.strokeStyle = highlight || '#ff8844';
+    ctx.lineWidth = 1.2; ctx.stroke();
+  }
+  // Right helix bundle (2 helices)
+  for (let i = 0; i < 2; i++) {
+    const hx = cx + halfW + i * 10;
+    const hg = ctx.createLinearGradient(hx - 5, top, hx + 5, bot);
+    hg.addColorStop(0, highlight || '#ff7722');
+    hg.addColorStop(1, '#331100');
+    ctx.fillStyle = hg;
+    ctx.beginPath();
+    ctx.roundRect(hx - 5, top, 10, bot - top, 3);
+    ctx.fill();
+    ctx.strokeStyle = highlight || '#ff8844';
+    ctx.lineWidth = 1.2; ctx.stroke();
+  }
+  // Pore-forming S6 helices (inner two) — slightly inward
+  for (const side of [-1, 1]) {
+    const hx = cx + side * (halfW - 8);
+    ctx.fillStyle = 'rgba(255,120,50,0.2)';
+    ctx.beginPath(); ctx.roundRect(hx - 4, top, 8, bot - top, 2); ctx.fill();
+    ctx.strokeStyle = side < 0 ? '#ff6633' : '#ff6633';
+    ctx.lineWidth = 1.5; ctx.stroke();
+  }
+  // Pore gate
+  const gateColor = poreOpen > 0.5 ? '#00e5ff' : '#334466';
+  const poreFill = ctx.createRadialGradient(cx, cy, 0, cx, cy, poreR + 4);
+  poreFill.addColorStop(0, poreOpen > 0.3 ? 'rgba(0,229,255,0.6)' : 'rgba(20,20,80,0.9)');
+  poreFill.addColorStop(1, 'rgba(0,0,40,0)');
+  ctx.fillStyle = poreFill;
+  ctx.beginPath(); ctx.arc(cx, cy, poreR + 4, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx, cy, poreR, 0, Math.PI * 2);
+  ctx.fillStyle = poreOpen > 0.5 ? 'rgba(0,229,255,0.5)' : '#1a1a3a';
+  ctx.fill();
+  ctx.strokeStyle = gateColor; ctx.lineWidth = 1.5; ctx.stroke();
+  // S4-S5 linker label bracket
+  ctx.strokeStyle = 'rgba(255,136,68,0.5)'; ctx.lineWidth = 1; ctx.setLineDash([2,3]);
+  ctx.beginPath(); ctx.moveTo(cx - halfW - 6, top + (bot-top)*0.45);
+  ctx.lineTo(cx - halfW - 14, top + (bot-top)*0.45);
+  ctx.lineTo(cx - halfW - 14, top + (bot-top)*0.6);
+  ctx.lineTo(cx - halfW - 6, top + (bot-top)*0.6);
+  ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(255,136,68,0.7)'; ctx.font = '7px monospace'; ctx.textAlign = 'right';
+  ctx.fillText('S4-S5', cx - halfW - 16, top + (bot-top)*0.54);
+}
+
+function drawIon(ctx, x, y, label, color) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, 7);
+  g.addColorStop(0, color + 'ff');
+  g.addColorStop(0.6, color + 'bb');
+  g.addColorStop(1, color + '00');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2);
+  ctx.fillStyle = color; ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.font = 'bold 5px sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText(label, x, y + 2);
+}
+
+function drawAnnotation(ctx, x, y, text, color, align) {
+  ctx.textAlign = align || 'center';
+  ctx.font = '10px monospace';
+  const lines = text.split('\n');
+  lines.forEach((ln, i) => {
+    const tw = ctx.measureText(ln).width;
+    const tx = align === 'left' ? x : align === 'right' ? x - tw : x - tw / 2;
+    ctx.fillStyle = 'rgba(7,7,30,0.75)';
+    ctx.fillRect(tx - 3, y + i * 14 - 10, tw + 6, 13);
+    ctx.fillStyle = color;
+    ctx.fillText(ln, x, y + i * 14);
+  });
+}
+
 function mechDraw(phase, t) {
   const cv = mechCv;
-  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 420;
   const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
   ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
   const cx = W / 2, cy = H / 2;
+  const memThick = 32; // membrane thickness (px)
 
   if (phase === 0) {
-    // TRPV1 tetramer at rest — four subunits arranged symmetrically, pore closed
-    const r = 50, subR = 18;
-    const angles = [Math.PI*0, Math.PI*0.5, Math.PI, Math.PI*1.5];
-    // Central pore (closed)
-    ctx.beginPath(); ctx.arc(cx, cy, 10, 0, Math.PI*2);
-    ctx.fillStyle = '#33335a'; ctx.fill();
-    ctx.strokeStyle = '#ff884444'; ctx.lineWidth = 1.5; ctx.stroke();
-    // Subunits
-    angles.forEach((a, i) => {
-      const sx = cx + r * Math.cos(a), sy = cy + r * Math.sin(a);
-      ctx.beginPath(); ctx.arc(sx, sy, subR, 0, Math.PI*2);
-      ctx.fillStyle = '#ff884422'; ctx.fill();
-      ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
-      ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText('S' + (i+1), sx, sy + 3);
-    });
-    ctx.fillStyle = '#ff884499'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('TRPV1 tetramer \u2014 resting (closed)', cx, cy - 82);
-    ctx.fillStyle = '#8888b066'; ctx.font = '9px monospace';
-    ctx.fillText('Pore gate closed \u2014 no Ca\u00b2\u207a influx', cx, cy + 82);
+    // ── Phase 0: TRPV1 at rest in membrane — closed pore, no ions ──
+    drawMembrane(ctx, W, cy, memThick, 0);
+    // Extracellular label
+    ctx.fillStyle = 'rgba(110,150,220,0.5)'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('extracellular  (high Ca²⁺, Na⁺)', 16, cy - memThick/2 - 18);
+    ctx.fillText('intracellular  (low Ca²⁺)', 16, cy + memThick/2 + 26);
+    // Four TRPV1 subunit outlines (side view, same plane)
+    // Draw as a wider channel to show homotetrameric nature
+    drawTRPV1Channel(ctx, cx, cy, memThick, 0, null);
+    // Label subunits
+    for (let i = -1; i <= 1; i += 2) {
+      ctx.fillStyle = '#ff884477'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('TRPV1', cx + i * 52, cy - memThick / 2 - 24);
+    }
+    // Show a few Ca2+ ions waiting outside, blocked
+    for (let i = 0; i < 4; i++) {
+      const ix = cx - 50 + i * 25 + Math.sin(t * 0.02 + i) * 3;
+      const iy = cy - memThick / 2 - 22 - Math.abs(Math.sin(t * 0.025 + i * 1.3)) * 8;
+      drawIon(ctx, ix, iy, 'Ca', '#00bbff');
+    }
+    // Closed gate indicator
+    ctx.strokeStyle = '#ff444466'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(cx - 14, cy + memThick/2 + 8); ctx.lineTo(cx + 14, cy + memThick/2 + 8); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ff444488'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('gate closed', cx, cy + memThick/2 + 20);
+    drawAnnotation(ctx, cx, H - 22, 'TRPV1 resting state — S6 gate closed, pore impermeant', '#ff884499');
+
   } else if (phase === 1) {
-    // Heat activation: radiant heat waves hitting channel, S4-S5 linker bending
+    // ── Phase 1: Thermal activation >43°C — S4-S5 bends, pore opens ──
     const pulse = (Math.sin(t * 0.05) + 1) / 2;
-    // Heat wave lines
-    for (let i = 0; i < 5; i++) {
-      const wy = 40 + i * 16 + pulse * 6;
-      ctx.strokeStyle = 'rgba(255,68,68,' + (0.3 + pulse * 0.4) + ')';
-      ctx.lineWidth = 1.5; ctx.setLineDash([4,4]);
+    const heatK = Math.min(1, t / 120);
+    const poreOpen = pulse * heatK;
+
+    // Heat shimmer above membrane — wavy radiant lines
+    for (let i = 0; i < 6; i++) {
+      const baseY = 18 + i * 10;
+      const alpha = 0.15 + pulse * 0.4 * (1 - i / 6);
+      ctx.strokeStyle = `rgba(255,${80 + i*20},20,${alpha})`;
+      ctx.lineWidth = 1.2; ctx.setLineDash([3, 4]);
       ctx.beginPath();
-      for (let x = 40; x < W - 40; x += 5) {
-        const y = wy + 5 * Math.sin((x + t * 2) * 0.1);
-        x === 40 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      for (let x = 20; x <= W - 20; x += 4) {
+        const y = baseY + 4 * Math.sin((x * 0.07) + t * 0.08 + i * 0.9);
+        x === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       ctx.stroke(); ctx.setLineDash([]);
     }
-    // Channel opening (S4-S5 gap widening)
-    const gapOpen = 8 + pulse * 14;
-    ctx.beginPath(); ctx.arc(cx, cy, 50, 0, Math.PI*2);
-    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ff444422'; ctx.fill();
-    ctx.beginPath(); ctx.arc(cx, cy, gapOpen, 0, Math.PI*2);
-    ctx.fillStyle = '#00e5ff' + Math.round(pulse * 255).toString(16).padStart(2,'0');
-    ctx.fill();
-    ctx.fillStyle = '#ff444499'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Heat >43\u00b0C \u2192 S4-S5 linker conformational shift', cx, cy + 80);
-    ctx.fillStyle = '#00e5ff88'; ctx.font = '9px monospace';
-    ctx.fillText(pulse > 0.5 ? 'Pore OPEN \u2014 Ca\u00b2\u207a entering' : 'S4-S5 bending\u2026', cx, cy + 96);
+    // Temperature badge
+    const tempAlpha = 0.4 + pulse * 0.5;
+    ctx.fillStyle = `rgba(255,60,20,${tempAlpha})`;
+    ctx.font = 'bold 18px monospace'; ctx.textAlign = 'right';
+    ctx.fillText(`${Math.round(37 + heatK * 10)}°C`, W - 20, 36);
+    ctx.font = '9px monospace'; ctx.fillStyle = `rgba(255,100,40,${tempAlpha * 0.8})`;
+    ctx.fillText('skin surface', W - 20, 50);
+
+    drawMembrane(ctx, W, cy, memThick, t * 0.03);
+    drawTRPV1Channel(ctx, cx, cy, memThick, poreOpen, poreOpen > 0.4 ? '#ff4488' : null);
+
+    // S4-S5 linker label during opening
+    if (heatK > 0.3) {
+      ctx.fillStyle = `rgba(255,80,150,${Math.min(1, (heatK-0.3)*3)})`;
+      ctx.font = '9px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('S4-S5 linker bends →', cx - 60, cy - memThick/2 - 10);
+    }
+
+    // Ca2+ ions streaming through if open
+    if (poreOpen > 0.3) {
+      const nIons = Math.floor(3 * poreOpen);
+      for (let i = 0; i < nIons; i++) {
+        const phase_i = ((t * 0.04 + i / nIons) % 1);
+        const iy = (cy - memThick/2 - 30) + phase_i * (memThick + 60);
+        const ix = cx + (i - 1) * 5 + Math.sin(phase_i * 8) * 2;
+        drawIon(ctx, ix, iy, 'Ca', '#00e5ff');
+      }
+      // Influx arrow
+      ctx.strokeStyle = 'rgba(0,229,255,0.5)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(cx + 22, cy - memThick/2 - 8); ctx.lineTo(cx + 22, cy + memThick/2 + 8); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx+17, cy+memThick/2+4); ctx.lineTo(cx+22, cy+memThick/2+10); ctx.lineTo(cx+27, cy+memThick/2+4); ctx.stroke();
+    }
+
+    const stateText = poreOpen > 0.5 ? 'Pore OPEN — Ca²⁺ influx depolarizes nociceptor' : 'S4-S5 linker conformational change in progress…';
+    drawAnnotation(ctx, cx, H - 22, stateText, poreOpen > 0.5 ? '#00e5ffbb' : '#ff448899');
+    ctx.fillStyle = 'rgba(120,130,200,0.55)'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('extracellular', 16, cy - memThick/2 - 18);
+    ctx.fillText('intracellular', 16, cy + memThick/2 + 26);
+
   } else if (phase === 2) {
-    // Capsaicin binding vanilloid pocket
-    const bind = (Math.sin(t * 0.04) + 1) / 2;
-    // Channel outline
-    ctx.beginPath(); ctx.arc(cx, cy + 20, 50, 0, Math.PI*2);
-    ctx.fillStyle = '#ff884415'; ctx.fill();
-    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
-    // Vanilloid pocket highlight
-    ctx.beginPath(); ctx.arc(cx - 30, cy - 10, 18, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(255,215,0,' + (0.1 + bind * 0.3) + ')'; ctx.fill();
+    // ── Phase 2: Capsaicin approaches vanilloid pocket (TM4-TM5) ──
+    const bindCycle = (Math.sin(t * 0.025) + 1) / 2;
+    const bound = bindCycle > 0.65;
+    const capProgress = Math.min(1, (t % 160) / 80);
+    // Capsaicin approaches from extracellular side → vanilloid pocket
+    const capTargetX = cx - 32, capTargetY = cy - memThick/2 - 2;
+    const capStartX = cx - 130, capStartY = cy - memThick/2 - 50;
+    const capX = capStartX + (capTargetX - capStartX) * Math.min(1, capProgress * 1.3);
+    const capY = capStartY + (capTargetY - capStartY) * Math.min(1, capProgress * 1.3);
+
+    drawMembrane(ctx, W, cy, memThick, 0);
+    // Highlight vanilloid pocket (TM4-TM5 interface)
+    const pocketAlpha = bound ? 0.5 + bindCycle * 0.3 : 0.15 + capProgress * 0.25;
+    ctx.beginPath();
+    ctx.ellipse(cx - 32, cy - memThick/2, 16, 20, 0, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,215,0,${pocketAlpha * 0.3})`;
+    ctx.fill();
+    ctx.strokeStyle = `rgba(255,215,0,${pocketAlpha})`;
+    ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = `rgba(255,215,0,${pocketAlpha})`; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('TM4-TM5', cx - 32, cy - memThick/2 - 26);
+    ctx.fillText('vanilloid', cx - 32, cy - memThick/2 - 18);
+    ctx.fillText('pocket', cx - 32, cy - memThick/2 - 10);
+
+    drawTRPV1Channel(ctx, cx, cy, memThick, bound ? bindCycle * 0.8 : 0, bound ? '#ffd700' : null);
+
+    // Capsaicin molecule — simplified structural representation
+    ctx.save();
+    ctx.translate(capX, capY);
+    // Aromatic ring
+    ctx.beginPath(); ctx.arc(0, 0, 8, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,215,0,0.3)'; ctx.fill();
     ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5; ctx.stroke();
-    // Capsaicin molecule approaching
-    const capX = cx - 80 + bind * 52;
-    ctx.beginPath(); ctx.arc(capX, cy - 10, 10, 0, Math.PI*2);
-    ctx.fillStyle = '#ffd70099'; ctx.fill();
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
+    // Amide bond line
+    ctx.strokeStyle = 'rgba(255,200,50,0.8)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(8, 0); ctx.lineTo(16, -4); ctx.stroke();
+    // Alkyl tail
+    ctx.beginPath(); ctx.moveTo(16, -4);
+    for (let i = 1; i <= 4; i++) ctx.lineTo(16 + i * 5, -4 + (i % 2) * 5 - 2);
+    ctx.stroke();
+    // -OH group
     ctx.fillStyle = '#ffd700'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('CAP', capX, cy - 7);
-    ctx.fillStyle = '#ffd70099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Capsaicin \u2192 vanilloid pocket (TM4-TM5)', cx, cy - 60);
-    ctx.fillStyle = '#8888b066'; ctx.font = '9px monospace';
-    ctx.fillText(bind > 0.7 ? 'H-bond T550 formed \u2014 channel opening' : 'Approaching binding site\u2026', cx, cy + 85);
+    ctx.fillText('-OH', -4, -13);
+    ctx.fillText('CAP', 0, 3);
+    ctx.restore();
+
+    // H-bond flash when bound
+    if (bound && capProgress >= 1) {
+      ctx.strokeStyle = `rgba(255,255,100,${bindCycle * 0.8})`;
+      ctx.lineWidth = 1; ctx.setLineDash([2, 2]);
+      ctx.beginPath(); ctx.moveTo(capX, capY); ctx.lineTo(cx - 32, cy - memThick/2 + 5); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = `rgba(255,255,100,${bindCycle})`; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('H-bond T550', (capX + cx - 32) / 2 - 20, capY - 14);
+    }
+
+    // Ca2+ ions through if bound
+    if (bound) {
+      for (let i = 0; i < 2; i++) {
+        const ph = ((t * 0.035 + i * 0.5) % 1);
+        drawIon(ctx, cx + 2 + i * 3, (cy - memThick/2 - 20) + ph * (memThick + 40), 'Ca', '#00e5ff');
+      }
+    }
+
+    const stateMsg = capProgress < 0.9 ? 'Capsaicin diffusing to vanilloid pocket…' :
+                     bound ? 'H-bond T550 formed — channel locked open' : 'Capsaicin docked, gate opening…';
+    drawAnnotation(ctx, cx, H - 22, stateMsg, bound ? '#ffd700bb' : '#ffd70066');
+    ctx.fillStyle = 'rgba(120,130,200,0.55)'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('extracellular', 16, cy - memThick/2 - 18);
+    ctx.fillText('intracellular', 16, cy + memThick/2 + 26);
+
   } else if (phase === 3) {
-    // PIEZO2 propeller blades being bent by mechanical force
-    const t2 = t * 0.03;
-    const press = (Math.sin(t2) + 1) / 2;
-    // Force arrow from top
-    const arrowY = 30 + press * 30;
-    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, arrowY); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx - 8, arrowY - 10); ctx.lineTo(cx, arrowY); ctx.lineTo(cx + 8, arrowY - 10); ctx.stroke();
-    // Propeller blades (3 arms of PIEZO2 trimer)
+    // ── Phase 3: PIEZO2 mechanosensation — membrane curvature deforms blades ──
+    const press = (Math.sin(t * 0.028) + 1) / 2;
+    // PIEZO2 is enormous — show top view of trimer blades embedded in membrane
+    // Membrane drawn first (wavy to show deformation)
+    const deform = press * 14;
+    // Draw deformed membrane as a wavy line
+    ctx.strokeStyle = 'rgba(80,120,200,0.4)'; ctx.lineWidth = 8;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 3) {
+      const distFromCenter = Math.abs(x - cx);
+      const sag = deform * Math.exp(-distFromCenter * distFromCenter / (W * W * 0.08));
+      const y = cy - memThick / 2 + sag;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    for (let x = W; x >= 0; x -= 3) {
+      const distFromCenter = Math.abs(x - cx);
+      const sag = deform * Math.exp(-distFromCenter * distFromCenter / (W * W * 0.08));
+      const y = cy + memThick / 2 + sag;
+      ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(30,30,90,0.85)'; ctx.fill();
+    ctx.strokeStyle = 'rgba(80,120,200,0.45)'; ctx.lineWidth = 2; ctx.stroke();
+    // Phospholipid heads on deformed membrane
+    ctx.fillStyle = 'rgba(110,150,220,0.5)';
+    for (let x = 12; x < W; x += 20) {
+      const distFromCenter = Math.abs(x - cx);
+      const sag = deform * Math.exp(-distFromCenter * distFromCenter / (W * W * 0.08));
+      ctx.beginPath(); ctx.arc(x, cy - memThick/2 + sag, 3.5, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x, cy + memThick/2 + sag, 3.5, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // Force arrow pressing down from top
+    const arrowTipY = cy - memThick/2 - 30 + deform;
+    ctx.strokeStyle = `rgba(255,136,68,${0.5 + press * 0.5})`; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(cx, 16); ctx.lineTo(cx, arrowTipY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx - 8, arrowTipY - 10); ctx.lineTo(cx, arrowTipY); ctx.lineTo(cx + 8, arrowTipY - 10); ctx.stroke();
+    ctx.fillStyle = `rgba(255,136,68,${0.5 + press * 0.5})`; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('mechanical\nforce (touch)', cx + 44, 24);
+
+    // PIEZO2 trimer arms (top-view propeller — 3 blades radiating 120° apart)
+    const armLen = 70 + press * 18;
     for (let i = 0; i < 3; i++) {
-      const a = (i * Math.PI * 2 / 3) + t2 * 0.1;
-      const bladeX = cx + (60 + press * 15) * Math.cos(a);
-      const bladeY = cy + (40 + press * 10) * Math.sin(a);
-      ctx.strokeStyle = '#8888b0'; ctx.lineWidth = 3;
-      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(bladeX, bladeY); ctx.stroke();
-      ctx.beginPath(); ctx.arc(bladeX, bladeY, 12, 0, Math.PI*2);
-      ctx.fillStyle = '#8888b022'; ctx.fill();
+      const a = (i * Math.PI * 2 / 3) - Math.PI / 2;
+      const ax = cx + armLen * Math.cos(a);
+      const ay = cy + (armLen * 0.5) * Math.sin(a) + deform * 0.5; // perspective compression
+      // Blade: thick stroked arm with a lozenge blade unit at end
+      const bgrad = ctx.createLinearGradient(cx, cy, ax, ay);
+      bgrad.addColorStop(0, 'rgba(136,136,176,0.6)');
+      bgrad.addColorStop(1, 'rgba(136,136,176,0.15)');
+      ctx.strokeStyle = bgrad; ctx.lineWidth = 6 - press;
+      ctx.beginPath(); ctx.moveTo(cx, cy + deform * 0.5); ctx.lineTo(ax, ay); ctx.stroke();
+      // THU (transmembrane helix unit) at blade tip
+      ctx.beginPath(); ctx.ellipse(ax, ay, 14, 8, a, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(136,136,200,0.25)'; ctx.fill();
       ctx.strokeStyle = '#8888b0'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#8888b088'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('THU', ax, ay + 3);
     }
-    // Central pore opening
-    const poreR = 6 + press * 12;
-    ctx.beginPath(); ctx.arc(cx, cy, poreR, 0, Math.PI*2);
-    ctx.fillStyle = '#00e5ff' + Math.round(press*200).toString(16).padStart(2,'0'); ctx.fill();
-    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#00e5ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('PIEZO2 propeller blades transmit membrane tension', cx, cy + 80);
+    // Central CTD pore
+    const poreOpen3 = press > 0.3 ? (press - 0.3) / 0.7 : 0;
+    const poreR3 = 5 + poreOpen3 * 10;
+    const pg = ctx.createRadialGradient(cx, cy + deform*0.5, 0, cx, cy + deform*0.5, poreR3 + 6);
+    pg.addColorStop(0, poreOpen3 > 0.3 ? 'rgba(0,229,255,0.7)' : 'rgba(20,20,80,0.8)');
+    pg.addColorStop(1, 'rgba(0,0,40,0)');
+    ctx.fillStyle = pg;
+    ctx.beginPath(); ctx.arc(cx, cy + deform*0.5, poreR3 + 6, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy + deform*0.5, poreR3, 0, Math.PI * 2);
+    ctx.fillStyle = poreOpen3 > 0.3 ? 'rgba(0,229,255,0.4)' : '#1a1a3a'; ctx.fill();
+    ctx.strokeStyle = poreOpen3 > 0.3 ? '#00e5ff' : '#334466'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    // Ca2+ ions flowing if pore open
+    if (poreOpen3 > 0.2) {
+      for (let i = 0; i < 2; i++) {
+        const ph = ((t * 0.04 + i * 0.5) % 1);
+        const sag = deform * Math.exp(0);
+        drawIon(ctx, cx + (i - 0.5) * 6, (cy + sag - memThick/2 - 14) + ph * (memThick + 28), 'Ca', '#00e5ff');
+      }
+    }
+
+    const msg = poreOpen3 > 0.3 ? 'Blade deflection → CTD pore opens — Ca²⁺ / Na⁺ influx' :
+                                   'Membrane curvature transmits force to PIEZO2 blades';
+    drawAnnotation(ctx, cx, H - 22, msg, poreOpen3 > 0.3 ? '#00e5ffaa' : '#8888b099');
+    ctx.fillStyle = 'rgba(120,130,200,0.55)'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('extracellular (above)', 16, cy - memThick/2 - 22 + deform * 0.2);
+    ctx.fillText('intracellular', 16, cy + memThick/2 + 26);
+
   } else if (phase === 4) {
-    // Action potential propagating along axon
-    const apPos = (t * 2) % (W - 80);
-    // Axon
-    ctx.strokeStyle = '#00e5ff44'; ctx.lineWidth = 8;
-    ctx.beginPath(); ctx.moveTo(40, cy); ctx.lineTo(W - 40, cy); ctx.stroke();
-    // Myelin segments
-    for (let i = 0; i < 8; i++) {
-      const sx = 40 + i * ((W - 80) / 7);
-      ctx.strokeStyle = '#8888b055'; ctx.lineWidth = 14;
-      ctx.beginPath(); ctx.moveTo(sx, cy); ctx.lineTo(sx + 30, cy); ctx.stroke();
+    // ── Phase 4: Action potential propagating along C-fiber ──
+    const axonY = cy;
+    const nodeCount = 7;
+    const nodeSpacing = (W - 80) / (nodeCount - 1);
+    const apPos = ((t * 1.6) % (W + 60)) - 30; // wavefront position
+
+    // Myelin segments (myelinated sheath between Ranvier nodes — but C-fibers are unmyelinated;
+    // show the axon as a tube with periodic Nav1.8 cluster labels)
+    // Axon tube (side view)
+    const axGrad = ctx.createLinearGradient(0, axonY - 10, 0, axonY + 10);
+    axGrad.addColorStop(0, 'rgba(0,229,255,0.05)');
+    axGrad.addColorStop(0.3, 'rgba(0,229,255,0.18)');
+    axGrad.addColorStop(0.7, 'rgba(0,229,255,0.18)');
+    axGrad.addColorStop(1, 'rgba(0,229,255,0.05)');
+    ctx.fillStyle = axGrad;
+    ctx.fillRect(30, axonY - 10, W - 60, 20);
+    ctx.strokeStyle = 'rgba(0,229,255,0.3)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(30, axonY - 10); ctx.lineTo(W - 30, axonY - 10); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(30, axonY + 10); ctx.lineTo(W - 30, axonY + 10); ctx.stroke();
+
+    // Nav1.8 cluster nodes
+    for (let i = 0; i < nodeCount; i++) {
+      const nx = 40 + i * nodeSpacing;
+      const distFromAP = Math.abs(nx - apPos);
+      const activated = distFromAP < 40 && apPos > nx - 40 && apPos < nx + 20;
+      const refractory = apPos > nx + 20 && apPos < nx + 100;
+      const nodeColor = activated ? '#ffd700' : refractory ? '#334466' : 'rgba(100,110,160,0.6)';
+      ctx.beginPath(); ctx.arc(nx, axonY, 7, 0, Math.PI * 2);
+      ctx.fillStyle = activated ? 'rgba(255,215,0,0.25)' : 'rgba(50,60,100,0.4)'; ctx.fill();
+      ctx.strokeStyle = nodeColor; ctx.lineWidth = activated ? 2 : 1; ctx.stroke();
+      if (activated) {
+        // Flash glow
+        const fg = ctx.createRadialGradient(nx, axonY, 0, nx, axonY, 22);
+        fg.addColorStop(0, 'rgba(255,215,0,0.5)');
+        fg.addColorStop(1, 'rgba(255,215,0,0)');
+        ctx.fillStyle = fg; ctx.beginPath(); ctx.arc(nx, axonY, 22, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#ffd700'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center';
+        ctx.fillText('Nav1.8', nx, axonY - 16);
+        ctx.fillText('+Na⁺', nx, axonY - 7);
+      }
     }
-    // AP depolarization wavefront
-    const apX = 40 + apPos;
-    const apGrad = ctx.createRadialGradient(apX, cy, 0, apX, cy, 30);
-    apGrad.addColorStop(0, '#00ff9988'); apGrad.addColorStop(1, '#00ff9900');
-    ctx.beginPath(); ctx.arc(apX, cy, 30, 0, Math.PI*2);
-    ctx.fillStyle = apGrad; ctx.fill();
-    // Nav1.8 labels at Ranvier nodes
-    ctx.fillStyle = '#ffd70088'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Nav1.8 AP \u2192 propagation along C-fiber', cx, cy - 50);
-    ctx.fillStyle = '#00ff9988'; ctx.font = '9px monospace';
-    ctx.fillText('\u2190 DRG cell body              spinal cord \u2192', cx, cy + 50);
+
+    // AP wavefront
+    if (apPos > 20 && apPos < W - 20) {
+      const apGrad = ctx.createRadialGradient(apPos, axonY, 0, apPos, axonY, 35);
+      apGrad.addColorStop(0, 'rgba(0,255,153,0.6)');
+      apGrad.addColorStop(0.5, 'rgba(0,255,153,0.25)');
+      apGrad.addColorStop(1, 'rgba(0,255,153,0)');
+      ctx.fillStyle = apGrad;
+      ctx.beginPath(); ctx.arc(apPos, axonY, 35, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // Membrane potential trace (mini VM trace above axon)
+    const traceY = axonY - 38, traceH = 22, traceW = W - 100;
+    ctx.strokeStyle = 'rgba(120,130,180,0.3)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(50, traceY); ctx.lineTo(50 + traceW, traceY); ctx.stroke();
+    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let px = 0; px < traceW; px++) {
+      const worldX = 40 + (px / traceW) * (W - 80);
+      const relToAP = (worldX - apPos) / 30;
+      let vm;
+      if (relToAP > -1 && relToAP < 0) vm = relToAP + 1; // upstroke
+      else if (relToAP >= 0 && relToAP < 0.3) vm = 1 - relToAP * 3; // repolarization
+      else vm = 0;
+      const vy = traceY - vm * traceH;
+      px === 0 ? ctx.moveTo(50 + px, vy) : ctx.lineTo(50 + px, vy);
+    }
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(0,255,153,0.6)'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('Vm', 30, traceY - 8);
+
+    // Labels
+    ctx.fillStyle = 'rgba(200,120,40,0.7)'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('DRG (nociceptor body) ←', 30, axonY + 28);
+    ctx.textAlign = 'right';
+    ctx.fillText('→ dorsal horn synapse', W - 30, axonY + 28);
+    drawAnnotation(ctx, cx, H - 16, 'Nav1.8 (TTX-r) fires saltatory AP → spinal cord at 0.5–2 m/s', '#00ff99aa');
   }
 }
 
@@ -720,10 +998,7 @@ mechDraw(0, 0);
 // ── Connections canvas (force-directed network) ───────────────────────────────
 function drawConnections() {
   const cv = document.getElementById('conn-canvas');
-  cv.width = cv.offsetWidth || 600;
-  cv.height = cv.offsetHeight || 360;
-  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
-  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const W = cv.offsetWidth || 600, H = 360;
 
   const nodes = [
     {id:'trp',   x:W*.5,  y:H*.5,  r:32, color:'#ff8844', label:'TRP\nChannels',  sub:'2021'},
@@ -741,33 +1016,16 @@ function drawConnections() {
     {from:'trp',to:'anti', color:'#aa77ff55',label:'GluCl similar\nCys-loop fold'},
   ];
 
-  const ns = {}; nodes.forEach(n => ns[n.id] = n);
-  edges.forEach(e => {
-    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
-    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
-    if(e.label) {
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
-      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
-    }
-  });
-  nodes.forEach(n => {
-    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-    ctx.fillStyle = n.color + '22'; ctx.fill();
-    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
-    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
-    ctx.fillText(n.sub, n.x, n.y+n.r+11);
-  });
+  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
 }
 </script>
 
 <!-- Shared infrastructure (load after module data) -->
 <script src="../shared/glossary-data.js"></script>
 <script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/connections.js"></script>
 <script src="../shared/molecule-modal.js"></script>
 <script src="../shared/auto-start.js"></script>
+<script src="../shared/mech-theater.js" defer></script>
 </body>
 </html>

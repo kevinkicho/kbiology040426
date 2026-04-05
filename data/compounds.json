@@ -1,50 +1,50 @@
 {
-  "135398513": {
-    "cid": 135398513,
-    "formula": "C8H11N5O3",
-    "weight": "225.20",
-    "xlogp": -1.9,
-    "hbd": 3,
-    "hba": 5,
-    "tpsa": 115,
-    "iupac": "2-amino-9-(2-hydroxyethoxymethyl)-1H-purin-6-one",
-    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/135398513",
+  "99543": {
+    "cid": 99543,
+    "formula": "C10H14N2O6",
+    "weight": "258.23",
+    "xlogp": -2.6,
+    "hbd": 4,
+    "hba": 6,
+    "tpsa": 119,
+    "iupac": "5-[(2S,3R,4S,5R)-3,4-dihydroxy-5-(hydroxymethyl)oxolan-2-yl]-1-methylpyrimidine-2,4-dione",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/99543",
     "topic": "2023_mrna"
   },
-  "137500165": {
-    "cid": 137500165,
-    "formula": "C11H13FN2O3S",
-    "weight": "272.30",
-    "xlogp": 1.2,
+  "126697616": {
+    "cid": 126697616,
+    "formula": "C44H87NO5",
+    "weight": "710.2",
+    "xlogp": 15.5,
     "hbd": 1,
     "hba": 6,
-    "tpsa": 96.5,
-    "iupac": "ethyl 5-(1-fluorocyclopropyl)-2-(formamidomethyl)-1,3-thiazole-4-carboxylate",
-    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/137500165",
+    "tpsa": 76.1,
+    "iupac": "heptadecan-9-yl 8-[2-hydroxyethyl-(6-oxo-6-undecoxyhexyl)amino]octanoate",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/126697616",
     "topic": "2023_mrna"
   },
-  "5497103": {
-    "cid": 5497103,
-    "formula": "C42H82NO8P",
-    "weight": "760.1",
-    "xlogp": 13.6,
+  "94190": {
+    "cid": 94190,
+    "formula": "C44H88NO8P",
+    "weight": "790.1",
+    "xlogp": 15.6,
     "hbd": 0,
     "hba": 8,
     "tpsa": 111,
-    "iupac": "[(2R)-3-hexadecanoyloxy-2-[(Z)-octadec-9-enoyl]oxypropyl] 2-(trimethylazaniumyl)ethyl phosphate",
-    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/5497103",
+    "iupac": "[(2R)-2,3-di(octadecanoyloxy)propyl] 2-(trimethylazaniumyl)ethyl phosphate",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/94190",
     "topic": "2023_mrna"
   },
-  "2723949": {
-    "cid": 2723949,
-    "formula": "C2H5NS",
-    "weight": "75.14",
-    "xlogp": -0.3,
-    "hbd": 1,
-    "hba": 1,
-    "tpsa": 58.1,
-    "iupac": "ethanethioamide",
-    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/2723949",
+  "1548943": {
+    "cid": 1548943,
+    "formula": "C18H27NO3",
+    "weight": "305.4",
+    "xlogp": 3.6,
+    "hbd": 2,
+    "hba": 3,
+    "tpsa": 58.6,
+    "iupac": "(E)-N-[(4-hydroxy-3-methoxyphenyl)methyl]-8-methylnon-6-enamide",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/1548943",
     "topic": "2021_trp"
   },
   "6321424": {
@@ -83,16 +83,16 @@
     "url": "https://pubchem.ncbi.nlm.nih.gov/compound/45375808",
     "topic": "2020_hcv"
   },
-  "67683433": {
-    "cid": 67683433,
-    "formula": "C9H9NO4",
-    "weight": "195.17",
-    "xlogp": -0.4,
+  "66828839": {
+    "cid": 66828839,
+    "formula": "C38H46F4N6O9S",
+    "weight": "838.9",
+    "xlogp": 4.6,
     "hbd": 3,
-    "hba": 5,
-    "tpsa": 90.7,
-    "iupac": "(E)-3-[3-hydroxy-6-(hydroxymethyl)-2-pyridinyl]prop-2-enoic acid",
-    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/67683433",
+    "hba": 15,
+    "tpsa": 204,
+    "iupac": "(1R,14E,18R,22R,26S,29S)-26-tert-butyl-N-[(1R,2R)-2-(difluoromethyl)-1-[(1-methylcyclopropyl)sulfonylcarbamoyl]cyclopropyl]-13,13-difluoro-24,27-dioxo-2,17,23-trioxa-4,11,25,28-tetrazapentacyclo[26.2.1.03,12.05,10.018,22]hentriaconta-3,5,7,9,11,14-hexaene-29-carboxamide",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/66828839",
     "topic": "2020_hcv"
   }
 }

@@ -1,21 +1,21 @@
 {
   "compounds": [
-    {"cid":135398513,"name":"N1-methylpseudouridine","topic":"2023_mrna"},
-    {"cid":137500165,"name":"SM-102",                "topic":"2023_mrna"},
-    {"cid":5497103,  "name":"DSPC",                  "topic":"2023_mrna"},
-    {"cid":2723949,  "name":"capsaicin",             "topic":"2021_trp"},
-    {"cid":6321424,  "name":"ivermectin",            "topic":"2015_antiparasitic"},
-    {"cid":68827,    "name":"artemisinin",           "topic":"2015_antiparasitic"},
-    {"cid":45375808, "name":"sofosbuvir",            "topic":"2020_hcv"},
-    {"cid":67683433, "name":"glecaprevir",           "topic":"2020_hcv"}
+    {"cid":99543,     "name":"N1-methylpseudouridine",  "topic":"2023_mrna"},
+    {"cid":126697616, "name":"SM-102",                   "topic":"2023_mrna"},
+    {"cid":94190,     "name":"DSPC",                     "topic":"2023_mrna"},
+    {"cid":1548943,   "name":"capsaicin",                "topic":"2021_trp"},
+    {"cid":6321424,   "name":"ivermectin",               "topic":"2015_antiparasitic"},
+    {"cid":68827,     "name":"artemisinin",              "topic":"2015_antiparasitic"},
+    {"cid":45375808,  "name":"sofosbuvir",               "topic":"2020_hcv"},
+    {"cid":66828839,  "name":"glecaprevir",              "topic":"2020_hcv"}
   ],
   "proteins": [
     {"pdb_id":"6VSB", "name":"SARS-CoV-2 spike prefusion","topic":"2023_mrna"},
     {"pdb_id":"1EJ1", "name":"eIF4E cap-binding",         "topic":"2023_mrna"},
     {"pdb_id":"4ZQK", "name":"PD-1/PD-L1 complex",       "topic":"2018_immunotherapy"},
-    {"pdb_id":"3OSS", "name":"CTLA-4/B7-1",              "topic":"2018_immunotherapy"},
-    {"pdb_id":"5GGS", "name":"TRPV1",                    "topic":"2021_trp"},
-    {"pdb_id":"1LM8", "name":"HIF-1a PAS-B",             "topic":"2019_hif"},
+    {"pdb_id":"1I85", "name":"CTLA-4/B7-2 complex",      "topic":"2018_immunotherapy"},
+    {"pdb_id":"3J5P", "name":"TRPV1 ion channel",         "topic":"2021_trp"},
+    {"pdb_id":"1LM8", "name":"HIF-1a/VHL/ElonginB/C",    "topic":"2019_hif"},
     {"pdb_id":"1LQB", "name":"VHL/HIF peptide",          "topic":"2019_hif"},
     {"pdb_id":"4OLA", "name":"Argonaute-2 (AGO2)",       "topic":"2024_microrna"},
     {"pdb_id":"1QSY", "name":"HCV NS5B polymerase",      "topic":"2020_hcv"},

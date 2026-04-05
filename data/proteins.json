@@ -3,7 +3,7 @@
     "pdb_id": "6VSB",
     "title": "Prefusion 2019-nCoV spike glycoprotein with a single receptor-binding domain up",
     "method": "ELECTRON MICROSCOPY",
-    "resolution": "",
+    "resolution": "3.46",
     "url": "https://www.rcsb.org/structure/6VSB",
     "topic": "2023_mrna"
   },
@@ -11,7 +11,7 @@
     "pdb_id": "1EJ1",
     "title": "COCRYSTAL STRUCTURE OF THE MESSENGER RNA 5' CAP-BINDING PROTEIN (EIF4E) BOUND TO 7-METHYL-GDP",
     "method": "X-RAY DIFFRACTION",
-    "resolution": "",
+    "resolution": "2.2",
     "url": "https://www.rcsb.org/structure/1EJ1",
     "topic": "2023_mrna"
   },
@@ -19,31 +19,31 @@
     "pdb_id": "4ZQK",
     "title": "Structure of the complex of human programmed death-1 (PD-1) and its ligand PD-L1.",
     "method": "X-RAY DIFFRACTION",
-    "resolution": "",
+    "resolution": "2.45",
     "url": "https://www.rcsb.org/structure/4ZQK",
     "topic": "2018_immunotherapy"
   },
-  "3OSS": {
-    "pdb_id": "3OSS",
-    "title": "The crystal structure of enterotoxigenic Escherichia coli GspC-GspD complex from the type II secretion system",
+  "1I85": {
+    "pdb_id": "1I85",
+    "title": "CRYSTAL STRUCTURE OF THE CTLA-4/B7-2 COMPLEX",
     "method": "X-RAY DIFFRACTION",
-    "resolution": "",
-    "url": "https://www.rcsb.org/structure/3OSS",
+    "resolution": "3.2",
+    "url": "https://www.rcsb.org/structure/1I85",
     "topic": "2018_immunotherapy"
   },
-  "5GGS": {
-    "pdb_id": "5GGS",
-    "title": "PD-1 in complex with pembrolizumab Fab",
-    "method": "X-RAY DIFFRACTION",
-    "resolution": "",
-    "url": "https://www.rcsb.org/structure/5GGS",
+  "3J5P": {
+    "pdb_id": "3J5P",
+    "title": "Structure of TRPV1 ion channel determined by single particle electron cryo-microscopy",
+    "method": "ELECTRON MICROSCOPY",
+    "resolution": "3.275",
+    "url": "https://www.rcsb.org/structure/3J5P",
     "topic": "2021_trp"
   },
   "1LM8": {
     "pdb_id": "1LM8",
     "title": "Structure of a HIF-1a-pVHL-ElonginB-ElonginC Complex",
     "method": "X-RAY DIFFRACTION",
-    "resolution": "",
+    "resolution": "1.85",
     "url": "https://www.rcsb.org/structure/1LM8",
     "topic": "2019_hif"
   },
@@ -51,7 +51,7 @@
     "pdb_id": "1LQB",
     "title": "Crystal structure of a hydroxylated HIF-1 alpha peptide bound to the pVHL/elongin-C/elongin-B complex",
     "method": "X-RAY DIFFRACTION",
-    "resolution": "",
+    "resolution": "2.0",
     "url": "https://www.rcsb.org/structure/1LQB",
     "topic": "2019_hif"
   },
@@ -59,7 +59,7 @@
     "pdb_id": "4OLA",
     "title": "Crystal Structure of Human Argonaute2",
     "method": "X-RAY DIFFRACTION",
-    "resolution": "",
+    "resolution": "2.3",
     "url": "https://www.rcsb.org/structure/4OLA",
     "topic": "2024_microrna"
   },
@@ -67,7 +67,7 @@
     "pdb_id": "1QSY",
     "title": "DDATP-Trapped closed ternary complex of the large fragment of DNA Polymerase I from thermus aquaticus",
     "method": "X-RAY DIFFRACTION",
-    "resolution": "",
+    "resolution": "2.3",
     "url": "https://www.rcsb.org/structure/1QSY",
     "topic": "2020_hcv"
   },
@@ -75,7 +75,7 @@
     "pdb_id": "3RHW",
     "title": "C. elegans glutamate-gated chloride channel (GluCl) in complex with Fab and ivermectin",
     "method": "X-RAY DIFFRACTION",
-    "resolution": "",
+    "resolution": "3.26",
     "url": "https://www.rcsb.org/structure/3RHW",
     "topic": "2015_antiparasitic"
   }

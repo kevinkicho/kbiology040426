@@ -5,80 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2016 · Autophagy — kbiology Nobel Frontier</title>
 <link rel="stylesheet" href="../shared/theme.css">
-<link rel="stylesheet" href="../shared/molecule-modal.css">
-<style>
-/* Module layout */
-.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
-.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
-.back-link:hover{color:var(--green);border-color:var(--green)}
-.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
-.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
-.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
-.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
-.mod-tab:hover{color:var(--text);background:var(--bg3)}
-.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
-.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
-.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
-
-/* Body layout */
-.mod-body{display:flex;min-height:calc(100vh - 100px)}
-.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
-.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-
-/* Tab panels */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Canvas */
-.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
-.canvas-wrap canvas{display:block;width:100%;height:240px}
-.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
-
-/* Mechanism panels */
-.mech-panels{display:flex;flex-direction:column;gap:10px}
-.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
-.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
-.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
-.mech-panel-body strong{color:var(--text)}
-.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-
-/* Molecules tab */
-.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
-.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
-.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
-.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
-.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
-.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
-
-/* Story tab */
-.story-content{max-width:720px}
-.story-block{margin-bottom:16px}
-.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
-
-/* Frontiers tab */
-.frontier-group{margin-bottom:20px}
-.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
-.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
-.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
-
-/* Connections tab */
-.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
-.connections-wrap canvas{display:block;width:100%;height:360px}
-
-/* Right sidebar */
-.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
-.rsb-mol-item:hover{color:var(--cyan)}
-.rsb-mol-icon{font-size:1rem;flex-shrink:0}
-.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
-.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
-</style>
-</head>
+<link rel="stylesheet" href="../shared/module-layout.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css"></head>
 <body>
 <!-- Module header -->
 <div class="mod-hdr">
@@ -141,7 +69,7 @@
   <div class="main" id="main-content">
     <!-- Tab 1: Mechanism -->
     <div class="tab-panel active" id="panel-mechanism">
-      <div class="canvas-wrap">
+      <div class="canvas-wrap" id="canvas-wrap">
         <canvas id="mech-canvas"></canvas>
         <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; mTORC1 Inhibition Releases ULK1</div>
       </div>
@@ -207,7 +135,7 @@ Object.assign(window.GLOSS, {
 });
 
 // ── Module molecules data ────────────────────────────────────────────────────
-const MODULE_MOLS = [
+window.MODULE_MOLS = [
   { id:'ulk1', icon:'\ud83d\udd35', color:'#00e5ff', type:'Protein \u00b7 Ser/Thr kinase', is_protein:true,
     name:'ULK1 complex', sub:'PDB: 4WNO \u00b7 autophagy initiation kinase',
     badges:[{text:'Autophagy initiator',color:'#00e5ff'},{text:'mTORC1 substrate',color:'#ffd700'},{text:'AMPK activator',color:'#00ff99'}],
@@ -386,144 +314,304 @@ let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
 
 function mechDraw(phase, t) {
   const cv = mechCv;
-  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 420;
   const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
   ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
   const cx = W / 2, cy = H / 2;
 
+  // shared helpers
+  function ap_label(text, x, y, col) {
+    ctx.textAlign = 'center'; ctx.font = '10px monospace';
+    const tw = ctx.measureText(text).width;
+    ctx.fillStyle = 'rgba(7,7,30,0.75)'; ctx.fillRect(x - tw/2 - 3, y - 10, tw + 6, 13);
+    ctx.fillStyle = col; ctx.fillText(text, x, y);
+  }
+  function ap_particle(x, y, label, col) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, 7);
+    g.addColorStop(0, col + 'ff'); g.addColorStop(1, col + '00');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI*2); ctx.fillStyle = col; ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 5px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(label, x, y + 2);
+  }
+
   if (phase === 0) {
-    // mTORC1 inhibition releases ULK1 — show mTOR suppressed, ULK1 active
+    // ── Phase 0: Starvation signal — mTORC1 off, AMPK on, ULK1 freed ──
     const pulse = 0.5 + 0.5 * Math.sin(t * 0.06);
-    // mTOR (suppressed, fading red)
-    ctx.beginPath(); ctx.arc(cx - 130, cy - 30, 28, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff444422'; ctx.fill();
-    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = '#ff444499'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('mTORC1', cx - 130, cy - 26); ctx.fillText('(off)', cx - 130, cy - 14);
-    // AMPK (active, glowing)
-    ctx.beginPath(); ctx.arc(cx + 130, cy - 30, 26, 0, Math.PI * 2);
-    ctx.fillStyle = '#00ff9922'; ctx.fill();
+    // Cell cytoplasm background
+    const cg = ctx.createRadialGradient(cx, cy, 40, cx, cy, W * 0.7);
+    cg.addColorStop(0, 'rgba(0,30,50,0.4)'); cg.addColorStop(1, 'rgba(7,7,30,0)');
+    ctx.fillStyle = cg; ctx.fillRect(0, 0, W, H);
+
+    // mTORC1 complex — suppressed (grey, X marks)
+    const mX = cx - 145, mY = cy - 20;
+    ctx.beginPath(); ctx.arc(mX, mY, 32, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,68,68,0.07)'; ctx.fill();
+    ctx.strokeStyle = '#ff444455'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(mX-14, mY-14); ctx.lineTo(mX+14, mY+14); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(mX+14, mY-14); ctx.lineTo(mX-14, mY+14); ctx.stroke();
+    ctx.fillStyle = '#ff444477'; ctx.font = 'bold 8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('mTORC1', mX, mY - 38); ctx.fillText('INHIBITED', mX, mY - 27);
+    // Starvation badge
+    ctx.fillStyle = 'rgba(255,100,40,0.8)'; ctx.font = 'bold 9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('⚡ Amino acid / energy starvation', 16, 22);
+
+    // AMPK — glowing active
+    const aX = cx + 145, aY = cy - 20;
+    const ag = ctx.createRadialGradient(aX, aY, 5, aX, aY, 34);
+    ag.addColorStop(0, 'rgba(0,255,153,0.3)'); ag.addColorStop(1, 'rgba(0,255,153,0)');
+    ctx.fillStyle = ag; ctx.beginPath(); ctx.arc(aX, aY, 34, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(aX, aY, 26, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,255,153,0.12)'; ctx.fill();
     ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2; ctx.stroke();
     ctx.fillStyle = '#00ff99'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('AMPK', cx + 130, cy - 32); ctx.fillText('(active)', cx + 130, cy - 20);
-    // ULK1 complex (pulsing cyan)
-    ctx.beginPath(); ctx.arc(cx, cy + 20, 34 + pulse * 4, 0, Math.PI * 2);
-    ctx.fillStyle = '#00e5ff' + Math.floor(pulse * 0x33 + 0x11).toString(16).padStart(2, '0');
-    ctx.fill();
+    ctx.fillText('AMPK', aX, aY - 3); ctx.fillText('active', aX, aY + 9);
+    // AMP:ATP ratio label
+    ctx.fillStyle = '#00ff9955'; ctx.font = '7px monospace';
+    ctx.fillText('AMP:ATP ↑', aX, aY + 26);
+
+    // ULK1 complex center — pulsing activated
+    const ug = ctx.createRadialGradient(cx, cy + 30, 5, cx, cy + 30, 40);
+    ug.addColorStop(0, `rgba(0,229,255,${0.2 + pulse * 0.25})`);
+    ug.addColorStop(1, 'rgba(0,229,255,0)');
+    ctx.fillStyle = ug; ctx.beginPath(); ctx.arc(cx, cy + 30, 40, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy + 30, 28, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(0,229,255,${0.08 + pulse*0.12})`; ctx.fill();
     ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2.5; ctx.stroke();
     ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('ULK1', cx, cy + 16); ctx.fillText('complex', cx, cy + 28);
-    // arrows
-    ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(cx + 104, cy - 20); ctx.lineTo(cx + 42, cy + 10); ctx.stroke();
-    ctx.fillStyle = '#00e5ff88'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('pS317/S777 activates', cx, cy + 70);
+    ctx.fillText('ULK1', cx, cy + 26); ctx.fillText('complex', cx, cy + 38);
+
+    // Activation arrow from AMPK → ULK1
+    ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(aX - 26, aY + 10); ctx.lineTo(cx + 32, cy + 15); ctx.stroke();
+    ctx.fillStyle = '#00ff99'; ctx.beginPath();
+    const aa = Math.atan2(cy + 15 - (aY + 10), cx + 32 - (aX - 26));
+    ctx.moveTo(cx+32, cy+15);
+    ctx.lineTo(cx+32 - 9*Math.cos(aa-0.4), cy+15 - 9*Math.sin(aa-0.4));
+    ctx.lineTo(cx+32 - 9*Math.cos(aa+0.4), cy+15 - 9*Math.sin(aa+0.4));
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#00ff9977'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('pS317/S777', (aX + cx) / 2 + 10, (aY + cy) / 2 - 2);
+
+    ap_label('mTORC1 suppressed → AMPK activates ULK1 → autophagy initiates', cx, H - 16, '#00e5ff88');
+
   } else if (phase === 1) {
-    // PI3P generation at phagophore — cup-shaped membrane forming
-    const cup = t * 0.02;
-    // ER membrane hint
-    ctx.strokeStyle = '#33335a'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(60, cy + 50); ctx.lineTo(W - 60, cy + 50); ctx.stroke();
-    ctx.fillStyle = '#33335a88'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
-    ctx.fillText('ER membrane', 62, cy + 62);
-    // Growing phagophore cup
-    const cupAngle = Math.min(cup, Math.PI * 1.4);
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 3;
+    // ── Phase 1: Phagophore nucleation at ER — PI3P, double membrane cup ──
+    const cupProg = Math.min(1, t / 80);
+    const cupAngle = cupProg * Math.PI * 1.5;
+    // ER membrane (wavy horizontal band)
+    const erY = cy + 55;
+    ctx.strokeStyle = 'rgba(80,100,180,0.4)'; ctx.lineWidth = 10;
     ctx.beginPath();
-    ctx.arc(cx, cy + 50, 60, Math.PI + (Math.PI - cupAngle) / 2, Math.PI * 2 - (Math.PI - cupAngle) / 2);
+    for (let x = 0; x <= W; x += 4) {
+      const y = erY + 3 * Math.sin(x * 0.06 + t * 0.03);
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
     ctx.stroke();
-    // PI3P dots on membrane
-    const nDots = 6;
-    for (let i = 0; i < nDots; i++) {
-      const a = Math.PI + (Math.PI - cupAngle) / 2 + i * cupAngle / (nDots - 1);
-      const px = cx + 60 * Math.cos(a), py = (cy + 50) + 60 * Math.sin(a);
-      ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffd700cc'; ctx.fill();
+    ctx.fillStyle = 'rgba(80,100,200,0.6)'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('ER membrane (omegasome origin)', 16, erY - 8);
+
+    // Phagophore double membrane cup — two concentric arcs
+    const cupCX = cx, cupCY = erY;
+    const outerR = 68, innerR = 54;
+    if (cupAngle > 0.05) {
+      const a0 = Math.PI + (Math.PI - cupAngle) / 2;
+      const a1 = Math.PI * 2 - (Math.PI - cupAngle) / 2;
+      // Outer leaflet
+      ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.arc(cupCX, cupCY, outerR, a0, a1); ctx.stroke();
+      // Inner leaflet
+      ctx.strokeStyle = 'rgba(255,215,0,0.5)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(cupCX, cupCY, innerR, a0, a1); ctx.stroke();
+      // PI3P phospholipid heads (yellow dots on outer leaflet)
+      const nDots = Math.floor(cupAngle / 0.35) + 1;
+      for (let i = 0; i < nDots; i++) {
+        const da = a0 + i * (a1 - a0) / Math.max(nDots - 1, 1);
+        const px = cupCX + outerR * Math.cos(da), py = cupCY + outerR * Math.sin(da);
+        ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI*2);
+        ctx.fillStyle = '#ffd700cc'; ctx.fill();
+        ctx.strokeStyle = '#ffd70055'; ctx.lineWidth = 1; ctx.stroke();
+      }
     }
-    // VPS34 label
-    ctx.beginPath(); ctx.arc(cx - 80, cy - 30, 22, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70022'; ctx.fill();
+
+    // VPS34/Beclin-1 PI3 kinase complex
+    const vX = cx - 110, vY = cy - 30;
+    ctx.beginPath(); ctx.arc(vX, vY, 24, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,215,0,0.1)'; ctx.fill();
     ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('VPS34', cx - 80, cy - 26);
-    ctx.fillStyle = '#ffd70099'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('PI3P generation at phagophore', cx, cy - 70);
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('VPS34', vX, vY - 4); ctx.fillText('Beclin1', vX, vY + 7);
+    // PI3P arrow
+    if (cupProg > 0.2) {
+      ctx.strokeStyle = '#ffd70066'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(vX + 24, vY + 14); ctx.lineTo(cupCX - outerR * 0.7, cupCY - outerR * 0.5); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#ffd70077'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('PI3P', vX + 45, vY + 30);
+    }
+    // Open end of cup — label
+    if (cupAngle > 0.8) {
+      ctx.fillStyle = '#ffd70066'; ctx.font = '8px monospace'; ctx.textAlign = 'right';
+      ctx.fillText('open end', cupCX - outerR * 0.85, cupCY - outerR * 0.52);
+    }
+    ap_label('VPS34 generates PI3P → phagophore nucleates at ER (omegasome)', cx, H - 16, '#ffd70088');
+
   } else if (phase === 2) {
-    // ATG5-ATG12/ATG16L1 LC3 lipidation
-    const spin = t * 0.03;
-    // Phagophore membrane (partial circle)
-    ctx.strokeStyle = '#ff884466'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.arc(cx, cy + 30, 70, Math.PI * 0.2, Math.PI * 1.8); ctx.stroke();
-    // ATG5-ATG12 complex
-    ctx.beginPath(); ctx.arc(cx - 20, cy - 20, 22, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70033'; ctx.fill();
+    // ── Phase 2: LC3 lipidation — ATG conjugation cascade on phagophore ──
+    // Phagophore (open cup, side view)
+    ctx.strokeStyle = '#ff884466'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(cx, cy + 40, 78, Math.PI * 0.15, Math.PI * 1.85); ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,136,68,0.25)'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(cx, cy + 40, 62, Math.PI * 0.15, Math.PI * 1.85); ctx.stroke();
+
+    // LC3-I → LC3-II conversion cascade labels
+    const lc3I_X = cx + 110, lc3I_Y = cy - 40;
+    ctx.beginPath(); ctx.arc(lc3I_X, lc3I_Y, 16, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,255,153,0.15)'; ctx.fill();
+    ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#00ff9966'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('LC3-I', lc3I_X, lc3I_Y + 3);
+    // ATG7 + ATG3 arrows
+    ctx.strokeStyle = '#ff884466'; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(lc3I_X - 16, lc3I_Y + 5); ctx.lineTo(lc3I_X - 60, lc3I_Y + 20); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ff884488'; ctx.font = '7px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('ATG7→ATG3', lc3I_X - 18, lc3I_Y + 18);
+
+    // ATG5-ATG12/ATG16L1 E3 on membrane edge
+    const atgX = cx - 25, atgY = cy - 22;
+    ctx.beginPath(); ctx.arc(atgX, atgY, 22, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,215,0,0.1)'; ctx.fill();
     ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('ATG5', cx - 20, cy - 22); ctx.fillText('ATG12', cx - 20, cy - 11);
-    // LC3-I converting to LC3-II
-    const lcx = cx + 80 + 20 * Math.cos(spin), lcy = cy - 10 + 15 * Math.sin(spin);
-    ctx.beginPath(); ctx.arc(lcx, lcy, 16, 0, Math.PI * 2);
-    ctx.fillStyle = '#00ff9933'; ctx.fill();
-    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.fillStyle = '#00ff99'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('LC3', lcx, lcy - 2); ctx.fillText('-II', lcx, lcy + 8);
-    // Arrow from complex to membrane
-    ctx.strokeStyle = '#ff884488'; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(cx - 20, cy + 3); ctx.lineTo(cx - 20, cy + 30); ctx.stroke();
-    ctx.fillStyle = '#ff884499'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('LC3 lipidation \u2014 ATG7/ATG3/ATG5-ATG12 E3', cx, cy + 110);
-  } else if (phase === 3) {
-    // p62 cargo recruitment
-    const bob = Math.sin(t * 0.05) * 6;
-    // Autophagosome (double membrane)
-    ctx.beginPath(); ctx.arc(cx, cy, 72, 0, Math.PI * 2);
-    ctx.fillStyle = '#00ff9908'; ctx.fill();
-    ctx.strokeStyle = '#00ff9955'; ctx.lineWidth = 1; ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx, cy, 58, 0, Math.PI * 2);
-    ctx.strokeStyle = '#00ff9933'; ctx.lineWidth = 1.5; ctx.stroke();
-    // p62 adaptors on surface
-    const receptorPositions = [0, Math.PI * 0.6, Math.PI * 1.2, Math.PI * 1.8, Math.PI * 2.4];
-    receptorPositions.forEach((angle, i) => {
-      const rx = cx + 72 * Math.cos(angle + t * 0.01);
-      const ry = cy + 72 * Math.sin(angle + t * 0.01);
-      ctx.beginPath(); ctx.arc(rx, ry, 9, 0, Math.PI * 2);
-      ctx.fillStyle = '#aa77ff44'; ctx.fill();
-      ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
-    });
-    // Ubiquitinated cargo inside
-    ctx.beginPath(); ctx.arc(cx + bob * 0.3, cy + bob * 0.2, 20, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70033'; ctx.fill();
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('Ub', cx + bob * 0.3, cy + bob * 0.2 + 3);
-    ctx.fillStyle = '#aa77ff99'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('p62 LIR + UBA bridges cargo to LC3', cx, cy + 100);
-  } else if (phase === 4) {
-    // Autophagosome-lysosome fusion
-    const prog = ((t * 0.015) % 1);
-    const autophagoX = cx - 80 + prog * 80;
-    const lysoX = cx + 60;
-    // Lysosome
-    ctx.beginPath(); ctx.arc(lysoX, cy, 50, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff884422'; ctx.fill();
-    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('Lysosome', lysoX, cy - 2); ctx.fillText('(LAMP1+)', lysoX, cy + 10);
-    // Autophagosome moving toward lysosome
-    ctx.beginPath(); ctx.arc(autophagoX, cy, 38, 0, Math.PI * 2);
-    ctx.fillStyle = '#00ff9915'; ctx.fill();
-    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#00ff99'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('Autophagy', autophagoX, cy - 4); ctx.fillText('vesicle', autophagoX, cy + 7);
-    // Degradation products arrow
-    if (prog > 0.7) {
-      const fade = (prog - 0.7) / 0.3;
-      ctx.fillStyle = '#00e5ff' + Math.floor(fade * 0xaa).toString(16).padStart(2, '0');
-      ctx.font = '9px monospace'; ctx.textAlign = 'center';
-      ctx.fillText('\u2193 amino acids, lipids, nucleotides', cx, cy + 80);
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('ATG5-12', atgX, atgY - 3); ctx.fillText('ATG16L1', atgX, atgY + 8);
+
+    // LC3-II dots embedded in phagophore membrane
+    const nLC3 = Math.min(8, Math.floor(t / 10) + 2);
+    for (let i = 0; i < nLC3; i++) {
+      const da = Math.PI * 0.2 + i * (Math.PI * 1.65) / 8;
+      const lx = cx + 78 * Math.cos(da + Math.PI * 0.15 / Math.PI);
+      const ly = (cy + 40) + 78 * Math.sin(da);
+      ctx.beginPath(); ctx.arc(lx + cx * 0 - cx + cx, ly, 5, 0, Math.PI*2);
+      ctx.fillStyle = '#00ff99cc'; ctx.fill();
+      ctx.strokeStyle = '#00ff9955'; ctx.lineWidth = 1; ctx.stroke();
     }
-    ctx.fillStyle = '#00ff9988'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Autolysosome \u2014 hydrolytic degradation + recycling', cx, cy + 100);
+    // Outer membrane LC3-II dots
+    for (let i = 0; i < nLC3; i++) {
+      const da = Math.PI * 0.15 + i * (Math.PI * 1.7) / 8;
+      const lx2 = cx + 78 * Math.cos(da);
+      const ly2 = (cy + 40) + 78 * Math.sin(da);
+      ctx.beginPath(); ctx.arc(lx2, ly2, 5, 0, Math.PI*2);
+      ctx.fillStyle = '#00ff99aa'; ctx.fill();
+    }
+    ctx.fillStyle = '#00ff9999'; ctx.font = '8px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('LC3-II (PE-conjugated)', cx + 140, cy - 55);
+    ap_label('ATG7→ATG3→ATG5-12/16L1 cascade lipidates LC3-I→LC3-II on membrane', cx, H - 16, '#ff884488');
+
+  } else if (phase === 3) {
+    // ── Phase 3: Cargo sequestration — p62/SQSTM1 bridges Ub-cargo to LC3-II ──
+    const bob = Math.sin(t * 0.04) * 5;
+    // Sealed autophagosome double membrane
+    for (const r of [72, 58]) {
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fillStyle = r === 72 ? 'rgba(0,255,153,0.04)' : 'transparent';
+      if (r === 72) ctx.fill();
+      ctx.strokeStyle = r === 72 ? 'rgba(0,255,153,0.5)' : 'rgba(0,255,153,0.25)';
+      ctx.lineWidth = r === 72 ? 2 : 1.5; ctx.stroke();
+    }
+    // LC3-II dots on outer membrane
+    for (let i = 0; i < 8; i++) {
+      const a = (i / 8) * Math.PI * 2;
+      ctx.beginPath(); ctx.arc(cx + 72 * Math.cos(a), cy + 72 * Math.sin(a), 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#00ff99aa'; ctx.fill();
+    }
+    // Cargo contents: aggregated proteins (clumped circles) + mitochondrion fragment
+    // Aggregated protein
+    ctx.beginPath(); ctx.arc(cx - 18 + bob * 0.3, cy - 12 + bob * 0.2, 15, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,215,0,0.15)'; ctx.fill();
+    ctx.strokeStyle = '#ffd70055'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#ffd70088'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Ub-cargo', cx - 18 + bob * 0.3, cy - 9 + bob * 0.2);
+    // Mitochondrion fragment (ellipse)
+    ctx.save(); ctx.translate(cx + 14, cy + 18 + bob * 0.15); ctx.rotate(0.4);
+    ctx.beginPath(); ctx.ellipse(0, 0, 18, 10, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,136,68,0.12)'; ctx.fill();
+    ctx.strokeStyle = '#ff884455'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#ff884466'; ctx.font = '6px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('mito', 0, 3);
+    ctx.restore();
+
+    // p62 bridge connector (line from LC3 on membrane to cargo)
+    ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(cx - 10, cy - 58); ctx.lineTo(cx - 14, cy - 24); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(cx - 12, cy - 41, 7, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(170,119,255,0.35)'; ctx.fill();
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#aa77ff'; ctx.font = '6px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('p62', cx - 12, cy - 38);
+    ap_label('p62 UBA binds Ub-cargo, LIR tethers to LC3-II → cargo enclosed', cx, H - 16, '#aa77ff88');
+
+  } else if (phase === 4) {
+    // ── Phase 4: Autophagosome–lysosome fusion → autolysosome degradation ──
+    const prog = (t * 0.012) % 1;
+    const fused = prog > 0.55;
+    const lysoX = cx + 90, lysoY = cy;
+    const autoX = cx - 90 + prog * 120, autoY = cy;
+
+    // Lysosome — acidic interior (orange-red glow)
+    const lysoG = ctx.createRadialGradient(lysoX, lysoY, 8, lysoX, lysoY, 50);
+    lysoG.addColorStop(0, 'rgba(255,80,20,0.35)');
+    lysoG.addColorStop(0.6, 'rgba(255,80,20,0.12)');
+    lysoG.addColorStop(1, 'rgba(255,80,20,0)');
+    ctx.fillStyle = lysoG; ctx.beginPath(); ctx.arc(lysoX, lysoY, 50, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(lysoX, lysoY, 44, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,100,40,0.08)'; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Lysosome', lysoX, lysoY - 4); ctx.fillText('pH 4.5', lysoX, lysoY + 7);
+    // Proton (H+) particles inside lysosome
+    for (let i = 0; i < 4; i++) {
+      const ha = (t * 0.06 + i * Math.PI / 2) % (Math.PI * 2);
+      const hx = lysoX + 24 * Math.cos(ha), hy = lysoY + 18 * Math.sin(ha);
+      ap_particle(hx, hy, 'H⁺', '#ff6622');
+    }
+
+    // Autophagosome moving
+    if (!fused || prog < 0.85) {
+      const displayX = fused ? lysoX - 10 : autoX;
+      ctx.beginPath(); ctx.arc(displayX, autoY, fused ? 34 : 38, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,255,153,0.08)'; ctx.fill();
+      ctx.strokeStyle = fused ? 'rgba(0,255,153,0.4)' : '#00ff99'; ctx.lineWidth = fused ? 1 : 2; ctx.stroke();
+      if (!fused) {
+        ctx.fillStyle = '#00ff9966'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText('autophagosome', displayX, autoY + 3);
+      }
+    }
+
+    // Fusion: SNARE proteins
+    if (prog > 0.3 && !fused) {
+      ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(autoX + 38, autoY); ctx.lineTo(lysoX - 44, autoY); ctx.stroke();
+      ctx.fillStyle = '#aa77ff77'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('SNARE/Rab7', (autoX + lysoX) / 2, autoY - 10);
+    }
+
+    // Degradation products released after fusion
+    if (fused) {
+      ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 8px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('AUTOLYSOSOME', lysoX - 10, autoY - 52);
+      const products = ['AA', 'FA', 'nt'];
+      for (let i = 0; i < 3; i++) {
+        const pa = -Math.PI / 4 + i * Math.PI / 4 + t * 0.02;
+        const dist = 55 + ((t * 0.5 + i * 30) % 40);
+        ap_particle(lysoX - 10 + dist * Math.cos(pa), autoY + dist * Math.sin(pa), products[i], '#00e5ff');
+      }
+      ctx.fillStyle = '#00e5ff66'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('amino acids · fatty acids · nucleotides recycled', cx, H - 30);
+    }
+    ap_label('Rab7/SNARE-mediated fusion → autolysosome → hydrolytic recycling', cx, H - 16, '#00ff9977');
   }
 }
 
@@ -740,10 +828,7 @@ mechDraw(0, 0);
 // ── Connections canvas (force-directed network) ───────────────────────────────
 function drawConnections() {
   const cv = document.getElementById('conn-canvas');
-  cv.width = cv.offsetWidth || 600;
-  cv.height = cv.offsetHeight || 360;
-  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
-  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const W = cv.offsetWidth || 600, H = 360;
 
   const nodes = [
     {id:'auto', x:W*.5,  y:H*.5,  r:32, color:'#00e5ff', label:'Autophagy', sub:'2016'},
@@ -761,33 +846,16 @@ function drawConnections() {
     {from:'auto',to:'trp',  color:'#ff884455',label:'mTORC1 integrates\nnutrient + pain'},
   ];
 
-  const ns = {}; nodes.forEach(n => ns[n.id] = n);
-  edges.forEach(e => {
-    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
-    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
-    if(e.label) {
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
-      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
-    }
-  });
-  nodes.forEach(n => {
-    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-    ctx.fillStyle = n.color + '22'; ctx.fill();
-    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
-    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
-    ctx.fillText(n.sub, n.x, n.y+n.r+11);
-  });
+  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
 }
 </script>
 
 <!-- Shared infrastructure (load after module data) -->
 <script src="../shared/glossary-data.js"></script>
 <script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/connections.js"></script>
 <script src="../shared/molecule-modal.js"></script>
 <script src="../shared/auto-start.js"></script>
+<script src="../shared/mech-theater.js" defer></script>
 </body>
 </html>

@@ -1,777 +1,987 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2022 · Paleogenomics — kbiology Nobel Frontier</title>
-<link rel="stylesheet" href="../shared/theme.css">
-<link rel="stylesheet" href="../shared/molecule-modal.css">
-<style>
-/* Module layout */
-.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
-.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
-.back-link:hover{color:var(--green);border-color:var(--green)}
-.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
-.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
-.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
-.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
-.mod-tab:hover{color:var(--text);background:var(--bg3)}
-.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
-.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
-.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
-
-/* Body layout */
-.mod-body{display:flex;min-height:calc(100vh - 100px)}
-.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
-.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-
-/* Tab panels */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Canvas */
-.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
-.canvas-wrap canvas{display:block;width:100%;height:240px}
-.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
-
-/* Mechanism panels */
-.mech-panels{display:flex;flex-direction:column;gap:10px}
-.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
-.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
-.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
-.mech-panel-body strong{color:var(--text)}
-.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-
-/* Molecules tab */
-.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
-.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
-.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
-.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
-.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
-.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
-
-/* Story tab */
-.story-content{max-width:720px}
-.story-block{margin-bottom:16px}
-.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
-
-/* Frontiers tab */
-.frontier-group{margin-bottom:20px}
-.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
-.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
-.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
-
-/* Connections tab */
-.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
-.connections-wrap canvas{display:block;width:100%;height:360px}
-
-/* Right sidebar */
-.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
-.rsb-mol-item:hover{color:var(--cyan)}
-.rsb-mol-icon{font-size:1rem;flex-shrink:0}
-.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
-.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
-</style>
-</head>
-<body>
-<!-- Module header -->
-<div class="mod-hdr">
-  <div class="mod-hdr-top">
-    <a href="../index.html" class="back-link">&#8592; Hub</a>
-    <span class="mod-year-badge" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">2022</span>
-    <div class="mod-title">Paleogenomics</div>
-  </div>
-  <div class="mod-laureates">Svante P&#228;&#228;bo &#8212; Nobel Prize in Physiology or Medicine 2022</div>
-  <div class="mod-tags">
-    <span class="mod-tag" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">Genomics</span>
-    <span class="mod-tag" style="color:#88aaff;border-color:#88aaff44;background:#88aaff10">Computational Bio</span>
-    <span class="mod-tag" style="color:#00e5ff;border-color:#00e5ff44;background:#00e5ff10">Evolutionary Biology</span>
-  </div>
-  <div class="mod-tabs" id="mod-tabs">
-    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
-    <div class="mod-tab" data-tab="story">&#128214; Story</div>
-    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
-    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
-    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
-  </div>
-</div>
-
-<!-- Module body -->
-<div class="mod-body">
-  <!-- Left sidebar: animation controls -->
-  <div class="sidebar" id="sidebar-left">
-    <div class="sidebar-block">
-      <span class="sec-lbl">Animation</span>
-      <div class="btn-row">
-        <button class="btn primary" id="btn-play">&#9654; Play</button>
-        <button class="btn" id="btn-reset">&#8634;</button>
-      </div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Phase</span>
-      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
-      <div class="val-disp" id="phase-label">Phase 0 &mdash; Ancient Specimen</div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Speed</span>
-      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
-      <div class="val-disp" id="speed-label">3&times;</div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Layers</span>
-      <div class="ctrl-row"><span class="ctrl-lbl">aDNA damage</span><span class="ctrl-val" id="lay-dmg">ON</span></div>
-      <div class="ctrl-row"><span class="ctrl-lbl">Admixture</span><span class="ctrl-val" id="lay-adm">ON</span></div>
-      <div class="ctrl-row"><span class="ctrl-lbl">D-statistics</span><span class="ctrl-val" id="lay-dst">ON</span></div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Info</span>
-      <div class="callout">
-        <strong>Key insight:</strong> C&rarr;T deamination at 5&prime; ends authenticates ancient DNA. ~2% Neanderthal ancestry in all non-Africans detected by ABBA-BABA test.
-      </div>
-    </div>
-  </div>
-
-  <!-- Main content area -->
-  <div class="main" id="main-content">
-    <!-- Tab 1: Mechanism -->
-    <div class="tab-panel active" id="panel-mechanism">
-      <div class="canvas-wrap">
-        <canvas id="mech-canvas"></canvas>
-        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; Ancient Specimen: Bone/Tooth Fragment (Vindija Cave)</div>
-      </div>
-      <div class="mech-panels" id="mech-panels"></div>
-    </div>
-
-    <!-- Tab 2: Story -->
-    <div class="tab-panel" id="panel-story">
-      <div class="story-content" id="story-content"></div>
-    </div>
-
-    <!-- Tab 3: Molecules -->
-    <div class="tab-panel" id="panel-molecules">
-      <div class="mol-grid" id="mol-grid"></div>
-    </div>
-
-    <!-- Tab 4: Frontiers -->
-    <div class="tab-panel" id="panel-frontiers">
-      <div id="frontiers-content"></div>
-    </div>
-
-    <!-- Tab 5: Connections -->
-    <div class="tab-panel" id="panel-connections">
-      <div class="connections-wrap">
-        <canvas id="conn-canvas"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right sidebar -->
-  <div class="rsidebar" id="sidebar-right">
-    <div class="sidebar-block">
-      <span class="sec-lbl">Key Molecules</span>
-      <div id="rsb-mols"></div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Landmark Papers</span>
-      <div id="rsb-papers"></div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">External Links</span>
-      <a href="https://www.nobelprize.org/prizes/medicine/2022/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
-        <div class="ref-year">nobelprize.org</div>
-        <div class="ref-title">Nobel Prize 2022 &#8212; official announcement</div>
-      </a>
-      <a href="https://reich.hms.harvard.edu/software" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
-        <div class="ref-year">reich.hms.harvard.edu</div>
-        <div class="ref-title">Reich Lab ADMIXTOOLS</div>
-      </a>
-    </div>
-  </div>
-</div>
-
-<script>
-// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
-// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
-window.GLOSS = window.GLOSS || {};
-Object.assign(window.GLOSS, {
-  'adna_auth':  { term:'aDNA authentication criteria', level:'res', def:'Requirements to validate ancient DNA: (1) C\u2192T deamination at 5\u2019 ends (>10%); (2) short fragment lengths (<100 bp modal); (3) phylogenetically reasonable sequence; (4) independent replication; (5) contamination estimate <1% (mtDNA) or <5% (nuclear) by quantifying modern human reads. Strict clean-room extraction in dedicated aDNA facilities mandatory \u2014 modern DNA contamination is ubiquitous.' },
-  'introgression': { term:'Archaic introgression', level:'res', def:'Gene flow from archaic hominins (Neanderthals, Denisovans) into anatomically modern humans after divergence ~600 kya. Detected by D-statistics (ABBA-BABA test). ~2% Neanderthal in non-Africans; ~4-6% Denisovan in Melanesians. Adaptive variants retained: EPAS1 (Tibetan altitude), OAS1 (antiviral), TRPM8 (cold sensation). Deleterious variants purged by purifying selection over 50,000 years.' },
-  'beagle_imputation': { term:'Genotype imputation (BEAGLE)', level:'res', def:'Statistical method inferring unobserved genotypes from nearby SNPs using reference haplotype panels. Essential for low-coverage ancient genomes. BEAGLE 5.4 can impute ~7M SNPs from 0.1\u00d7 coverage aDNA, enabling GWAS of ancient samples. Critical for connecting archaic introgression variants to modern disease risk (e.g., Neanderthal OAS1 splice variant protective against COVID-19).' },
-  'abba_baba': { term:'ABBA-BABA test (D-statistics)', level:'res', def:'Statistical test for gene flow. Tests whether test population (H3) shares more derived alleles with Neanderthal (H2) than outgroup (H4). D = (ABBA - BABA)/(ABBA + BABA). Significantly positive D = Neanderthal gene flow into H3. Green et al. 2010: D \u2248 0.05 across non-Africans. Implemented in ADMIXTOOLS2.' },
-});
-
-// ── Module molecules data ────────────────────────────────────────────────────
-const MODULE_MOLS = [
-  { id:'adna_damage', icon:'\ud83e\uddec', color:'#ffd700', type:'aDNA \u00b7 authentication pattern', is_protein:false,
-    name:'Ancient DNA Damage Pattern', sub:'Cytosine deamination signature at fragment ends',
-    badges:[{text:'C\u2192T deamination',color:'#ffd700'},{text:'Authentication marker',color:'#00e5ff'},{text:'5\u2019 + 3\u2019 overhangs',color:'#aa77ff'}],
-    pubchem_cid:null, pdb_id:null,
-    nih_link:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3938849/',
-    mechanism:'Ancient DNA undergoes hydrolytic cytosine deamination, particularly at single-stranded overhangs. At 5\u2019 ends: C\u2192T substitutions at high frequency (15-35% at position 1, declining over 10-15 bp). At 3\u2019 ends: G\u2192A substitutions (complementary to C\u2192T on antisense). Fragments are typically <100 bp (modal ~50 bp) due to hydrolytic nicking of the phosphodiester backbone. This damage pattern is the PRIMARY authentication signature distinguishing ancient from modern contaminating DNA. UDG (uracil-DNA glycosylase) treatment removes the damaged uracils before library preparation \u2014 eliminating the signal in "half-UDG" libraries at a cost of losing authentication information.',
-    properties:{'Fragmentation':'Mean ~50 bp (permafrost better than tropical)','5\u2019 C\u2192T':'~30% at position 1','3\u2019 G\u2192A':'~20% at position 1','Age range':'Viable: 50,000+ years (permafrost); <10,000 (tropical)','Contamination':'Modern DNA typically >90% of extract (human skeletal)','Authentication':'mapDamage2.0 software models damage pattern'},
-    property_flags:{},
-    interaction:{ title:'aDNA Damage Pattern \u2014 Authentication via Deamination',
-      nodes:[
-        {id:'ssdna', x:100,y:80, r:22,color:'#ffd700',label:'ssDNA overhang',sub:'hydrolytic'},
-        {id:'cyt',   x:280,y:80, r:22,color:'#00e5ff',label:'Cytosine',    sub:'at 5\u2019 end'},
-        {id:'ura',   x:440,y:80, r:22,color:'#ff8844',label:'Uracil',      sub:'deamination'},
-        {id:'mapdmg',x:280,y:260,r:26,color:'#00ff99',label:'mapDamage2\nprofile',sub:'authentication'},
-        {id:'udg',   x:100,y:260,r:22,color:'#aa77ff',label:'UDG treatment',sub:'removes signal'},
-      ],
-      edges:[
-        {from:'ssdna',to:'cyt',  color:'#ffd700',label:'exposed at\n5\u2019 overhang',    dashed:false},
-        {from:'cyt',  to:'ura',  color:'#ff8844',label:'deamination\n(C\u2192U\u2192T in PCR)',dashed:false},
-        {from:'ura',  to:'mapdmg',color:'#00ff99',label:'reads as T\nin sequencing',  dashed:false},
-        {from:'udg',  to:'ura',  color:'#aa77ff',label:'removes U\nbefore library',   dashed:true},
-      ]
-    },
-    papers:[
-      {year:'2010',journal:'Science',impact:'IF 56',title:'A Draft Sequence of the Neandertal Genome (Green et al., P\u00e4\u00e4bo)',abstract:'Vindija Neanderthal genome at 1.3\u00d7 coverage. First Neanderthal nuclear genome. 2-4% Neanderthal admixture in non-Africans detected via D-statistics.'},
-      {year:'2013',journal:'Nature',impact:'IF 69',title:'A High-Coverage Genome Sequence from an Archaic Denisovan Individual',abstract:'Meyer et al.: Denisovan finger phalanx \u2014 30\u00d7 coverage from a single bone. ~4-6% Denisovan ancestry in Melanesians.'},
-    ],
-    rel_molecules:[
-      {icon:'\ud83d\udd35',name:'mapDamage2.0',role:'aDNA authentication software\nmodels damage pattern',    id:'bioinformatics'},
-      {icon:'\ud83d\udfe1',name:'ADMIXTOOLS2',  role:'D-statistics\narchaic admixture detection',              id:'bioinformatics'},
-    ]
-  },
-  { id:'neanderthal_genome', icon:'\ud83e\uddb4', color:'#00e5ff', type:'Paleogenomic \u00b7 nuclear genome', is_protein:false,
-    name:'Neanderthal Nuclear Genome', sub:'Vindija 33.19 \u00b7 ~52\u00d7 coverage (2013)',
-    badges:[{text:'~1.8-2.6% in non-Africans',color:'#00e5ff'},{text:'Vindija Neanderthal',color:'#ffd700'},{text:'Nobel 2022',color:'#ffd700'}],
-    pubchem_cid:null, pdb_id:null,
-    nih_link:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3709582/',
-    mechanism:'Vindija 33.19 \u2014 ~50,000-year-old Neanderthal specimen from Croatia. 2013 high-coverage (~52\u00d7) genome sequenced from mitochondria-depleted extract. Libraries prepared with single-stranded protocol (superior sensitivity). Contamination estimate <1% using mtDNA divergence metrics. The high-coverage genome enabled precise quantification of Neanderthal ancestry in living humans (~1.8-2.6% in non-Africans), identification of ~50,000 SNPs distinguishing modern humans from Neanderthals (regulatory regions enriched), and discovery of Neanderthal-introgressed adaptive variants (EPAS1, OAS1, TRPM8).',
-    properties:{'Source':'Vindija cave, Croatia (Vi33.19)','Coverage':'~52\u00d7 (2013 Pr\u00fcfer et al.)','Divergence':'600,000 years MCA from modern humans','Neanderthal admixture in modern humans':'~1.8-2.6% non-Africans','Modern human-specific changes':'>50,000 SNPs vs Neanderthal','Key introgressed traits':'EPAS1 (altitude), OAS1 (antiviral), MC1R (pigmentation)'},
-    property_flags:{},
-    interaction:{ title:'Neanderthal Admixture D-Statistics',
-      nodes:[
-        {id:'afr',   x:80, y:220,r:22,color:'#8888b0',label:'African\n(H1)',    sub:'no admixture'},
-        {id:'naf',   x:200,y:80, r:24,color:'#00e5ff',label:'Non-African\n(H2)',sub:'2% Nean.'},
-        {id:'nean',  x:380,y:80, r:26,color:'#ffd700',label:'Neanderthal\n(H3)',sub:'archaic'},
-        {id:'anc',   x:280,y:220,r:22,color:'#aa77ff',label:'Ancestral\nHuman', sub:'~600 kya div.'},
-        {id:'chimp', x:480,y:220,r:20,color:'#ff8844',label:'Chimpanzee\n(H4)', sub:'outgroup'},
-      ],
-      edges:[
-        {from:'anc', to:'afr',  color:'#8888b0',label:'African branch',         dashed:false},
-        {from:'anc', to:'nean', color:'#ffd700',label:'~600 kya\ndivergence',   dashed:false},
-        {from:'nean',to:'naf',  color:'#00e5ff',label:'~2% gene flow\n~50 kya', dashed:false},
-        {from:'chimp',to:'anc', color:'#ff884488',label:'outgroup',             dashed:true},
-      ]
-    },
-    papers:[
-      {year:'2010',journal:'Science',impact:'IF 56',title:'A Draft Sequence of the Neandertal Genome',abstract:'Green et al.: first complete Neanderthal genome. Proof of Neanderthal-modern human gene flow. D-statistics developed. Nobel 2022.'},
-      {year:'2013',journal:'Nature',impact:'IF 69',title:'The complete genome sequence of a Neanderthal from the Altai Mountains',abstract:'Pr\u00fcfer et al.: 52\u00d7 Altai Neanderthal genome. Detailed analysis of Neanderthal-modern human differences and shared ancestry with Denisovans.'},
-    ],
-    rel_molecules:[
-      {icon:'\ud83d\udc8e',name:'Denisovan Genome', role:'Sister archaic group\n4-6% in Melanesians',        id:'Denisova cave'},
-      {icon:'\ud83e\uddec',name:'EPAS1 allele',     role:'Tibetan altitude adaptation\nfrom Denisovan',      id:'EPAS1 gene'},
-    ]
-  },
-  { id:'epas1_allele', icon:'\ud83c\udfd4\ufe0f', color:'#aa77ff', type:'Introgressed variant \u00b7 Adaptive', is_protein:false,
-    name:'EPAS1 Tibetan Altitude Allele', sub:'Denisovan introgression \u00b7 HIF-2\u03b1 gene',
-    badges:[{text:'Denisovan introgression',color:'#aa77ff'},{text:'>80% in Tibetans',color:'#ffd700'},{text:'Adaptive variant',color:'#00ff99'}],
-    pubchem_cid:null, pdb_id:null,
-    nih_link:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3875136/',
-    mechanism:'EPAS1 (Endothelial PAS domain protein 1 = HIF-2\u03b1) encodes a key oxygen-sensing transcription factor. Tibetan EPAS1 haplotype: frequency >80% in Tibetans vs <1% in Han Chinese. Effect: reduced erythropoietic response to hypoxia \u2014 prevents polycythemia and related cardiovascular risk at altitude. The Tibetan EPAS1 haplotype is derived from Denisovan introgression (~50,000 ya) \u2014 detected because it clusters with Denisovan genome sequence rather than any modern human lineage. One of the clearest examples of adaptive introgression: archaic variant providing immediate fitness advantage in a new environment.',
-    properties:{'Gene':'EPAS1 (HIF-2\u03b1, chromosome 2p21)','Tibetan allele frequency':'>80%','Han Chinese frequency':'<1%','Effect':'Reduced erythropoiesis at altitude \u2014 protective','Origin':'Denisovan introgression (~50 kya)','Identification':'Nielsen et al. Nature Genetics 2010; Huerta-Sanchez Science 2014'},
-    property_flags:{'Tibetan allele frequency':'good'},
-    interaction:{ title:'EPAS1 Adaptive Introgression: Denisovan \u2192 Tibetan',
-      nodes:[
-        {id:'den',  x:100,y:80, r:24,color:'#aa77ff',label:'Denisovan',  sub:'archaic human'},
-        {id:'tib',  x:300,y:80, r:26,color:'#ffd700',label:'Tibetan\nancestor',sub:'~50 kya gene flow'},
-        {id:'epas', x:300,y:240,r:26,color:'#ff8844',label:'EPAS1\nHIF-2\u03b1',   sub:'O2 sensor'},
-        {id:'ery',  x:100,y:360,r:22,color:'#ff4444',label:'Erythropoiesis',  sub:'\u2193 at altitude'},
-        {id:'fit',  x:480,y:280,r:22,color:'#00ff99',label:'Tibetan\nfitness',sub:'no polycythemia'},
-      ],
-      edges:[
-        {from:'den', to:'tib', color:'#aa77ff',label:'introgression\n~50 kya',              dashed:false},
-        {from:'tib', to:'epas',color:'#ffd700',label:'Denisovan EPAS1\nhaplotype (>80%)',    dashed:false},
-        {from:'epas',to:'ery', color:'#ff4444',label:'reduced\nEPO response',               dashed:false},
-        {from:'ery', to:'fit', color:'#00ff99',label:'protects vs\npolycythemia',            dashed:false},
-      ]
-    },
-    papers:[
-      {year:'2010',journal:'Nat Genet',impact:'IF 38',title:'Altitude adaptation in Tibetans caused by introgression of Denisovan-like DNA',abstract:'Nielsen et al.: EPAS1 selection in Tibetans. Strong positive selection signal \u2014 highest reported sweep statistic in humans.'},
-      {year:'2014',journal:'Science',  impact:'IF 56',title:'Altitude adaptation in Tibet caused by introgression of Denisovan-like DNA',abstract:'Huerta-Sanchez et al.: Tibetan EPAS1 haplotype clusters with Denisovan genome \u2014 archaic introgression confirmed as source of adaptation.'},
-    ],
-    rel_molecules:[
-      {icon:'\ud83d\udfe0',name:'HIF-2\u03b1 (EPAS1)',  role:'O2-sensing TF\nsame gene, different allele',id:'PDB: see HIF module'},
-      {icon:'\ud83d\udd35',name:'Neanderthal OAS1',role:'COVID-19 protective\n2\u2019 antiviral variant',  id:'OAS1 gene chr12'},
-    ]
-  },
-  { id:'admixture_tool', icon:'\ud83d\udcbb', color:'#88aaff', type:'Bioinformatics \u00b7 Population genomics', is_protein:false,
-    name:'D-statistics / ADMIXTOOLS2', sub:'Ancient DNA admixture analysis pipeline',
-    badges:[{text:'ABBA-BABA test',color:'#88aaff'},{text:'Archaic admixture detection',color:'#ffd700'},{text:'Population genomics',color:'#00e5ff'}],
-    pubchem_cid:null, pdb_id:null,
-    nih_link:'https://reich.hms.harvard.edu/software',
-    mechanism:'D-statistics (ABBA-BABA test): tests for excess shared derived alleles between H3 (test population) and Neanderthal vs African outgroup. D = (ABBA \u2212 BABA)/(ABBA + BABA). Significantly positive D = Neanderthal gene flow. ADMIXTOOLS2 (Reich lab): maximum likelihood estimation of ancestry proportions and admixture graphs. f3 and f4 statistics for population graph fitting. qpAdm for multi-source admixture. Critical for reconstructing human population history from aDNA \u2014 now applied to thousands of ancient genomes from archaeological contexts.',
-    properties:{'Method':'ABBA-BABA D-statistics','Detects':'Excess shared derived alleles between test+archaic vs outgroup','ADMIXTOOLS2':'ML ancestry proportions; f3/f4 statistics','Neanderthal admixture in non-Africans':'~2%','Denisovan admixture in Melanesians':'~4-6%','Key paper':'Green et al. Science 2010'},
-    property_flags:{},
-    interaction:{ title:'D-Statistics: ABBA-BABA Test Logic',
-      nodes:[
-        {id:'h1',   x:80, y:200,r:22,color:'#8888b0',label:'H1\nAfrican',    sub:'no flow'},
-        {id:'h2',   x:230,y:100,r:24,color:'#00e5ff',label:'H2\nNon-African',sub:'test'},
-        {id:'h3',   x:380,y:100,r:24,color:'#ffd700',label:'H3\nNeanderthal',sub:'archaic'},
-        {id:'h4',   x:460,y:240,r:20,color:'#ff8844',label:'H4\nChimp',      sub:'outgroup'},
-        {id:'abba', x:200,y:320,r:22,color:'#00ff99',label:'ABBA\nD>0',      sub:'gene flow detected'},
-      ],
-      edges:[
-        {from:'h2',  to:'h3', color:'#00e5ff',label:'excess shared\nderived alleles',  dashed:false},
-        {from:'h1',  to:'h2', color:'#8888b0',label:'sister\ngroup',                   dashed:false},
-        {from:'h4',  to:'h3', color:'#ff884488',label:'outgroup',                      dashed:true},
-        {from:'h2',  to:'abba',color:'#00ff99',label:'D = (ABBA-BABA)\n/(ABBA+BABA)', dashed:false},
-      ]
-    },
-    papers:[
-      {year:'2010',journal:'Science',impact:'IF 56',title:'A Draft Sequence of the Neandertal Genome (Green, Reich, P\u00e4\u00e4bo)',abstract:'D-statistics first described. Non-African populations share 1-4% more derived alleles with Neanderthals than Africans do \u2014 proof of admixture.'},
-    ],
-    rel_molecules:[
-      {icon:'\ud83e\uddec',name:'mapDamage2.0', role:'aDNA authentication\ndamage modeling',           id:'bioinformatics'},
-      {icon:'\ud83d\udd35',name:'BEAGLE imputation',role:'Low-coverage aDNA\ngenotype imputation',       id:'bioinformatics'},
-    ]
-  },
-];
-
-// ── Mechanism phases ─────────────────────────────────────────────────────────
-const PHASES = [
-  {label:'Phase 0 \u2014 Ancient Specimen: Bone/Tooth Fragment (Vindija Cave)', color:'#ffd700', mol:null},
-  {label:'Phase 1 \u2014 aDNA Extraction: Silica Spin Column + Bleach Pre-Treatment', color:'#00e5ff', mol:'adna_damage'},
-  {label:'Phase 2 \u2014 Library Preparation: End Repair + Adapter Ligation + UDG', color:'#aa77ff', mol:null},
-  {label:'Phase 3 \u2014 Hybridization Capture + Deep Sequencing', color:'#00ff99', mol:null},
-  {label:'Phase 4 \u2014 Authentication + Admixture Inference (mapDamage + ADMIXTOOLS)', color:'#88aaff', mol:'admixture_tool'},
-];
-
-// ── Tab switching ────────────────────────────────────────────────────────────
-document.querySelectorAll('.mod-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    const panelId = 'panel-' + tab.dataset.tab;
-    const panel = document.getElementById(panelId);
-    if (panel) panel.classList.add('active');
-    if (tab.dataset.tab === 'connections') drawConnections();
-  });
-});
-
-// ── Mechanism canvas animation ────────────────────────────────────────────────
-const mechCv = document.getElementById('mech-canvas');
-let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
-
-function mechDraw(phase, t) {
-  const cv = mechCv;
-  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
-  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
-  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
-  const cx = W / 2, cy = H / 2;
-
-  if (phase === 0) {
-    // Bone fragment icon with age label
-    const bx = cx, by = cy;
-    ctx.fillStyle = '#ffd70033';
-    ctx.beginPath();
-    ctx.roundRect ? ctx.roundRect(bx - 60, by - 20, 120, 40, 20) : ctx.rect(bx - 60, by - 20, 120, 40);
-    ctx.fill();
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.roundRect ? ctx.roundRect(bx - 60, by - 20, 120, 40, 20) : ctx.rect(bx - 60, by - 20, 120, 40);
-    ctx.stroke();
-    // End knobs
-    ctx.beginPath(); ctx.arc(bx - 60, by, 18, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70033'; ctx.fill();
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.beginPath(); ctx.arc(bx + 60, by, 18, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70033'; ctx.fill();
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Bone fragment', bx, by + 5);
-    ctx.fillStyle = '#ffd70099'; ctx.font = '9px monospace';
-    ctx.fillText('Vindija Cave, Croatia \u2014 ~50,000 years old', bx, by + 55);
-    ctx.fillStyle = '#8888b0'; ctx.font = '9px monospace';
-    ctx.fillText('Specimen: Vi33.19 \u2014 Neanderthal', bx, by - 42);
-  } else if (phase === 1) {
-    // DNA fragments with colored damage indicators at ends
-    const fragY = [cy - 40, cy - 15, cy + 10, cy + 35, cy + 60];
-    const fragLens = [80, 55, 100, 65, 45];
-    fragY.forEach((fy, i) => {
-      const fl = fragLens[i];
-      const fx = cx - fl / 2;
-      // Fragment backbone
-      ctx.strokeStyle = '#8888b044'; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(fx + fl, fy); ctx.stroke();
-      // 5' C->T damage dot (left)
-      const alpha = 0.3 + 0.5 * (t % 60) / 60;
-      ctx.beginPath(); ctx.arc(fx, fy, 5, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffd700'; ctx.fill();
-      // 3' G->A damage dot (right)
-      ctx.beginPath(); ctx.arc(fx + fl, fy, 5, 0, Math.PI * 2);
-      ctx.fillStyle = '#00e5ff'; ctx.fill();
-    });
-    ctx.fillStyle = '#ffd700'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
-    ctx.fillText("5' C\u2192T", cx - 110, cy - 65);
-    ctx.fillStyle = '#00e5ff'; ctx.textAlign = 'right';
-    ctx.fillText("3' G\u2192A", cx + 110, cy - 65);
-    ctx.fillStyle = '#8888b0'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Short aDNA fragments (~50 bp) with terminal damage markers', cx, cy + 90);
-  } else if (phase === 2) {
-    // Fragments with adapter shapes on both ends
-    const adpY = [cy - 30, cy, cy + 30];
-    adpY.forEach((ay, i) => {
-      const fl = 90 + i * 15;
-      const ax = cx - fl / 2;
-      // Adapter left (triangle shape)
-      ctx.fillStyle = '#aa77ff66';
-      ctx.beginPath(); ctx.moveTo(ax - 18, ay - 10); ctx.lineTo(ax, ay - 10); ctx.lineTo(ax, ay + 10); ctx.lineTo(ax - 18, ay + 10); ctx.closePath(); ctx.fill();
-      ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
-      // Fragment backbone
-      ctx.strokeStyle = '#00e5ff88'; ctx.lineWidth = 3;
-      ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ax + fl, ay); ctx.stroke();
-      // Adapter right
-      ctx.fillStyle = '#aa77ff66';
-      ctx.beginPath(); ctx.moveTo(ax + fl, ay - 10); ctx.lineTo(ax + fl + 18, ay - 10); ctx.lineTo(ax + fl + 18, ay + 10); ctx.lineTo(ax + fl, ay + 10); ctx.closePath(); ctx.fill();
-      ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
-    });
-    ctx.fillStyle = '#aa77ff99'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Library preparation: adapters ligated to aDNA fragments', cx, cy + 75);
-    ctx.fillStyle = '#8888b0'; ctx.font = '9px monospace';
-    ctx.fillText('End repair + A-tailing + ligation \u00b1 UDG treatment', cx, cy + 90);
-  } else if (phase === 3) {
-    // Sequencing reads as horizontal colored bars
-    const colors = ['#00ff99','#00e5ff','#ffd700','#aa77ff','#ff8844','#88aaff','#ff4488'];
-    const readY0 = cy - 70;
-    for (let i = 0; i < 8; i++) {
-      const ry = readY0 + i * 20;
-      const rx = 80 + (i * 37) % 120;
-      const rlen = 40 + (i * 23) % 80;
-      const col = colors[i % colors.length];
-      ctx.fillStyle = col + '55';
-      ctx.fillRect(rx, ry, rlen, 13);
-      ctx.strokeStyle = col; ctx.lineWidth = 1;
-      ctx.strokeRect(rx, ry, rlen, 13);
-      // Small colored base squares
-      for (let b = 0; b < Math.floor(rlen / 8); b++) {
-        const bc = colors[(i + b) % colors.length];
-        ctx.fillStyle = bc + '99';
-        ctx.fillRect(rx + b * 8 + 1, ry + 2, 6, 9);
-      }
-    }
-    const scrollX = (t * animSpeed * 0.5) % (W - 200);
-    ctx.fillStyle = '#00ff9933';
-    ctx.fillRect(80 + scrollX, readY0 - 5, 3, 8 * 20 + 10);
-    ctx.fillStyle = '#00ff99'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Hybridization capture + deep sequencing', cx, cy + 95);
-    ctx.fillStyle = '#8888b0'; ctx.font = '9px monospace';
-    ctx.fillText('Target enrichment of nuclear + mtDNA \u2014 alignment to reference', cx, cy + 110);
-  } else if (phase === 4) {
-    // Admixture pie chart: 98% modern, 2% Neanderthal
-    const pr = 55;
-    const neanAngle = (2 / 100) * Math.PI * 2;
-    // Modern human slice (98%)
-    ctx.beginPath();
-    ctx.moveTo(cx - 80, cy);
-    ctx.arc(cx - 80, cy, pr, -Math.PI / 2 + neanAngle, -Math.PI / 2 + Math.PI * 2, false);
-    ctx.closePath();
-    ctx.fillStyle = '#8888b033'; ctx.fill();
-    ctx.strokeStyle = '#8888b0'; ctx.lineWidth = 1.5; ctx.stroke();
-    // Neanderthal slice (2%)
-    ctx.beginPath();
-    ctx.moveTo(cx - 80, cy);
-    ctx.arc(cx - 80, cy, pr, -Math.PI / 2, -Math.PI / 2 + neanAngle, false);
-    ctx.closePath();
-    ctx.fillStyle = '#ffd70088'; ctx.fill();
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('2% Nean.', cx - 80, cy - pr - 10);
-    ctx.fillStyle = '#8888b0'; ctx.font = '9px monospace';
-    ctx.fillText('98% Modern', cx - 80, cy + pr + 16);
-    // D-statistic bar
-    const bx2 = cx + 60, bw = 80, bh = 12;
-    ctx.fillStyle = '#07071e'; ctx.fillRect(bx2, cy - 60, bw, 5 * bh + 10);
-    ctx.strokeStyle = '#88aaff44'; ctx.lineWidth = 1; ctx.strokeRect(bx2, cy - 60, bw, 5 * bh + 10);
-    const dvals = [0.052, 0.048, 0.051, 0.049, 0.053];
-    const pops = ['EUR','EAS','SAS','AME','OCE'];
-    dvals.forEach((d, i) => {
-      const barW = d * bw * 12;
-      ctx.fillStyle = '#88aaff66';
-      ctx.fillRect(bx2 + 2, cy - 55 + i * bh, barW, bh - 2);
-      ctx.fillStyle = '#88aaff'; ctx.font = '7px monospace'; ctx.textAlign = 'left';
-      ctx.fillText(pops[i], bx2 + 4, cy - 55 + i * bh + 8);
-      ctx.fillStyle = '#88aaff99'; ctx.textAlign = 'right';
-      ctx.fillText('D=' + d.toFixed(3), bx2 + bw - 2, cy - 55 + i * bh + 8);
-    });
-    ctx.fillStyle = '#88aaff'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('D-statistics by population', cx + 100, cy + 60);
-    ctx.fillStyle = '#8888b0'; ctx.font = '9px monospace';
-    ctx.fillText('Authentication + archaic admixture inference', cx, cy + 100);
-  }
-}
-
-document.getElementById('btn-play').addEventListener('click', function() {
-  animRunning = !animRunning;
-  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
-  if (animRunning) requestAnimationFrame(animLoop);
-});
-document.getElementById('btn-reset').addEventListener('click', () => {
-  animT = 0; animRunning = false;
-  document.getElementById('btn-play').textContent = '\u25b6 Play';
-  mechDraw(animPhase, 0);
-});
-document.getElementById('phase-slider').addEventListener('input', function() {
-  animPhase = +this.value;
-  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
-  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
-  animT = 0; mechDraw(animPhase, 0);
-});
-document.getElementById('speed-slider').addEventListener('input', function() {
-  animSpeed = +this.value;
-  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
-});
-
-function animLoop() {
-  if (!animRunning) return;
-  animT += animSpeed;
-  mechDraw(animPhase, animT);
-  requestAnimationFrame(animLoop);
-}
-mechDraw(0, 0);
-
-// ── Build mechanism panels ───────────────────────────────────────────────────
-(function buildMechPanels() {
-  const container = document.getElementById('mech-panels');
-  const panelData = [
-    { title:'Phase 0 \u2014 Ancient Specimen', color:'#ffd700', mol:null,
-      body:'Fossil hominin bones and teeth are the source material. <strong>Vindija Cave (Croatia)</strong> specimens yielded the key Neanderthal genomes. Petrous bone (inner ear) provides highest aDNA yield due to dense hydroxyapatite matrix limiting microbial colonization. Cold, dry, or permafrost environments dramatically improve preservation. Tropical specimens rarely exceed 10,000 years viability.'},
-    { title:'Phase 1 \u2014 aDNA Extraction', color:'#00e5ff', mol:'adna_damage',
-      body:'<strong>Bleach pre-treatment</strong> removes surface contamination. Bone powder is decalcified in EDTA, then proteinase K digestion solubilizes cells. Silica-based extraction captures short, damaged DNA fragments. The hallmark of authentic aDNA: <strong>C\u2192T deamination</strong> at 5\u2019 ends (~30% at position 1) and G\u2192A at 3\u2019 ends, short fragment sizes (~50 bp modal), and phylogenetic consistency with archaic hominins.'},
-    { title:'Phase 2 \u2014 Library Preparation', color:'#aa77ff', mol:null,
-      body:'<strong>End repair</strong> blunts ragged aDNA ends. <strong>A-tailing</strong> adds 3\u2019 adenines for adapter ligation. Double-stranded or single-stranded library protocols \u2014 ssDNA libraries have 10-100\u00d7 higher sensitivity for very degraded material. Optional <strong>UDG (uracil-DNA glycosylase)</strong> treatment removes deaminated cytosines, eliminating the damage signal but reducing authentication. Half-UDG libraries preserve the 5\u2019 damage signal for authentication.'},
-    { title:'Phase 3 \u2014 Hybridization Capture + Sequencing', color:'#00ff99', mol:null,
-      body:'Ancient samples are overwhelmingly contaminated \u2014 typically >90% microbial/modern. <strong>Hybridization capture</strong> with biotinylated baits enriches target loci (1240K SNP array, mtDNA, or whole genome). Streptavidin pulldown concentrates endogenous DNA. Shotgun sequencing or targeted enrichment depending on preservation. Illumina short-read sequencing is ideal for aDNA due to fragment size compatibility.'},
-    { title:'Phase 4 \u2014 Authentication + Admixture Inference', color:'#88aaff', mol:'admixture_tool',
-      body:'<strong>mapDamage2.0</strong> quantifies the C\u2192T damage profile and estimates contamination. <strong>ANGSD</strong> calls genotypes accounting for aDNA error rates. <strong>ADMIXTOOLS2</strong> computes D-statistics (ABBA-BABA) revealing ~2% Neanderthal ancestry in all non-Africans \u2014 proof of archaic introgression. f3 and f4 statistics model admixture graphs. qpAdm quantifies multi-source ancestry from archaeological populations.'},
-  ];
-
-  panelData.forEach(p => {
-    const panel = document.createElement('div');
-    panel.className = 'mech-panel';
-    const titleDiv = document.createElement('div');
-    titleDiv.className = 'mech-panel-title';
-    const bar = document.createElement('div');
-    bar.className = 'mech-panel-bar';
-    bar.style.background = p.color;
-    const titleText = document.createElement('span');
-    titleText.textContent = p.title;
-    titleText.style.color = p.color;
-    titleDiv.appendChild(bar);
-    titleDiv.appendChild(titleText);
-    const body = document.createElement('div');
-    body.className = 'mech-panel-body';
-    // Parse simple <strong> tags safely (developer-controlled content)
-    const parts = p.body.split(/<strong>|<\/strong>/);
-    parts.forEach((part, i) => {
-      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
-      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
-    });
-    // Molecule chip if specified
-    if (p.mol) {
-      const chipRow = document.createElement('div');
-      chipRow.className = 'mol-chips-row';
-      const mol = MODULE_MOLS.find(m => m.id === p.mol);
-      if (mol) {
-        const chip = document.createElement('span');
-        chip.className = 'mol-chip' + (mol.type.toLowerCase().includes('protein') ? ' protein' : mol.type.toLowerCase().includes('lipid') ? ' lipid' : ' small');
-        chip.style.borderColor = mol.color + '44';
-        chip.style.color = mol.color;
-        chip.textContent = mol.icon + ' ' + mol.name;
-        chip.style.cursor = 'pointer';
-        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
-        chipRow.appendChild(chip);
-        body.appendChild(chipRow);
-      }
-    }
-    panel.appendChild(titleDiv);
-    panel.appendChild(body);
-    container.appendChild(panel);
-  });
-})();
-
-// ── Build molecules tab ───────────────────────────────────────────────────────
-(function buildMolGrid() {
-  const grid = document.getElementById('mol-grid');
-  MODULE_MOLS.forEach(mol => {
-    const card = document.createElement('div');
-    card.className = 'mol-card';
-    card.style.setProperty('--accent', mol.color);
-    card.style.borderColor = mol.color + '33';
-    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
-    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
-    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
-    const role = document.createElement('div'); role.className = 'mol-card-role';
-    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
-    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
-    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
-    grid.appendChild(card);
-  });
-})();
-
-// ── Build story tab ────────────────────────────────────────────────────────────
-(function buildStory() {
-  const container = document.getElementById('story-content');
-  const events = [
-    {year:'1984', text:'P\u00e4\u00e4bo (Uppsala), as an undergraduate, secretly extracts DNA from a 2,400-year-old Egyptian mummy. Publishes in Nature 1985. The paper is retracted/revised \u2014 modern contamination likely. But P\u00e4\u00e4bo\'s interest is ignited.'},
-    {year:'1989', text:'Wilson lab (UC Berkeley): first systematic ancient DNA extraction from extinct animals (quagga, thylacine). P\u00e4\u00e4bo joins Wilson, establishes that ancient DNA fragments are short and damaged.'},
-    {year:'1997', text:'P\u00e4\u00e4bo (Leipzig MPI): first Neanderthal mitochondrial DNA from Feldhofer Cave (Germany). The mtDNA is ~4% divergent from modern human \u2014 confirming Neanderthals and humans are separate species. Nature 1997. Proves ancient hominin DNA is recoverable.'},
-    {year:'2006', text:'P\u00e4\u00e4bo\'s group + Rubin lab: first Neanderthal nuclear DNA fragments (1 million bp). Proof of concept that nuclear genome sequencing is feasible.'},
-    {year:'2010', text:'Green et al. (Science): Draft Neanderthal nuclear genome from three specimens at ~1.3\u00d7 coverage. ABBA-BABA test developed. Non-Africans carry ~2-4% Neanderthal ancestry. "One of the greatest surprises in human genetics."'},
-    {year:'2010', text:'Reich, P\u00e4\u00e4bo: Denisovan finger phalanx from Denisova cave. Mitochondrial DNA is extremely divergent (~4% from modern + Neanderthal). First discovery of a new archaic hominin from genomic data alone \u2014 no fossils.'},
-    {year:'2012\u20132022', text:'Vindija 33.19 at 52\u00d7 coverage (2013). Altai Neanderthal genome at 30\u00d7 (2014). EPAS1 Tibetan altitude adaptation from Denisovans confirmed (2014). Denisovan admixture in Melanesians confirmed (4-6%). Ancient pathogen genomics (Black Death Yersinia pestis, 1918 flu).'},
-    {year:'2022', text:'Nobel Prize in Physiology or Medicine to Svante P\u00e4\u00e4bo "for his discoveries concerning the genomes of extinct hominins and human evolution." The only Nobel awarded for a single scientist\'s computational genomics work.'},
-  ];
-  events.forEach(ev => {
-    const block = document.createElement('div');
-    block.className = 'story-block panel-card';
-    const yearTag = document.createElement('span');
-    yearTag.className = 'story-year-tag';
-    yearTag.textContent = ev.year;
-    const text = document.createElement('span');
-    text.style.fontSize = '.76rem';
-    text.style.color = '#8888b0';
-    text.style.lineHeight = '1.6';
-    text.textContent = ev.text;
-    block.appendChild(yearTag);
-    block.appendChild(text);
-    container.appendChild(block);
-  });
-})();
-
-// ── Build frontiers tab ───────────────────────────────────────────────────────
-(function buildFrontiers() {
-  const container = document.getElementById('frontiers-content');
-  const groups = [
-    { title:'Ancient Proteomics (2024\u20132026)', items:[
-      {title:'Collagen sequences survive >1.7 million years \u2014 Homo antecessor 2020', body:'Welker et al. (Nature 2020): Homo antecessor dental enamel collagen from Atapuerca (1.77 Ma) \u2014 first hominin protein beyond 400,000-year aDNA barrier. Mass spectrometry protein sequencing from calcified proteins. Reveals Homo antecessor as sister to Neanderthal+Denisovan+modern human clade. Palaeoproteomics now extends the temporal window of hominin phylogenetics beyond aDNA.'},
-      {title:'Tropical aDNA: finally cracking the barrier', body:'Tropical heat was thought to preclude aDNA. Skoglund et al. (Science 2012): first ancient genomes from tropical Africa (~3,000 years old). Advances: petrous bone (inner ear) contains highest DNA yield; dental calculus provides aDNA in tropical environments. Earliest tropical aDNA now reaching 15,000+ years. Will finally allow African population history during and after the Out-of-Africa migration.'},
-    ]},
-    { title:'AI & Computational Approaches', items:[
-      {title:'AI contamination filtering and damage pattern modeling', body:'HAPI (Hidden Ancestry Probabilistic Inference): deep learning model trained on >10,000 ancient genomes to estimate modern contamination from damage patterns. Outperforms mapDamage2.0 at low coverage (<2\u00d7). ATLAS: Bayesian genotype caller for aDNA accounting for damage patterns. Snakemake-based automated aDNA processing pipelines (EAGER 2.0) now process new ancient genomes in 24h vs weeks.'},
-    ]},
-    { title:'Open Questions', items:[
-      {title:'Denisovan diversity \u2014 who were they?', body:'Denisovan paleogenomics has fewer specimens than Neanderthals. Known genomes: Altai Denisovan (Siberia), Xiahe mandible (Tibetan Plateau, ~160 kya), Denisova cave remains with variable levels of Denisovan ancestry in modern Southeast Asians. Denisovan diversity may rival that of Neanderthals across Asia \u2014 but the fossil record is essentially nonexistent. DNA-inferred morphological predictions using polygenic scores are being attempted.'},
-    ]},
-    { title:'Industry & Translational Applications', items:[
-      {title:'Neanderthal variants and COVID-19 severity (OAS1, LZTFL1)', body:'Neanderthal-introgressed OAS1 splice-site variant (rs10774671) on chromosome 12 \u2014 protective against severe COVID-19 (OR ~0.5). OAS1 produces a prenylated isoform with stronger antiviral activity. Neanderthal chromosome 3 haplotype (LZTFL1/SLC6A20/FYCO1) associated with increased COVID-19 severity \u2014 risk variant present in ~16% of Europeans. Demonstrates real-time relevance of archaic introgression to contemporary disease susceptibility.'},
-    ]},
-  ];
-  groups.forEach(g => {
-    const section = document.createElement('div');
-    section.className = 'frontier-group';
-    const title = document.createElement('div');
-    title.className = 'frontier-group-title';
-    title.textContent = g.title;
-    section.appendChild(title);
-    g.items.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'frontier-item';
-      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
-      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
-      card.appendChild(it); card.appendChild(ib);
-      section.appendChild(card);
-    });
-    container.appendChild(section);
-  });
-})();
-
-// ── Build right sidebar ────────────────────────────────────────────────────────
-(function buildRsidebar() {
-  // Key molecules list
-  const molList = document.getElementById('rsb-mols');
-  MODULE_MOLS.forEach(mol => {
-    const item = document.createElement('div');
-    item.className = 'rsb-mol-item';
-    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
-    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
-    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
-    const id = document.createElement('div'); id.className = 'rsb-mol-id';
-    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
-    nameCol.appendChild(name); nameCol.appendChild(id);
-    item.appendChild(icon); item.appendChild(nameCol);
-    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
-    molList.appendChild(item);
-  });
-
-  // Papers
-  const paperList = document.getElementById('rsb-papers');
-  const papers = [
-    {year:'1997', journal:'Nature', title:'Neanderthal mtDNA sequence from Feldhofer Cave (P\u00e4\u00e4bo)'},
-    {year:'2010', journal:'Science', title:'A Draft Sequence of the Neandertal Genome (Green, P\u00e4\u00e4bo)'},
-    {year:'2014', journal:'Science', title:'EPAS1 Tibetan altitude adaptation from Denisovans'},
-  ];
-  papers.forEach(p => {
-    const item = document.createElement('div');
-    item.className = 'ref-item';
-    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
-    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
-    item.appendChild(year); item.appendChild(title);
-    paperList.appendChild(item);
-  });
-})();
-
-// ── Connections canvas (force-directed network) ───────────────────────────────
-function drawConnections() {
-  const cv = document.getElementById('conn-canvas');
-  cv.width = cv.offsetWidth || 600;
-  cv.height = cv.offsetHeight || 360;
-  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
-  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
-
-  const nodes = [
-    {id:'paleo', x:W*.5,  y:H*.5,  r:32, color:'#ffd700', label:'Paleo-\ngenomics',  sub:'2022'},
-    {id:'mrna',  x:W*.75, y:H*.28, r:24, color:'#44ffcc', label:'mRNA\nVaccines',    sub:'2023'},
-    {id:'mir',   x:W*.25, y:H*.28, r:24, color:'#aa77ff', label:'microRNA',          sub:'2024'},
-    {id:'circ',  x:W*.8,  y:H*.7,  r:22, color:'#ffd700', label:'Circadian',         sub:'2017'},
-    {id:'hif',   x:W*.2,  y:H*.7,  r:22, color:'#ff8844', label:'HIF\nEPAS1',        sub:'2019'},
-    {id:'trp',   x:W*.5,  y:H*.88, r:20, color:'#ff8844', label:'TRPM8\nDenisovan',  sub:'2021'},
-  ];
-  const edges = [
-    {from:'paleo',to:'mrna', color:'#44ffcc55',label:'mRNA vaccine for\narchaic pathogens'},
-    {from:'paleo',to:'mir',  color:'#aa77ff55',label:'miRNA regulation\nof introgressed genes'},
-    {from:'paleo',to:'circ', color:'#ffd70055',label:'circadian\narchaic variants'},
-    {from:'paleo',to:'hif',  color:'#ff884455',label:'EPAS1 introgression\nTibetan altitude'},
-    {from:'paleo',to:'trp',  color:'#ff884455',label:'TRPM8 cold gene\nfrom Denisovans'},
-  ];
-
-  const ns = {}; nodes.forEach(n => ns[n.id] = n);
-  edges.forEach(e => {
-    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
-    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
-    if(e.label) {
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
-      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
-    }
-  });
-  nodes.forEach(n => {
-    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-    ctx.fillStyle = n.color + '22'; ctx.fill();
-    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
-    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
-    ctx.fillText(n.sub, n.x, n.y+n.r+11);
-  });
-}
-</script>
-
-<!-- Shared infrastructure (load after module data) -->
-<script src="../shared/glossary-data.js"></script>
-<script src="../shared/glossary-tooltip.js"></script>
-<script src="../shared/molecule-modal.js"></script>
-<script src="../shared/auto-start.js"></script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2022 · Paleogenomics — kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/module-layout.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css"></head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">2022</span>
+    <div class="mod-title">Paleogenomics</div>
+  </div>
+  <div class="mod-laureates">Svante P&#228;&#228;bo &#8212; Nobel Prize in Physiology or Medicine 2022</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">Genomics</span>
+    <span class="mod-tag" style="color:#88aaff;border-color:#88aaff44;background:#88aaff10">Computational Bio</span>
+    <span class="mod-tag" style="color:#00e5ff;border-color:#00e5ff44;background:#00e5ff10">Evolutionary Biology</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; Ancient Specimen</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">aDNA damage</span><span class="ctrl-val" id="lay-dmg">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">Admixture</span><span class="ctrl-val" id="lay-adm">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">D-statistics</span><span class="ctrl-val" id="lay-dst">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> C&rarr;T deamination at 5&prime; ends authenticates ancient DNA. ~2% Neanderthal ancestry in all non-Africans detected by ABBA-BABA test.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; Ancient Specimen: Bone/Tooth Fragment (Vindija Cave)</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2022/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel Prize 2022 &#8212; official announcement</div>
+      </a>
+      <a href="https://reich.hms.harvard.edu/software" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">reich.hms.harvard.edu</div>
+        <div class="ref-title">Reich Lab ADMIXTOOLS</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
+// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'adna_auth':  { term:'aDNA authentication criteria', level:'res', def:'Requirements to validate ancient DNA: (1) C\u2192T deamination at 5\u2019 ends (>10%); (2) short fragment lengths (<100 bp modal); (3) phylogenetically reasonable sequence; (4) independent replication; (5) contamination estimate <1% (mtDNA) or <5% (nuclear) by quantifying modern human reads. Strict clean-room extraction in dedicated aDNA facilities mandatory \u2014 modern DNA contamination is ubiquitous.' },
+  'introgression': { term:'Archaic introgression', level:'res', def:'Gene flow from archaic hominins (Neanderthals, Denisovans) into anatomically modern humans after divergence ~600 kya. Detected by D-statistics (ABBA-BABA test). ~2% Neanderthal in non-Africans; ~4-6% Denisovan in Melanesians. Adaptive variants retained: EPAS1 (Tibetan altitude), OAS1 (antiviral), TRPM8 (cold sensation). Deleterious variants purged by purifying selection over 50,000 years.' },
+  'beagle_imputation': { term:'Genotype imputation (BEAGLE)', level:'res', def:'Statistical method inferring unobserved genotypes from nearby SNPs using reference haplotype panels. Essential for low-coverage ancient genomes. BEAGLE 5.4 can impute ~7M SNPs from 0.1\u00d7 coverage aDNA, enabling GWAS of ancient samples. Critical for connecting archaic introgression variants to modern disease risk (e.g., Neanderthal OAS1 splice variant protective against COVID-19).' },
+  'abba_baba': { term:'ABBA-BABA test (D-statistics)', level:'res', def:'Statistical test for gene flow. Tests whether test population (H3) shares more derived alleles with Neanderthal (H2) than outgroup (H4). D = (ABBA - BABA)/(ABBA + BABA). Significantly positive D = Neanderthal gene flow into H3. Green et al. 2010: D \u2248 0.05 across non-Africans. Implemented in ADMIXTOOLS2.' },
+});
+
+// ── Module molecules data ────────────────────────────────────────────────────
+window.MODULE_MOLS = [
+  { id:'adna_damage', icon:'\ud83e\uddec', color:'#ffd700', type:'aDNA \u00b7 authentication pattern', is_protein:false,
+    name:'Ancient DNA Damage Pattern', sub:'Cytosine deamination signature at fragment ends',
+    badges:[{text:'C\u2192T deamination',color:'#ffd700'},{text:'Authentication marker',color:'#00e5ff'},{text:'5\u2019 + 3\u2019 overhangs',color:'#aa77ff'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3938849/',
+    mechanism:'Ancient DNA undergoes hydrolytic cytosine deamination, particularly at single-stranded overhangs. At 5\u2019 ends: C\u2192T substitutions at high frequency (15-35% at position 1, declining over 10-15 bp). At 3\u2019 ends: G\u2192A substitutions (complementary to C\u2192T on antisense). Fragments are typically <100 bp (modal ~50 bp) due to hydrolytic nicking of the phosphodiester backbone. This damage pattern is the PRIMARY authentication signature distinguishing ancient from modern contaminating DNA. UDG (uracil-DNA glycosylase) treatment removes the damaged uracils before library preparation \u2014 eliminating the signal in "half-UDG" libraries at a cost of losing authentication information.',
+    properties:{'Fragmentation':'Mean ~50 bp (permafrost better than tropical)','5\u2019 C\u2192T':'~30% at position 1','3\u2019 G\u2192A':'~20% at position 1','Age range':'Viable: 50,000+ years (permafrost); <10,000 (tropical)','Contamination':'Modern DNA typically >90% of extract (human skeletal)','Authentication':'mapDamage2.0 software models damage pattern'},
+    property_flags:{},
+    interaction:{ title:'aDNA Damage Pattern \u2014 Authentication via Deamination',
+      nodes:[
+        {id:'ssdna', x:100,y:80, r:22,color:'#ffd700',label:'ssDNA overhang',sub:'hydrolytic'},
+        {id:'cyt',   x:280,y:80, r:22,color:'#00e5ff',label:'Cytosine',    sub:'at 5\u2019 end'},
+        {id:'ura',   x:440,y:80, r:22,color:'#ff8844',label:'Uracil',      sub:'deamination'},
+        {id:'mapdmg',x:280,y:260,r:26,color:'#00ff99',label:'mapDamage2\nprofile',sub:'authentication'},
+        {id:'udg',   x:100,y:260,r:22,color:'#aa77ff',label:'UDG treatment',sub:'removes signal'},
+      ],
+      edges:[
+        {from:'ssdna',to:'cyt',  color:'#ffd700',label:'exposed at\n5\u2019 overhang',    dashed:false},
+        {from:'cyt',  to:'ura',  color:'#ff8844',label:'deamination\n(C\u2192U\u2192T in PCR)',dashed:false},
+        {from:'ura',  to:'mapdmg',color:'#00ff99',label:'reads as T\nin sequencing',  dashed:false},
+        {from:'udg',  to:'ura',  color:'#aa77ff',label:'removes U\nbefore library',   dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2010',journal:'Science',impact:'IF 56',title:'A Draft Sequence of the Neandertal Genome (Green et al., P\u00e4\u00e4bo)',abstract:'Vindija Neanderthal genome at 1.3\u00d7 coverage. First Neanderthal nuclear genome. 2-4% Neanderthal admixture in non-Africans detected via D-statistics.'},
+      {year:'2013',journal:'Nature',impact:'IF 69',title:'A High-Coverage Genome Sequence from an Archaic Denisovan Individual',abstract:'Meyer et al.: Denisovan finger phalanx \u2014 30\u00d7 coverage from a single bone. ~4-6% Denisovan ancestry in Melanesians.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udd35',name:'mapDamage2.0',role:'aDNA authentication software\nmodels damage pattern',    id:'bioinformatics'},
+      {icon:'\ud83d\udfe1',name:'ADMIXTOOLS2',  role:'D-statistics\narchaic admixture detection',              id:'bioinformatics'},
+    ]
+  },
+  { id:'neanderthal_genome', icon:'\ud83e\uddb4', color:'#00e5ff', type:'Paleogenomic \u00b7 nuclear genome', is_protein:false,
+    name:'Neanderthal Nuclear Genome', sub:'Vindija 33.19 \u00b7 ~52\u00d7 coverage (2013)',
+    badges:[{text:'~1.8-2.6% in non-Africans',color:'#00e5ff'},{text:'Vindija Neanderthal',color:'#ffd700'},{text:'Nobel 2022',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3709582/',
+    mechanism:'Vindija 33.19 \u2014 ~50,000-year-old Neanderthal specimen from Croatia. 2013 high-coverage (~52\u00d7) genome sequenced from mitochondria-depleted extract. Libraries prepared with single-stranded protocol (superior sensitivity). Contamination estimate <1% using mtDNA divergence metrics. The high-coverage genome enabled precise quantification of Neanderthal ancestry in living humans (~1.8-2.6% in non-Africans), identification of ~50,000 SNPs distinguishing modern humans from Neanderthals (regulatory regions enriched), and discovery of Neanderthal-introgressed adaptive variants (EPAS1, OAS1, TRPM8).',
+    properties:{'Source':'Vindija cave, Croatia (Vi33.19)','Coverage':'~52\u00d7 (2013 Pr\u00fcfer et al.)','Divergence':'600,000 years MCA from modern humans','Neanderthal admixture in modern humans':'~1.8-2.6% non-Africans','Modern human-specific changes':'>50,000 SNPs vs Neanderthal','Key introgressed traits':'EPAS1 (altitude), OAS1 (antiviral), MC1R (pigmentation)'},
+    property_flags:{},
+    interaction:{ title:'Neanderthal Admixture D-Statistics',
+      nodes:[
+        {id:'afr',   x:80, y:220,r:22,color:'#8888b0',label:'African\n(H1)',    sub:'no admixture'},
+        {id:'naf',   x:200,y:80, r:24,color:'#00e5ff',label:'Non-African\n(H2)',sub:'2% Nean.'},
+        {id:'nean',  x:380,y:80, r:26,color:'#ffd700',label:'Neanderthal\n(H3)',sub:'archaic'},
+        {id:'anc',   x:280,y:220,r:22,color:'#aa77ff',label:'Ancestral\nHuman', sub:'~600 kya div.'},
+        {id:'chimp', x:480,y:220,r:20,color:'#ff8844',label:'Chimpanzee\n(H4)', sub:'outgroup'},
+      ],
+      edges:[
+        {from:'anc', to:'afr',  color:'#8888b0',label:'African branch',         dashed:false},
+        {from:'anc', to:'nean', color:'#ffd700',label:'~600 kya\ndivergence',   dashed:false},
+        {from:'nean',to:'naf',  color:'#00e5ff',label:'~2% gene flow\n~50 kya', dashed:false},
+        {from:'chimp',to:'anc', color:'#ff884488',label:'outgroup',             dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2010',journal:'Science',impact:'IF 56',title:'A Draft Sequence of the Neandertal Genome',abstract:'Green et al.: first complete Neanderthal genome. Proof of Neanderthal-modern human gene flow. D-statistics developed. Nobel 2022.'},
+      {year:'2013',journal:'Nature',impact:'IF 69',title:'The complete genome sequence of a Neanderthal from the Altai Mountains',abstract:'Pr\u00fcfer et al.: 52\u00d7 Altai Neanderthal genome. Detailed analysis of Neanderthal-modern human differences and shared ancestry with Denisovans.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udc8e',name:'Denisovan Genome', role:'Sister archaic group\n4-6% in Melanesians',        id:'Denisova cave'},
+      {icon:'\ud83e\uddec',name:'EPAS1 allele',     role:'Tibetan altitude adaptation\nfrom Denisovan',      id:'EPAS1 gene'},
+    ]
+  },
+  { id:'epas1_allele', icon:'\ud83c\udfd4\ufe0f', color:'#aa77ff', type:'Introgressed variant \u00b7 Adaptive', is_protein:false,
+    name:'EPAS1 Tibetan Altitude Allele', sub:'Denisovan introgression \u00b7 HIF-2\u03b1 gene',
+    badges:[{text:'Denisovan introgression',color:'#aa77ff'},{text:'>80% in Tibetans',color:'#ffd700'},{text:'Adaptive variant',color:'#00ff99'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3875136/',
+    mechanism:'EPAS1 (Endothelial PAS domain protein 1 = HIF-2\u03b1) encodes a key oxygen-sensing transcription factor. Tibetan EPAS1 haplotype: frequency >80% in Tibetans vs <1% in Han Chinese. Effect: reduced erythropoietic response to hypoxia \u2014 prevents polycythemia and related cardiovascular risk at altitude. The Tibetan EPAS1 haplotype is derived from Denisovan introgression (~50,000 ya) \u2014 detected because it clusters with Denisovan genome sequence rather than any modern human lineage. One of the clearest examples of adaptive introgression: archaic variant providing immediate fitness advantage in a new environment.',
+    properties:{'Gene':'EPAS1 (HIF-2\u03b1, chromosome 2p21)','Tibetan allele frequency':'>80%','Han Chinese frequency':'<1%','Effect':'Reduced erythropoiesis at altitude \u2014 protective','Origin':'Denisovan introgression (~50 kya)','Identification':'Nielsen et al. Nature Genetics 2010; Huerta-Sanchez Science 2014'},
+    property_flags:{'Tibetan allele frequency':'good'},
+    interaction:{ title:'EPAS1 Adaptive Introgression: Denisovan \u2192 Tibetan',
+      nodes:[
+        {id:'den',  x:100,y:80, r:24,color:'#aa77ff',label:'Denisovan',  sub:'archaic human'},
+        {id:'tib',  x:300,y:80, r:26,color:'#ffd700',label:'Tibetan\nancestor',sub:'~50 kya gene flow'},
+        {id:'epas', x:300,y:240,r:26,color:'#ff8844',label:'EPAS1\nHIF-2\u03b1',   sub:'O2 sensor'},
+        {id:'ery',  x:100,y:360,r:22,color:'#ff4444',label:'Erythropoiesis',  sub:'\u2193 at altitude'},
+        {id:'fit',  x:480,y:280,r:22,color:'#00ff99',label:'Tibetan\nfitness',sub:'no polycythemia'},
+      ],
+      edges:[
+        {from:'den', to:'tib', color:'#aa77ff',label:'introgression\n~50 kya',              dashed:false},
+        {from:'tib', to:'epas',color:'#ffd700',label:'Denisovan EPAS1\nhaplotype (>80%)',    dashed:false},
+        {from:'epas',to:'ery', color:'#ff4444',label:'reduced\nEPO response',               dashed:false},
+        {from:'ery', to:'fit', color:'#00ff99',label:'protects vs\npolycythemia',            dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2010',journal:'Nat Genet',impact:'IF 38',title:'Altitude adaptation in Tibetans caused by introgression of Denisovan-like DNA',abstract:'Nielsen et al.: EPAS1 selection in Tibetans. Strong positive selection signal \u2014 highest reported sweep statistic in humans.'},
+      {year:'2014',journal:'Science',  impact:'IF 56',title:'Altitude adaptation in Tibet caused by introgression of Denisovan-like DNA',abstract:'Huerta-Sanchez et al.: Tibetan EPAS1 haplotype clusters with Denisovan genome \u2014 archaic introgression confirmed as source of adaptation.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe0',name:'HIF-2\u03b1 (EPAS1)',  role:'O2-sensing TF\nsame gene, different allele',id:'PDB: see HIF module'},
+      {icon:'\ud83d\udd35',name:'Neanderthal OAS1',role:'COVID-19 protective\n2\u2019 antiviral variant',  id:'OAS1 gene chr12'},
+    ]
+  },
+  { id:'admixture_tool', icon:'\ud83d\udcbb', color:'#88aaff', type:'Bioinformatics \u00b7 Population genomics', is_protein:false,
+    name:'D-statistics / ADMIXTOOLS2', sub:'Ancient DNA admixture analysis pipeline',
+    badges:[{text:'ABBA-BABA test',color:'#88aaff'},{text:'Archaic admixture detection',color:'#ffd700'},{text:'Population genomics',color:'#00e5ff'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://reich.hms.harvard.edu/software',
+    mechanism:'D-statistics (ABBA-BABA test): tests for excess shared derived alleles between H3 (test population) and Neanderthal vs African outgroup. D = (ABBA \u2212 BABA)/(ABBA + BABA). Significantly positive D = Neanderthal gene flow. ADMIXTOOLS2 (Reich lab): maximum likelihood estimation of ancestry proportions and admixture graphs. f3 and f4 statistics for population graph fitting. qpAdm for multi-source admixture. Critical for reconstructing human population history from aDNA \u2014 now applied to thousands of ancient genomes from archaeological contexts.',
+    properties:{'Method':'ABBA-BABA D-statistics','Detects':'Excess shared derived alleles between test+archaic vs outgroup','ADMIXTOOLS2':'ML ancestry proportions; f3/f4 statistics','Neanderthal admixture in non-Africans':'~2%','Denisovan admixture in Melanesians':'~4-6%','Key paper':'Green et al. Science 2010'},
+    property_flags:{},
+    interaction:{ title:'D-Statistics: ABBA-BABA Test Logic',
+      nodes:[
+        {id:'h1',   x:80, y:200,r:22,color:'#8888b0',label:'H1\nAfrican',    sub:'no flow'},
+        {id:'h2',   x:230,y:100,r:24,color:'#00e5ff',label:'H2\nNon-African',sub:'test'},
+        {id:'h3',   x:380,y:100,r:24,color:'#ffd700',label:'H3\nNeanderthal',sub:'archaic'},
+        {id:'h4',   x:460,y:240,r:20,color:'#ff8844',label:'H4\nChimp',      sub:'outgroup'},
+        {id:'abba', x:200,y:320,r:22,color:'#00ff99',label:'ABBA\nD>0',      sub:'gene flow detected'},
+      ],
+      edges:[
+        {from:'h2',  to:'h3', color:'#00e5ff',label:'excess shared\nderived alleles',  dashed:false},
+        {from:'h1',  to:'h2', color:'#8888b0',label:'sister\ngroup',                   dashed:false},
+        {from:'h4',  to:'h3', color:'#ff884488',label:'outgroup',                      dashed:true},
+        {from:'h2',  to:'abba',color:'#00ff99',label:'D = (ABBA-BABA)\n/(ABBA+BABA)', dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2010',journal:'Science',impact:'IF 56',title:'A Draft Sequence of the Neandertal Genome (Green, Reich, P\u00e4\u00e4bo)',abstract:'D-statistics first described. Non-African populations share 1-4% more derived alleles with Neanderthals than Africans do \u2014 proof of admixture.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83e\uddec',name:'mapDamage2.0', role:'aDNA authentication\ndamage modeling',           id:'bioinformatics'},
+      {icon:'\ud83d\udd35',name:'BEAGLE imputation',role:'Low-coverage aDNA\ngenotype imputation',       id:'bioinformatics'},
+    ]
+  },
+];
+
+// ── Mechanism phases ─────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 Ancient Specimen: Bone/Tooth Fragment (Vindija Cave)', color:'#ffd700', mol:null},
+  {label:'Phase 1 \u2014 aDNA Extraction: Silica Spin Column + Bleach Pre-Treatment', color:'#00e5ff', mol:'adna_damage'},
+  {label:'Phase 2 \u2014 Library Preparation: End Repair + Adapter Ligation + UDG', color:'#aa77ff', mol:null},
+  {label:'Phase 3 \u2014 Hybridization Capture + Deep Sequencing', color:'#00ff99', mol:null},
+  {label:'Phase 4 \u2014 Authentication + Admixture Inference (mapDamage + ADMIXTOOLS)', color:'#88aaff', mol:'admixture_tool'},
+];
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+document.querySelectorAll('.mod-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panelId = 'panel-' + tab.dataset.tab;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (tab.dataset.tab === 'connections') drawConnections();
+  });
+});
+
+// ── Mechanism canvas animation ────────────────────────────────────────────────
+const mechCv = document.getElementById('mech-canvas');
+let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
+
+// roundRect polyfill for older browsers
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    r = Math.min(r, w/2, h/2);
+    this.beginPath();
+    this.moveTo(x+r, y);
+    this.lineTo(x+w-r, y); this.arcTo(x+w, y, x+w, y+r, r);
+    this.lineTo(x+w, y+h-r); this.arcTo(x+w, y+h, x+w-r, y+h, r);
+    this.lineTo(x+r, y+h); this.arcTo(x, y+h, x, y+h-r, r);
+    this.lineTo(x, y+r); this.arcTo(x, y, x+r, y, r);
+    this.closePath();
+  };
+}
+
+function mechDraw(phase, t) {
+  const cv = mechCv;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 280;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+
+  // ── shared helpers ────────────────────────────────────────────────────────
+  function pal_label(x, y, text, color, align) {
+    ctx.save();
+    ctx.font = '8px monospace'; ctx.textAlign = align || 'center';
+    const mw = ctx.measureText(text).width;
+    const tx = align === 'left' ? x : align === 'right' ? x - mw : x - mw/2;
+    ctx.fillStyle = 'rgba(7,7,30,0.75)';
+    ctx.fillRect(tx - 2, y - 9, mw + 4, 13);
+    ctx.fillStyle = color || '#ffffff'; ctx.textAlign = align || 'center';
+    ctx.fillText(text, x, y);
+    ctx.restore();
+  }
+  function pal_glow(x, y, r, color) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.fillStyle = g; ctx.fill();
+  }
+  function drawBone(bx, by) {
+    // Cortical bone cross-section: shaft + epiphyseal knobs
+    ctx.fillStyle = '#c8a84433';
+    ctx.beginPath();
+    ctx.roundRect(bx - 55, by - 16, 110, 32, 16);
+    ctx.fill();
+    ctx.strokeStyle = '#c8a844'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(bx - 55, by - 16, 110, 32, 16);
+    ctx.stroke();
+    // Compact bone texture lines (Haversian canal suggestion)
+    ctx.strokeStyle = '#c8a84444'; ctx.lineWidth = 0.8;
+    for (let i = -35; i <= 35; i += 12) {
+      ctx.beginPath();
+      ctx.moveTo(bx + i, by - 11); ctx.lineTo(bx + i + 3, by + 11); ctx.stroke();
+    }
+    // Epiphyseal knobs
+    [bx - 55, bx + 55].forEach(kx => {
+      ctx.beginPath(); ctx.arc(kx, by, 18, 0, Math.PI*2);
+      ctx.fillStyle = '#c8a84422'; ctx.fill();
+      ctx.strokeStyle = '#c8a844'; ctx.lineWidth = 2; ctx.stroke();
+    });
+    // Medullary cavity (inner space)
+    ctx.beginPath(); ctx.roundRect(bx - 40, by - 9, 80, 18, 9);
+    ctx.fillStyle = '#0a0a1e88'; ctx.fill();
+    ctx.strokeStyle = '#c8a84444'; ctx.lineWidth = 1; ctx.stroke();
+  }
+
+  if (phase === 0) {
+    // ── Cave specimen: bone cross-section + hydroxyapatite aDNA preservation ──
+    const pulse = (Math.sin(t * 0.04) + 1) / 2;
+
+    // Cave wall / rock context
+    const gCave = ctx.createLinearGradient(0, 0, 0, H);
+    gCave.addColorStop(0, '#0d0d1a');
+    gCave.addColorStop(1, '#1a1206');
+    ctx.fillStyle = gCave; ctx.fillRect(0, 0, W, H);
+    // Rock texture dots
+    for (let i = 0; i < 40; i++) {
+      const rx = 20 + (i * 97 % (W - 40)), ry = 15 + (i * 53 % (H - 60));
+      ctx.beginPath(); ctx.arc(rx, ry, 2, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(180,160,100,0.08)'; ctx.fill();
+    }
+
+    // Bone fragment (center)
+    drawBone(cx, cy - 20);
+    pal_label(cx, cy - 20 + 2, 'Petrous bone (inner ear)', '#c8a844cc');
+    pal_label(cx, cy + 8, 'dense hydroxyapatite matrix', '#c8a84488');
+
+    // aDNA molecules trapped in matrix (illustrated as tiny dsDNA fragments)
+    const dnaPositions = [[cx - 28, cy - 28],[cx + 10, cy - 32],[cx - 10, cy - 14],[cx + 30, cy - 20]];
+    dnaPositions.forEach(([dx, dy], i) => {
+      const glow = (Math.sin(t * 0.05 + i * 1.3) + 1) / 2;
+      // double helix mini
+      ctx.strokeStyle = 'rgba(0,229,255,' + (0.3 + glow * 0.4) + ')'; ctx.lineWidth = 1;
+      for (let s = 0; s < 2; s++) {
+        ctx.beginPath();
+        for (let k = 0; k <= 8; k++) {
+          const hx = dx - 8 + k * 2;
+          const hy = dy + (s === 0 ? 1 : -1) * 3 * Math.sin(k * Math.PI / 4);
+          k === 0 ? ctx.moveTo(hx, hy) : ctx.lineTo(hx, hy);
+        }
+        ctx.stroke();
+      }
+    });
+
+    // Specimen data panel
+    const panX = cx + 90, panY = cy - 60;
+    ctx.fillStyle = '#0d0d2244'; ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.roundRect(panX, panY, 160, 80, 5); ctx.fill(); ctx.stroke();
+    pal_label(panX + 80, panY + 14, 'Vindija Cave, Croatia', '#ffd700cc');
+    pal_label(panX + 80, panY + 28, 'Specimen: Vi33.19', '#ffd700aa');
+    pal_label(panX + 80, panY + 42, '~50,000 years BP', '#88aaff');
+    pal_label(panX + 80, panY + 56, 'Neanderthal (H. neanderthalensis)', '#88aaffaa');
+    pal_label(panX + 80, panY + 70, 'Permafrost \u2192 aDNA preserved', '#00ff9988');
+
+    // Decay indicator (left panel)
+    const decX = 40, decY = cy - 40;
+    ctx.strokeStyle = '#88448844'; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let i = 0; i <= 60; i++) {
+      const dx2 = decX + i * 2;
+      const dy2 = decY + 60 * (1 - Math.exp(-i * 0.04));
+      i === 0 ? ctx.moveTo(dx2, dy2) : ctx.lineTo(dx2, dy2);
+    }
+    ctx.stroke();
+    pal_label(decX + 60, decY + 45, 'DNA decay vs. age', '#88448888', 'left');
+    pal_label(decX + 10, decY - 8, 'intact', '#00ff9988', 'left');
+    pal_label(decX + 10, decY + 55, 'degraded', '#ff444488', 'left');
+
+    pal_label(cx, H - 22, 'Petrous bone: highest aDNA yield \u2014 dense mineral matrix limits microbial access', '#ffd700cc');
+    pal_label(cx, H - 8, 'Cold/dry/permafrost environments extend viability; tropics rarely exceed 10,000 yr', '#ffd70088');
+
+  } else if (phase === 1) {
+    // ── aDNA damage landscape: C→T deamination + size distribution ──
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+
+    // Fragment length distribution histogram (left)
+    const histX = 35, histY = H - 52, histW = 180, histH = 120;
+    const fragSizes = [5, 12, 28, 45, 38, 22, 10, 6, 4, 3];  // ~50bp modal
+    const maxBar = Math.max(...fragSizes);
+    ctx.strokeStyle = '#88aaffaa'; ctx.lineWidth = 1;
+    // axes
+    ctx.beginPath(); ctx.moveTo(histX, histY - histH); ctx.lineTo(histX, histY); ctx.lineTo(histX + histW, histY); ctx.stroke();
+    fragSizes.forEach((h, i) => {
+      const bw = histW / fragSizes.length - 2;
+      const bx2 = histX + i * (histW / fragSizes.length) + 1;
+      const bh2 = (h / maxBar) * histH;
+      const col = i === 4 ? '#00ff99' : '#88aaff';
+      ctx.fillStyle = col + '55'; ctx.strokeStyle = col + 'aa'; ctx.lineWidth = 1;
+      ctx.fillRect(bx2, histY - bh2, bw, bh2);
+      ctx.strokeRect(bx2, histY - bh2, bw, bh2);
+    });
+    pal_label(histX + histW/2, histY + 12, '~50 bp modal fragment length', '#88aaff');
+    pal_label(histX + histW/2, histY + 24, 'size (10-bp bins)', '#88aaff88');
+
+    // aDNA fragments with damage endpoints (right side)
+    const fragY = [70, 98, 126, 154, 182];
+    const fragLens = [88, 60, 110, 70, 50];
+    const fragX0 = cx + 20;
+    fragY.forEach((fy, i) => {
+      const fl = fragLens[i];
+      const fx = fragX0;
+      // Backbone (degraded = muted)
+      ctx.strokeStyle = '#8888b055'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(fx + fl, fy); ctx.stroke();
+      // Base positions along backbone
+      const nBases = Math.floor(fl / 7);
+      for (let b = 2; b < nBases - 2; b++) {
+        const baseX = fx + b * 7 + 3;
+        const isC = (b + i) % 5 === 0;
+        ctx.beginPath(); ctx.arc(baseX, fy, 2, 0, Math.PI*2);
+        ctx.fillStyle = isC ? '#ffd70066' : '#8888b033'; ctx.fill();
+      }
+      // 5' C→T damage (left end) — animated glow
+      const dAlpha = 0.4 + pulse * 0.5;
+      pal_glow(fx, fy, 10, 'rgba(255,215,0,' + dAlpha + ')');
+      ctx.beginPath(); ctx.arc(fx, fy, 4.5, 0, Math.PI*2);
+      ctx.fillStyle = '#ffd700cc'; ctx.fill();
+      ctx.fillStyle = '#110d00'; ctx.font = 'bold 5px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('C\u2192T', fx, fy + 1.8);
+
+      // 3' G→A damage (right end)
+      pal_glow(fx + fl, fy, 10, 'rgba(0,229,255,' + dAlpha * 0.8 + ')');
+      ctx.beginPath(); ctx.arc(fx + fl, fy, 4.5, 0, Math.PI*2);
+      ctx.fillStyle = '#00e5ffcc'; ctx.fill();
+      ctx.fillStyle = '#001a22'; ctx.font = 'bold 5px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('G\u2192A', fx + fl, fy + 1.8);
+    });
+
+    // Legend
+    pal_label(fragX0 + 65, 54, "5' C\u2192T deamination", '#ffd700cc');
+    pal_label(fragX0 + 160, 54, "3' G\u2192A deamination", '#00e5ffcc');
+
+    // C→T frequency bar at 5' position
+    const dmgX = W - 120, dmgY = 80;
+    pal_label(dmgX + 45, dmgY - 8, 'Damage %', '#ffd70088');
+    const dmgVals = [28, 18, 9, 5, 3, 2];
+    dmgVals.forEach((v, i) => {
+      const bx2 = dmgX + i * 18;
+      const bh2 = v * 1.8;
+      ctx.fillStyle = '#ffd700' + Math.round(100 + v * 4).toString(16).padStart(2, '0');
+      ctx.fillRect(bx2, dmgY + 90 - bh2, 14, bh2);
+    });
+    pal_label(dmgX + 45, dmgY + 96, "pos 1\u21926", '#ffd70088');
+
+    pal_label(cx, H - 22, 'Hallmark aDNA: C\u2192T at 5\u2019 (~30% pos 1), G\u2192A at 3\u2019, short fragments', '#ffd700cc');
+    pal_label(cx, H - 8, 'Deamination rate authenticates aDNA vs contamination; mapDamage2.0 quantifies', '#ffd70088');
+
+  } else if (phase === 2) {
+    // ── Library preparation workflow: end repair → A-tail → ligation ──
+    const pulse = (Math.sin(t * 0.04) + 1) / 2;
+    const prog = (t % 400) / 400;  // cycle progress for workflow animation
+
+    // Step boxes with connecting arrows
+    const steps = [
+      {x: 50,  label:'Damaged\naDNA',   color:'#ffd700', sub:'blunt ends'},
+      {x: 180, label:'End\nrepair',     color:'#00e5ff', sub:'T4 PNK'},
+      {x: 310, label:'A-tailing',       color:'#aa77ff', sub:"3' dA overhang"},
+      {x: 440, label:'Adapter\nligation',color:'#00ff99',sub:'P5/P7 barcodes'},
+      {x: 570, label:'Amplify\nIndex',  color:'#ff8844', sub:'PCR enrichment'},
+    ];
+    const stepY = cy - 20;
+    steps.forEach(({x, label, color, sub}, i) => {
+      // Box
+      const active = prog > i / (steps.length - 1) - 0.05;
+      ctx.fillStyle = active ? color + '18' : '#ffffff06';
+      ctx.strokeStyle = active ? color + 'cc' : '#ffffff22';
+      ctx.lineWidth = active ? 1.5 : 1;
+      ctx.beginPath(); ctx.roundRect(x - 45, stepY - 22, 90, 44, 5); ctx.fill(); ctx.stroke();
+      // Label lines
+      const lLines = label.split('\n');
+      lLines.forEach((ll, li) => {
+        ctx.fillStyle = active ? color + 'ee' : '#ffffff44';
+        ctx.font = 'bold 7.5px monospace'; ctx.textAlign = 'center';
+        ctx.fillText(ll, x, stepY - 6 + li * 12);
+      });
+      ctx.fillStyle = active ? color + '88' : '#ffffff22';
+      ctx.font = '7px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(sub, x, stepY + 16);
+
+      // Arrow to next
+      if (i < steps.length - 1) {
+        const arActive = prog > (i + 0.5) / (steps.length - 1) - 0.05;
+        ctx.strokeStyle = arActive ? steps[i+1].color + '88' : '#ffffff22';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(x + 45, stepY); ctx.lineTo(steps[i+1].x - 45, stepY); ctx.stroke();
+        const mx = (x + 45 + steps[i+1].x - 45) / 2;
+        ctx.beginPath(); ctx.moveTo(mx - 4, stepY - 4); ctx.lineTo(mx + 1, stepY); ctx.lineTo(mx - 4, stepY + 4); ctx.stroke();
+      }
+    });
+
+    // Fragment detail panels (bottom)
+    // Before: damaged fragment
+    const bfX = 95, bfY = cy + 40;
+    ctx.strokeStyle = '#8888b066'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(bfX - 35, bfY); ctx.lineTo(bfX + 35, bfY); ctx.stroke();
+    pal_glow(bfX - 35, bfY, 8, 'rgba(255,68,68,0.4)');
+    pal_glow(bfX + 35, bfY, 8, 'rgba(255,68,68,0.4)');
+    ctx.beginPath(); ctx.arc(bfX - 35, bfY, 3.5, 0, Math.PI*2); ctx.fillStyle = '#ff4444aa'; ctx.fill();
+    ctx.beginPath(); ctx.arc(bfX + 35, bfY, 3.5, 0, Math.PI*2); ctx.fillStyle = '#ff4444aa'; ctx.fill();
+    pal_label(bfX, bfY + 18, 'ragged ends', '#ff444488');
+
+    // After: adapter-ligated
+    const afX = 490, afY = cy + 40;
+    ctx.strokeStyle = '#00e5ff88'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(afX - 35, afY); ctx.lineTo(afX + 35, afY); ctx.stroke();
+    // Adapters (colored brackets)
+    [[afX - 35, '#aa77ff'], [afX + 35, '#00ff99']].forEach(([ax, col]) => {
+      ctx.fillStyle = col + '66'; ctx.strokeStyle = col; ctx.lineWidth = 1.5;
+      ctx.fillRect(ax - (ax < afX ? 14 : 0), afY - 8, 14, 16);
+      ctx.strokeRect(ax - (ax < afX ? 14 : 0), afY - 8, 14, 16);
+    });
+    pal_label(afX, afY + 18, 'P5 + P7 adapters', '#00ff9988');
+
+    // UDG branch (optional treatment)
+    const udgX = cx, udgY = cy + 60;
+    ctx.strokeStyle = '#ff884488'; ctx.lineWidth = 1; ctx.setLineDash([3, 2]);
+    ctx.beginPath(); ctx.moveTo(310, stepY + 22); ctx.lineTo(udgX, udgY); ctx.stroke();
+    ctx.setLineDash([]);
+    pal_label(udgX, udgY + 12, 'UDG treatment (removes C\u2192U) \u2014 optional', '#ff884488');
+    pal_label(udgX, udgY + 24, 'removes damage signal but reduces contamination', '#ff884422');
+
+    pal_label(cx, H - 22, 'ssDNA protocols yield 10\u2013100\u00d7 more library molecules from degraded aDNA', '#aa77ffcc');
+    pal_label(cx, H - 8, 'Half-UDG: preserve 5\u2019 C\u2192T for authentication while cleaning 3\u2019 end', '#aa77ff88');
+
+  } else if (phase === 3) {
+    // ── Hybridization capture: biotinylated baits + read pile-up ──
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+
+    // Reference genome bar (center-bottom)
+    const refY = H - 60, refX = 40, refW = W - 80;
+    ctx.fillStyle = '#88aaffcc';
+    ctx.fillRect(refX, refY, refW, 12);
+    pal_label(refX + refW/2, refY - 8, 'Reference genome (GRCh38)', '#88aaff');
+
+    // Bait probe (biotinylated ssDNA hanging down from top)
+    const baitPositions = [120, 220, 340, 460, 560];
+    baitPositions.forEach(bx2 => {
+      // Streptavidin bead at top
+      pal_glow(bx2, 22, 16, 'rgba(255,140,0,0.35)');
+      ctx.beginPath(); ctx.arc(bx2, 22, 8, 0, Math.PI*2);
+      ctx.fillStyle = '#ff8c00cc'; ctx.fill();
+      ctx.strokeStyle = '#ff8c00'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#221100'; ctx.font = '5px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('SA', bx2, 24.5);
+      // Biotin-probe tether
+      ctx.strokeStyle = '#ffd70066'; ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 2]);
+      ctx.beginPath(); ctx.moveTo(bx2, 30); ctx.lineTo(bx2, refY - 5); ctx.stroke();
+      ctx.setLineDash([]);
+    });
+    pal_label(cx, 38, 'Streptavidin-biotinylated bait probes', '#ff8c00cc');
+
+    // aDNA reads piling up on reference (reads scroll across)
+    const readColors = ['#00ff99','#00e5ff','#ffd700','#aa77ff','#ff8844','#88aaff','#ff4488'];
+    const readDefs = [
+      {rx: 80, rl: 70}, {rx: 130, rl: 55}, {rx: 190, rl: 80}, {rx: 260, rl: 65},
+      {rx: 320, rl: 45}, {rx: 360, rl: 90}, {rx: 430, rl: 60}, {rx: 490, rl: 75},
+      {rx: 540, rl: 50}, {rx: 580, rl: 85},
+    ];
+    readDefs.forEach(({rx, rl}, i) => {
+      const lane = i % 5;
+      const ry = refY - 30 - lane * 20;
+      const col = readColors[i % readColors.length];
+      ctx.fillStyle = col + '44';
+      ctx.fillRect(rx, ry, rl, 14);
+      ctx.strokeStyle = col + 'aa'; ctx.lineWidth = 1;
+      ctx.strokeRect(rx, ry, rl, 14);
+      // Base colors
+      for (let b = 0; b < Math.floor(rl / 8); b++) {
+        ctx.fillStyle = readColors[(i + b) % readColors.length] + '77';
+        ctx.fillRect(rx + b * 8 + 1, ry + 2, 6, 10);
+      }
+      // C→T mismatch indicator on some reads
+      if (i % 3 === 0) {
+        ctx.beginPath(); ctx.arc(rx + 3, ry + 7, 4, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(255,215,0,0.7)'; ctx.fill();
+      }
+    });
+
+    // Scrolling read coverage bar (animated)
+    const scrollX = (t * 0.4) % (refW - 40);
+    ctx.fillStyle = '#00ff9922';
+    ctx.fillRect(refX + scrollX, refY - 120, 4, 110);
+
+    // Enrichment stats (right panel)
+    const statX = W - 145;
+    ctx.fillStyle = '#07071e55'; ctx.strokeStyle = '#ffffff11'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.roundRect(statX, cy - 50, 130, 95, 4); ctx.fill(); ctx.stroke();
+    pal_label(statX + 65, cy - 38, 'Capture statistics', '#88aaffcc');
+    [
+      ['Endogenous DNA:', '2\u20138%', '#00ff99'],
+      ['After capture:', '40\u201380%', '#ffd700'],
+      ['Coverage depth:', '20\u201350\u00d7', '#aa77ff'],
+      ['Bait set:', '1240K SNPs', '#00e5ff'],
+    ].forEach(([k, v, col], i) => {
+      pal_label(statX + 10, cy - 20 + i * 16, k, '#ffffff88', 'left');
+      pal_label(statX + 125, cy - 20 + i * 16, v, col, 'right');
+    });
+
+    pal_label(cx, H - 22, 'Hybridization capture: 10\u201350\u00d7 enrichment of target loci from microbial matrix', '#00ff99cc');
+    pal_label(cx, H - 8, 'Illumina short reads ideal for aDNA fragment size; paired-end resolves overlaps', '#00ff9988');
+
+  } else if (phase === 4) {
+    // ── Authentication + admixture: ABBA-BABA + D-statistics ──
+    const pulse = (Math.sin(t * 0.04) + 1) / 2;
+
+    // Admixture pie chart (left)
+    const pieX = cx - 120, pieY = cy - 10, pieR = 52;
+    const neanFrac = 0.02;
+    const neanAngle = neanFrac * Math.PI * 2;
+
+    // Modern human slice (98%)
+    ctx.beginPath();
+    ctx.moveTo(pieX, pieY);
+    ctx.arc(pieX, pieY, pieR, -Math.PI/2 + neanAngle, -Math.PI/2 + Math.PI*2);
+    ctx.closePath();
+    ctx.fillStyle = '#8888b033'; ctx.fill();
+    ctx.strokeStyle = '#8888b0'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    // Neanderthal slice (2%) — pulsing glow
+    pal_glow(pieX, pieY - pieR * 0.5, 20, 'rgba(255,215,0,' + (0.15 + pulse*0.2) + ')');
+    ctx.beginPath();
+    ctx.moveTo(pieX, pieY);
+    ctx.arc(pieX, pieY, pieR, -Math.PI/2, -Math.PI/2 + neanAngle);
+    ctx.closePath();
+    ctx.fillStyle = '#ffd70088'; ctx.fill();
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
+
+    pal_label(pieX, pieY - pieR - 12, '2% Neanderthal', '#ffd700cc');
+    pal_label(pieX, pieY + pieR + 14, '98% Modern human', '#8888b0cc');
+
+    // ABBA-BABA tree diagram (center)
+    const treeX = cx + 10, treeY = 35;
+    ctx.strokeStyle = '#ffffff33'; ctx.lineWidth = 1.5;
+    // Root
+    ctx.beginPath(); ctx.moveTo(treeX, treeY + 140); ctx.lineTo(treeX, treeY + 100); ctx.stroke();
+    // Out-group branch
+    ctx.beginPath(); ctx.moveTo(treeX, treeY + 140); ctx.lineTo(treeX - 80, treeY + 60);
+    ctx.lineTo(treeX - 80, treeY + 30); ctx.stroke();
+    // (Nean, EUR) clade
+    ctx.beginPath(); ctx.moveTo(treeX, treeY + 100); ctx.lineTo(treeX + 60, treeY + 60);
+    ctx.lineTo(treeX + 60, treeY + 30); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(treeX, treeY + 100); ctx.lineTo(treeX - 20, treeY + 60); ctx.stroke();
+
+    // Admixture arrow (Nean → EUR)
+    ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 2; ctx.setLineDash([4, 2]);
+    ctx.beginPath();
+    ctx.moveTo(treeX - 20, treeY + 55);
+    ctx.bezierCurveTo(treeX + 15, treeY + 10, treeX + 45, treeY + 10, treeX + 60, treeY + 55);
+    ctx.stroke(); ctx.setLineDash([]);
+    pal_label(treeX + 20, treeY + 5, 'gene flow', '#ffd70088');
+
+    // Leaf labels
+    pal_label(treeX - 80, treeY + 18, 'Chimpanzee\n(outgroup)', '#8888b0cc');
+    pal_label(treeX - 20, treeY + 46, 'Neanderthal', '#ffd700cc');
+    pal_label(treeX + 60, treeY + 18, 'Non-African\n(EUR/EAS)', '#88aaffcc');
+
+    // D-statistics bar chart (right)
+    const dX = W - 190, dY = cy - 50;
+    ctx.fillStyle = '#07071e44'; ctx.strokeStyle = '#88aaff22'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.roundRect(dX - 5, dY, 175, 120, 4); ctx.fill(); ctx.stroke();
+    pal_label(dX + 80, dY + 12, 'D-statistics (ABBA-BABA)', '#88aaffcc');
+    const dvals = [0.052, 0.048, 0.051, 0.049, 0.053];
+    const pops =  ['EUR', 'EAS', 'SAS', 'AME', 'OCE'];
+    const maxD = 0.06;
+    dvals.forEach((d, i) => {
+      const bx2 = dX + 5;
+      const by2 = dY + 24 + i * 18;
+      const bw2 = (d / maxD) * 130;
+      const col = d > 0.05 ? '#ffd700' : '#88aaff';
+      ctx.fillStyle = col + '44';
+      ctx.fillRect(bx2, by2, bw2, 13);
+      ctx.strokeStyle = col + 'aa'; ctx.lineWidth = 1;
+      ctx.strokeRect(bx2, by2, bw2, 13);
+      pal_label(bx2 + 18, by2 + 9, pops[i], '#ffffffbb', 'left');
+      pal_label(dX + 150, by2 + 9, 'D=' + d.toFixed(3), col + 'cc', 'right');
+    });
+    // Significance line
+    ctx.strokeStyle = '#ffd70066'; ctx.lineWidth = 1; ctx.setLineDash([3, 2]);
+    const sigX = dX + 5 + (0.05 / maxD) * 130;
+    ctx.beginPath(); ctx.moveTo(sigX, dY + 24); ctx.lineTo(sigX, dY + 24 + 5 * 18); ctx.stroke();
+    ctx.setLineDash([]);
+    pal_label(sigX + 2, dY + 130, 'D>0.05', '#ffd70066', 'left');
+
+    pal_label(cx, H - 22, 'ABBA-BABA test: D>0 in all non-Africans \u2192 Neanderthal gene flow confirmed', '#88aaffcc');
+    pal_label(cx, H - 8, 'f3/f4 statistics, qpAdm: 2% Neanderthal in EUR; higher in Melanesians (Denisovan)', '#88aaff88');
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  animT = 0; animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
+  animT = 0; mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ───────────────────────────────────────────────────
+(function buildMechPanels() {
+  const container = document.getElementById('mech-panels');
+  const panelData = [
+    { title:'Phase 0 \u2014 Ancient Specimen', color:'#ffd700', mol:null,
+      body:'Fossil hominin bones and teeth are the source material. <strong>Vindija Cave (Croatia)</strong> specimens yielded the key Neanderthal genomes. Petrous bone (inner ear) provides highest aDNA yield due to dense hydroxyapatite matrix limiting microbial colonization. Cold, dry, or permafrost environments dramatically improve preservation. Tropical specimens rarely exceed 10,000 years viability.'},
+    { title:'Phase 1 \u2014 aDNA Extraction', color:'#00e5ff', mol:'adna_damage',
+      body:'<strong>Bleach pre-treatment</strong> removes surface contamination. Bone powder is decalcified in EDTA, then proteinase K digestion solubilizes cells. Silica-based extraction captures short, damaged DNA fragments. The hallmark of authentic aDNA: <strong>C\u2192T deamination</strong> at 5\u2019 ends (~30% at position 1) and G\u2192A at 3\u2019 ends, short fragment sizes (~50 bp modal), and phylogenetic consistency with archaic hominins.'},
+    { title:'Phase 2 \u2014 Library Preparation', color:'#aa77ff', mol:null,
+      body:'<strong>End repair</strong> blunts ragged aDNA ends. <strong>A-tailing</strong> adds 3\u2019 adenines for adapter ligation. Double-stranded or single-stranded library protocols \u2014 ssDNA libraries have 10-100\u00d7 higher sensitivity for very degraded material. Optional <strong>UDG (uracil-DNA glycosylase)</strong> treatment removes deaminated cytosines, eliminating the damage signal but reducing authentication. Half-UDG libraries preserve the 5\u2019 damage signal for authentication.'},
+    { title:'Phase 3 \u2014 Hybridization Capture + Sequencing', color:'#00ff99', mol:null,
+      body:'Ancient samples are overwhelmingly contaminated \u2014 typically >90% microbial/modern. <strong>Hybridization capture</strong> with biotinylated baits enriches target loci (1240K SNP array, mtDNA, or whole genome). Streptavidin pulldown concentrates endogenous DNA. Shotgun sequencing or targeted enrichment depending on preservation. Illumina short-read sequencing is ideal for aDNA due to fragment size compatibility.'},
+    { title:'Phase 4 \u2014 Authentication + Admixture Inference', color:'#88aaff', mol:'admixture_tool',
+      body:'<strong>mapDamage2.0</strong> quantifies the C\u2192T damage profile and estimates contamination. <strong>ANGSD</strong> calls genotypes accounting for aDNA error rates. <strong>ADMIXTOOLS2</strong> computes D-statistics (ABBA-BABA) revealing ~2% Neanderthal ancestry in all non-Africans \u2014 proof of archaic introgression. f3 and f4 statistics model admixture graphs. qpAdm quantifies multi-source ancestry from archaeological populations.'},
+  ];
+
+  panelData.forEach(p => {
+    const panel = document.createElement('div');
+    panel.className = 'mech-panel';
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    const bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    const titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+    const body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    // Parse simple <strong> tags safely (developer-controlled content)
+    const parts = p.body.split(/<strong>|<\/strong>/);
+    parts.forEach((part, i) => {
+      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
+      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
+    });
+    // Molecule chip if specified
+    if (p.mol) {
+      const chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      const mol = MODULE_MOLS.find(m => m.id === p.mol);
+      if (mol) {
+        const chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.type.toLowerCase().includes('protein') ? ' protein' : mol.type.toLowerCase().includes('lipid') ? ' lipid' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  const grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(mol => {
+    const card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
+    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
+    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
+    const role = document.createElement('div'); role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
+    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
+    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ────────────────────────────────────────────────────────────
+(function buildStory() {
+  const container = document.getElementById('story-content');
+  const events = [
+    {year:'1984', text:'P\u00e4\u00e4bo (Uppsala), as an undergraduate, secretly extracts DNA from a 2,400-year-old Egyptian mummy. Publishes in Nature 1985. The paper is retracted/revised \u2014 modern contamination likely. But P\u00e4\u00e4bo\'s interest is ignited.'},
+    {year:'1989', text:'Wilson lab (UC Berkeley): first systematic ancient DNA extraction from extinct animals (quagga, thylacine). P\u00e4\u00e4bo joins Wilson, establishes that ancient DNA fragments are short and damaged.'},
+    {year:'1997', text:'P\u00e4\u00e4bo (Leipzig MPI): first Neanderthal mitochondrial DNA from Feldhofer Cave (Germany). The mtDNA is ~4% divergent from modern human \u2014 confirming Neanderthals and humans are separate species. Nature 1997. Proves ancient hominin DNA is recoverable.'},
+    {year:'2006', text:'P\u00e4\u00e4bo\'s group + Rubin lab: first Neanderthal nuclear DNA fragments (1 million bp). Proof of concept that nuclear genome sequencing is feasible.'},
+    {year:'2010', text:'Green et al. (Science): Draft Neanderthal nuclear genome from three specimens at ~1.3\u00d7 coverage. ABBA-BABA test developed. Non-Africans carry ~2-4% Neanderthal ancestry. "One of the greatest surprises in human genetics."'},
+    {year:'2010', text:'Reich, P\u00e4\u00e4bo: Denisovan finger phalanx from Denisova cave. Mitochondrial DNA is extremely divergent (~4% from modern + Neanderthal). First discovery of a new archaic hominin from genomic data alone \u2014 no fossils.'},
+    {year:'2012\u20132022', text:'Vindija 33.19 at 52\u00d7 coverage (2013). Altai Neanderthal genome at 30\u00d7 (2014). EPAS1 Tibetan altitude adaptation from Denisovans confirmed (2014). Denisovan admixture in Melanesians confirmed (4-6%). Ancient pathogen genomics (Black Death Yersinia pestis, 1918 flu).'},
+    {year:'2022', text:'Nobel Prize in Physiology or Medicine to Svante P\u00e4\u00e4bo "for his discoveries concerning the genomes of extinct hominins and human evolution." The only Nobel awarded for a single scientist\'s computational genomics work.'},
+  ];
+  events.forEach(ev => {
+    const block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    const yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    const text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  const container = document.getElementById('frontiers-content');
+  const groups = [
+    { title:'Ancient Proteomics (2024\u20132026)', items:[
+      {title:'Collagen sequences survive >1.7 million years \u2014 Homo antecessor 2020', body:'Welker et al. (Nature 2020): Homo antecessor dental enamel collagen from Atapuerca (1.77 Ma) \u2014 first hominin protein beyond 400,000-year aDNA barrier. Mass spectrometry protein sequencing from calcified proteins. Reveals Homo antecessor as sister to Neanderthal+Denisovan+modern human clade. Palaeoproteomics now extends the temporal window of hominin phylogenetics beyond aDNA.'},
+      {title:'Tropical aDNA: finally cracking the barrier', body:'Tropical heat was thought to preclude aDNA. Skoglund et al. (Science 2012): first ancient genomes from tropical Africa (~3,000 years old). Advances: petrous bone (inner ear) contains highest DNA yield; dental calculus provides aDNA in tropical environments. Earliest tropical aDNA now reaching 15,000+ years. Will finally allow African population history during and after the Out-of-Africa migration.'},
+    ]},
+    { title:'AI & Computational Approaches', items:[
+      {title:'AI contamination filtering and damage pattern modeling', body:'HAPI (Hidden Ancestry Probabilistic Inference): deep learning model trained on >10,000 ancient genomes to estimate modern contamination from damage patterns. Outperforms mapDamage2.0 at low coverage (<2\u00d7). ATLAS: Bayesian genotype caller for aDNA accounting for damage patterns. Snakemake-based automated aDNA processing pipelines (EAGER 2.0) now process new ancient genomes in 24h vs weeks.'},
+    ]},
+    { title:'Open Questions', items:[
+      {title:'Denisovan diversity \u2014 who were they?', body:'Denisovan paleogenomics has fewer specimens than Neanderthals. Known genomes: Altai Denisovan (Siberia), Xiahe mandible (Tibetan Plateau, ~160 kya), Denisova cave remains with variable levels of Denisovan ancestry in modern Southeast Asians. Denisovan diversity may rival that of Neanderthals across Asia \u2014 but the fossil record is essentially nonexistent. DNA-inferred morphological predictions using polygenic scores are being attempted.'},
+    ]},
+    { title:'Industry & Translational Applications', items:[
+      {title:'Neanderthal variants and COVID-19 severity (OAS1, LZTFL1)', body:'Neanderthal-introgressed OAS1 splice-site variant (rs10774671) on chromosome 12 \u2014 protective against severe COVID-19 (OR ~0.5). OAS1 produces a prenylated isoform with stronger antiviral activity. Neanderthal chromosome 3 haplotype (LZTFL1/SLC6A20/FYCO1) associated with increased COVID-19 severity \u2014 risk variant present in ~16% of Europeans. Demonstrates real-time relevance of archaic introgression to contemporary disease susceptibility.'},
+    ]},
+  ];
+  groups.forEach(g => {
+    const section = document.createElement('div');
+    section.className = 'frontier-group';
+    const title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'frontier-item';
+      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
+      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
+      card.appendChild(it); card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ────────────────────────────────────────────────────────
+(function buildRsidebar() {
+  // Key molecules list
+  const molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(mol => {
+    const item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
+    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
+    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
+    const id = document.createElement('div'); id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name); nameCol.appendChild(id);
+    item.appendChild(icon); item.appendChild(nameCol);
+    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  // Papers
+  const paperList = document.getElementById('rsb-papers');
+  const papers = [
+    {year:'1997', journal:'Nature', title:'Neanderthal mtDNA sequence from Feldhofer Cave (P\u00e4\u00e4bo)'},
+    {year:'2010', journal:'Science', title:'A Draft Sequence of the Neandertal Genome (Green, P\u00e4\u00e4bo)'},
+    {year:'2014', journal:'Science', title:'EPAS1 Tibetan altitude adaptation from Denisovans'},
+  ];
+  papers.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
+    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
+    item.appendChild(year); item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas (force-directed network) ───────────────────────────────
+function drawConnections() {
+  const cv = document.getElementById('conn-canvas');
+  const W = cv.offsetWidth || 600, H = 360;
+
+  const nodes = [
+    {id:'paleo', x:W*.5,  y:H*.5,  r:32, color:'#ffd700', label:'Paleo-\ngenomics',  sub:'2022'},
+    {id:'mrna',  x:W*.75, y:H*.28, r:24, color:'#44ffcc', label:'mRNA\nVaccines',    sub:'2023'},
+    {id:'mir',   x:W*.25, y:H*.28, r:24, color:'#aa77ff', label:'microRNA',          sub:'2024'},
+    {id:'circ',  x:W*.8,  y:H*.7,  r:22, color:'#ffd700', label:'Circadian',         sub:'2017'},
+    {id:'hif',   x:W*.2,  y:H*.7,  r:22, color:'#ff8844', label:'HIF\nEPAS1',        sub:'2019'},
+    {id:'trp',   x:W*.5,  y:H*.88, r:20, color:'#ff8844', label:'TRPM8\nDenisovan',  sub:'2021'},
+  ];
+  const edges = [
+    {from:'paleo',to:'mrna', color:'#44ffcc55',label:'mRNA vaccine for\narchaic pathogens'},
+    {from:'paleo',to:'mir',  color:'#aa77ff55',label:'miRNA regulation\nof introgressed genes'},
+    {from:'paleo',to:'circ', color:'#ffd70055',label:'circadian\narchaic variants'},
+    {from:'paleo',to:'hif',  color:'#ff884455',label:'EPAS1 introgression\nTibetan altitude'},
+    {from:'paleo',to:'trp',  color:'#ff884455',label:'TRPM8 cold gene\nfrom Denisovans'},
+  ];
+
+  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/connections.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+<script src="../shared/mech-theater.js" defer></script>
+</body>
+</html>

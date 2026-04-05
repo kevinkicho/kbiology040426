@@ -34,7 +34,11 @@ def pdb(pid):
     url = f"https://data.rcsb.org/rest/v1/core/entry/{pid.upper()}"
     try:
         r = requests.get(url, headers=HDR, timeout=10); r.raise_for_status(); d = r.json()
-        res = (d.get("refine",[{}])[0] or {}).get("ls_d_res_high","") if d.get("refine") else ""
+        ref = (d.get("refine") or [{}])[0] or {}
+        res = ref.get("ls_dres_high") or ref.get("ls_d_res_high","")
+        # EM structures use em_3d_reconstruction instead
+        if not res and d.get("em3d_reconstruction"):
+            res = (d["em3d_reconstruction"][0] or {}).get("resolution","")
     except Exception as e:
         print(f"  WARN PDB {pid}: {e}"); d = {}; res = ""
     time.sleep(0.4)

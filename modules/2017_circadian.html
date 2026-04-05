@@ -5,80 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2017 · Circadian Clocks — kbiology Nobel Frontier</title>
 <link rel="stylesheet" href="../shared/theme.css">
-<link rel="stylesheet" href="../shared/molecule-modal.css">
-<style>
-/* Module layout */
-.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
-.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
-.back-link:hover{color:var(--green);border-color:var(--green)}
-.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
-.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
-.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
-.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
-.mod-tab:hover{color:var(--text);background:var(--bg3)}
-.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
-.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
-.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
-
-/* Body layout */
-.mod-body{display:flex;min-height:calc(100vh - 100px)}
-.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
-.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-
-/* Tab panels */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Canvas */
-.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
-.canvas-wrap canvas{display:block;width:100%;height:240px}
-.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
-
-/* Mechanism panels */
-.mech-panels{display:flex;flex-direction:column;gap:10px}
-.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
-.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
-.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
-.mech-panel-body strong{color:var(--text)}
-.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-
-/* Molecules tab */
-.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
-.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
-.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
-.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
-.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
-.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
-
-/* Story tab */
-.story-content{max-width:720px}
-.story-block{margin-bottom:16px}
-.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
-
-/* Frontiers tab */
-.frontier-group{margin-bottom:20px}
-.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
-.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
-.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
-
-/* Connections tab */
-.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
-.connections-wrap canvas{display:block;width:100%;height:360px}
-
-/* Right sidebar */
-.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
-.rsb-mol-item:hover{color:var(--cyan)}
-.rsb-mol-icon{font-size:1rem;flex-shrink:0}
-.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
-.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
-</style>
-</head>
+<link rel="stylesheet" href="../shared/module-layout.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css"></head>
 <body>
 <!-- Module header -->
 <div class="mod-hdr">
@@ -141,7 +69,7 @@
   <div class="main" id="main-content">
     <!-- Tab 1: Mechanism -->
     <div class="tab-panel active" id="panel-mechanism">
-      <div class="canvas-wrap">
+      <div class="canvas-wrap" id="canvas-wrap">
         <canvas id="mech-canvas"></canvas>
         <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; CLOCK:BMAL1 E-box Transcription (Day)</div>
       </div>
@@ -207,7 +135,7 @@ Object.assign(window.GLOSS, {
 });
 
 // ── Module molecules data ────────────────────────────────────────────────────
-const MODULE_MOLS = [
+window.MODULE_MOLS = [
   { id:'clock_bmal1', icon:'\ud83d\udfe1', color:'#ffd700', type:'Protein heterodimer \u00b7 bHLH-PAS', is_protein:true,
     name:'CLOCK:BMAL1 heterodimer', sub:'PDB: 4F3L \u00b7 positive limb transcription factor',
     badges:[{text:'Positive loop driver',color:'#ffd700'},{text:'E-box binder',color:'#00e5ff'},{text:'Nobel 2017',color:'#ffd700'}],
@@ -386,130 +314,271 @@ let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
 
 function mechDraw(phase, t) {
   const cv = mechCv;
-  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 420;
   const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
   ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
   const cx = W / 2, cy = H / 2;
 
-  if (phase === 0) {
-    // CLOCK:BMAL1 binding E-box and driving transcription
-    const pulse = (Math.sin(t * 0.05) + 1) / 2;
-    // Nucleus boundary
-    ctx.beginPath(); ctx.arc(cx, cy, 70, 0, Math.PI * 2);
-    ctx.strokeStyle = '#ffd70033'; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
-    // CLOCK:BMAL1 heterodimer
-    ctx.beginPath(); ctx.arc(cx - 20, cy - 20, 22, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70022'; ctx.fill();
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx + 20, cy - 20, 18, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70022'; ctx.fill();
-    ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 2; ctx.stroke();
-    // E-box DNA
-    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(cx - 50, cy + 30); ctx.lineTo(cx + 50, cy + 30); ctx.stroke();
-    // Transcription arrow
-    const arrowX = cx + 50 + pulse * 40;
-    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(cx + 50, cy + 30); ctx.lineTo(arrowX, cy + 30); ctx.stroke();
-    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('CLOCK', cx - 20, cy - 16);
-    ctx.fillStyle = '#ffd70088'; ctx.fillText('BMAL1', cx + 20, cy - 16);
-    ctx.fillStyle = '#00e5ff99'; ctx.font = '9px monospace'; ctx.fillText('E-box CACGTG', cx, cy + 44);
-    ctx.fillStyle = '#00ff9999'; ctx.font = '9px monospace'; ctx.fillText('PER/CRY transcription \u2192', cx + 60, cy + 26);
-  } else if (phase === 1) {
-    // PER/CRY cytoplasmic accumulation — protein dots building up
-    const count = Math.floor((t % 120) / 8) + 1;
-    ctx.beginPath(); ctx.arc(cx, cy, 75, 0, Math.PI * 2);
-    ctx.strokeStyle = '#33334a'; ctx.lineWidth = 1; ctx.setLineDash([3,6]); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = '#8888b055'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Cytoplasm', cx, cy - 82);
-    for (let i = 0; i < Math.min(count, 8); i++) {
-      const angle = (i / 8) * Math.PI * 2 + t * 0.01;
-      const r = 45 + (i % 3) * 10;
-      const x = cx + r * Math.cos(angle);
-      const y = cy + r * Math.sin(angle);
-      ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2);
-      ctx.fillStyle = i % 2 === 0 ? '#00e5ff33' : '#aa77ff33'; ctx.fill();
-      ctx.strokeStyle = i % 2 === 0 ? '#00e5ff' : '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
-      ctx.fillStyle = i % 2 === 0 ? '#00e5ff' : '#aa77ff';
-      ctx.font = '7px monospace'; ctx.textAlign = 'center';
-      ctx.fillText(i % 2 === 0 ? 'PER' : 'CRY', x, y + 3);
-    }
-    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('PER/CRY accumulate in cytoplasm (daytime)', cx, cy + 100);
-  } else if (phase === 2) {
-    // CKId progressive phosphorylation of PER2
-    const pCount = Math.floor((t % 100) / 10);
-    // PER2 protein
-    ctx.beginPath(); ctx.arc(cx, cy, 35, 0, Math.PI * 2);
-    ctx.fillStyle = '#00e5ff22'; ctx.fill();
-    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('PER2', cx, cy + 4);
-    // CKId kinase
-    ctx.beginPath(); ctx.arc(cx - 100, cy - 30, 22, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff884422'; ctx.fill();
-    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ff8844'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('CKI\u03b4', cx - 100, cy - 26);
-    // Phosphate marks
-    for (let i = 0; i < Math.min(pCount, 8); i++) {
-      const angle = (i / 8) * Math.PI * 2;
-      const px = cx + 42 * Math.cos(angle);
-      const py = cy + 42 * Math.sin(angle);
-      ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffd700'; ctx.fill();
-      ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 1; ctx.stroke();
-    }
-    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('CKI\u03b4 adds phosphate groups (pSer) \u2014 timer', cx, cy + 85);
-  } else if (phase === 3) {
-    // Nuclear entry and CLOCK:BMAL1 repression
-    const nX = cx, nY = cy;
+  function circ_label(text, x, y, col) {
+    ctx.textAlign = 'center'; ctx.font = '10px monospace';
+    const tw = ctx.measureText(text).width;
+    ctx.fillStyle = 'rgba(7,7,30,0.8)'; ctx.fillRect(x - tw/2 - 3, y - 10, tw + 6, 13);
+    ctx.fillStyle = col; ctx.fillText(text, x, y);
+  }
+  // Draw cell context: nucleus (inner) + cytoplasm ring
+  function drawCellContext(nucR, nucCol) {
+    // Cytoplasm hint
+    const cg = ctx.createRadialGradient(cx, cy, nucR + 10, cx, cy, W * 0.7);
+    cg.addColorStop(0, 'rgba(20,20,50,0.35)'); cg.addColorStop(1, 'rgba(7,7,30,0)');
+    ctx.fillStyle = cg; ctx.fillRect(0, 0, W, H);
     // Nucleus
-    ctx.beginPath(); ctx.arc(nX, nY, 65, 0, Math.PI * 2);
-    ctx.fillStyle = '#1a1a3a'; ctx.fill();
-    ctx.strokeStyle = '#8888b0'; ctx.lineWidth = 1.5; ctx.stroke();
-    // CLOCK:BMAL1 (repressed — dimmer)
-    ctx.beginPath(); ctx.arc(nX - 15, nY - 10, 20, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70011'; ctx.fill();
-    ctx.strokeStyle = '#ffd70055'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.fillStyle = '#ffd70055'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('CLOCK\nBMAL1', nX - 15, nY - 6);
-    // PER:CRY complex coming in
-    const angle2 = t * 0.02;
-    const ex = nX + 55 * Math.cos(angle2);
-    const ey = nY + 55 * Math.sin(angle2);
-    ctx.beginPath(); ctx.arc(ex, ey, 14, 0, Math.PI * 2);
-    ctx.fillStyle = '#00e5ff33'; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, nucR, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(15,15,40,0.85)'; ctx.fill();
+    ctx.strokeStyle = nucCol; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = nucCol.replace(')', ',0.6)').replace('rgba', 'rgba') || nucCol + '99';
+    ctx.font = '8px monospace'; ctx.textAlign = 'left';
+    ctx.fillStyle = nucCol + '77'; ctx.fillText('Nucleus', cx - nucR + 8, cy - nucR + 14);
+    ctx.fillStyle = 'rgba(120,130,180,0.4)'; ctx.textAlign = 'right';
+    ctx.fillText('Cytoplasm', W - 16, cy + 10);
+  }
+  // DNA double helix (simplified 2-strand sine)
+  function drawDNA(x0, y, len, col1, col2) {
+    for (let strand = 0; strand < 2; strand++) {
+      const phase_s = strand * Math.PI;
+      ctx.strokeStyle = strand === 0 ? col1 : col2; ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let x = x0; x <= x0 + len; x += 3) {
+        const wy = y + 8 * Math.sin((x - x0) * 0.12 + phase_s);
+        x === x0 ? ctx.moveTo(x, wy) : ctx.lineTo(x, wy);
+      }
+      ctx.stroke();
+    }
+    // Base pairs
+    ctx.strokeStyle = 'rgba(0,229,255,0.25)'; ctx.lineWidth = 1;
+    for (let x = x0 + 4; x < x0 + len; x += 16) {
+      const y1 = y + 8 * Math.sin((x - x0) * 0.12);
+      const y2 = y + 8 * Math.sin((x - x0) * 0.12 + Math.PI);
+      ctx.beginPath(); ctx.moveTo(x, y1); ctx.lineTo(x, y2); ctx.stroke();
+    }
+  }
+
+  if (phase === 0) {
+    // ── Phase 0: Dawn — CLOCK:BMAL1 binds E-box, drives PER/CRY transcription ──
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+    drawCellContext(72, '#ffd70055');
+    // Day/night sun indicator
+    ctx.fillStyle = 'rgba(255,215,0,0.8)'; ctx.font = 'bold 10px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('☀ DAY (ZT0–12)', W - 14, 20);
+
+    // CLOCK:BMAL1 heterodimer — two linked protein shapes
+    const c_x = cx - 22, b_x = cx + 22, dimer_Y = cy - 24;
+    ctx.beginPath(); ctx.arc(c_x, dimer_Y, 20, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,215,0,0.18)'; ctx.fill();
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('CLOCK', c_x, dimer_Y + 3);
+    ctx.beginPath(); ctx.arc(b_x, dimer_Y, 18, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,215,0,0.1)'; ctx.fill();
+    ctx.strokeStyle = '#ffd70099'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ffd70099'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('BMAL1', b_x, dimer_Y + 3);
+    // PAS domain linker
+    ctx.strokeStyle = '#ffd70066'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(c_x + 20, dimer_Y); ctx.lineTo(b_x - 18, dimer_Y); ctx.stroke();
+
+    // E-box DNA below dimer
+    const eboxY = cy + 22;
+    drawDNA(cx - 55, eboxY, 110, '#00e5ff88', '#00e5ff44');
+    ctx.fillStyle = '#00e5ff99'; ctx.font = 'bold 8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CACGTG (E-box)', cx, eboxY + 24);
+    // Dimer binding arrow
+    ctx.strokeStyle = '#ffd70066'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx, dimer_Y + 20); ctx.lineTo(cx, eboxY - 12); ctx.stroke();
+
+    // Growing mRNA transcript arrow (transcription)
+    const mRNAX = cx + 55 + pulse * 55;
+    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(cx + 55, eboxY); ctx.lineTo(mRNAX, eboxY); ctx.stroke();
+    // Arrow head
+    ctx.fillStyle = '#00ff99';
+    ctx.beginPath(); ctx.moveTo(mRNAX, eboxY);
+    ctx.lineTo(mRNAX - 8, eboxY - 5); ctx.lineTo(mRNAX - 8, eboxY + 5); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#00ff9977'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('PER/CRY\nmRNA ↗', mRNAX + 4, eboxY - 4);
+    circ_label('CLOCK:BMAL1 binds E-box CACGTG → drives PER1/2, CRY1/2 transcription', cx, H - 16, '#ffd70088');
+
+  } else if (phase === 1) {
+    // ── Phase 1: Daytime — PER/CRY mRNA exported, proteins accumulate in cytoplasm ──
+    const count = Math.min(10, Math.floor(t / 9) + 1);
+    drawCellContext(62, '#8888b055');
+    // Time bar
+    const timeBar = Math.min(1, t / 100);
+    ctx.fillStyle = 'rgba(255,215,0,0.15)'; ctx.fillRect(W - 90, 14, 70, 8);
+    ctx.fillStyle = 'rgba(255,215,0,0.6)'; ctx.fillRect(W - 90, 14, 70 * timeBar, 8);
+    ctx.strokeStyle = 'rgba(255,215,0,0.4)'; ctx.lineWidth = 1; ctx.strokeRect(W - 90, 14, 70, 8);
+    ctx.fillStyle = 'rgba(255,215,0,0.7)'; ctx.font = '7px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('ZT ' + Math.round(timeBar * 12), W - 14, 11);
+
+    // PER and CRY proteins building up in cytoplasm (outside nucleus)
+    for (let i = 0; i < count; i++) {
+      const a = (i / 10) * Math.PI * 2 + t * 0.008;
+      const r = 80 + (i % 3) * 12;
+      const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+      if (Math.sqrt((x-cx)*(x-cx) + (y-cy)*(y-cy)) < 68) continue; // skip if inside nucleus
+      const isPER = i % 2 === 0;
+      const col = isPER ? '#00e5ff' : '#aa77ff';
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 11);
+      g.addColorStop(0, col + 'cc'); g.addColorStop(1, col + '00');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 11, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI*2);
+      ctx.fillStyle = col + '33'; ctx.fill();
+      ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = col; ctx.font = '6px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(isPER ? 'PER' : 'CRY', x, y + 2);
+    }
+    // mRNA transcript entering cytoplasm
+    if (count < 8) {
+      const mX = cx + 62 + 12, mY = cy - 10;
+      ctx.beginPath(); ctx.arc(mX, mY, 6, 0, Math.PI*2);
+      ctx.fillStyle = '#00ff9933'; ctx.fill(); ctx.strokeStyle = '#00ff9988'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#00ff9966'; ctx.font = '6px monospace'; ctx.textAlign = 'center'; ctx.fillText('mRNA', mX, mY + 2);
+    }
+    circ_label('PER/CRY proteins accumulate in cytoplasm throughout the day', cx, H - 16, '#8888b088');
+
+  } else if (phase === 2) {
+    // ── Phase 2: CKIδ/ε progressive phosphorylation of PER2 — molecular timer ──
+    const pCount = Math.min(8, Math.floor((t % 110) / 12));
+    drawCellContext(50, '#ff884455');
+    // PER2 protein body (larger, with phospho sites around perimeter)
+    ctx.beginPath(); ctx.arc(cx, cy, 38, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,229,255,0.12)'; ctx.fill();
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2.5; ctx.stroke();
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PER2', cx, cy - 4); ctx.fillText('pSer cluster', cx, cy + 8);
+
+    // CKIδ kinase approaching
+    const ckiX = cx - 110, ckiY = cy - 20;
+    ctx.beginPath(); ctx.arc(ckiX, ckiY, 24, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,136,68,0.15)'; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('CKIδ/ε', ckiX, ckiY - 3); ctx.fillText('kinase', ckiX, ckiY + 8);
+    // ATP → ADP label
+    ctx.fillStyle = '#ff884455'; ctx.font = '7px monospace';
+    ctx.fillText('ATP→ADP', ckiX, ckiY + 24);
+    // Activation arrow
+    ctx.strokeStyle = '#ff884466'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(ckiX + 24, ckiY + 5); ctx.lineTo(cx - 38, cy + 5); ctx.stroke();
+
+    // Phosphate groups appearing sequentially around PER2
+    for (let i = 0; i < pCount; i++) {
+      const a = (i / 8) * Math.PI * 2 - Math.PI / 2;
+      const px = cx + 46 * Math.cos(a), py = cy + 46 * Math.sin(a);
+      const pg = ctx.createRadialGradient(px, py, 0, px, py, 7);
+      pg.addColorStop(0, '#ffd700ff'); pg.addColorStop(1, '#ffd70000');
+      ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(px, py, 7, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(px, py, 4.5, 0, Math.PI*2);
+      ctx.fillStyle = '#ffd700'; ctx.fill();
+      ctx.strokeStyle = '#ffd70077'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = '#111'; ctx.font = 'bold 5px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('P', px, py + 2);
+    }
+    // β-TrCP ubiquitin ligase (appears after >5 phosphates)
+    if (pCount >= 5) {
+      const btX = cx + 110, btY = cy + 20;
+      ctx.beginPath(); ctx.arc(btX, btY, 22, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(170,119,255,0.15)'; ctx.fill();
+      ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('β-TrCP', btX, btY - 3); ctx.fillText('E3 lig.', btX, btY + 8);
+      ctx.strokeStyle = '#aa77ff66'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]);
+      ctx.beginPath(); ctx.moveTo(cx + 38, cy + 14); ctx.lineTo(btX - 22, btY - 5); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    circ_label(`CKIδ adds ${pCount} pSer marks → β-TrCP recruits → proteasomal targeting`, cx, H - 16, '#ff884488');
+
+  } else if (phase === 3) {
+    // ── Phase 3: Night — PER:CRY translocates to nucleus, represses CLOCK:BMAL1 ──
+    drawCellContext(70, '#aa77ff55');
+    // Night indicator
+    ctx.fillStyle = 'rgba(150,100,255,0.7)'; ctx.font = 'bold 10px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('☽ NIGHT (ZT12–24)', W - 14, 20);
+
+    // CLOCK:BMAL1 on DNA — dimmed (repressed state)
+    drawDNA(cx - 50, cy + 28, 100, '#ffd70033', '#ffd70018');
+    ctx.beginPath(); ctx.arc(cx - 18, cy + 5, 18, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,215,0,0.05)'; ctx.fill();
+    ctx.strokeStyle = '#ffd70033'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#ffd70033'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CLOCK:BMAL1', cx - 18, cy + 8); ctx.fillText('(OFF)', cx - 18, cy + 18);
+
+    // PER:CRY complex orbiting nucleus then docking
+    const entryAngle = t * 0.025;
+    const entryR = Math.max(70, 95 - t * 0.15);
+    const ex = cx + entryR * Math.cos(entryAngle), ey = cy + entryR * Math.sin(entryAngle);
+    // Glow around complex
+    const cpG = ctx.createRadialGradient(ex, ey, 0, ex, ey, 20);
+    cpG.addColorStop(0, 'rgba(0,229,255,0.4)'); cpG.addColorStop(1, 'rgba(0,229,255,0)');
+    ctx.fillStyle = cpG; ctx.beginPath(); ctx.arc(ex, ey, 20, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(ex, ey, 14, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,229,255,0.2)'; ctx.fill();
     ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#00e5ff'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('PER\nCRY', ex, ey + 1);
-    ctx.fillStyle = '#aa77ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('PER:CRY represses CLOCK:BMAL1 (night)', cx, cy + 90);
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PER', ex, ey - 3); ctx.fillText('CRY', ex, ey + 7);
+    // Import arrow when entering nucleus
+    if (entryR <= 75) {
+      ctx.strokeStyle = '#00e5ff66'; ctx.lineWidth = 1; ctx.setLineDash([2,3]);
+      ctx.beginPath(); ctx.moveTo(cx, cy - 70); ctx.lineTo(cx - 14, cy - 14); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    circ_label('PER:CRY imports into nucleus → displaces CLOCK:BMAL1 from E-box', cx, H - 16, '#aa77ff88');
+
   } else if (phase === 4) {
-    // Degradation and cycle reset
+    // ── Phase 4: PER:CRY degradation → cycle resets after ~24h ──
     const fade = (Math.sin(t * 0.04) + 1) / 2;
-    ctx.beginPath(); ctx.arc(cx, cy - 20, 28, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(0,229,255,${0.1 + fade * 0.2})`; ctx.fill();
-    ctx.strokeStyle = `rgba(0,229,255,${0.3 + fade * 0.5})`; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = `rgba(0,229,255,${0.4 + fade * 0.5})`; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('PER:CRY', cx, cy - 16);
-    // Proteasome
-    ctx.beginPath(); ctx.arc(cx + 90, cy + 20, 24, 0, Math.PI * 2);
-    ctx.fillStyle = '#ff444422'; ctx.fill();
-    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ff4444'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('26S\nProteasome', cx + 90, cy + 23);
-    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]);
-    ctx.beginPath(); ctx.moveTo(cx + 28, cy - 10); ctx.lineTo(cx + 66, cy + 10); ctx.stroke(); ctx.setLineDash([]);
-    // Reset arrow
-    ctx.strokeStyle = '#00ff9988'; ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.arc(cx - 40, cy + 50, 30, Math.PI * 0.9, Math.PI * 0.1, true);
-    ctx.stroke();
-    ctx.fillStyle = '#00ff9999'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Degradation \u2192 cycle reset (~24h)', cx, cy + 95);
+    drawCellContext(68, '#00ff9933');
+    // Pre-dawn indicator
+    ctx.fillStyle = 'rgba(255,200,50,0.6)'; ctx.font = 'bold 10px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('☀ PRE-DAWN reset', W - 14, 20);
+    // PER:CRY — fading (α represents degradation progress)
+    const percry_alpha = 0.25 + fade * 0.5;
+    ctx.beginPath(); ctx.arc(cx - 40, cy - 14, 26, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(0,229,255,${percry_alpha * 0.2})`; ctx.fill();
+    ctx.strokeStyle = `rgba(0,229,255,${percry_alpha})`; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = `rgba(0,229,255,${percry_alpha})`; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PER:CRY', cx - 40, cy - 10);
+    // Ubiquitin chain on PER:CRY
+    for (let i = 0; i < 3; i++) {
+      const ux = cx - 40 + 30 + i * 14, uy = cy - 35 - i * 5;
+      ctx.beginPath(); ctx.arc(ux, uy, 8, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(170,119,255,${percry_alpha * 0.5})`; ctx.fill();
+      ctx.strokeStyle = `rgba(170,119,255,${percry_alpha * 0.8})`; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = `rgba(170,119,255,${percry_alpha})`; ctx.font = '6px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('Ub', ux, uy + 2);
+    }
+    // 26S Proteasome barrel
+    const proX = cx + 90, proY = cy + 5;
+    ctx.fillStyle = 'rgba(255,68,68,0.12)'; ctx.fillRect(proX - 22, proY - 32, 44, 65);
+    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2; ctx.strokeRect(proX - 22, proY - 32, 44, 65);
+    for (let i = 0; i < 3; i++) {
+      ctx.strokeStyle = '#ff444455'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(proX - 22, proY - 20 + i * 18); ctx.lineTo(proX + 22, proY - 20 + i * 18); ctx.stroke();
+    }
+    ctx.fillStyle = '#ff4444'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('26S', proX, proY - 15); ctx.fillText('Proteasome', proX, proY - 4);
+    // Degradation arrow
+    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(cx - 14, cy - 14); ctx.lineTo(proX - 22, proY - 8); ctx.stroke();
+    ctx.setLineDash([]);
+    // Cycle reset arrow
+    ctx.strokeStyle = '#00ff9977'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(cx - 60, cy + 60, 28, Math.PI * 0.9, Math.PI * 0.1, true); ctx.stroke();
+    ctx.fillStyle = '#00ff99'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('→ cycle resets', cx - 60, cy + 94);
+    // Period label
+    ctx.fillStyle = '#ffd70077'; ctx.font = 'bold 9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('Period: ~24.1 h', 16, H - 28);
+    circ_label('PER:CRY polyubiquitinated → 26S proteasome → CLOCK:BMAL1 reactivates', cx, H - 16, '#00ff9977');
   }
 }
 
@@ -726,10 +795,7 @@ mechDraw(0, 0);
 // ── Connections canvas (force-directed network) ───────────────────────────────
 function drawConnections() {
   const cv = document.getElementById('conn-canvas');
-  cv.width = cv.offsetWidth || 600;
-  cv.height = cv.offsetHeight || 360;
-  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
-  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const W = cv.offsetWidth || 600, H = 360;
 
   const nodes = [
     {id:'circ', x:W*.5,  y:H*.5,  r:32, color:'#ffd700', label:'Circadian\nClocks',  sub:'2017'},
@@ -747,33 +813,16 @@ function drawConnections() {
     {from:'circ',to:'mir', color:'#aa77ff55',label:'miR-146a\nclock regulation'},
   ];
 
-  const ns = {}; nodes.forEach(n => ns[n.id] = n);
-  edges.forEach(e => {
-    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
-    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
-    if(e.label) {
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
-      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
-    }
-  });
-  nodes.forEach(n => {
-    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-    ctx.fillStyle = n.color + '22'; ctx.fill();
-    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
-    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
-    ctx.fillText(n.sub, n.x, n.y+n.r+11);
-  });
+  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
 }
 </script>
 
 <!-- Shared infrastructure (load after module data) -->
 <script src="../shared/glossary-data.js"></script>
 <script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/connections.js"></script>
 <script src="../shared/molecule-modal.js"></script>
 <script src="../shared/auto-start.js"></script>
+<script src="../shared/mech-theater.js" defer></script>
 </body>
 </html>

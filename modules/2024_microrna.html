@@ -5,80 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2024 · microRNA — kbiology Nobel Frontier</title>
 <link rel="stylesheet" href="../shared/theme.css">
-<link rel="stylesheet" href="../shared/molecule-modal.css">
-<style>
-/* Module layout */
-.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
-.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
-.back-link:hover{color:var(--green);border-color:var(--green)}
-.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
-.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
-.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
-.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
-.mod-tab:hover{color:var(--text);background:var(--bg3)}
-.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
-.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
-.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
-
-/* Body layout */
-.mod-body{display:flex;min-height:calc(100vh - 100px)}
-.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
-.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
-
-/* Tab panels */
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Canvas */
-.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
-.canvas-wrap canvas{display:block;width:100%;height:240px}
-.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
-
-/* Mechanism panels */
-.mech-panels{display:flex;flex-direction:column;gap:10px}
-.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
-.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
-.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
-.mech-panel-body strong{color:var(--text)}
-.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-
-/* Molecules tab */
-.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
-.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
-.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
-.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
-.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
-.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
-
-/* Story tab */
-.story-content{max-width:720px}
-.story-block{margin-bottom:16px}
-.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
-
-/* Frontiers tab */
-.frontier-group{margin-bottom:20px}
-.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
-.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
-.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
-
-/* Connections tab */
-.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
-.connections-wrap canvas{display:block;width:100%;height:360px}
-
-/* Right sidebar */
-.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
-.rsb-mol-item:hover{color:var(--cyan)}
-.rsb-mol-icon{font-size:1rem;flex-shrink:0}
-.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
-.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
-</style>
-</head>
+<link rel="stylesheet" href="../shared/module-layout.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css"></head>
 <body>
 <!-- Module header -->
 <div class="mod-hdr">
@@ -141,7 +69,7 @@
   <div class="main" id="main-content">
     <!-- Tab 1: Mechanism -->
     <div class="tab-panel active" id="panel-mechanism">
-      <div class="canvas-wrap">
+      <div class="canvas-wrap" id="canvas-wrap">
         <canvas id="mech-canvas"></canvas>
         <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; pri-miRNA Transcription by RNA Pol II</div>
       </div>
@@ -207,7 +135,7 @@ Object.assign(window.GLOSS, {
 });
 
 // ── Module molecules data ────────────────────────────────────────────────────
-const MODULE_MOLS = [
+window.MODULE_MOLS = [
   { id:'lin4', icon:'\ud83d\udfe3', color:'#aa77ff', type:'ncRNA \u00b7 ~22 nt', is_protein:false,
     name:'lin-4 miRNA (C. elegans)', sub:'First discovered miRNA \u00b7 22 nt',
     badges:[{text:'First miRNA',color:'#aa77ff'},{text:'lin-14 repressor',color:'#ffd700'},{text:'Nobel 2024',color:'#ffd700'}],
@@ -378,132 +306,295 @@ let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
 
 function mechDraw(phase, t) {
   const cv = mechCv;
-  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 420;
   const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
   ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
   const cx = W / 2, cy = H / 2;
 
-  if (phase === 0) {
-    // pri-miRNA: long RNA strand with embedded hairpin
-    ctx.strokeStyle = '#aa77ff44'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(40, cy); ctx.lineTo(W - 40, cy); ctx.stroke();
-    // Draw hairpin loop in center
-    const hx = cx, hy = cy;
-    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(hx - 40, hy);
-    ctx.quadraticCurveTo(hx - 40, hy - 50, hx, hy - 55);
-    ctx.quadraticCurveTo(hx + 40, hy - 50, hx + 40, hy);
+  function mir_label(text, x, y, col) {
+    ctx.textAlign = 'center'; ctx.font = '10px monospace';
+    const tw = ctx.measureText(text).width;
+    ctx.fillStyle = 'rgba(7,7,30,0.8)'; ctx.fillRect(x-tw/2-3, y-10, tw+6, 13);
+    ctx.fillStyle = col; ctx.fillText(text, x, y);
+  }
+  // Draw a stem-loop (hairpin) with visible base pairs
+  function drawHairpin(hx, hy, stemLen, loopR, strand1col, strand2col, bpCol, wobble) {
+    const stemW = 10;
+    // Left strand (5' side)
+    ctx.strokeStyle = strand1col; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(hx - stemW, hy + stemLen);
+    ctx.quadraticCurveTo(hx - stemW, hy, hx, hy - loopR);
     ctx.stroke();
-    // Nucleotide dots along backbone
-    for (let i = 0; i < 14; i++) {
-      const x = 40 + i * ((W - 80) / 13);
-      const inHairpin = (i >= 5 && i <= 8);
-      ctx.beginPath(); ctx.arc(x, cy, 6, 0, Math.PI * 2);
-      ctx.fillStyle = inHairpin ? '#aa77ffcc' : '#33335acc'; ctx.fill();
-      ctx.strokeStyle = inHairpin ? '#aa77ff' : '#33335a'; ctx.lineWidth = 1.5; ctx.stroke();
+    // Right strand (3' side)
+    ctx.strokeStyle = strand2col; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(hx + stemW, hy + stemLen);
+    ctx.quadraticCurveTo(hx + stemW, hy, hx, hy - loopR);
+    ctx.stroke();
+    // Loop at top
+    ctx.strokeStyle = strand1col + '99'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(hx, hy - loopR, loopR * 0.55, 0, Math.PI, true); ctx.stroke();
+    // Base pair rungs
+    const nBP = Math.floor(stemLen / 10);
+    ctx.strokeStyle = bpCol; ctx.lineWidth = 1;
+    for (let i = 0; i < nBP; i++) {
+      const frac = (i + 0.5) / nBP;
+      const byCenter = hy + stemLen * (1 - frac) * 0.85;
+      const w2 = stemW * (0.5 + frac * 0.5);
+      ctx.beginPath(); ctx.moveTo(hx - w2, byCenter + (wobble || 0) * Math.sin(i));
+      ctx.lineTo(hx + w2, byCenter + (wobble || 0) * Math.sin(i)); ctx.stroke();
     }
-    ctx.fillStyle = '#aa77ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('pri-miRNA \u2014 RNA Pol II transcript with hairpin', cx, cy - 72);
-    ctx.fillStyle = '#8888b077'; ctx.font = '9px monospace';
-    ctx.fillText('Drosha/DGCR8 recognizes ssRNA\u2013dsRNA junction', cx, cy + 28);
+  }
+  // Nuclear pore complex (side view)
+  function drawNuclearPore(px, y, h) {
+    // NPC channels
+    for (const side of [-1, 1]) {
+      ctx.fillStyle = 'rgba(0,229,255,0.25)';
+      ctx.fillRect(px + side * 18, y - h/2, 8, h);
+      ctx.strokeStyle = '#00e5ff88'; ctx.lineWidth = 1;
+      ctx.strokeRect(px + side * 18, y - h/2, 8, h);
+    }
+    // Central channel
+    ctx.fillStyle = 'rgba(0,229,255,0.1)';
+    ctx.fillRect(px - 16, y - h/2, 32, h);
+    ctx.strokeStyle = '#00e5ff55'; ctx.lineWidth = 1.5;
+    ctx.strokeRect(px - 16, y - h/2, 32, h);
+    ctx.fillStyle = '#00e5ff77'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('NPC', px, y + h/2 + 12);
+  }
+
+  if (phase === 0) {
+    // ── Phase 0: pri-miRNA — Pol II transcript with embedded hairpin in nucleus ──
+    // Nucleus context
+    ctx.beginPath(); ctx.arc(cx, cy, 95, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(10,10,35,0.85)'; ctx.fill();
+    ctx.strokeStyle = '#aa77ff44'; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#aa77ff44'; ctx.font = '8px monospace'; ctx.textAlign = 'left'; ctx.fillText('Nucleus', cx - 90, cy - 80);
+    ctx.fillStyle = 'rgba(120,130,180,0.4)'; ctx.textAlign = 'right'; ctx.fillText('Cytoplasm', W - 14, 20);
+
+    // Long RNA strand (Pol II transcript) — flanking sequences
+    const strandY = cy + 28;
+    ctx.strokeStyle = 'rgba(170,119,255,0.3)'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(30, strandY); ctx.lineTo(cx - 45, strandY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx + 45, strandY); ctx.lineTo(W - 30, strandY); ctx.stroke();
+    // Nucleotide dots on flanking strands
+    for (let x = 38; x < cx - 45; x += 20) {
+      ctx.beginPath(); ctx.arc(x, strandY, 5, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(80,80,140,0.6)'; ctx.fill();
+    }
+    for (let x = cx + 50; x < W - 30; x += 20) {
+      ctx.beginPath(); ctx.arc(x, strandY, 5, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(80,80,140,0.6)'; ctx.fill();
+    }
+
+    // Hairpin (embedded in Pol II transcript)
+    drawHairpin(cx, strandY - 12, 50, 18, '#aa77ff', '#aa77ffbb', 'rgba(170,119,255,0.5)', 2);
+
+    // ssRNA/dsRNA junction indicator
+    ctx.strokeStyle = '#ffd70066'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx - 44, strandY); ctx.lineTo(cx - 44, strandY - 25); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx + 44, strandY); ctx.lineTo(cx + 44, strandY - 25); ctx.stroke();
+    ctx.fillStyle = '#ffd70077'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('ss↔ds junction', cx - 44, strandY - 32);
+
+    // Drosha/DGCR8 approaching
+    ctx.beginPath(); ctx.arc(cx - 100, cy - 10, 24, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,215,0,0.1)'; ctx.fill();
+    ctx.strokeStyle = '#ffd70066'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#ffd70077'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Drosha', cx - 100, cy - 12); ctx.fillText('DGCR8', cx - 100, cy - 1);
+
+    mir_label('pri-miRNA — Pol II transcript; Drosha:DGCR8 recognizes ss↔dsRNA junction', cx, H - 16, '#aa77ff88');
+
   } else if (phase === 1) {
-    // Drosha cropping: two scissors-like cuts releasing ~65 nt hairpin
-    const angle = t * 0.015;
-    // Pre-miRNA hairpin product
-    const hx = cx, hy = cy - 10;
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(hx - 28, hy + 30);
-    ctx.quadraticCurveTo(hx - 30, hy - 30, hx, hy - 38 + 4 * Math.sin(angle));
-    ctx.quadraticCurveTo(hx + 30, hy - 30, hx + 28, hy + 30);
-    ctx.stroke();
-    // Drosha complex
-    ctx.beginPath(); ctx.arc(cx - 70, cy + 10, 22, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70022'; ctx.fill();
+    // ── Phase 1: Drosha cleavage → pre-miRNA (~65 nt hairpin with 2-nt 3' overhang) ──
+    const wobble = Math.sin(t * 0.04) * 3;
+    // Nucleus
+    ctx.beginPath(); ctx.arc(cx - 80, cy, 80, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(10,10,35,0.8)'; ctx.fill();
+    ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+
+    // Drosha active site
+    const dX = cx - 110, dY = cy + 20;
+    ctx.beginPath(); ctx.arc(dX, dY, 24, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,215,0,0.15)'; ctx.fill();
     ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('Drosha', cx - 70, cy + 8); ctx.fillText('DGCR8', cx - 70, cy + 18);
-    // Cleavage arrows
-    ctx.strokeStyle = '#ff448888'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
-    ctx.beginPath(); ctx.moveTo(cx - 45, cy + 30); ctx.lineTo(cx - 28, cy + 30); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx + 45, cy + 30); ctx.lineTo(cx + 28, cy + 30); ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle = '#ffd70099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('pre-miRNA (~65 nt hairpin, 2-nt 3\' overhang)', cx, hy + 56);
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Drosha', dX, dY - 4); ctx.fillText('DGCR8', dX, dY + 7);
+
+    // Hairpin being cleaved
+    drawHairpin(cx - 80, cy + 30, 44, 16, '#aa77ff', '#aa77ffbb', 'rgba(170,119,255,0.5)', wobble);
+    // Cleavage site indicators
+    ctx.strokeStyle = '#ff4488bb'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx - 80 - 14, cy + 30); ctx.lineTo(cx - 80 - 6, cy + 35); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx - 80 + 14, cy + 30); ctx.lineTo(cx - 80 + 6, cy + 35); ctx.stroke();
+    ctx.fillStyle = '#ff488866'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('cut', cx - 80, cy + 44);
+
+    // Pre-miRNA product (exported to cytoplasm)
+    drawHairpin(cx + 90, cy - 5, 40, 14, '#ffd700', '#ffd700bb', 'rgba(255,215,0,0.5)', wobble * 0.5);
+    ctx.fillStyle = '#ffd70088'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('pre-miRNA', cx + 90, cy + 44);
+    ctx.fillText('~65 nt', cx + 90, cy + 54);
+    // 2-nt 3' overhang indicators
+    ctx.strokeStyle = '#ffd70077'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx + 90 + 10, cy + 36); ctx.lineTo(cx + 90 + 18, cy + 36); ctx.stroke();
+    ctx.fillStyle = '#ffd70066'; ctx.font = '6px monospace'; ctx.textAlign = 'left';
+    ctx.fillText("2-nt 3'", cx + 90 + 14, cy + 34);
+    ctx.fillStyle = 'rgba(120,130,180,0.4)'; ctx.font = '8px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('Cytoplasm', W - 14, 20);
+
+    mir_label('Drosha:DGCR8 makes staggered cuts → pre-miRNA hairpin (2-nt 3\' overhang)', cx, H - 16, '#ffd70077');
+
   } else if (phase === 2) {
-    // Exportin-5 transporting pre-miRNA through nuclear pore
-    const progress = (t % 120) / 120;
-    // Nuclear pore
-    ctx.strokeStyle = '#00e5ff55'; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, H - 20); ctx.stroke();
-    ctx.fillStyle = '#00e5ff22';
-    ctx.fillRect(cx - 18, cy - 30, 36, 60);
-    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 1.5;
-    ctx.strokeRect(cx - 18, cy - 30, 36, 60);
-    ctx.fillStyle = '#00e5ff88'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Nuclear pore', cx, cy + 48);
-    // Exportin-5 + cargo moving
-    const ex = cx - 100 + progress * 200;
-    ctx.beginPath(); ctx.arc(ex, cy, 20, 0, Math.PI * 2);
-    ctx.fillStyle = '#00e5ff22'; ctx.fill();
+    // ── Phase 2: Exportin-5 (XPO5) escorts pre-miRNA through nuclear pore ──
+    const progress = (t % 130) / 130;
+    const ex_x = 60 + progress * (W - 120);
+
+    // Nuclear envelope: solid boundary with pore
+    const nucBoundaryX = W / 2;
+    ctx.fillStyle = 'rgba(10,10,35,0.8)';
+    ctx.fillRect(0, 0, nucBoundaryX - 18, H);
+    ctx.strokeStyle = '#8888b033'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(nucBoundaryX - 18, 0);
+    ctx.lineTo(nucBoundaryX - 18, cy - 32);
+    ctx.moveTo(nucBoundaryX - 18, cy + 32); ctx.lineTo(nucBoundaryX - 18, H);
+    ctx.lineTo(0, H); ctx.stroke();
+    drawNuclearPore(nucBoundaryX, cy, 64);
+    ctx.fillStyle = '#aa77ff44'; ctx.font = '8px monospace'; ctx.textAlign = 'left'; ctx.fillText('Nucleus', 16, 22);
+    ctx.fillStyle = 'rgba(120,130,180,0.4)'; ctx.textAlign = 'right'; ctx.fillText('Cytoplasm', W - 16, 22);
+
+    // XPO5 + pre-miRNA complex moving
+    const xpoG = ctx.createRadialGradient(ex_x, cy, 0, ex_x, cy, 26);
+    xpoG.addColorStop(0, 'rgba(0,229,255,0.35)'); xpoG.addColorStop(1, 'rgba(0,229,255,0)');
+    ctx.fillStyle = xpoG; ctx.beginPath(); ctx.arc(ex_x, cy, 26, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(ex_x, cy, 20, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,229,255,0.15)'; ctx.fill();
     ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
     ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('XPO5', ex, cy + 4);
-    // Pre-miRNA cargo
-    ctx.beginPath(); ctx.arc(ex + 14, cy - 14, 10, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffd70033'; ctx.fill();
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.fillStyle = '#00e5ff77'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('Exportin-5 exports pre-miRNA to cytoplasm', cx, H - 22);
+    ctx.fillText('XPO5', ex_x, cy - 4); ctx.fillText('RanGTP', ex_x, cy + 7);
+    // pre-miRNA hairpin attached to XPO5
+    drawHairpin(ex_x + 24, cy - 12, 28, 10, '#ffd700', '#ffd700bb', 'rgba(255,215,0,0.4)', 1);
+
+    // Ran-GDP release in cytoplasm
+    if (progress > 0.7) {
+      ctx.fillStyle = '#ff884455'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('RanGAP→RanGDP', ex_x, cy + 36); ctx.fillText('XPO5 releases cargo', ex_x, cy + 46);
+    }
+    mir_label('XPO5:RanGTP recognizes 2-nt 3\' overhang → escorts pre-miRNA to cytoplasm', cx, H - 16, '#00e5ff77');
+
   } else if (phase === 3) {
-    // DICER cleavage: hairpin in, duplex out
-    const blink = Math.sin(t * 0.06) > 0;
-    // Input pre-miRNA
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(100, cy - 20); ctx.quadraticCurveTo(100, cy - 60, cx - 40, cy - 65);
-    ctx.quadraticCurveTo(cx, cy - 70, cx + 40, cy - 65);
-    ctx.quadraticCurveTo(W - 100, cy - 60, W - 100, cy - 20);
-    ctx.stroke();
-    // DICER box
-    ctx.fillStyle = '#00ff9918'; ctx.fillRect(cx - 55, cy - 18, 110, 36);
-    ctx.strokeStyle = blink ? '#00ff99' : '#00ff9966'; ctx.lineWidth = 2;
-    ctx.strokeRect(cx - 55, cy - 18, 110, 36);
+    // ── Phase 3: DICER cleaves hairpin → ~22 bp miRNA:miRNA* duplex ──
+    const blink = Math.sin(t * 0.07) > 0;
+    // Input pre-miRNA hairpin (arriving from top-left)
+    drawHairpin(cx - 130, cy - 5, 48, 17, '#ffd700', '#ffd700bb', 'rgba(255,215,0,0.45)', 1);
+
+    // DICER1 enzyme (central block)
+    const dW = 110, dH = 52;
+    ctx.fillStyle = blink ? 'rgba(0,255,153,0.15)' : 'rgba(0,255,153,0.08)';
+    ctx.fillRect(cx - dW/2, cy - dH/2, dW, dH);
+    ctx.strokeStyle = blink ? '#00ff99' : '#00ff9966'; ctx.lineWidth = 2.5;
+    ctx.strokeRect(cx - dW/2, cy - dH/2, dW, dH);
     ctx.fillStyle = '#00ff99'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('DICER1', cx, cy - 3); ctx.fillText('RNase IIIa+b', cx, cy + 10);
-    // Output duplex
+    ctx.fillText('DICER1', cx, cy - 9); ctx.fillText('RNase IIIa + IIIb', cx, cy + 4); ctx.fillText('PAZ domain', cx, cy + 15);
+
+    // Cleavage scissors icon
+    ctx.strokeStyle = '#ff448866'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(cx - dW/2 - 24, cy - 8); ctx.lineTo(cx - dW/2, cy - 8); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx - dW/2 - 24, cy + 8); ctx.lineTo(cx - dW/2, cy + 8); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ff448866'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('cut ×2', cx - dW/2 - 16, cy + 22);
+
+    // Output: miRNA:miRNA* duplex (two parallel strands)
+    const duplexX = cx + 80, duplexY = cy;
+    const dStrandLen = 60;
     ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(cx - 40, cy + 22); ctx.lineTo(cx + 40, cy + 22); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx - 36, cy + 32); ctx.lineTo(cx + 36, cy + 32); ctx.stroke();
-    ctx.fillStyle = '#00ff9999'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('miRNA duplex (~22 bp, 2-nt 3\' overhangs)', cx, cy + 52);
+    ctx.beginPath(); ctx.moveTo(duplexX - dStrandLen/2, duplexY - 6); ctx.lineTo(duplexX + dStrandLen/2, duplexY - 6); ctx.stroke();
+    ctx.strokeStyle = '#aa77ffaa'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(duplexX - dStrandLen/2 + 5, duplexY + 6); ctx.lineTo(duplexX + dStrandLen/2 - 5, duplexY + 6); ctx.stroke();
+    // Base pair rungs of duplex
+    ctx.strokeStyle = 'rgba(170,119,255,0.4)'; ctx.lineWidth = 1;
+    for (let i = 0; i < 7; i++) {
+      const rx = duplexX - dStrandLen/2 + 5 + i * 8;
+      ctx.beginPath(); ctx.moveTo(rx, duplexY - 6); ctx.lineTo(rx + 3, duplexY + 6); ctx.stroke();
+    }
+    // 2-nt overhangs
+    ctx.strokeStyle = '#aa77ff77'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(duplexX + dStrandLen/2, duplexY - 6); ctx.lineTo(duplexX + dStrandLen/2 + 12, duplexY - 6); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(duplexX - dStrandLen/2 + 5, duplexY + 6); ctx.lineTo(duplexX - dStrandLen/2 - 8, duplexY + 6); ctx.stroke();
+    ctx.fillStyle = '#aa77ff88'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText("miRNA:miRNA*", duplexX, duplexY - 18); ctx.fillText('~22 bp duplex', duplexX, duplexY + 24);
+    ctx.fillStyle = '#aa77ff55'; ctx.font = '6px monospace';
+    ctx.fillText("2-nt 3' ovhg", duplexX + dStrandLen/2 + 8, duplexY - 3);
+
+    mir_label('DICER1 PAZ binds 2-nt overhang → RNase IIIa/b stagger cuts → ~22 bp duplex', cx, H - 16, '#00ff9977');
+
   } else if (phase === 4) {
-    // RISC loading: guide strand in AGO2, mRNA target being repressed
+    // ── Phase 4: RISC loading — guide strand in AGO2, target mRNA repressed ──
     const wobble = Math.sin(t * 0.04) * 4;
-    // AGO2 core
-    ctx.beginPath(); ctx.arc(cx, cy - 10, 34, 0, Math.PI * 2);
-    ctx.fillStyle = '#00e5ff18'; ctx.fill();
+
+    // AGO2 / RISC complex (large, central)
+    const agoG = ctx.createRadialGradient(cx - 20, cy - 20, 5, cx - 20, cy - 20, 44);
+    agoG.addColorStop(0, 'rgba(0,229,255,0.3)'); agoG.addColorStop(1, 'rgba(0,229,255,0)');
+    ctx.fillStyle = agoG; ctx.beginPath(); ctx.arc(cx - 20, cy - 20, 44, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx - 20, cy - 20, 34, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,229,255,0.12)'; ctx.fill();
     ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2.5; ctx.stroke();
     ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText('AGO2', cx, cy - 13); ctx.fillText('RISC', cx, cy - 1);
-    // Guide strand arrow in
+    ctx.fillText('AGO2', cx - 20, cy - 24); ctx.fillText('RISC', cx - 20, cy - 12);
+
+    // Guide strand inside AGO2 (miRNA)
     ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(60, cy - 10); ctx.lineTo(cx - 36, cy - 10); ctx.stroke();
-    ctx.fillStyle = '#aa77ff77'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
-    ctx.fillText('miRNA guide', 40, cy - 16);
-    // Target mRNA with suppression indicator
-    const mY = cy + 60 + wobble;
-    ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(60, mY); ctx.lineTo(W - 60, mY); ctx.stroke();
-    ctx.fillStyle = '#ffd70099'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText("target mRNA 3'UTR (seed match nt 2\u20137)", cx, mY - 12);
-    // Repression X
-    ctx.strokeStyle = '#ff448899'; ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(cx - 12, mY + 14); ctx.lineTo(cx + 12, mY + 28); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx + 12, mY + 14); ctx.lineTo(cx - 12, mY + 28); ctx.stroke();
-    ctx.fillStyle = '#ff448877'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('translational repression + mRNA decay', cx, mY + 46);
+    ctx.beginPath(); ctx.moveTo(cx - 55, cy - 20); ctx.lineTo(cx + 15, cy - 20); ctx.stroke();
+    ctx.fillStyle = '#aa77ff88'; ctx.font = '7px monospace'; ctx.textAlign = 'right';
+    ctx.fillText('guide strand (nt 2–7 seed)', cx - 20, cy - 26);
+    // Passenger strand (miRNA*) being ejected
+    ctx.strokeStyle = '#aa77ff44'; ctx.lineWidth = 1.5; ctx.setLineDash([2,3]);
+    ctx.beginPath(); ctx.moveTo(cx - 20, cy - 20 - 36); ctx.lineTo(cx - 20 - 25, cy - 20 - 55); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#aa77ff33'; ctx.font = '7px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('miRNA* passenger →', cx - 20 - 22, cy - 20 - 58);
+    ctx.fillStyle = '#aa77ff33'; ctx.font = '6px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('degraded', cx - 42, cy - 20 - 68);
+
+    // Target mRNA (bottom) with 3'UTR seed match region highlighted
+    const mY = cy + 55 + wobble;
+    ctx.strokeStyle = '#ffd70055'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(30, mY); ctx.lineTo(W - 30, mY); ctx.stroke();
+    // Seed match region (highlighted)
+    const seedX = cx - 20;
+    ctx.fillStyle = 'rgba(255,215,0,0.25)'; ctx.fillRect(seedX - 30, mY - 6, 60, 14);
+    ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 1.5; ctx.strokeRect(seedX - 30, mY - 6, 60, 14);
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('seed match', seedX, mY + 3);
+    ctx.fillStyle = '#ffd70055'; ctx.font = '7px monospace';
+    ctx.fillText("3'UTR", seedX + 60, mY + 4);
+
+    // Watson-Crick pairing lines between guide and seed
+    ctx.strokeStyle = '#aa77ff66'; ctx.lineWidth = 1; ctx.setLineDash([2,2]);
+    for (let i = 0; i < 6; i++) {
+      const px = seedX - 20 + i * 8;
+      ctx.beginPath(); ctx.moveTo(px, cy - 20 + 36); ctx.lineTo(px - 2, mY - 6); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // Deadenylation: poly-A tail shortening
+    const deadenylProg = (t * 0.008) % 1;
+    const polyALen = Math.round((1 - deadenylProg) * 30);
+    ctx.strokeStyle = '#ff448866'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(W - 30, mY); ctx.lineTo(W - 30 + polyALen - 30, mY); ctx.stroke();
+    ctx.fillStyle = '#ff448855'; ctx.font = '7px monospace'; ctx.textAlign = 'right';
+    ctx.fillText(`poly-A: ${polyALen}nt`, W - 30, mY - 10);
+    // CCR4-NOT deadenylase
+    if (deadenylProg > 0.3) {
+      ctx.beginPath(); ctx.arc(W - 55, mY - 18, 12, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,68,136,0.2)'; ctx.fill();
+      ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#ff4488'; ctx.font = '6px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('CCR4', W - 55, mY - 20); ctx.fillText('NOT', W - 55, mY - 10);
+    }
+
+    mir_label('AGO2 RISC guide:seed base-pairs with 3\'UTR → deadenylation + mRNA decay', cx, H - 16, '#00e5ff77');
   }
 }
 
@@ -721,10 +812,7 @@ mechDraw(0, 0);
 // ── Connections canvas (force-directed network) ───────────────────────────────
 function drawConnections() {
   const cv = document.getElementById('conn-canvas');
-  cv.width = cv.offsetWidth || 600;
-  cv.height = cv.offsetHeight || 360;
-  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
-  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const W = cv.offsetWidth || 600, H = 360;
 
   const nodes = [
     {id:'mirna', x:W*.5,  y:H*.5,  r:32, color:'#aa77ff', label:'microRNA',        sub:'2024'},
@@ -742,33 +830,16 @@ function drawConnections() {
     {from:'mirna',to:'circ', color:'#ffd70055',label:'ceRNA sponge\nhypothesis'},
   ];
 
-  const ns = {}; nodes.forEach(n => ns[n.id] = n);
-  edges.forEach(e => {
-    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
-    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
-    if(e.label) {
-      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
-      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
-      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
-    }
-  });
-  nodes.forEach(n => {
-    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-    ctx.fillStyle = n.color + '22'; ctx.fill();
-    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
-    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
-    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
-    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
-    ctx.fillText(n.sub, n.x, n.y+n.r+11);
-  });
+  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
 }
 </script>
 
 <!-- Shared infrastructure (load after module data) -->
 <script src="../shared/glossary-data.js"></script>
 <script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/connections.js"></script>
 <script src="../shared/molecule-modal.js"></script>
 <script src="../shared/auto-start.js"></script>
+<script src="../shared/mech-theater.js" defer></script>
 </body>
 </html>

@@ -7,27 +7,20 @@
 
 #mol-shell {
   background:var(--bg2); border:1px solid var(--border); border-radius:12px;
-  width:100%; max-width:920px; max-height:90vh; overflow:hidden;
+  width:100%; max-width:1000px; max-height:93vh; overflow:hidden;
   display:flex; flex-direction:column;
-  box-shadow:0 20px 80px rgba(0,0,0,.9);
-  animation:molIn .2s ease;
+  box-shadow:0 20px 80px rgba(0,0,0,.9), 0 0 60px rgba(0,0,0,.5);
+  animation:molIn .22s ease;
 }
 @keyframes molIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
 
 #mol-hdr {
   background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 60%,var(--bg) 100%);
-  padding:14px 16px 0; border-bottom:1px solid var(--border);
-  flex-shrink:0; position:relative; overflow:hidden;
+  padding:14px 16px 12px; border-bottom:1px solid var(--border);
+  flex-shrink:0;
 }
-#mol-charge-bar {
-  position:absolute; top:0; left:0; height:3px;
-  background:linear-gradient(90deg,var(--mol-color,#00e5ff) 0%,#fff 50%,var(--mol-color,#00e5ff) 100%);
-  box-shadow:0 0 14px var(--mol-color,#00e5ff),0 0 28px rgba(255,255,255,.35);
-  border-radius:12px 12px 0 0; animation:molcharge .8s ease forwards;
-}
-@keyframes molcharge { from{width:0%} to{width:100%} }
 
-.mol-hdr-row { display:flex; align-items:flex-start; gap:12px; margin-bottom:10px; }
+.mol-hdr-row { display:flex; align-items:flex-start; gap:12px; }
 .mol-hdr-icon { width:46px; height:46px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0; border:1px solid var(--border); }
 .mol-hdr-meta { flex:1; }
 .mol-hdr-name { font-size:1.05rem; font-weight:700; color:var(--bright); letter-spacing:.04em; }
@@ -37,27 +30,73 @@
 .mol-close    { background:none; border:none; color:var(--muted); font-size:1.2rem; cursor:pointer; padding:4px 8px; border-radius:4px; transition:.15s; flex-shrink:0; }
 .mol-close:hover { color:var(--text); background:var(--border); }
 
-.mol-viz-tabs { display:flex; gap:2px; }
-.mol-viz-tab  { padding:6px 14px; border:1px solid transparent; border-bottom:none; background:transparent; color:var(--muted); font-size:.74rem; border-radius:5px 5px 0 0; cursor:pointer; transition:.15s; position:relative; top:1px; user-select:none; }
-.mol-viz-tab:hover  { color:var(--text); background:var(--bg3); }
-.mol-viz-tab.active { color:var(--mol-color,var(--cyan)); background:var(--bg3); border-color:var(--border); }
-
+/* ── Body / unified scroll ────────────────────────────────────────────── */
 #mol-body { flex:1; overflow-y:auto; background:var(--bg3); }
 
-.mol-panel { display:none; padding:14px 16px; }
-.mol-panel.active { display:grid; gap:12px; }
+.mol-unified { padding:14px 16px 20px; display:flex; flex-direction:column; gap:0; }
 
-.mol-canvas-wrap { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px; display:flex; align-items:center; justify-content:center; min-height:200px; position:relative; }
-.mol-canvas-lbl  { position:absolute; bottom:7px; left:50%; transform:translateX(-50%); font-size:.6rem; color:var(--muted); font-family:monospace; white-space:nowrap; }
-.mol-prop-sect   { background:var(--bg4); border:1px solid var(--border); border-radius:6px; padding:10px 11px; }
-.mol-prop-title  { font-size:.62rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:7px; }
-.mol-mech        { font-size:.74rem; color:#8888b0; line-height:1.6; }
+/* Section label */
+.mol-uni-sec { display:flex; align-items:center; gap:8px; padding:14px 0 8px; }
+.mol-uni-sec:first-child { padding-top:2px; }
+.mol-uni-sec-bar { width:3px; height:14px; border-radius:2px; flex-shrink:0; }
+.mol-uni-sec-txt { font-size:.62rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); }
 
-.mol-interaction-wrap { background:var(--bg); border:1px solid var(--border); border-radius:8px; min-height:280px; display:flex; align-items:center; justify-content:center; position:relative; }
-.mol-legend      { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-top:6px; }
+/* Top 2-column grid */
+.mol-uni-top { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:4px; }
+
+/* Viz column */
+.mol-uni-viz { display:flex; flex-direction:column; gap:8px; }
+
+/* Small molecule: 2D image card */
+.mol-uni-img-card { background:transparent; border:1px solid var(--border); border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+/* transparent: removes white/grey letterbox around PubChem image when aspect ratio doesn't fill container */
+.mol-struct-img-wrap { background:transparent; flex:1; display:flex; align-items:center; justify-content:center; min-height:160px; overflow:hidden; }
+/* App is permanently dark-themed; invert PubChem's white-bg 2D structure images to match */
+.mol-struct-img { display:block; max-width:100%; max-height:190px; object-fit:contain;
+  filter: invert(1) hue-rotate(180deg); }
+@media (prefers-color-scheme: light) {
+  /* Undo the inversion for users on a light OS theme */
+  .mol-struct-img { filter: none; }
+}
+.mol-struct-ph { color:#ffffff22; font-size:.75rem; text-align:center; padding:40px 16px; line-height:1.8; }
+
+/* Small molecule: mini 3D viewer */
+.mol-uni-3d-mini {
+  height:190px; position:relative; background:#07071e;
+  border-radius:8px; border:1px solid var(--border); overflow:hidden;
+}
+
+/* Protein: tall 3D viewer */
+.mol-uni-3d-protein {
+  height:300px; position:relative; background:#07071e;
+  border-radius:8px; border:1px solid var(--border); overflow:hidden;
+}
+
+.mol-canvas-lbl { font-size:.6rem; color:var(--muted); font-family:monospace; text-align:center; padding:4px 0 3px; background:#07071e; flex-shrink:0; }
+
+/* Prop column */
+.mol-uni-prop-col { display:flex; flex-direction:column; gap:8px; }
+.mol-prop-sect  { background:var(--bg4); border:1px solid var(--border); border-radius:6px; padding:10px 11px; }
+.mol-prop-title { font-size:.62rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:7px; }
+.mol-mech       { font-size:.74rem; color:#8888b0; line-height:1.6; }
+
+/* Interaction map */
+.mol-interaction-wrap { background:var(--bg); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.mol-legend      { display:flex; flex-wrap:wrap; gap:4px 16px; margin-top:6px; margin-bottom:4px; }
 .mol-leg-item    { display:flex; align-items:center; gap:6px; font-size:.7rem; color:#8888b0; }
 .mol-leg-dot     { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
 
+/* Domain grid */
+.mol-uni-domain-grid { display:grid; grid-template-columns:1fr 260px; gap:12px; margin-bottom:4px; }
+.mol-domain-map  { background:var(--bg4); border:1px solid var(--border); border-radius:8px; padding:10px; }
+.mol-domain-row  { display:flex; align-items:flex-start; gap:8px; padding:5px 0; border-bottom:1px solid var(--border2); font-size:.7rem; }
+.mol-domain-row:last-child { border-bottom:none; }
+.mol-domain-seg  { width:16px; height:12px; border-radius:2px; flex-shrink:0; margin-top:2px; }
+.mol-domain-name { color:var(--text); font-size:.71rem; font-weight:600; }
+.mol-domain-pos  { font-family:monospace; color:var(--muted); font-size:.62rem; }
+.mol-domain-fn   { color:var(--dim); font-size:.65rem; margin-top:1px; }
+
+/* Papers */
 .mol-paper-item  { padding:10px 12px; border-bottom:1px solid var(--border2); cursor:pointer; transition:.1s; }
 .mol-paper-item:hover { background:var(--bg4); }
 .mol-paper-meta  { display:flex; gap:8px; align-items:center; margin-bottom:4px; }
@@ -67,21 +106,31 @@
 .mol-paper-title { font-size:.76rem; color:var(--text); line-height:1.4; margin-bottom:3px; }
 .mol-paper-abs   { font-size:.7rem; color:var(--dim); line-height:1.5; }
 
-.mol-rel-card    { background:var(--bg4); border:1px solid var(--border); border-radius:7px; padding:10px; cursor:pointer; transition:.15s; text-align:center; }
-.mol-rel-card:hover { border-color:var(--mol-color,var(--cyan)); background:var(--bg); }
+/* Related molecules */
+.mol-uni-rel-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:4px; }
+.mol-rel-card    { background:var(--bg4); border:1px solid var(--border); border-radius:7px; padding:10px; transition:.15s; text-align:center; position:relative; }
+.mol-rel-card.navigable { cursor:pointer; }
+.mol-rel-card.navigable:hover { border-color:var(--mol-color,var(--cyan)); background:var(--bg); transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,.4); }
+.mol-rel-card.navigable::after { content:'↗'; position:absolute; top:7px; right:9px; font-size:.6rem; color:var(--muted); transition:.15s; }
+.mol-rel-card.navigable:hover::after { color:var(--mol-color,var(--cyan)); }
+.mol-rel-card:not(.navigable) { opacity:.65; cursor:default; }
 .mol-rel-icon { font-size:1.5rem; margin-bottom:5px; }
 .mol-rel-name { font-size:.74rem; color:var(--text); font-weight:600; margin-bottom:3px; }
 .mol-rel-role { font-size:.65rem; color:var(--dim); line-height:1.4; }
 .mol-rel-id   { font-size:.6rem; color:var(--muted); font-family:monospace; margin-top:4px; }
 
-.mol-domain-map { background:var(--bg4); border:1px solid var(--border); border-radius:8px; padding:10px; }
-.mol-domain-row { display:flex; align-items:flex-start; gap:8px; padding:5px 0; border-bottom:1px solid var(--border2); font-size:.7rem; }
-.mol-domain-row:last-child { border-bottom:none; }
-.mol-domain-seg  { width:16px; height:12px; border-radius:2px; flex-shrink:0; margin-top:2px; }
-.mol-domain-name { color:var(--text); font-size:.71rem; font-weight:600; }
-.mol-domain-pos  { font-family:monospace; color:var(--muted); font-size:.62rem; }
-.mol-domain-fn   { color:var(--dim); font-size:.65rem; margin-top:1px; }
+/* 3D spinner */
+.mol-3d-spinner { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#ffffff66; font-size:12px; letter-spacing:.1em; text-align:center; z-index:1; pointer-events:none; animation:mol3dPulse 1.6s ease-in-out infinite; }
+@keyframes mol3dPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
 
+/* Interaction map title — absolute overlay, no fill, uses mol color */
+.mol-imap-title {
+  position:absolute; top:8px; right:10px;
+  font-size:.58rem; font-family:monospace; letter-spacing:.05em;
+  pointer-events:none; user-select:none;
+}
+
+/* Footer */
 #mol-foot { background:var(--bg); border-top:1px solid var(--border); padding:8px 16px; display:flex; align-items:center; gap:10px; flex-shrink:0; }
 .mol-foot-link   { font-size:.7rem; color:var(--cyan); text-decoration:none; transition:.15s; }
 .mol-foot-link:hover { color:var(--bright); }
