@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kbiology — Nobel Frontier 2015–2024</title>
+<link rel="stylesheet" href="shared/theme.css">
+<style>
+html,body{height:100%;overflow-x:hidden}
+#particle-canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
+.hub-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:20px 16px 40px}
+.hub-hdr{text-align:center;padding:32px 0 24px}
+.hub-title{font-size:1.8rem;color:var(--green);text-shadow:0 0 40px rgba(0,255,153,.4);letter-spacing:.1em;margin-bottom:6px}
+.hub-sub{font-size:.8rem;color:var(--dim);letter-spacing:.06em}
+.hub-search{margin:12px auto 0;max-width:360px;display:flex;gap:8px}
+.hub-search input{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:6px;font-size:.8rem;outline:none}
+.hub-search input:focus{border-color:var(--green)}
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding:12px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;align-items:center}
+.filter-lbl{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-right:4px}
+.filter-chip{padding:4px 12px;border-radius:12px;font-size:.7rem;cursor:pointer;border:1px solid;letter-spacing:.04em;transition:.15s;user-select:none;position:relative}
+.filter-chip:hover{filter:brightness(1.3)}
+.filter-chip.active{filter:brightness(1.5)}
+.timeline-section{margin-bottom:24px}
+.timeline-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
+.timeline-rail{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin}
+.timeline-rail::-webkit-scrollbar{height:3px}
+.timeline-rail::-webkit-scrollbar-thumb{background:#2a2a55;border-radius:2px}
+.mod-card{flex-shrink:0;width:148px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 10px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.mod-card:hover{transform:translateY(-2px);border-color:var(--cc,var(--green));box-shadow:0 6px 24px rgba(0,0,0,.5),0 0 16px rgba(0,0,0,.3)}
+.mod-card.filtered-out{opacity:.25;pointer-events:none}
+.mod-card.visited::after{content:'✓';position:absolute;top:6px;right:8px;font-size:.7rem;color:var(--good);opacity:.9}
+.card-year{font-size:.62rem;font-family:monospace;color:var(--cc,var(--green));letter-spacing:.06em;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.card-icon{font-size:1.4rem;margin-bottom:6px}
+.card-title{font-size:.72rem;color:var(--text);line-height:1.4;font-weight:600;margin-bottom:5px}
+.card-tag{font-size:.6rem;padding:2px 7px;border-radius:3px;border:1px solid;display:inline-block}
+.card-glow{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--cc,var(--green));opacity:.3;transition:.2s}
+.mod-card:hover .card-glow{opacity:.8;box-shadow:0 0 10px var(--cc,var(--green))}
+.progress-bar-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:20px}
+.progress-label{display:flex;justify-content:space-between;font-size:.7rem;color:var(--dim);margin-bottom:7px}
+.progress-track{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:2px;transition:width .4s ease}
+.info-bar{display:flex;gap:14px;margin-top:8px}
+.info-stat{font-size:.68rem;color:var(--muted)}
+.info-stat span{color:var(--text);font-family:monospace}
+
+/* Chip modal */
+#chip-modal{
+  display:none;position:fixed;z-index:99999;
+  min-width:240px;max-width:320px;
+  background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+  padding:16px 14px 12px;
+  box-shadow:0 10px 50px rgba(0,0,0,.85);
+  font-size:12px;line-height:1.55;color:var(--text);
+  pointer-events:none;overflow:hidden;transition:border-color .3s
+}
+#chip-modal.vis{display:block}
+#chip-modal .cm-bar{
+  position:absolute;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--cc,#00e5ff) 0%,#fff 50%,var(--cc,#00e5ff) 100%);
+  box-shadow:0 0 10px var(--cc,#00e5ff),0 0 22px rgba(255,255,255,.4);
+  opacity:0;border-radius:10px 10px 0 0;pointer-events:none
+}
+#chip-modal.counting .cm-bar{opacity:1;animation:cmcharge 5s linear forwards}
+#chip-modal.pinned .cm-bar{opacity:1;width:100%;animation:none;background:var(--cc,#00e5ff);box-shadow:0 0 18px var(--cc,#00e5ff),0 0 40px rgba(255,255,255,.5)}
+#chip-modal.pinned{pointer-events:auto;border-color:var(--cc,#00e5ff)}
+@keyframes cmcharge{from{width:0%}to{width:100%}}
+.cm-title{font-size:13px;font-weight:700;color:var(--bright);margin-bottom:4px;display:flex;align-items:center;gap:7px}
+.cm-badge{font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;border:1px solid;flex-shrink:0}
+.cm-desc{color:#8888b0;margin-bottom:8px;font-size:11px}
+.cm-topics{display:flex;flex-direction:column;gap:3px;margin-bottom:7px}
+.cm-topic-row{display:flex;align-items:center;gap:7px;background:var(--bg4);border-radius:4px;padding:3px 7px;font-size:11px}
+.cm-topic-year{color:#44447a;font-family:monospace;font-size:.68rem;flex-shrink:0;width:30px}
+.cm-hint{font-size:.62rem;color:#22224a;margin-top:5px;text-align:center}
+#chip-modal.counting .cm-hint{opacity:0}
+#chip-modal.pinned .cm-hint{display:none}
+.cm-ext-link{display:none;font-size:.68rem;color:var(--cc,#00e5ff);text-decoration:none;margin-top:5px}
+#chip-modal.pinned .cm-ext-link{display:block}
+</style>
+</head>
+<body>
+<canvas id="particle-canvas"></canvas>
+<div class="hub-wrap">
+
+  <div class="hub-hdr">
+    <div class="hub-title">⚗ Nobel Frontier</div>
+    <div class="hub-sub">Medicine &amp; Physiology 2015 – 2024 &nbsp;·&nbsp; Graduate / Postdoc Level</div>
+    <div class="hub-search">
+      <input type="text" id="search-input" placeholder="Search discoveries…" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <span>Learning Progress</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="info-bar">
+      <div class="info-stat">Explored: <span id="stat-visited">0</span>/10</div>
+      <div class="info-stat">Category: <span id="stat-cat">All</span></div>
+    </div>
+  </div>
+
+  <div class="filter-row" id="filter-row">
+    <span class="filter-lbl">Category</span>
+  </div>
+
+  <div class="timeline-section">
+    <div class="timeline-label">Nobel Timeline 2015 – 2024</div>
+    <div class="timeline-rail" id="timeline-rail"></div>
+  </div>
+
+</div>
+
+<div id="chip-modal">
+  <div class="cm-bar"></div>
+  <div class="cm-title"><span id="cm-name"></span><span class="cm-badge" id="cm-badge"></span></div>
+  <div class="cm-desc" id="cm-desc"></div>
+  <div class="cm-topics" id="cm-topics"></div>
+  <div class="cm-hint">Hold 5s to pin</div>
+  <a class="cm-ext-link" id="cm-link" href="#" target="_blank" rel="noopener">Explore on NIH ↗</a>
+</div>
+
+<script>
+// ── Data ─────────────────────────────────────────────────────────────────────
+const MODULES = [
+  {year:2015,title:'Avermectin & Artemisinin', icon:'🧫',category:'pharmacology',tag:'Pharmacology',file:'modules/2015_antiparasitic.html'},
+  {year:2016,title:'Autophagy Mechanisms',     icon:'♻️',category:'cell',         tag:'Cell Bio',    file:'modules/2016_autophagy.html'},
+  {year:2017,title:'Circadian Clocks',          icon:'🕐',category:'genetics',     tag:'Genetics',    file:'modules/2017_circadian.html'},
+  {year:2018,title:'Checkpoint Immunotherapy',  icon:'🎯',category:'immunology',   tag:'Immunology',  file:'modules/2018_immunotherapy.html'},
+  {year:2019,title:'HIF / O\u2082 Sensing',     icon:'⚗️',category:'cell',         tag:'Cell Bio',    file:'modules/2019_hif_oxygen.html'},
+  {year:2020,title:'Hepatitis C Virus',          icon:'🦠',category:'biotech',      tag:'Virology',    file:'modules/2020_hepatitis_c.html'},
+  {year:2021,title:'TRP Channels',               icon:'🌡️',category:'neuroscience', tag:'Neuroscience',file:'modules/2021_trp_channels.html'},
+  {year:2022,title:'Paleogenomics',              icon:'🦴',category:'genetics',     tag:'Genomics',    file:'modules/2022_paleogenomics.html'},
+  {year:2023,title:'mRNA Vaccines',              icon:'💉',category:'biotech',      tag:'Biotech',     file:'modules/2023_mrna.html'},
+  {year:2024,title:'microRNA',                   icon:'🔬',category:'genetics',     tag:'Genomics',    file:'modules/2024_microrna.html'},
+];
+
+const CATEGORIES = {
+  all:{name:'All Discoveries',color:'#00ff99',badge:'10 topics',
+    desc:'The complete Nobel Medicine & Physiology prizes 2015–2024. Cell biology, genomics, immunology, pharmacology, neuroscience and biotechnology.',
+    topics:MODULES.map(m=>({year:String(m.year),name:m.title})),
+    link:'https://www.nobelprize.org/prizes/medicine/'},
+  immunology:{name:'Immunology',color:'#ff4488',badge:'1 prize',
+    desc:'Checkpoint proteins PD-1 and CTLA-4 act as molecular brakes that tumors exploit to evade immune destruction — blocking them unleashes T cells against cancer.',
+    topics:[{year:'2018',name:'PD-1 / CTLA-4 Checkpoint Blockade'}],
+    link:'https://www.niaid.nih.gov/research/immune-system'},
+  cell:{name:'Cell Biology',color:'#00e5ff',badge:'2 prizes',
+    desc:'Fundamental cellular homeostasis — lysosomal autophagy machinery (Ohsumi) and HIF transcription factor oxygen sensing (Kaelin, Ratcliffe, Semenza).',
+    topics:[{year:'2016',name:'Autophagy — lysosomal self-digestion'},{year:'2019',name:'HIF pathway — hypoxia signaling'}],
+    link:'https://www.nigms.nih.gov/education/fact-sheets/Pages/cell-biology.aspx'},
+  genetics:{name:'Genetics / Genomics',color:'#ffd700',badge:'3 prizes',
+    desc:'Molecular clocks from transcription factor feedback loops, ancient DNA from 40,000-year-old bones, and microRNA post-transcriptional silencing networks.',
+    topics:[{year:'2017',name:'CLOCK/BMAL1 circadian oscillator'},{year:'2022',name:'Neanderthal paleogenomics'},{year:'2024',name:'lin-4 / let-7 microRNA silencing'}],
+    link:'https://www.genome.gov/'},
+  pharmacology:{name:'Pharmacology',color:'#aa77ff',badge:'1 prize',
+    desc:'Rational drug discovery from natural products: avermectin from soil bacteria and artemisinin from herbal medicine — ethnopharmacology meets modern drug development.',
+    topics:[{year:'2015',name:'Avermectin & Artemisinin'}],
+    link:'https://www.ncats.nih.gov/'},
+  neuroscience:{name:'Neuroscience',color:'#ff8844',badge:'1 prize',
+    desc:'TRPV1 and PIEZO channels — molecular transducers of heat, cold, and mechanical force at nerve terminals. Opens new analgesic drug targets.',
+    topics:[{year:'2021',name:'TRPV1 / PIEZO thermosensation & mechanosensation'}],
+    link:'https://www.ninds.nih.gov/'},
+  biotech:{name:'Biotech / Virology',color:'#44ffcc',badge:'2 prizes',
+    desc:'HCV characterization enabling curative direct-acting antivirals, and nucleoside-modified mRNA with lipid nanoparticle delivery for rapid vaccine platforms.',
+    topics:[{year:'2020',name:'HCV — NS5A/NS5B targets, pan-genotypic DAAs'},{year:'2023',name:'mRNA — pseudouridine mod, LNP formulation'}],
+    link:'https://www.niaid.nih.gov/'},
+  compbio:{name:'Computational Bio',color:'#88aaff',badge:'2 prizes',
+    desc:'Paleogenomics relies on ancient DNA assembly and admixture modeling. microRNA target prediction drove first-wave bioinformatics tools for ncRNA.',
+    topics:[{year:'2022',name:'Paleogenomics — ADMIXTURE, ancient DNA pipelines'},{year:'2024',name:'microRNA — TargetScan, miRBase, ceRNA networks'}],
+    link:'https://www.ncbi.nlm.nih.gov/'},
+};
+
+// ── localStorage progress ─────────────────────────────────────────────────
+const STORE_KEY = 'kbiology-visited';
+function loadVisited() {
+  try { return new Set(JSON.parse(localStorage.getItem(STORE_KEY) || '[]')); }
+  catch(e) { return new Set(); }
+}
+function saveVisited(s) {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify([...s])); } catch(e){}
+}
+let visited = loadVisited();
+
+function updateProgress() {
+  const pct = Math.round(visited.size / MODULES.length * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('stat-visited').textContent = visited.size;
+  // update card visited state
+  MODULES.forEach(m => {
+    const card = document.getElementById('card-' + m.year);
+    if (card) card.classList.toggle('visited', visited.has(m.year));
+  });
+}
+
+// ── Build filter chips ───────────────────────────────────────────────────────
+let activeCat = 'all';
+const filterRow = document.getElementById('filter-row');
+const CHIP_COLORS = {all:'#00ff99',immunology:'#ff4488',cell:'#00e5ff',genetics:'#ffd700',pharmacology:'#aa77ff',neuroscience:'#ff8844',biotech:'#44ffcc',compbio:'#88aaff'};
+
+Object.entries(CATEGORIES).forEach(([catKey, cat]) => {
+  const chip = document.createElement('span');
+  chip.className = 'filter-chip' + (catKey === 'all' ? ' active' : '');
+  chip.textContent = cat.name;
+  chip.style.borderColor = cat.color;
+  chip.style.color = cat.color;
+  chip.style.background = cat.color + '0d';
+  chip.dataset.cat = catKey;
+  chip.addEventListener('click', () => {
+    activeCat = catKey;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === catKey));
+    document.getElementById('stat-cat').textContent = cat.name;
+    filterCards(catKey);
+    pinned = false; clearTimeout(hoverTimer); chipModal.className = '';
+  });
+  // Hover events wired below
+  filterRow.appendChild(chip);
+});
+
+function filterCards(cat) {
+  MODULES.forEach(m => {
+    const card = document.getElementById('card-' + m.year);
+    if (card) card.classList.toggle('filtered-out', cat !== 'all' && m.category !== cat);
+  });
+}
+
+// ── Build timeline cards ─────────────────────────────────────────────────────
+const rail = document.getElementById('timeline-rail');
+MODULES.forEach(m => {
+  const cat = CATEGORIES[m.category] || CATEGORIES.all;
+  const card = document.createElement('div');
+  card.className = 'mod-card' + (visited.has(m.year) ? ' visited' : '');
+  card.id = 'card-' + m.year;
+  card.style.setProperty('--cc', cat.color);
+
+  const yearEl = document.createElement('div');
+  yearEl.className = 'card-year';
+  yearEl.textContent = m.year;
+
+  const iconEl = document.createElement('div');
+  iconEl.className = 'card-icon';
+  iconEl.textContent = m.icon;
+
+  const titleEl = document.createElement('div');
+  titleEl.className = 'card-title';
+  titleEl.textContent = m.title;
+
+  const tagEl = document.createElement('div');
+  tagEl.className = 'card-tag';
+  tagEl.textContent = m.tag;
+  tagEl.style.color = cat.color;
+  tagEl.style.borderColor = cat.color + '44';
+  tagEl.style.background = cat.color + '10';
+
+  const glowEl = document.createElement('div');
+  glowEl.className = 'card-glow';
+
+  card.appendChild(yearEl);
+  card.appendChild(iconEl);
+  card.appendChild(titleEl);
+  card.appendChild(tagEl);
+  card.appendChild(glowEl);
+
+  card.addEventListener('click', () => {
+    visited.add(m.year);
+    saveVisited(visited);
+    updateProgress();
+    window.open(m.file, '_blank');
+  });
+
+  rail.appendChild(card);
+});
+
+// ── Search filter ────────────────────────────────────────────────────────────
+document.getElementById('search-input').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  MODULES.forEach(m => {
+    const card = document.getElementById('card-' + m.year);
+    if (!card) return;
+    const match = !q || m.title.toLowerCase().includes(q) || String(m.year).includes(q) || m.tag.toLowerCase().includes(q);
+    card.classList.toggle('filtered-out', !match);
+  });
+});
+
+// ── Chip modal (Warhammer 5s charge bar) ─────────────────────────────────────
+const chipModal = document.getElementById('chip-modal');
+let hoverTimer = null, pinned = false;
+
+function buildChipTopics(topics) {
+  const el = document.getElementById('cm-topics');
+  while (el.firstChild) el.removeChild(el.firstChild);
+  topics.forEach(t => {
+    const row = document.createElement('div'); row.className = 'cm-topic-row';
+    const yr = document.createElement('span'); yr.className = 'cm-topic-year'; yr.textContent = t.year;
+    const nm = document.createElement('span'); nm.className = ''; nm.style.color = '#c0c0ea'; nm.textContent = t.name;
+    row.appendChild(yr); row.appendChild(nm);
+    el.appendChild(row);
+  });
+}
+
+function showChipModal(catKey, x, y) {
+  const d = CATEGORIES[catKey]; if (!d) return;
+  chipModal.style.setProperty('--cc', d.color);
+  document.getElementById('cm-name').textContent = d.name;
+  const badge = document.getElementById('cm-badge');
+  badge.textContent = d.badge;
+  badge.style.color = d.color;
+  badge.style.borderColor = d.color + '44';
+  badge.style.background = d.color + '12';
+  document.getElementById('cm-desc').textContent = d.desc;
+  buildChipTopics(d.topics);
+  document.getElementById('cm-link').href = d.link;
+  posChipModal(x, y);
+  chipModal.className = 'vis counting';
+}
+
+function posChipModal(x, y) {
+  const mw=320, mh=280, vw=window.innerWidth, vh=window.innerHeight;
+  let left = x + 14, top = y + 14;
+  if (left + mw > vw - 10) left = x - mw - 14;
+  if (top  + mh > vh - 10) top  = vh - mh - 10;
+  chipModal.style.left = left + 'px';
+  chipModal.style.top  = top  + 'px';
+}
+
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('mouseenter', e => {
+    if (pinned) return;
+    clearTimeout(hoverTimer);
+    const r = chip.getBoundingClientRect();
+    showChipModal(chip.dataset.cat, r.right, r.bottom);
+    hoverTimer = setTimeout(() => {
+      chipModal.classList.remove('counting');
+      chipModal.classList.add('pinned');
+      pinned = true;
+    }, 5000);
+  });
+  chip.addEventListener('mouseleave', () => {
+    if (pinned) return;
+    clearTimeout(hoverTimer);
+    chipModal.className = '';
+  });
+  chip.addEventListener('mousemove', e => {
+    if (!pinned && chipModal.classList.contains('vis')) posChipModal(e.clientX, e.clientY);
+  });
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.filter-chip') && !e.target.closest('#chip-modal')) {
+    pinned = false; clearTimeout(hoverTimer); chipModal.className = '';
+  }
+});
+
+// ── Particle background ───────────────────────────────────────────────────────
+(function() {
+  const cv = document.getElementById('particle-canvas');
+  const ctx = cv.getContext('2d');
+  const COLORS = ['#00ff99','#00e5ff','#ffd700','#ff4488','#ff8844','#44ffcc','#88aaff','#aa77ff'];
+  let W, H, particles = [];
+
+  function resize() {
+    W = cv.width  = window.innerWidth;
+    H = cv.height = window.innerHeight;
+  }
+
+  function mkParticle() {
+    return {
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+      r: 1 + Math.random() * 2.5,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      a: Math.random() * Math.PI * 2, da: (Math.random() - 0.5) * 0.01
+    };
+  }
+
+  resize();
+  for (let i = 0; i < 55; i++) particles.push(mkParticle());
+  window.addEventListener('resize', resize);
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.a += p.da;
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W + 10) p.x = -10;
+      if (p.y < -10) p.y = H + 10;
+      if (p.y > H + 10) p.y = -10;
+      const opacity = 0.15 + 0.15 * Math.sin(p.a);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = opacity;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+updateProgress();
+</script>
+</body>
+</html>
