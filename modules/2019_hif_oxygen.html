@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2019 · HIF / Oxygen Sensing — kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css">
+<style>
+/* Module layout */
+.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
+.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
+.back-link:hover{color:var(--green);border-color:var(--green)}
+.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
+.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
+.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
+.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
+.mod-tab:hover{color:var(--text);background:var(--bg3)}
+.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
+.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
+.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
+
+/* Body layout */
+.mod-body{display:flex;min-height:calc(100vh - 100px)}
+.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
+.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Canvas */
+.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
+.canvas-wrap canvas{display:block;width:100%;height:240px}
+.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
+
+/* Mechanism panels */
+.mech-panels{display:flex;flex-direction:column;gap:10px}
+.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
+.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
+.mech-panel-body strong{color:var(--text)}
+.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+
+/* Molecules tab */
+.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
+.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
+.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
+.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
+.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
+.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
+
+/* Story tab */
+.story-content{max-width:720px}
+.story-block{margin-bottom:16px}
+.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
+
+/* Frontiers tab */
+.frontier-group{margin-bottom:20px}
+.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
+.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
+.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
+
+/* Connections tab */
+.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
+.connections-wrap canvas{display:block;width:100%;height:360px}
+
+/* Right sidebar */
+.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
+.rsb-mol-item:hover{color:var(--cyan)}
+.rsb-mol-icon{font-size:1rem;flex-shrink:0}
+.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
+.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
+</style>
+</head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#ff8844;border-color:#ff884444;background:#ff884410">2019</span>
+    <div class="mod-title">HIF / Oxygen Sensing</div>
+  </div>
+  <div class="mod-laureates">William G. Kaelin Jr., Sir Peter J. Ratcliffe &amp; Gregg L. Semenza &#8212; Nobel Prize 2019</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#00e5ff;border-color:#00e5ff44;background:#00e5ff10">Cell Biology</span>
+    <span class="mod-tag" style="color:#ff8844;border-color:#ff884444;background:#ff884410">Hypoxia</span>
+    <span class="mod-tag" style="color:#ff4488;border-color:#ff448844;background:#ff448810">Oncology</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; Normoxia</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">PHD2 activity</span><span class="ctrl-val" id="lay-phd">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">VHL E3 ligase</span><span class="ctrl-val" id="lay-vhl">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">HIF targets</span><span class="ctrl-val" id="lay-targets">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> PHD2 uses O&#8322; as a co-substrate, making it a direct molecular O&#8322; sensor — HIF-1&alpha; half-life drops from &gt;30 min (hypoxia) to &lt;5 min (normoxia).
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; Normoxia: PHD2 Active, HIF-1&alpha; Degraded</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2019/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel Prize 2019 &#8212; official announcement</div>
+      </a>
+      <a href="https://www.rcsb.org/structure/1LM8" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">RCSB PDB</div>
+        <div class="ref-title">PDB: HIF-1&alpha; PAS-B domain (1LM8)</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
+// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'hydroxylation': { term:'Prolyl hydroxylation (HIF)', level:'grad', def:'PHD enzymes modify Pro402 and Pro564 of HIF-1\u03b1 using O\u2082, 2-oxoglutarate (2-OG), and Fe\u00b2\u207a as co-substrates, generating 4-hydroxyproline. This modification is recognized by VHL with Kd ~1 \u00b5M (hydroxylated) vs >1 mM (unmodified) \u2014 1000-fold selectivity for the modified form.' },
+  'vegf_a':  { term:'VEGF-A', level:'grad', def:'Vascular endothelial growth factor A \u2014 principal HIF-1\u03b1 target gene. Binds VEGFR1 (decoy) and VEGFR2 (signaling) on endothelial cells driving angiogenesis, permeability, and endothelial survival. Target of bevacizumab (anti-VEGF mAb) and VEGFR TKIs (sunitinib, pazopanib).' },
+  'clear_cell_rcc': { term:'Clear-cell renal cell carcinoma (ccRCC)', level:'res', def:'Most common kidney cancer (~75% of RCC). VHL tumor suppressor mutated/methylated in >90% of cases, constitutively activating HIF-1\u03b1/2\u03b1. Characterized by lipid/glycogen accumulation (clear cytoplasm). Highly angiogenic; sensitive to VEGFR TKIs, mTOR inhibitors, and belzutifan (HIF-2\u03b1 inhibitor).' },
+  'oerf':    { term:'Oxygen-dependent degradation domain (ODD)', level:'res', def:'Region of HIF-1\u03b1 (residues ~400\u2013603) containing Pro402 and Pro564 \u2014 the two PHD hydroxylation sites. The ODD is necessary and sufficient for oxygen-dependent HIF degradation. Fusion of the ODD to other proteins renders them oxygen-sensitive. Critical target for PHD inhibitor drug design.' },
+});
+
+// ── Module molecules data ────────────────────────────────────────────────────
+const MODULE_MOLS = [
+  { id:'hif1a', icon:'\ud83d\udfe0', color:'#ff8844', type:'Protein \u00b7 bHLH-PAS TF', is_protein:true,
+    name:'HIF-1\u03b1', sub:'PDB: 1LM8 \u00b7 826 aa \u00b7 oxygen-responsive TF',
+    badges:[{text:'O2 sensor',color:'#ff8844'},{text:'Tumor driver',color:'#ff4444'},{text:'Nobel 2019',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'1LM8',
+    nih_link:'https://www.rcsb.org/structure/1LM8',
+    mechanism:'Constitutively synthesized but under normoxia: PHD2 hydroxylates Pro402 and Pro564 using O\u2082 + 2-OG. Hydroxylated HIF-1\u03b1 is recognized by pVHL E3 ligase \u2192 polyubiquitination \u2192 26S proteasomal degradation (t\u00bd <5 min). Under hypoxia: PHD2 inactive (no O\u2082 substrate) \u2192 HIF-1\u03b1 accumulates \u2192 dimerizes with HIF-1\u03b2/ARNT \u2192 binds HRE (5\u2032-RCGTG-3\u2032) \u2192 transcribes VEGF-A, EPO, LDHA, PDK1, >100 target genes.',
+    properties:{'PDB':'1LM8 (PAS-B domain)','Domains':'bHLH, PAS-A, PAS-B, TAD-N (P402), ODD (P564), TAD-C','Hydroxylation sites':'Pro402 (PHD2+3) and Pro564 (PHD2)','Half-life (normoxia)':'<5 min','Half-life (hypoxia)':'>30 min','Cancer relevance':'Overexpressed in >70% of human cancers'},
+    property_flags:{'Cancer relevance':'bad'},
+    interaction:{ title:'HIF-1\u03b1 Oxygen-Dependent Degradation',
+      nodes:[
+        {id:'o2',   x:80, y:80, r:22,color:'#00e5ff',label:'O\u2082',       sub:'substrate'},
+        {id:'phd',  x:250,y:80, r:26,color:'#ffd700',label:'PHD2',     sub:'hydroxylase'},
+        {id:'hif',  x:250,y:220,r:30,color:'#ff8844',label:'HIF-1\u03b1',   sub:'Pro402/564'},
+        {id:'vhl',  x:420,y:220,r:26,color:'#00ff99',label:'pVHL',     sub:'E3 ligase'},
+        {id:'prot', x:420,y:360,r:22,color:'#aa77ff',label:'26S Proteasome',sub:'degradation'},
+      ],
+      edges:[
+        {from:'o2',  to:'phd', color:'#00e5ff',label:'required\nco-substrate',         dashed:false},
+        {from:'phd', to:'hif', color:'#ffd700',label:'hydroxylates\nPro402+564',       dashed:false},
+        {from:'hif', to:'vhl', color:'#00ff99',label:'OH-Pro\nrecognized',             dashed:false},
+        {from:'vhl', to:'prot',color:'#aa77ff',label:'polyUb \u2192\ndegradation',          dashed:false},
+      ]
+    },
+    papers:[
+      {year:'1992',journal:'PNAS',   impact:'IF 11',title:'Identification of hypoxia-inducible factor 1 (Semenza)',abstract:'Semenza and Wang: HIF-1 identified by binding the erythropoietin (EPO) enhancer under hypoxia. First characterization of the hypoxia-sensing transcription factor.'},
+      {year:'2001',journal:'Mol Cell',impact:'IF 19',title:'An oxygen-regulated switch in the protein stability of oncoproteins',abstract:'Kaelin lab: von Hippel-Lindau tumor suppressor functions as ubiquitin ligase targeting HIF-1\u03b1 under normoxia. VHL mutations in RCC constitutively activate HIF pathway.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe2',name:'HIF-1\u03b2/ARNT',role:'Obligate dimerization partner\nnot O2-regulated',   id:'ARNT gene'},
+      {icon:'\ud83d\udd35',name:'pVHL',       role:'E3 ligase recognizing\nOH-HIF-1\u03b1',                 id:'PDB: 1LQB'},
+    ],
+    domains:[
+      {color:'#ff8844',name:'bHLH domain',      pos:'1\u201375',    fn:'DNA binding to HRE (RCGTG)'},
+      {color:'#ffd700',name:'PAS-A domain',      pos:'85\u2013162',  fn:'Dimerization with HIF-1\u03b2'},
+      {color:'#ff4488',name:'PAS-B domain',      pos:'172\u2013350', fn:'Additional dimerization; heat shock protein binding'},
+      {color:'#00e5ff',name:'TAD-N / ODD',       pos:'395\u2013603', fn:'P402 and P564 hydroxylation sites \u2014 O2-sensitive'},
+      {color:'#00ff99',name:'TAD-C domain',      pos:'786\u2013826', fn:'p300/CBP coactivator recruitment under hypoxia'},
+    ]
+  },
+  { id:'vhl', icon:'\ud83d\udfe2', color:'#00e5ff', type:'Protein \u00b7 E3 ligase component', is_protein:true,
+    name:'pVHL (Von Hippel-Lindau)', sub:'PDB: 1LQB \u00b7 213 aa',
+    badges:[{text:'Tumor suppressor',color:'#00e5ff'},{text:'HIF-1\u03b1 E3 ligase',color:'#00ff99'},{text:'Nobel 2019',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'1LQB',
+    nih_link:'https://www.rcsb.org/structure/1LQB',
+    mechanism:'VHL protein is the substrate recognition subunit of CRL2-VHL E3 ubiquitin ligase (VHL-Elongin B-Elongin C-Cullin 2-RBX1). The \u03b2-domain recognizes hydroxylated Pro402/Pro564 of HIF-1\u03b1 with ~1 \u00b5M Kd; unmodified proline >1 mM \u2014 1000-fold selectivity. Loss-of-function VHL mutations in >90% of clear-cell RCC constitutively activate HIF pathway. VHL also has HIF-independent functions (microtubule stabilization, centrosome regulation).',
+    properties:{'PDB':'1LQB','Structure':'pVHL\u00b7Elongin B\u00b7Elongin C trimeric complex','\u03b2-domain':'HIF-1\u03b1 hydroxyproline binding','\u03b1-domain':'Elongin B/C binding','VHL mutations in ccRCC':'>90%','VHL syndrome':'Hemangioblastomas, pheochromocytoma, ccRCC'},
+    property_flags:{'VHL mutations in ccRCC':'bad'},
+    interaction:{ title:'VHL E3 Ligase Complex',
+      nodes:[
+        {id:'hif',  x:100,y:150,r:24,color:'#ff8844',label:'OH-HIF-1\u03b1',  sub:'hydroxyPro'},
+        {id:'vhl',  x:280,y:150,r:30,color:'#00e5ff',label:'pVHL\n\u03b2-domain',sub:'recognition'},
+        {id:'elong',x:440,y:100,r:22,color:'#ffd700',label:'Elongin B/C', sub:'scaffold'},
+        {id:'cul2', x:440,y:220,r:22,color:'#aa77ff',label:'Cullin 2',    sub:'E3 backbone'},
+        {id:'ub',   x:280,y:320,r:22,color:'#ff4488',label:'Ub chains',   sub:'polyUb \u2192 proteasome'},
+      ],
+      edges:[
+        {from:'hif',  to:'vhl', color:'#ff8844',label:'OH-Pro\nrecognized',         dashed:false},
+        {from:'vhl',  to:'elong',color:'#ffd700',label:'\u03b1-domain\nbinds elongins',  dashed:false},
+        {from:'elong',to:'cul2', color:'#aa77ff',label:'scaffold',                  dashed:false},
+        {from:'cul2', to:'ub',   color:'#ff4488',label:'ubiquitin\ntransfer',        dashed:false},
+      ]
+    },
+    papers:[
+      {year:'1998',journal:'Science',impact:'IF 56',title:'VHL tumor suppressor protein is an important regulator of cell cycle exit',abstract:'Kaelin lab: VHL targets HIF for proteasomal degradation. Missing VHL in RCC leads to HIF accumulation \u2014 explaining the hypervascular phenotype of clear-cell RCC.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe0',name:'HIF-1\u03b1',    role:'E3 substrate\nhydroxyProline-dependent',   id:'PDB: 1LM8'},
+      {icon:'\ud83d\udc9c',name:'Belzutifan',role:'HIF-2\u03b1 inhibitor\nVHL mutation ccRCC',     id:'Welireg FDA 2021'},
+    ],
+    domains:[
+      {color:'#00e5ff',name:'\u03b2-domain',      pos:'1\u2013132',   fn:'OH-HIF-1\u03b1 substrate recognition via hydroxyproline pocket'},
+      {color:'#00ff99',name:'\u03b1-domain',       pos:'133\u2013213', fn:'Elongin B/C binding \u2014 anchors VHL to CRL2 scaffold'},
+    ]
+  },
+  { id:'phd2', icon:'\ud83d\udd35', color:'#aa77ff', type:'Protein \u00b7 Dioxygenase', is_protein:true,
+    name:'PHD2 (EGLN1)', sub:'PDB: 2HBT \u00b7 426 aa \u00b7 the primary O\u2082 sensor',
+    badges:[{text:'O2-sensor dioxygenase',color:'#aa77ff'},{text:'Fe\u00b2\u207a/2-OG dependent',color:'#ffd700'},{text:'Nobel 2019',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'2HBT',
+    nih_link:'https://www.rcsb.org/structure/2HBT',
+    mechanism:'PHD2 (EGLN1) is the primary HIF-1\u03b1 hydroxylase \u2014 O\u2082/2-oxoglutarate/Fe\u00b2\u207a-dependent dioxygenase. Catalysis: O\u2082 + 2-OG + Fe\u00b2\u207a \u2192 succinate + CO\u2082 + Fe\u00b3\u207a; the activated oxygen inserts into HIF-1\u03b1 Pro564 (and independently Pro402). PHD2 activity is directly proportional to [O\u2082] \u2014 making it the molecular O\u2082 sensor. Inhibited by competitors of 2-OG: succinate and fumarate accumulation in IDH/SDH-mutant cancers activates HIF pathway.',
+    properties:{'PDB':'2HBT','Catalytic mechanism':'O\u2082/2-OG/Fe\u00b2\u207a dioxygenase','Primary hydroxylation site':'Pro564 (HIF-1\u03b1 ODD)','O2 Km':'~230 \u00b5M (atmospheric ~210 \u00b5M)','Inhibitors (endogenous)':'Succinate, fumarate (SDH/FH mutations)','PHD inhibitors (drugs)':'Roxadustat, vadadustat, daprodustat'},
+    property_flags:{},
+    interaction:{ title:'PHD2: Molecular O\u2082 Sensor',
+      nodes:[
+        {id:'o2',    x:80, y:100,r:22,color:'#00e5ff',label:'O\u2082',       sub:'co-substrate'},
+        {id:'2og',   x:200,y:60, r:20,color:'#ffd700',label:'2-OG',     sub:'co-substrate'},
+        {id:'fe2',   x:320,y:60, r:18,color:'#ff8844',label:'Fe\u00b2\u207a',     sub:'cofactor'},
+        {id:'phd',   x:250,y:200,r:28,color:'#aa77ff',label:'PHD2',     sub:'EGLN1'},
+        {id:'pro',   x:250,y:340,r:24,color:'#ff8844',label:'HIF-1\u03b1\nPro564',sub:'substrate'},
+        {id:'succ',  x:420,y:200,r:22,color:'#ff4444',label:'Succinate', sub:'SDH mutant'},
+      ],
+      edges:[
+        {from:'o2',  to:'phd',  color:'#00e5ff',label:'required\nsubstrate',     dashed:false},
+        {from:'2og', to:'phd',  color:'#ffd700', label:'co-substrate',            dashed:false},
+        {from:'fe2', to:'phd',  color:'#ff8844', label:'cofactor',                dashed:false},
+        {from:'phd', to:'pro',  color:'#aa77ff', label:'hydroxylates\nPro564',    dashed:false},
+        {from:'succ',to:'phd',  color:'#ff444488',label:'competitive\ninhibition', dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2001',journal:'Science',impact:'IF 56',title:'Targeting of HIF-\u03b1 to the von Hippel-Lindau Ubiquitylation Complex by O2-Regulated Prolyl Hydroxylation',abstract:'Ohh, Bhatt, Kaelin: PHD enzymes identified as O2-dependent HIF-1\u03b1 hydroxylases. The molecular O2 sensor mechanism elucidated simultaneously by Kaelin, Ratcliffe, and Semenza labs.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe0',name:'HIF-1\u03b1',      role:'Primary substrate\nPro402/564',         id:'PDB: 1LM8'},
+      {icon:'\ud83d\udfe2',name:'Roxadustat',   role:'PHD inhibitor for\nrenal anemia',        id:'FG-4592, FDA China'},
+    ],
+    domains:[
+      {color:'#88aaff',name:'MYND-type zinc finger',pos:'1\u201363',   fn:'Protein-protein interactions; substrate recruitment'},
+      {color:'#aa77ff',name:'Catalytic cupin fold', pos:'183\u2013426', fn:'Fe\u00b2\u207a binding (H313, D315, H374) + 2-OG + O\u2082 binding; HIF hydroxylation'},
+    ]
+  },
+  { id:'belzutifan', icon:'\ud83d\udc9c', color:'#00ff99', type:'Small Molecule \u00b7 HIF-2\u03b1 inhibitor', is_protein:false,
+    name:'Belzutifan (Welireg)', sub:'PubChem available \u00b7 FDA 2021',
+    badges:[{text:'HIF-2\u03b1 inhibitor',color:'#00ff99'},{text:'FDA 2021 (VHL-RCC)',color:'#ffd700'},{text:'First HIF inhibitor',color:'#00e5ff'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://www.fda.gov/drugs/resources-information-approved-drugs/welireg-belzutifan',
+    mechanism:'Allosteric HIF-2\u03b1 PAS-B domain inhibitor \u2014 disrupts HIF-2\u03b1:ARNT (HIF-1\u03b2) dimerization. Binds an internal cavity within HIF-2\u03b1 PAS-B domain (identified by Bhatt lab, University of Texas). First approved HIF-pathway inhibitor. FDA approved 2021 for VHL-mutation ccRCC, hemangioblastomas, pancreatic NETs. Phase 3 vs everolimus in ccRCC (LITESPARK-005) shows 22.7 vs 3.5 month PFS. Second-line therapy becoming first-line consideration.',
+    properties:{'MW':'383.4 g/mol','Target':'HIF-2\u03b1 PAS-B domain (allosteric)','Mechanism':'Disrupts HIF-2\u03b1:ARNT dimerization','FDA approved':'Aug 2021','Indication':'VHL-mutant ccRCC, hemangioblastoma, pancreatic NETs','Phase 3 PFS':'22.7 months vs 3.5 (everolimus)'},
+    property_flags:{'FDA approved':'good','Phase 3 PFS':'good'},
+    interaction:{ title:'Belzutifan: Allosteric HIF-2\u03b1 Inhibition',
+      nodes:[
+        {id:'belz', x:100,y:100,r:24,color:'#00ff99',label:'Belzutifan',sub:'PAS-B binder'},
+        {id:'hif2', x:280,y:150,r:30,color:'#ff8844',label:'HIF-2\u03b1\nPAS-B',sub:'cavity binding'},
+        {id:'arnt', x:420,y:100,r:24,color:'#aa77ff',label:'ARNT\n(HIF-1\u03b2)',sub:'partner blocked'},
+        {id:'hre',  x:420,y:280,r:24,color:'#ffd700',label:'HRE target\ngenes',sub:'VEGF, cycD1'},
+        {id:'norm', x:100,y:280,r:24,color:'#00e5ff',label:'Normal\nHIF-2\u03b1',  sub:'without drug'},
+      ],
+      edges:[
+        {from:'belz',to:'hif2',color:'#00ff99',label:'allosteric\nbinding cavity',   dashed:false},
+        {from:'hif2',to:'arnt',color:'#aa77ff44',label:'dimerization\nblocked',      dashed:true},
+        {from:'arnt',to:'hre', color:'#ffd70044',label:'transcription\nblocked',     dashed:true},
+        {from:'norm',to:'arnt',color:'#ff884488',label:'normally\ndimerizes',        dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2021',journal:'NEJM',impact:'IF 176',title:'Belzutifan for Renal Cell Carcinoma in von Hippel-Lindau Disease',abstract:'Choueiri et al.: 49% ORR, 91% disease control rate in VHL-mutation ccRCC. First HIF inhibitor to show clinical efficacy. New therapeutic paradigm for HIF-driven cancers.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe0',name:'HIF-2\u03b1',     role:'Direct target\nPAS-B allosteric site',  id:'EPAS1 gene'},
+      {icon:'\ud83d\udd35',name:'Roxadustat', role:'PHD inhibitor\nopposite mechanism',      id:'FG-4592'},
+    ]
+  },
+];
+
+// ── Mechanism phases ─────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 Normoxia: PHD2 Active, HIF-1\u03b1 Degraded', color:'#ff8844', mol:'phd2'},
+  {label:'Phase 1 \u2014 PHD2 Hydroxylation of HIF-1\u03b1 Pro564', color:'#ffd700', mol:'phd2'},
+  {label:'Phase 2 \u2014 VHL Recognition and Ubiquitination', color:'#00e5ff', mol:'vhl'},
+  {label:'Phase 3 \u2014 Hypoxia: PHD Inactive, HIF-1\u03b1 Accumulates', color:'#aa77ff', mol:'hif1a'},
+  {label:'Phase 4 \u2014 HIF Target Gene Transcription (VEGF, EPO)', color:'#00ff99', mol:'hif1a'},
+];
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+document.querySelectorAll('.mod-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panelId = 'panel-' + tab.dataset.tab;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (tab.dataset.tab === 'connections') drawConnections();
+  });
+});
+
+// ── Mechanism canvas animation ────────────────────────────────────────────────
+const mechCv = document.getElementById('mech-canvas');
+let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
+
+function mechDraw(phase, t) {
+  const cv = mechCv;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+
+  if (phase === 0) {
+    // Normoxia: O2 + PHD2 active, HIF-1a degraded rapidly
+    // PHD2 enzyme in center
+    ctx.beginPath(); ctx.arc(cx, cy, 30, 0, Math.PI * 2);
+    ctx.fillStyle = '#aa77ff22'; ctx.fill();
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PHD2', cx, cy - 3); ctx.fillText('ACTIVE', cx, cy + 9);
+    // O2 molecules orbiting
+    for (let i = 0; i < 4; i++) {
+      const a = (t * 0.03) + i * (Math.PI / 2);
+      const x = cx + 65 * Math.cos(a), y = cy + 40 * Math.sin(a);
+      ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2);
+      ctx.fillStyle = '#00e5ff33'; ctx.fill();
+      ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#00e5ff'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('O\u2082', x, y + 3);
+    }
+    // HIF-1a being degraded
+    const fadeX = cx + 130, fadeY = cy;
+    const alpha = 0.3 + 0.3 * Math.abs(Math.sin(t * 0.04));
+    ctx.globalAlpha = alpha;
+    ctx.beginPath(); ctx.arc(fadeX, fadeY, 20, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff884422'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1\u03b1', fadeX, fadeY + 3);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#ff884455'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('t\u00bd < 5 min', fadeX, fadeY + 36);
+    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Normoxia: PHD2 uses O\u2082 \u2192 HIF-1\u03b1 continuously degraded', cx, H - 20);
+  } else if (phase === 1) {
+    // PHD2 hydroxylating HIF-1a Pro564
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+    // PHD2
+    ctx.beginPath(); ctx.arc(cx - 80, cy - 20, 28, 0, Math.PI * 2);
+    ctx.fillStyle = '#aa77ff22'; ctx.fill(); ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PHD2', cx - 80, cy - 23); ctx.fillText('Fe\u00b2\u207a / 2-OG', cx - 80, cy - 11);
+    // HIF-1a Pro564
+    ctx.beginPath(); ctx.arc(cx + 80, cy - 20, 28, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff884422'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1\u03b1', cx + 80, cy - 23); ctx.fillText('Pro564', cx + 80, cy - 11);
+    // O2 arrow
+    const arrowX = cx;
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(cx - 52, cy - 20); ctx.lineTo(cx + 52, cy - 20); ctx.stroke();
+    ctx.setLineDash([]);
+    // OH product pulsing
+    ctx.globalAlpha = 0.4 + 0.6 * pulse;
+    ctx.beginPath(); ctx.arc(cx + 80, cy + 30, 16, 0, Math.PI * 2);
+    ctx.fillStyle = '#00ff9944'; ctx.fill(); ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00ff99'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('OH-Pro', cx + 80, cy + 33);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('O\u2082 + 2-OG \u2192 4-hydroxyproline on Pro564 (and Pro402)', cx, H - 20);
+  } else if (phase === 2) {
+    // VHL recognizing OH-HIF-1a, ubiquitination
+    const ub_t = (t * 0.03) % (Math.PI * 2);
+    // VHL complex
+    ctx.beginPath(); ctx.arc(cx, cy, 34, 0, Math.PI * 2);
+    ctx.fillStyle = '#00e5ff22'; ctx.fill(); ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('pVHL', cx, cy - 4); ctx.fillText('E3 complex', cx, cy + 8);
+    // OH-HIF coming in
+    const hifX = cx - 120 + Math.min(t * 0.5, 80);
+    ctx.beginPath(); ctx.arc(hifX, cy, 22, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff884433'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('OH-HIF', hifX, cy - 2); ctx.fillText('1\u03b1', hifX, cy + 9);
+    // Ubiquitin chains
+    for (let i = 0; i < 4; i++) {
+      const a = ub_t + i * (Math.PI / 2);
+      const ux = cx + 80 * Math.cos(a), uy = cy + 50 * Math.sin(a);
+      ctx.beginPath(); ctx.arc(ux, uy, 10, 0, Math.PI * 2);
+      ctx.fillStyle = '#aa77ff33'; ctx.fill(); ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = '#aa77ffaa'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+      ctx.fillText('Ub', ux, uy + 3);
+    }
+    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('pVHL recognizes OH-Pro (Kd ~1 \u00b5M) \u2192 polyubiquitination \u2192 26S proteasome', cx, H - 20);
+  } else if (phase === 3) {
+    // Hypoxia: PHD2 inactive, HIF-1a accumulates and translocates
+    // Low O2 indicator
+    ctx.fillStyle = '#00e5ff44'; ctx.font = 'bold 11px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('[O\u2082] < 5%', 20, 30);
+    ctx.fillStyle = '#00e5ff22'; ctx.font = '9px monospace';
+    ctx.fillText('PHD2 inactive \u2014 no substrate', 20, 45);
+    // PHD2 crossed out
+    ctx.beginPath(); ctx.arc(cx - 90, cy, 26, 0, Math.PI * 2);
+    ctx.fillStyle = '#aa77ff11'; ctx.fill(); ctx.strokeStyle = '#aa77ff44'; ctx.lineWidth = 2; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx - 114, cy - 20); ctx.lineTo(cx - 66, cy + 20); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx - 66, cy - 20); ctx.lineTo(cx - 114, cy + 20); ctx.stroke();
+    ctx.fillStyle = '#aa77ff44'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PHD2', cx - 90, cy + 3);
+    // HIF-1a building up
+    const scale = Math.min(1, (t % 100) / 50);
+    const r = 20 + 14 * scale;
+    ctx.beginPath(); ctx.arc(cx + 60, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff884433'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1\u03b1', cx + 60, cy - 2); ctx.fillText('\u2191\u2191 accumulates', cx + 60, cy + 12);
+    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Hypoxia \u2192 PHD2 stalls \u2192 HIF-1\u03b1 escapes degradation (t\u00bd > 30 min)', cx, H - 20);
+  } else if (phase === 4) {
+    // HIF target gene transcription: nucleus with HRE
+    const orbit = 60;
+    // Nucleus
+    ctx.beginPath(); ctx.arc(cx, cy, orbit, 0, Math.PI * 2);
+    ctx.fillStyle = '#05050f'; ctx.fill(); ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 2; ctx.setLineDash([6,3]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#ffd70066'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Nucleus', cx, cy - orbit + 14);
+    // HRE sequence
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('5\'-RCGTG-3\' (HRE)', cx, cy - 6);
+    // HIF-1a/HIF-1b dimer on DNA
+    ctx.beginPath(); ctx.arc(cx - 18, cy + 18, 14, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff884433'; ctx.fill(); ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = '7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1\u03b1', cx - 18, cy + 21);
+    ctx.beginPath(); ctx.arc(cx + 18, cy + 18, 14, 0, Math.PI * 2);
+    ctx.fillStyle = '#00ff9933'; ctx.fill(); ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#00ff99'; ctx.font = '7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1\u03b2', cx + 18, cy + 21);
+    // Target gene labels orbiting
+    const genes = ['VEGF-A', 'EPO', 'LDHA', 'PDK1'];
+    genes.forEach((gene, i) => {
+      const a = (t * 0.02) + i * (Math.PI / 2);
+      const gx = cx + (orbit + 38) * Math.cos(a), gy = cy + (orbit + 38) * Math.sin(a);
+      ctx.beginPath(); ctx.arc(gx, gy, 18, 0, Math.PI * 2);
+      ctx.fillStyle = '#00ff9922'; ctx.fill(); ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#00ff99'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(gene, gx, gy + 3);
+    });
+    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('HIF-1\u03b1/\u03b2 dimer binds HRE \u2192 VEGF-A, EPO, LDHA, PDK1, >100 targets', cx, H - 20);
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  animT = 0; animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
+  animT = 0; mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ───────────────────────────────────────────────────
+(function buildMechPanels() {
+  const container = document.getElementById('mech-panels');
+  const panelData = [
+    { title:'Phase 0 \u2014 Normoxia: PHD2 Active, HIF-1\u03b1 Degraded', color:'#ff8844', mol:'phd2',
+      body:'Under normoxia (21% O\u2082), <strong>PHD2 (EGLN1)</strong> hydroxylates Pro402 and Pro564 of HIF-1\u03b1 using O\u2082, 2-oxoglutarate, and Fe\u00b2\u207a as co-substrates. This is a continuous, O\u2082-proportional reaction. Hydroxylated HIF-1\u03b1 is immediately recognized by the VHL E3 ubiquitin ligase complex, polyubiquitinated, and degraded by the 26S proteasome. Under normoxia, HIF-1\u03b1 half-life is <5 minutes \u2014 steady-state levels are essentially undetectable.'},
+    { title:'Phase 1 \u2014 PHD2 Hydroxylation of HIF-1\u03b1 Pro564', color:'#ffd700', mol:'phd2',
+      body:'<strong>PHD2 dioxygenase catalysis</strong>: O\u2082 + 2-oxoglutarate + Fe\u00b2\u207a \u2192 succinate + CO\u2082 + Fe\u00b3\u207a; activated oxygen is inserted into the C-H bond of Pro564 (and independently Pro402) generating 4-hydroxyproline. PHD2 has Km for O\u2082 of ~230 \u00b5M, close to atmospheric O\u2082 (~210 \u00b5M) \u2014 making it exquisitely sensitive to physiological O\u2082 fluctuations. This is the direct molecular mechanism of O\u2082 sensing.'},
+    { title:'Phase 2 \u2014 VHL Recognition and Ubiquitination', color:'#00e5ff', mol:'vhl',
+      body:'<strong>pVHL \u03b2-domain</strong> recognizes the hydroxylated proline on HIF-1\u03b1 with Kd ~1 \u00b5M, compared to >1 mM for unmodified proline \u2014 a 1000-fold selectivity switch. VHL is the substrate recognition subunit of the CRL2-VHL E3 complex (VHL-Elongin B-Elongin C-Cullin 2-RBX1). Poly-K48-ubiquitination targets HIF-1\u03b1 for 26S proteasomal destruction. In >90% of clear-cell RCC, VHL is mutated \u2014 constitutively activating HIF regardless of O\u2082 levels.'},
+    { title:'Phase 3 \u2014 Hypoxia: PHD Inactive, HIF-1\u03b1 Accumulates', color:'#aa77ff', mol:'hif1a',
+      body:'When [O\u2082] drops below ~5% (tumor core, high altitude, ischemia), <strong>PHD2 lacks its co-substrate</strong> and hydroxylation ceases. HIF-1\u03b1 is no longer recognized by pVHL and escapes proteasomal degradation. Half-life rises from <5 min to >30 min \u2014 HIF-1\u03b1 protein rapidly accumulates in the cytoplasm and translocates to the nucleus. The same mechanism is hijacked in VHL-mutant cancers even under normoxia (pseudohypoxia).'},
+    { title:'Phase 4 \u2014 HIF Target Gene Transcription (VEGF, EPO)', color:'#00ff99', mol:'hif1a',
+      body:'Accumulated <strong>HIF-1\u03b1</strong> dimerizes with its constitutive partner HIF-1\u03b2/ARNT, recruits p300/CBP coactivators via TAD-C, and binds hypoxia response elements (HRE: 5\u2032-RCGTG-3\u2032) in target gene promoters/enhancers. >100 transcriptional targets include: <strong>VEGF-A</strong> (angiogenesis), <strong>EPO</strong> (erythropoiesis), <strong>LDHA/PDK1</strong> (Warburg glycolysis), GLUT1, CAIX, and stem cell factors. This adaptive transcriptional program is co-opted in cancer to drive tumor vascularization, metabolic reprogramming, and metastasis.'},
+  ];
+
+  panelData.forEach(p => {
+    const panel = document.createElement('div');
+    panel.className = 'mech-panel';
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    const bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    const titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+    const body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    // Parse simple <strong> tags safely (developer-controlled content)
+    const parts = p.body.split(/<strong>|<\/strong>/);
+    parts.forEach((part, i) => {
+      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
+      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
+    });
+    // Molecule chip if specified
+    if (p.mol) {
+      const chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      const mol = MODULE_MOLS.find(m => m.id === p.mol);
+      if (mol) {
+        const chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.type.toLowerCase().includes('protein') ? ' protein' : mol.type.toLowerCase().includes('lipid') ? ' lipid' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  const grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(mol => {
+    const card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
+    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
+    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
+    const role = document.createElement('div'); role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
+    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
+    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ────────────────────────────────────────────────────────────
+(function buildStory() {
+  const container = document.getElementById('story-content');
+  const events = [
+    {year:'1991', text:'Semenza (Johns Hopkins): discovers HIF-1 binding the erythropoietin (EPO) gene enhancer under hypoxia. Hypoxia-inducible factor \u2014 the transcription factor that senses oxygen levels.'},
+    {year:'1996', text:'Ratcliffe (Oxford) lab: HIF oxygen-regulated degradation is universal \u2014 not EPO-specific. The oxygen-sensing pathway controls hundreds of genes across all metazoans.'},
+    {year:'1993\u20131998', text:'Kaelin (Dana-Farber) investigates VHL tumor suppressor mechanism. VHL mutant in clear-cell RCC \u2014 but why? VHL-deficient cells: VEGF, EPO constitutively elevated.'},
+    {year:'1999', text:'Simultaneous convergence: Maxwell, Bhatt, Kaelin (Nature); Iliopoulos, Kaelin; Ratcliffe lab \u2014 VHL targets HIF-1\u03b1 for proteasomal degradation. VHL is the E3 ligase recognizing HIF. The mechanism clicks.'},
+    {year:'2001', text:'PHD enzymes identified (Kaelin, Ratcliffe, Semenza in parallel). O\u2082/2-OG-dependent dioxygenases \u2014 the actual molecular O\u2082 sensor. HIF-1\u03b1 prolyl hydroxylation at Pro402/564 creates VHL binding site. Nobel-level mechanism complete.'},
+    {year:'2006\u20132012', text:'Altitude physiology, tumor hypoxia, anemia connect to HIF pathway. VEGFR TKIs (sunitinib, pazopanib) approved for VHL-pathway RCC. Anti-VEGF (bevacizumab) in glioblastoma. PHD inhibitor development begins.'},
+    {year:'2021', text:'Belzutifan (Welireg): first approved HIF-2\u03b1 inhibitor \u2014 FDA for VHL-mutation RCC. PHD inhibitors (roxadustat) approved in China/Europe for renal anemia. HIF pathway becomes a druggable target.'},
+    {year:'2019', text:'Nobel Prize in Physiology or Medicine to Kaelin, Ratcliffe, Semenza "for their discoveries of how cells sense and adapt to oxygen availability."'},
+  ];
+  events.forEach(ev => {
+    const block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    const yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    const text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  const container = document.getElementById('frontiers-content');
+  const groups = [
+    { title:'Clinical Pipeline (2024\u20132026)', items:[
+      {title:'Belzutifan Phase 3 vs everolimus (LITESPARK-005)', body:'PFS 22.7 vs 3.5 months. Now being evaluated as first-line combination with pembrolizumab (LITESPARK-011). HIF-2\u03b1 inhibition + checkpoint blockade: synergistic via different immune evasion mechanisms. Expected regulatory application 2025.'},
+      {title:'PHD inhibitors for renal anemia (roxadustat, vadadustat, daprodustat)', body:'PHD inhibition \u2192 HIF-1\u03b1 stabilization \u2192 EPO transcription \u2192 RBC production. Oral alternatives to EPO injections. Roxadustat FDA approved China/Europe; vadadustat Phase 3 FDA application withdrawn 2023 (CV signal). Daprodustat (GSK) approved Japan 2020. PHD2 selectivity vs PHD1/3 is critical for avoiding off-target HIF-1\u03b1 activation in non-erythroid tissue.'},
+    ]},
+    { title:'AI & Computational Approaches', items:[
+      {title:'HIF target gene prediction: ChIP-seq + HRE motif modeling', body:'HIF ChIP-seq (ENCODE consortium): ~2,000 HIF-binding sites across multiple cancer cell lines. Only ~400 consistently occupied across all hypoxic contexts. HRE motif (RCGTG) + flanking sequences + chromatin accessibility determine functional HIF targets. Machine learning (SELEX-Seq + accessibility) predicts context-specific HIF targets at cell-type resolution.'},
+    ]},
+    { title:'Open Questions', items:[
+      {title:'HIF-1\u03b1 vs HIF-2\u03b1: divergent oncogenic roles in different tissues', body:'HIF-1\u03b1: aerobic glycolysis (Warburg effect) \u2014 LDHA, PDK1. HIF-2\u03b1: stem cell renewal, EPO, VEGF, cyclin D1. In ccRCC: HIF-2\u03b1 is the oncogenic driver (HIF-1\u03b1 acts as tumor suppressor in advanced RCC \u2014 paradox). In neuroblastoma: HIF-2\u03b1 confers poor prognosis. Tissue-specific transcriptional partners explain divergence.'},
+    ]},
+    { title:'Industry & Translational Applications', items:[
+      {title:'HIF pathway in COVID-19 and acute respiratory disease', body:'Severe COVID-19: hypoxemia + cytokine storm activates HIF in multiple cell types. HIF-1\u03b1 in macrophages drives IL-1\u03b2, IL-6, CCL2. Paradox: HIF activation promotes viral replication (HIF-1\u03b1 enhances SARS-CoV-2 entry via ACE2 upregulation) but also drives anti-viral innate immune responses. PHD inhibitors being evaluated as immunomodulators in acute lung injury.'},
+    ]},
+  ];
+  groups.forEach(g => {
+    const section = document.createElement('div');
+    section.className = 'frontier-group';
+    const title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'frontier-item';
+      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
+      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
+      card.appendChild(it); card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ────────────────────────────────────────────────────────
+(function buildRsidebar() {
+  // Key molecules list
+  const molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(mol => {
+    const item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
+    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
+    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
+    const id = document.createElement('div'); id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name); nameCol.appendChild(id);
+    item.appendChild(icon); item.appendChild(nameCol);
+    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  // Papers
+  const paperList = document.getElementById('rsb-papers');
+  const papers = [
+    {year:'1992', journal:'PNAS', title:'Identification of hypoxia-inducible factor 1 (Semenza)'},
+    {year:'1999', journal:'Nature', title:'VHL targets HIF for degradation (Kaelin lab)'},
+    {year:'2001', journal:'Science', title:'PHD enzymes: prolyl hydroxylases are O2 sensors'},
+  ];
+  papers.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
+    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
+    item.appendChild(year); item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas (force-directed network) ───────────────────────────────
+function drawConnections() {
+  const cv = document.getElementById('conn-canvas');
+  cv.width = cv.offsetWidth || 600;
+  cv.height = cv.offsetHeight || 360;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+
+  const nodes = [
+    {id:'hif',   x:W*.5,  y:H*.5,  r:32, color:'#ff8844', label:'HIF\nO2 Sensing',  sub:'2019'},
+    {id:'auto',  x:W*.75, y:H*.28, r:24, color:'#00e5ff', label:'Autophagy',        sub:'2016'},
+    {id:'mrna',  x:W*.25, y:H*.28, r:24, color:'#44ffcc', label:'mRNA\nVaccines',   sub:'2023'},
+    {id:'imm',   x:W*.8,  y:H*.7,  r:22, color:'#ff4488', label:'Checkpoint\nImmuno',sub:'2018'},
+    {id:'circ',  x:W*.2,  y:H*.7,  r:22, color:'#ffd700', label:'Circadian',        sub:'2017'},
+    {id:'hcv',   x:W*.5,  y:H*.88, r:20, color:'#44ffcc', label:'HCV',              sub:'2020'},
+  ];
+  const edges = [
+    {from:'hif',to:'auto', color:'#00e5ff55',label:'mTOR-HIF\nautophagy link'},
+    {from:'hif',to:'mrna', color:'#44ffcc55',label:'hypoxia\nmRNA stability'},
+    {from:'hif',to:'imm',  color:'#ff448855',label:'HIF drives\nPD-L1 in TME'},
+    {from:'hif',to:'circ', color:'#ffd70055',label:'BMAL1 regulates\nHIF-1\u03b1'},
+    {from:'hif',to:'hcv',  color:'#44ffcc44',label:'HIF-1\u03b1 in\nviral hepatitis'},
+  ];
+
+  const ns = {}; nodes.forEach(n => ns[n.id] = n);
+  edges.forEach(e => {
+    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
+    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
+    if(e.label) {
+      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
+      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
+    }
+  });
+  nodes.forEach(n => {
+    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+    ctx.fillStyle = n.color + '22'; ctx.fill();
+    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
+    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
+    ctx.fillText(n.sub, n.x, n.y+n.r+11);
+  });
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+</body>
+</html>
