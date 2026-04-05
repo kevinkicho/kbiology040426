@@ -22,10 +22,8 @@ html,body{height:100%;overflow-x:hidden}
 .filter-chip.active{filter:brightness(1.5)}
 .timeline-section{margin-bottom:24px}
 .timeline-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
-.timeline-rail{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin}
-.timeline-rail::-webkit-scrollbar{height:3px}
-.timeline-rail::-webkit-scrollbar-thumb{background:#2a2a55;border-radius:2px}
-.mod-card{flex-shrink:0;width:148px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 10px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.timeline-rail{display:flex;gap:10px;flex-wrap:wrap;padding-bottom:8px}
+.mod-card{width:148px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 10px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
 .mod-card:hover{transform:translateY(-2px);border-color:var(--cc,var(--green));box-shadow:0 6px 24px rgba(0,0,0,.5),0 0 16px rgba(0,0,0,.3)}
 .mod-card.filtered-out{opacity:.25;pointer-events:none}
 .mod-card.visited::after{content:'✓';position:absolute;top:6px;right:8px;font-size:.7rem;color:var(--good);opacity:.9}
@@ -266,7 +264,7 @@ MODULES.forEach(m => {
     visited.add(m.year);
     saveVisited(visited);
     updateProgress();
-    window.open(m.file, '_blank');
+    window.location.href = m.file;
   });
 
   rail.appendChild(card);
