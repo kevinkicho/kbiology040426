@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2024 · microRNA — kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css">
+<style>
+/* Module layout */
+.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
+.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
+.back-link:hover{color:var(--green);border-color:var(--green)}
+.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
+.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
+.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
+.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
+.mod-tab:hover{color:var(--text);background:var(--bg3)}
+.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
+.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
+.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
+
+/* Body layout */
+.mod-body{display:flex;min-height:calc(100vh - 100px)}
+.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
+.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Canvas */
+.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
+.canvas-wrap canvas{display:block;width:100%;height:240px}
+.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
+
+/* Mechanism panels */
+.mech-panels{display:flex;flex-direction:column;gap:10px}
+.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
+.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
+.mech-panel-body strong{color:var(--text)}
+.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+
+/* Molecules tab */
+.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
+.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
+.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
+.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
+.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
+.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
+
+/* Story tab */
+.story-content{max-width:720px}
+.story-block{margin-bottom:16px}
+.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
+
+/* Frontiers tab */
+.frontier-group{margin-bottom:20px}
+.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
+.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
+.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
+
+/* Connections tab */
+.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
+.connections-wrap canvas{display:block;width:100%;height:360px}
+
+/* Right sidebar */
+.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
+.rsb-mol-item:hover{color:var(--cyan)}
+.rsb-mol-icon{font-size:1rem;flex-shrink:0}
+.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
+.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
+</style>
+</head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">2024</span>
+    <div class="mod-title">microRNA Discovery</div>
+  </div>
+  <div class="mod-laureates">Victor Ambros &amp; Gary Ruvkun &#8212; Nobel Prize in Physiology or Medicine 2024</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">Genetics</span>
+    <span class="mod-tag" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">ncRNA Biology</span>
+    <span class="mod-tag" style="color:#00e5ff;border-color:#00e5ff44;background:#00e5ff10">Regulatory RNA</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; pri-miRNA Transcription</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">Drosha/DGCR8</span><span class="ctrl-val" id="lay-drosha">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">DICER1 cleavage</span><span class="ctrl-val" id="lay-dicer">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">RISC silencing</span><span class="ctrl-val" id="lay-risc">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> lin-4 (1993) and let-7 (2000) revealed that ~22 nt non-coding RNAs govern animal development — and are conserved across all bilaterian animals.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; pri-miRNA Transcription by RNA Pol II</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2024/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel 2024 &#8212; official announcement</div>
+      </a>
+      <a href="https://www.mirbase.org/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">miRBase</div>
+        <div class="ref-title">miRBase: miRNA database</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
+// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'risc': { term:'RISC (RNA-induced silencing complex)', level:'grad', def:'AGO2-centered effector complex loaded with ~22 nt guide strand. Guide base-pairs target mRNA 3\'UTR via seed sequence (nt 2\u20137). Perfect match: AGO2 slices via RNase H fold (PIWI domain). Imperfect: GW182/TNRC6 recruits CCR4-NOT deadenylase complex \u2192 translational repression + mRNA decay. ~1,000 molecules/cell.' },
+  'seed_seq': { term:'Seed sequence (miRNA)', level:'res', def:'Nucleotides 2\u20137 of the miRNA 5\' end \u2014 the primary determinant of target specificity. 7mer-A1, 7mer-m8, and 8mer sites provide progressively stronger repression. ~60% of conserved mammalian miRNA targets have perfect seed matches. TargetScan database uses seed match + conservation to predict ~20,000 high-confidence targets.' },
+  'cerna':   { term:'ceRNA hypothesis', level:'frontier', def:'Competing endogenous RNA \u2014 lncRNAs, circRNAs, and pseudogene transcripts acting as miRNA sponges by harboring miRNA response elements (MREs), sequestering miRNAs from their mRNA targets. Controversial: requires high ceRNA:miRNA ratio. circRNA CDR1as (ciRS-7) has 63 miR-7 binding sites \u2014 the best-supported ceRNA. Active research 2024.' },
+  'drosha':  { term:'Drosha/DGCR8 (Microprocessor)', level:'grad', def:'Nuclear ribonuclease III enzyme complex that crops pri-miRNA. Drosha: catalytic subunit (RNase III domains); DGCR8 (DiGeorge critical region 8): dsRNA-binding subunit. Recognizes the hairpin junction between ssRNA flanks and dsRNA stem. Releases ~65 nt pre-miRNA hairpin with 2-nt 3\' overhang. DGCR8 deletion causes DiGeorge syndrome.' },
+});
+
+// ── Module molecules data ────────────────────────────────────────────────────
+const MODULE_MOLS = [
+  { id:'lin4', icon:'\ud83d\udfe3', color:'#aa77ff', type:'ncRNA \u00b7 ~22 nt', is_protein:false,
+    name:'lin-4 miRNA (C. elegans)', sub:'First discovered miRNA \u00b7 22 nt',
+    badges:[{text:'First miRNA',color:'#aa77ff'},{text:'lin-14 repressor',color:'#ffd700'},{text:'Nobel 2024',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://www.ncbi.nlm.nih.gov/gene/3183555',
+    mechanism:'22-nt RNA from C. elegans chromosome I. Represses LIN-14 translation by binding 7 imperfect complementary sites in the lin-14 3\'UTR \u2014 first demonstration of miRNA-mediated translational repression. Not conserved beyond nematodes, making initial reception skeptical. Discovery by Ambros lab 1993.',
+    properties:{'Length':'22 nt','Organism':'C. elegans','Chromosome':'I','Target':'lin-14 mRNA 3\'UTR (7 sites)','Conservation':'Nematodes only','Discovery':'Lee, Feinbaum, Ambros (Cell 1993)'},
+    property_flags:{},
+    interaction:{ title:'lin-4 represses lin-14 via 3\'UTR binding',
+      nodes:[
+        {id:'lin4',   x:150,y:80, r:22,color:'#aa77ff',label:'lin-4',    sub:'22 nt guide'},
+        {id:'risc',   x:250,y:80, r:22,color:'#00e5ff',label:'RISC',     sub:'AGO2 complex'},
+        {id:'utr',    x:380,y:80, r:28,color:'#ffd700',label:'lin-14\n3\'UTR',sub:'7 sites'},
+        {id:'lin14',  x:380,y:220,r:28,color:'#ff4444',label:'LIN-14',   sub:'protein'},
+        {id:'larva',  x:250,y:320,r:24,color:'#00ff99',label:'L1\u2192L2',    sub:'stage transition'},
+      ],
+      edges:[
+        {from:'lin4', to:'risc', color:'#aa77ff',label:'loads',                           dashed:false},
+        {from:'risc', to:'utr',  color:'#aa77ff',label:'seed match\n7 sites',             dashed:false},
+        {from:'utr',  to:'lin14',color:'#ff444466',label:'translation\nrepressed',        dashed:true},
+        {from:'lin14',to:'larva',color:'#00ff99',label:'low LIN-14\nL1\u2192L2 transition',   dashed:false},
+      ]
+    },
+    papers:[
+      {year:'1993',journal:'Cell',impact:'IF 66',title:'The C. elegans heterochronic gene lin-4 encodes small RNAs with antisense complementarity to lin-14',abstract:'Ambros lab: lin-4 locus produces ~22 nt RNA (not a protein). lin-4 RNA has antisense complementarity to lin-14 3\'UTR. First miRNA discovered.'},
+      {year:'2000',journal:'Science',impact:'IF 56',title:'The 21-nucleotide let-7 RNA Directs Temporal Developmental Timing in Caenorhabditis elegans',abstract:'Reinhart, Slack, Basson, Pasquinelli, Bettinger, Rougvie, Horvitz, Ruvkun: let-7 is conserved across bilaterians \u2014 "conservation shock" showing miRNAs are universal regulators.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe1',name:'let-7 miRNA',role:'Conservation-establishing\nsecond miRNA',id:'Human: hsa-let-7a'},
+      {icon:'\ud83d\udd35',name:'LIN-14 protein',role:'Heterochronic transcription\nfactor repressed by lin-4',id:'C. elegans'},
+    ]
+  },
+  { id:'let7', icon:'\ud83d\udfe1', color:'#ffd700', type:'ncRNA \u00b7 ~21 nt', is_protein:false,
+    name:'let-7 miRNA', sub:'First conserved miRNA \u2014 13 human orthologs',
+    badges:[{text:'Conserved across bilaterians',color:'#ffd700'},{text:'lin-41 repressor',color:'#aa77ff'},{text:'Tumor suppressor',color:'#00ff99'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://www.ncbi.nlm.nih.gov/gene/406882',
+    mechanism:'21-nt RNA discovered by Ruvkun lab 2000. Represses lin-41 (TRIM71) mRNA to drive L4\u2192adult transition in C. elegans. Conservation across all bilaterian animals (fly, zebrafish, human) was the "conservation shock" establishing miRNAs as universal gene regulators. Human let-7 family: 13 members regulate RAS, HMGA2, DICER1.',
+    properties:{'Length':'21 nt','Conservation':'All bilaterian animals','Human orthologs':'13 (hsa-let-7a through hsa-let-7i)','Key targets (human)':'KRAS, NRAS, HMGA2, DICER1','Role':'Tumor suppressor (multiple cancers)','Discovery':'Reinhart et al. (Science 2000)'},
+    property_flags:{},
+    interaction:{ title:'let-7 Conservation and Tumor Suppression',
+      nodes:[
+        {id:'let7',  x:250,y:60, r:24,color:'#ffd700',label:'let-7',     sub:'21 nt'},
+        {id:'kras',  x:100,y:200,r:24,color:'#ff4444',label:'KRAS',      sub:'oncogene'},
+        {id:'hmga2', x:250,y:220,r:22,color:'#ff8844',label:'HMGA2',     sub:'oncofetal'},
+        {id:'dicer', x:400,y:200,r:22,color:'#00e5ff',label:'DICER1',    sub:'let-7 limits'},
+        {id:'risc',  x:250,y:140,r:22,color:'#aa77ff',label:'RISC',      sub:'AGO2'},
+      ],
+      edges:[
+        {from:'let7', to:'risc', color:'#ffd700',label:'loads',                   dashed:false},
+        {from:'risc', to:'kras', color:'#ff444488',label:'3\'UTR seed\nrepresses', dashed:false},
+        {from:'risc', to:'hmga2',color:'#ff884488',label:'3\'UTR seed\nrepresses', dashed:false},
+        {from:'risc', to:'dicer',color:'#00e5ff88',label:'limits Dicer\n(feedback)',dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2000',journal:'Science',impact:'IF 56',title:'The 21-nucleotide let-7 RNA directs temporal developmental timing in C. elegans',abstract:'Ruvkun lab: let-7 is phylogenetically conserved across animals including humans \u2014 establishing miRNAs as universal gene regulators, not a worm quirk.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe3',name:'lin-4 miRNA',role:'First miRNA\nC. elegans only',     id:'C. elegans'},
+      {icon:'\ud83d\udd34',name:'KRAS mRNA',   role:'Oncogene 3\'UTR\ntarget repressed',id:'KRAS gene'},
+    ]
+  },
+  { id:'ago2', icon:'\ud83d\udd35', color:'#00e5ff', type:'Protein \u00b7 RISC nuclease', is_protein:true,
+    name:'Argonaute-2 (AGO2)', sub:'PDB: 4OLA \u00b7 859 aa \u00b7 RISC slicer',
+    badges:[{text:'RISC slicer',color:'#00e5ff'},{text:'PAZ + PIWI',color:'#aa77ff'},{text:'RNAi effector',color:'#00ff99'}],
+    pubchem_cid:null, pdb_id:'4OLA',
+    nih_link:'https://www.rcsb.org/structure/4OLA',
+    mechanism:'Catalytic Argonaute \u2014 the PIWI domain has RNase H fold with DDH catalytic triad (Asp-Asp-His). For siRNA (perfect complementarity): PIWI slices mRNA. For miRNA (imperfect): AGO2 recruits GW182/TNRC6 via W-rich motifs, leading to CCR4-NOT deadenylase recruitment and translational repression. PAZ domain anchors 3\' end of guide; MID domain anchors 5\' phosphate.',
+    properties:{'PDB':'4OLA','Resolution':'2.3 \u00c5 (X-ray)','Domains':'N, PAZ, MID, PIWI','Catalytic triad':'D597, D669, H807 (PIWI)','Guide loading':'Preferentially miRNA/siRNA duplex + RISC loading complex','Cancer relevance':'High \u2014 miRNA target derepression drives oncogenesis'},
+    property_flags:{'Resolution':'good','Cancer relevance':'warn'},
+    interaction:{ title:'AGO2 RISC: siRNA Slicing vs miRNA Repression',
+      nodes:[
+        {id:'ago2', x:250,y:150,r:32,color:'#00e5ff',label:'AGO2',     sub:'RISC core'},
+        {id:'sirna',x:100,y:80, r:22,color:'#00ff99',label:'siRNA',    sub:'perfect match'},
+        {id:'mirna',x:400,y:80, r:22,color:'#aa77ff',label:'miRNA',    sub:'imperfect'},
+        {id:'slice',x:100,y:280,r:22,color:'#ff4444',label:'mRNA\ncleavage',sub:'slicer mode'},
+        {id:'gw182',x:400,y:280,r:22,color:'#ffd700',label:'GW182',   sub:'deadenylation'},
+      ],
+      edges:[
+        {from:'sirna',to:'ago2',color:'#00ff99',label:'perfect\ncomplement',        dashed:false},
+        {from:'mirna',to:'ago2',color:'#aa77ff',label:'imperfect\nseed match',      dashed:false},
+        {from:'ago2', to:'slice',color:'#ff4444',label:'PIWI slices\n(siRNA mode)', dashed:false},
+        {from:'ago2', to:'gw182',color:'#ffd700',label:'recruits GW182\n(miRNA mode)',dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2004',journal:'Nature',impact:'IF 69',title:'Argonaute2 is the catalytic engine of mammalian RNAi',abstract:'Liu et al.: AGO2 PIWI domain is the slicer. Point mutation D597A abolishes RNAi. AGO2 is the catalytic heart of RISC.'},
+      {year:'2012',journal:'Cell',  impact:'IF 66',title:'Structures of the human Argonaute-2 in complex with miRNA',abstract:'Crystal structures showing PAZ anchors 3\' end, MID anchors 5\' phosphate, PIWI positions target for slicing or repression.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe2',name:'DICER1',   role:'Produces miRNA/siRNA\nfrom precursors',       id:'PDB: 2QVW'},
+      {icon:'\ud83d\udfe1',name:'GW182/TNRC6',role:'Bridges AGO2 to\nCCR4-NOT deadenylase',    id:'TNRC6A gene'},
+    ],
+    domains:[
+      {color:'#88aaff',name:'N domain',          pos:'1\u2013161',    fn:'RNA duplex separation; facilitates guide loading'},
+      {color:'#aa77ff',name:'PAZ domain',         pos:'162\u2013367',  fn:'Anchors 3\' end of guide strand (2 nt overhang)'},
+      {color:'#00e5ff',name:'MID domain',         pos:'368\u2013576',  fn:'Binds 5\' phosphate of guide; cap-analog binding'},
+      {color:'#00ff99',name:'PIWI domain',        pos:'577\u2013859',  fn:'RNase H fold \u2014 DDH catalytic triad for slicing (siRNA mode)'},
+    ]
+  },
+  { id:'dicer1', icon:'\ud83d\udfe2', color:'#00ff99', type:'Protein \u00b7 RNase III', is_protein:true,
+    name:'DICER1', sub:'PDB: 5ZAK \u00b7 1922 aa \u00b7 pre-miRNA processor',
+    badges:[{text:'Pre-miRNA cleavage',color:'#00ff99'},{text:'RNase IIIa+b',color:'#00e5ff'},{text:'Tumor suppressor',color:'#aa77ff'}],
+    pubchem_cid:null, pdb_id:'5ZAK',
+    nih_link:'https://www.rcsb.org/structure/5ZAK',
+    mechanism:'Cytoplasmic RNase III enzyme cleaving pre-miRNA at ~22 bp from base. PAZ domain measures distance from 3\' end; RNase IIIa + IIIb domains act as intramolecular dimer to simultaneously cleave both strands. Products: ~22 nt miRNA duplex with 2-nt 3\' overhangs. Also processes dsRNA \u2192 siRNA (viral defense). DICER1 mutations cause DICER1 syndrome (pleuropulmonary blastoma).',
+    properties:{'PDB':'5ZAK','Domains':'Helicase, PAZ, Platform, RNase IIIa, RNase IIIb, dsRBD','Product':'~22 bp miRNA/siRNA duplex','Mechanism':'PAZ measures 22 bp from 3\' end; dual RNase III cleavage','DICER1 syndrome':'PPB, Sertoli-Leydig, cystic nephroma','let-7 feedback':'let-7 represses DICER1 mRNA (auto-regulatory)'},
+    property_flags:{},
+    interaction:{ title:'DICER1: Pre-miRNA to miRNA Duplex',
+      nodes:[
+        {id:'pre',   x:100,y:150,r:24,color:'#ffd700',label:'pre-miRNA',sub:'~65 nt hairpin'},
+        {id:'dicer', x:280,y:150,r:32,color:'#00ff99',label:'DICER1',   sub:'RNase III'},
+        {id:'duplex',x:460,y:150,r:24,color:'#aa77ff',label:'miRNA\nduplex',sub:'~22 bp'},
+        {id:'ago2',  x:280,y:300,r:26,color:'#00e5ff',label:'AGO2\nRISC',sub:'loaded'},
+        {id:'guide', x:460,y:300,r:22,color:'#00ff99',label:'Guide\nstrand',sub:'retained'},
+      ],
+      edges:[
+        {from:'pre',  to:'dicer', color:'#ffd700',label:'PAZ measures\n22 bp',           dashed:false},
+        {from:'dicer',to:'duplex',color:'#00ff99',label:'RNase IIIa+b\ndual cleavage',   dashed:false},
+        {from:'duplex',to:'ago2', color:'#aa77ff',label:'RISC loading\ncomplex',         dashed:false},
+        {from:'ago2', to:'guide', color:'#00ff99',label:'passenger strand\nejected',     dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2001',journal:'Nature',impact:'IF 69',title:'An RNA-directed nuclease mediates post-transcriptional gene silencing in Drosophila cells',abstract:'Bernstein et al.: DICER identified as the enzyme producing siRNA from dsRNA. First molecular link between dsRNA and RNAi.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udd35',name:'AGO2',        role:'Loads DICER\nproducts for silencing',   id:'PDB: 4OLA'},
+      {icon:'\ud83d\udfe3',name:'Exportin-5',  role:'Nuclear export of\npre-miRNA hairpins', id:'XPO5 gene'},
+    ],
+    domains:[
+      {color:'#88aaff',name:'Helicase domain',   pos:'1\u2013603',     fn:'dsRNA recognition; ATP-dependent (partially)'},
+      {color:'#ffd700',name:'PAZ domain',         pos:'863\u2013981',   fn:'3\' end anchor of pre-miRNA; distance measurement'},
+      {color:'#ff8844',name:'Platform',           pos:'982\u20131024',  fn:'Positions dsRNA for cleavage'},
+      {color:'#00e5ff',name:'RNase IIIa',         pos:'1025\u20131240', fn:'Cleaves antisense strand'},
+      {color:'#00ff99',name:'RNase IIIb',         pos:'1241\u20131627', fn:'Cleaves guide strand \u2014 intramolecular dimer'},
+      {color:'#aa77ff',name:'dsRBD',              pos:'1628\u20131922', fn:'dsRNA-binding; interaction with TRBP loading complex'},
+    ]
+  },
+];
+
+// ── Mechanism phases ─────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 pri-miRNA Transcription by RNA Pol II', color:'#aa77ff', mol:null},
+  {label:'Phase 1 \u2014 Drosha/DGCR8 Nuclear Cropping \u2192 pre-miRNA', color:'#ffd700', mol:'dicer1'},
+  {label:'Phase 2 \u2014 Exportin-5 Nuclear Export', color:'#00e5ff', mol:null},
+  {label:'Phase 3 \u2014 DICER1 Cytoplasmic Cleavage \u2192 miRNA Duplex', color:'#00ff99', mol:'dicer1'},
+  {label:'Phase 4 \u2014 RISC Loading + 3\'UTR Silencing', color:'#ff4488', mol:'ago2'},
+];
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+document.querySelectorAll('.mod-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panelId = 'panel-' + tab.dataset.tab;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (tab.dataset.tab === 'connections') drawConnections();
+  });
+});
+
+// ── Mechanism canvas animation ────────────────────────────────────────────────
+const mechCv = document.getElementById('mech-canvas');
+let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
+
+function mechDraw(phase, t) {
+  const cv = mechCv;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+
+  if (phase === 0) {
+    // pri-miRNA: long RNA strand with embedded hairpin
+    ctx.strokeStyle = '#aa77ff44'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(40, cy); ctx.lineTo(W - 40, cy); ctx.stroke();
+    // Draw hairpin loop in center
+    const hx = cx, hy = cy;
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(hx - 40, hy);
+    ctx.quadraticCurveTo(hx - 40, hy - 50, hx, hy - 55);
+    ctx.quadraticCurveTo(hx + 40, hy - 50, hx + 40, hy);
+    ctx.stroke();
+    // Nucleotide dots along backbone
+    for (let i = 0; i < 14; i++) {
+      const x = 40 + i * ((W - 80) / 13);
+      const inHairpin = (i >= 5 && i <= 8);
+      ctx.beginPath(); ctx.arc(x, cy, 6, 0, Math.PI * 2);
+      ctx.fillStyle = inHairpin ? '#aa77ffcc' : '#33335acc'; ctx.fill();
+      ctx.strokeStyle = inHairpin ? '#aa77ff' : '#33335a'; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+    ctx.fillStyle = '#aa77ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('pri-miRNA \u2014 RNA Pol II transcript with hairpin', cx, cy - 72);
+    ctx.fillStyle = '#8888b077'; ctx.font = '9px monospace';
+    ctx.fillText('Drosha/DGCR8 recognizes ssRNA\u2013dsRNA junction', cx, cy + 28);
+  } else if (phase === 1) {
+    // Drosha cropping: two scissors-like cuts releasing ~65 nt hairpin
+    const angle = t * 0.015;
+    // Pre-miRNA hairpin product
+    const hx = cx, hy = cy - 10;
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(hx - 28, hy + 30);
+    ctx.quadraticCurveTo(hx - 30, hy - 30, hx, hy - 38 + 4 * Math.sin(angle));
+    ctx.quadraticCurveTo(hx + 30, hy - 30, hx + 28, hy + 30);
+    ctx.stroke();
+    // Drosha complex
+    ctx.beginPath(); ctx.arc(cx - 70, cy + 10, 22, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffd70022'; ctx.fill();
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('Drosha', cx - 70, cy + 8); ctx.fillText('DGCR8', cx - 70, cy + 18);
+    // Cleavage arrows
+    ctx.strokeStyle = '#ff448888'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
+    ctx.beginPath(); ctx.moveTo(cx - 45, cy + 30); ctx.lineTo(cx - 28, cy + 30); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx + 45, cy + 30); ctx.lineTo(cx + 28, cy + 30); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ffd70099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('pre-miRNA (~65 nt hairpin, 2-nt 3\' overhang)', cx, hy + 56);
+  } else if (phase === 2) {
+    // Exportin-5 transporting pre-miRNA through nuclear pore
+    const progress = (t % 120) / 120;
+    // Nuclear pore
+    ctx.strokeStyle = '#00e5ff55'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, H - 20); ctx.stroke();
+    ctx.fillStyle = '#00e5ff22';
+    ctx.fillRect(cx - 18, cy - 30, 36, 60);
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 1.5;
+    ctx.strokeRect(cx - 18, cy - 30, 36, 60);
+    ctx.fillStyle = '#00e5ff88'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Nuclear pore', cx, cy + 48);
+    // Exportin-5 + cargo moving
+    const ex = cx - 100 + progress * 200;
+    ctx.beginPath(); ctx.arc(ex, cy, 20, 0, Math.PI * 2);
+    ctx.fillStyle = '#00e5ff22'; ctx.fill();
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('XPO5', ex, cy + 4);
+    // Pre-miRNA cargo
+    ctx.beginPath(); ctx.arc(ex + 14, cy - 14, 10, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffd70033'; ctx.fill();
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#00e5ff77'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Exportin-5 exports pre-miRNA to cytoplasm', cx, H - 22);
+  } else if (phase === 3) {
+    // DICER cleavage: hairpin in, duplex out
+    const blink = Math.sin(t * 0.06) > 0;
+    // Input pre-miRNA
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(100, cy - 20); ctx.quadraticCurveTo(100, cy - 60, cx - 40, cy - 65);
+    ctx.quadraticCurveTo(cx, cy - 70, cx + 40, cy - 65);
+    ctx.quadraticCurveTo(W - 100, cy - 60, W - 100, cy - 20);
+    ctx.stroke();
+    // DICER box
+    ctx.fillStyle = '#00ff9918'; ctx.fillRect(cx - 55, cy - 18, 110, 36);
+    ctx.strokeStyle = blink ? '#00ff99' : '#00ff9966'; ctx.lineWidth = 2;
+    ctx.strokeRect(cx - 55, cy - 18, 110, 36);
+    ctx.fillStyle = '#00ff99'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('DICER1', cx, cy - 3); ctx.fillText('RNase IIIa+b', cx, cy + 10);
+    // Output duplex
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(cx - 40, cy + 22); ctx.lineTo(cx + 40, cy + 22); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx - 36, cy + 32); ctx.lineTo(cx + 36, cy + 32); ctx.stroke();
+    ctx.fillStyle = '#00ff9999'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('miRNA duplex (~22 bp, 2-nt 3\' overhangs)', cx, cy + 52);
+  } else if (phase === 4) {
+    // RISC loading: guide strand in AGO2, mRNA target being repressed
+    const wobble = Math.sin(t * 0.04) * 4;
+    // AGO2 core
+    ctx.beginPath(); ctx.arc(cx, cy - 10, 34, 0, Math.PI * 2);
+    ctx.fillStyle = '#00e5ff18'; ctx.fill();
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2.5; ctx.stroke();
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('AGO2', cx, cy - 13); ctx.fillText('RISC', cx, cy - 1);
+    // Guide strand arrow in
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(60, cy - 10); ctx.lineTo(cx - 36, cy - 10); ctx.stroke();
+    ctx.fillStyle = '#aa77ff77'; ctx.font = '9px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('miRNA guide', 40, cy - 16);
+    // Target mRNA with suppression indicator
+    const mY = cy + 60 + wobble;
+    ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(60, mY); ctx.lineTo(W - 60, mY); ctx.stroke();
+    ctx.fillStyle = '#ffd70099'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText("target mRNA 3'UTR (seed match nt 2\u20137)", cx, mY - 12);
+    // Repression X
+    ctx.strokeStyle = '#ff448899'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(cx - 12, mY + 14); ctx.lineTo(cx + 12, mY + 28); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx + 12, mY + 14); ctx.lineTo(cx - 12, mY + 28); ctx.stroke();
+    ctx.fillStyle = '#ff448877'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('translational repression + mRNA decay', cx, mY + 46);
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  animT = 0; animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
+  animT = 0; mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ───────────────────────────────────────────────────
+(function buildMechPanels() {
+  const container = document.getElementById('mech-panels');
+  const panelData = [
+    { title:'Phase 0 \u2014 pri-miRNA Transcription', color:'#aa77ff', mol:null,
+      body:'<strong>RNA Pol II</strong> transcribes miRNA genes as long primary transcripts (pri-miRNAs). Pri-miRNAs fold into one or more <strong>stem-loop hairpin structures</strong> flanked by single-stranded RNA segments. Most miRNA genes are in introns of protein-coding or non-coding genes; ~50% of human miRNAs are clustered and co-transcribed as polycistronic precursors.'},
+    { title:'Phase 1 \u2014 Drosha/DGCR8 Nuclear Cropping', color:'#ffd700', mol:'dicer1',
+      body:'The <strong>Microprocessor complex</strong> (Drosha RNase III + DGCR8 dsRNA-binding protein) recognizes the ssRNA-dsRNA junction of the hairpin and cleaves ~11 bp from the basal junction, releasing a <strong>~65 nt pre-miRNA hairpin</strong> with a characteristic 2-nt 3\' overhang. DGCR8 deletion causes DiGeorge syndrome via loss of cardiac and neural crest miRNA processing.'},
+    { title:'Phase 2 \u2014 Exportin-5 Nuclear Export', color:'#00e5ff', mol:null,
+      body:'<strong>Exportin-5 (XPO5)</strong> recognizes the 2-nt 3\' overhang of the pre-miRNA in a RanGTP-dependent manner and transports it through the nuclear pore complex to the cytoplasm. RanGAP in the cytoplasm hydrolyzes RanGTP \u2192 RanGDP, releasing the pre-miRNA. This step is rate-limiting in some contexts and subject to regulation (e.g., downregulated in certain cancers).'},
+    { title:'Phase 3 \u2014 DICER1 Cytoplasmic Cleavage', color:'#00ff99', mol:'dicer1',
+      body:'<strong>DICER1</strong> (RNase III) measures ~22 bp from the 3\' end of the pre-miRNA (via its PAZ domain) and cleaves both strands with its <strong>RNase IIIa + IIIb intramolecular dimer</strong>, producing a ~22 bp miRNA:miRNA* duplex with 2-nt 3\' overhangs. TRBP and PACT cofactors assist loading into the RISC loading complex (RLC). DICER1 also processes dsRNA \u2192 siRNA for antiviral defense.'},
+    { title:'Phase 4 \u2014 RISC Loading + 3\'UTR Silencing', color:'#ff4488', mol:'ago2',
+      body:'The miRNA:miRNA* duplex is loaded into <strong>AGO2</strong> (RISC loading complex with Hsc70/Hsp90). The passenger strand (miRNA*) is ejected; the guide strand is retained. The guide strand <strong>seed sequence (nt 2\u20137)</strong> base-pairs with complementary sites in target mRNA 3\'UTRs. Imperfect matching (typical of animal miRNAs): GW182/TNRC6 recruits CCR4-NOT deadenylase \u2192 translational repression + mRNA decay. >60% of protein-coding genes regulated by miRNAs.'},
+  ];
+
+  panelData.forEach(p => {
+    const panel = document.createElement('div');
+    panel.className = 'mech-panel';
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    const bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    const titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+    const body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    // Parse simple <strong> tags safely (developer-controlled content)
+    const parts = p.body.split(/<strong>|<\/strong>/);
+    parts.forEach((part, i) => {
+      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
+      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
+    });
+    // Molecule chip if specified
+    if (p.mol) {
+      const chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      const mol = MODULE_MOLS.find(m => m.id === p.mol);
+      if (mol) {
+        const chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.type.toLowerCase().includes('protein') ? ' protein' : mol.type.toLowerCase().includes('lipid') ? ' lipid' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  const grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(mol => {
+    const card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
+    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
+    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
+    const role = document.createElement('div'); role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
+    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
+    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ────────────────────────────────────────────────────────────
+(function buildStory() {
+  const container = document.getElementById('story-content');
+  const events = [
+    {year:'1987', text:'Ambros lab (Harvard): screens C. elegans for heterochronic mutations affecting larval stage timing. Identifies lin-4 and lin-14 as a regulatory pair \u2014 but the molecular mechanism is completely unknown.'},
+    {year:'1993', text:'Ambros lab (Cell): lin-4 locus encodes ~22 nt RNA \u2014 NOT a protein. Ruvkun lab simultaneously (Cell): lin-14 is post-transcriptionally regulated via its 3\'UTR. lin-4 RNA has antisense complementarity to lin-14 3\'UTR. First miRNA. Initial reception: "a nematode quirk."'},
+    {year:'1998', text:'Fire & Mello (Nature): RNA interference discovered. dsRNA silences genes in C. elegans. Nobel 2006. Sets conceptual stage for understanding RISC and guide RNA biology.'},
+    {year:'2000', text:'Ruvkun lab (Science): let-7 miRNA is conserved in flies, zebrafish, and humans. "Conservation shock" \u2014 miRNAs are universal, not worm-specific. lin-4 credit suddenly vindicated. Field erupts: hundreds of miRNAs discovered in 2001\u20132003.'},
+    {year:'2001', text:'Lagos-Quintana, Tuschl labs, Ambros lab simultaneously publish ~100 miRNAs each from fly and human. DICER identified as the processing enzyme. miRBase database founded (now >2,500 human miRNAs).'},
+    {year:'2004', text:'AGO2 (Argonaute-2) identified as the RISC slicer. miRNA-target site prediction bioinformatics (TargetScan, miRanda, PicTar) launch. >60% of protein-coding genes predicted to be miRNA-regulated.'},
+    {year:'2008\u20132015', text:'Cancer biology of miRNAs: let-7 family suppresses KRAS/HMGA2. miR-21 is the most commonly amplified miRNA in cancer. Oncomirs vs tumor-suppressor miRNAs. miRNA liquid biopsy potential recognized.'},
+    {year:'2024', text:'Nobel Prize in Physiology or Medicine to Ambros and Ruvkun "for the discovery of microRNA and its role in post-transcriptional gene regulation." 31 years after the original lin-4 paper.'},
+  ];
+  events.forEach(ev => {
+    const block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    const yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    const text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  const container = document.getElementById('frontiers-content');
+  const groups = [
+    { title:'Clinical Pipeline (2024\u20132026)', items:[
+      {title:'Miravirsen \u2014 miR-122 antagomir for HCV (Phase II completed)', body:'Miravirsen (Santaris) LNA-modified antisense oligonucleotide targeting miR-122 (liver-specific miRNA required by HCV replication). Phase IIa: dose-dependent HCV RNA reduction. Not advanced due to DAA competition. First miRNA-targeting drug to show clinical efficacy. Proof-of-concept for miRNA therapeutics.'},
+      {title:'Inclisiran (Novartis) \u2014 siRNA for PCSK9 (FDA 2021)', body:'siRNA (not miRNA) targeting PCSK9 mRNA for LDL-C lowering. GalNAc-conjugated delivery to hepatocytes. Twice-yearly dosing (vs daily statin). 50% LDL-C reduction. First approved hepatic siRNA demonstrates that RISC-based therapeutics reach clinical scale. miRNA therapeutics trail behind siRNA due to target promiscuity.'},
+    ]},
+    { title:'AI & Computational Approaches', items:[
+      {title:'TargetScan 8.0 + Deep Learning miRNA Target Prediction', body:'TargetScan (Bartel lab) uses seed complementarity + conservation + context scores. TargetScan 8.0 (2022) incorporates CLIP-seq datasets to validate predictions. DeepMirTar (LSTM) and miRTarBase (curated database, >1M validated interactions) are 2024 state-of-the-art. Key challenge: distinguishing direct from indirect effects.'},
+      {title:'ceRNA network modeling: circRNA and lncRNA as miRNA sponges', body:'Competing endogenous RNA hypothesis (Salmena 2011): CDR1as/ciRS-7 circRNA with 63 miR-7 sites is the best-supported sponge. Network models using TCGA RNA-seq data identify cancer-specific ceRNA dysregulation. Controversy: stoichiometry requirement limits physiological relevance except in high-abundance circRNA contexts.'},
+    ]},
+    { title:'Open Questions', items:[
+      {title:'miRNA liquid biopsy: circulating miRNA as disease biomarker', body:'Serum/plasma miRNAs are extraordinarily stable (packaged in exosomes, Argonaute complexes, or HDL). miR-141, miR-200 elevated in prostate cancer plasma. Panel of 8 miRNAs distinguishes lung cancer from COPD. FDA-cleared miRNA assays do not yet exist \u2014 assay standardization and reference ranges are the bottleneck.'},
+    ]},
+    { title:'Industry & Translational Applications', items:[
+      {title:'MiRNA replacement therapy: tumor suppressor miRNAs as drugs', body:'miR-34a (p53 target) downregulated in many cancers. MRX34 (miR-34a mimic liposome, Mirna Therapeutics): Phase I for HCC \u2014 halted 2016 due to immune-mediated adverse events. Lessons learned for delivery and immunogenicity. miR-16 replacement (mesothelioma), let-7 replacement (lung cancer) in preclinical development 2024.'},
+    ]},
+  ];
+  groups.forEach(g => {
+    const section = document.createElement('div');
+    section.className = 'frontier-group';
+    const title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'frontier-item';
+      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
+      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
+      card.appendChild(it); card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ────────────────────────────────────────────────────────
+(function buildRsidebar() {
+  // Key molecules list
+  const molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(mol => {
+    const item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
+    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
+    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
+    const id = document.createElement('div'); id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name); nameCol.appendChild(id);
+    item.appendChild(icon); item.appendChild(nameCol);
+    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  // Papers
+  const paperList = document.getElementById('rsb-papers');
+  const papers = [
+    {year:'1993', journal:'Cell', title:'lin-4 encodes small RNAs with antisense complementarity to lin-14 (Ambros)'},
+    {year:'2000', journal:'Science', title:'let-7 RNA directs temporal developmental timing (Ruvkun)'},
+    {year:'2001', journal:'Science', title:'Identification of novel genes coding for small RNAs'},
+  ];
+  papers.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
+    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
+    item.appendChild(year); item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas (force-directed network) ───────────────────────────────
+function drawConnections() {
+  const cv = document.getElementById('conn-canvas');
+  cv.width = cv.offsetWidth || 600;
+  cv.height = cv.offsetHeight || 360;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+
+  const nodes = [
+    {id:'mirna', x:W*.5,  y:H*.5,  r:32, color:'#aa77ff', label:'microRNA',        sub:'2024'},
+    {id:'rnai',  x:W*.75, y:H*.28, r:24, color:'#00ff99', label:'RNAi\n(Fire/Mello)',sub:'2006'},
+    {id:'imm',   x:W*.25, y:H*.28, r:24, color:'#ff4488', label:'Checkpoint\nImmuno',sub:'2018'},
+    {id:'mrna',  x:W*.8,  y:H*.7,  r:22, color:'#44ffcc', label:'mRNA\nVaccines',   sub:'2023'},
+    {id:'auto',  x:W*.2,  y:H*.7,  r:22, color:'#00e5ff', label:'Autophagy',        sub:'2016'},
+    {id:'circ',  x:W*.5,  y:H*.88, r:20, color:'#ffd700', label:'circRNA\nceRNA',   sub:'frontier'},
+  ];
+  const edges = [
+    {from:'mirna',to:'rnai', color:'#00ff9955',label:'RISC/AGO2\nshared machinery'},
+    {from:'mirna',to:'imm',  color:'#ff448855',label:'PD-L1 regulated\nby miR-200'},
+    {from:'mirna',to:'mrna', color:'#44ffcc55',label:'mRNA stability\n5\'UTR regulation'},
+    {from:'mirna',to:'auto', color:'#00e5ff55',label:'miR-21 regulates\nBeclin-1'},
+    {from:'mirna',to:'circ', color:'#ffd70055',label:'ceRNA sponge\nhypothesis'},
+  ];
+
+  const ns = {}; nodes.forEach(n => ns[n.id] = n);
+  edges.forEach(e => {
+    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
+    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
+    if(e.label) {
+      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
+      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
+    }
+  });
+  nodes.forEach(n => {
+    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+    ctx.fillStyle = n.color + '22'; ctx.fill();
+    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
+    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
+    ctx.fillText(n.sub, n.x, n.y+n.r+11);
+  });
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+</body>
+</html>
