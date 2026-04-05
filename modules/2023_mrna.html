@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2023 · mRNA Vaccines — kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css">
+<style>
+/* Module layout */
+.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
+.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
+.back-link:hover{color:var(--green);border-color:var(--green)}
+.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
+.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
+.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
+.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
+.mod-tab:hover{color:var(--text);background:var(--bg3)}
+.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
+.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
+.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
+
+/* Body layout */
+.mod-body{display:flex;min-height:calc(100vh - 100px)}
+.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
+.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Canvas */
+.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
+.canvas-wrap canvas{display:block;width:100%;height:240px}
+.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
+
+/* Mechanism panels */
+.mech-panels{display:flex;flex-direction:column;gap:10px}
+.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
+.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
+.mech-panel-body strong{color:var(--text)}
+.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+
+/* Molecules tab */
+.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
+.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
+.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
+.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
+.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
+.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
+
+/* Story tab */
+.story-content{max-width:720px}
+.story-block{margin-bottom:16px}
+.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
+
+/* Frontiers tab */
+.frontier-group{margin-bottom:20px}
+.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
+.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
+.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
+
+/* Connections tab */
+.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
+.connections-wrap canvas{display:block;width:100%;height:360px}
+
+/* Right sidebar */
+.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
+.rsb-mol-item:hover{color:var(--cyan)}
+.rsb-mol-icon{font-size:1rem;flex-shrink:0}
+.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
+.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
+</style>
+</head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#44ffcc;border-color:#44ffcc44;background:#44ffcc10">2023</span>
+    <div class="mod-title">mRNA Vaccines</div>
+  </div>
+  <div class="mod-laureates">Katalin Karik&#243; &amp; Drew Weissman &#8212; Nobel Prize in Physiology or Medicine 2023</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#44ffcc;border-color:#44ffcc44;background:#44ffcc10">Biotech</span>
+    <span class="mod-tag" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">Pharmacology</span>
+    <span class="mod-tag" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">Translational</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; mRNA Design</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">m1&#936; modification</span><span class="ctrl-val" id="lay-psu">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">LNP shell</span><span class="ctrl-val" id="lay-lnp">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">Immune cells</span><span class="ctrl-val" id="lay-immune">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> N1-methylpseudouridine abolishes TLR innate recognition while paradoxically increasing ribosome processivity ~10&times;.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; mRNA Design &amp; Codon Optimization</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2023/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel Prize 2023 &#8212; official announcement</div>
+      </a>
+      <a href="https://pubchem.ncbi.nlm.nih.gov/compound/135398513" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">PubChem</div>
+        <div class="ref-title">N1-methylpseudouridine (CID 135398513)</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
+// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'codon optimization': { term:'Codon optimization', level:'grad', def:'Replacing synonymous codons with those preferred by human ribosomes, maximizing translational speed. LinearDesign (Liang et al. 2023) jointly optimizes MFE and codon usage, outperforming rule-based approaches by 2\u20135\u00d7 in protein output.' },
+  'pseudouridine': { term:'Pseudouridine (\u03a8)', level:'res', def:'C5-glycosidic isomer of uridine \u2014 uracil base attached at C5 instead of N1. Natural post-transcriptional RNA modification. Karik\u00f3/Weissman 2005: \u03a8-containing mRNA evades TLR recognition. Parent compound of the therapeutically superior m1\u03a8 (N1-methyl derivative).' },
+  'nonimmunogenic': { term:'Nonimmunogenic (mRNA)', level:'res', def:'mRNA designed to avoid innate immune activation. Strategy: (1) m1\u03a8 modification blocking TLR3/7/8; (2) HPLC purification removing dsRNA byproducts (Kariko 2011); (3) clean 5\' cap (CleanCap\u00ae analog). Nonimmunogenic mRNA enables repeat dosing required for cancer vaccine applications.' },
+  'germinal center': { term:'Germinal center reaction', level:'res', def:'Iterative affinity maturation in lymph node B cell follicles driven by T follicular helper (Tfh) cells. LNP-delivered mRNA vaccines generate unusually prolonged GC reactions (>12 weeks in non-human primates) compared to protein subunit vaccines, correlating with higher and more durable antibody titers.' },
+  'saRNA':          { term:'Self-amplifying RNA (saRNA)', level:'frontier', def:'Alphavirus-derived RNA replicons encoding the antigen plus the viral replicase (nsP1-4). After delivery, the replicase amplifies the mRNA 100-1000\u00d7 intracellularly, enabling potent immune responses from ~10-fold lower doses than conventional mRNA. ARCT-154 (Arcturus) \u2014 COVID saRNA vaccine approved in Japan 2023.' },
+});
+
+// ── Module molecules data ────────────────────────────────────────────────────
+const MODULE_MOLS = [
+  { id:'psu', icon:'\ud83d\udd35', color:'#00e5ff', type:'Small Molecule', is_protein:false,
+    name:'N1-Methylpseudouridine (m1\u03a8)', sub:'PubChem CID: 135398513 \u00b7 C\u2081\u2080H\u2081\u2084N\u2082O\u2086',
+    badges:[{text:'mRNA mod',color:'#00e5ff'},{text:'TLR evasion',color:'#00ff99'},{text:'Nobel 2023',color:'#ffd700'}],
+    pubchem_cid:135398513, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/135398513',
+    mechanism:'Replaces every uridine in therapeutic mRNA. N1-methyl group occludes TLR3/7/8 binding groove \u2014 abolishes innate immune activation while paradoxically increasing ribosome processivity ~10\u00d7. The Karik\u00f3/Weissman 2023 Nobel insight.',
+    properties:{'MW':'258.23 g/mol','Formula':'C\u2081\u2080H\u2081\u2084N\u2082O\u2086','XLogP':'-2.1','HBD':'3','HBA':'7','TPSA':'119 \u00c5\u00b2','Lipinski':'Pass'},
+    property_flags:{'XLogP':'good','Lipinski':'good'},
+    interaction:{ title:'m1\u03a8 vs Uridine: TLR7 Recognition',
+      nodes:[
+        {id:'u',  x:120,y:120,r:26,color:'#ff4444',label:'Uridine',  sub:'TLR7 binds'},
+        {id:'psu',x:380,y:120,r:26,color:'#00ff99',label:'m1\u03a8',  sub:'TLR7 blocked'},
+        {id:'tlr',x:250,y:260,r:32,color:'#ffd700',label:'TLR7',     sub:'innate sensor'},
+        {id:'rib',x:250,y:20, r:28,color:'#aa77ff',label:'Ribosome', sub:'translates both'},
+      ],
+      edges:[
+        {from:'u',  to:'tlr',color:'#ff4444',label:'activates \u2192\ninnate alarm',dashed:false},
+        {from:'psu',to:'tlr',color:'#33334a',label:'no binding\n(blocked)',          dashed:true},
+        {from:'u',  to:'rib',color:'#8888b0',label:'translates',                    dashed:true},
+        {from:'psu',to:'rib',color:'#00ff99',label:'10\u00d7 faster',               dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2005',journal:'Immunity',impact:'IF 43',title:'Suppression of RNA Recognition by Toll-like Receptors: The Impact of Nucleoside Modification',abstract:'First demonstration that pseudouridine modification suppresses TLR innate activation of exogenous mRNA. The founding paper of therapeutic mRNA.'},
+      {year:'2008',journal:'Mol Ther',impact:'IF 12',title:'Incorporation of Pseudouridine Into mRNA Yields Superior Nonimmunogenic Vector',abstract:'Modified mRNA is both non-immunogenic AND produces more protein \u2014 the dual benefit enabling clinical development.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udd35',name:'Pseudouridine (\u03a8)',role:'Parent compound\nunmethylated',id:'CID 65058'},
+      {icon:'\ud83e\uddec',name:'Uridine',              role:'Natural\nTLR-activating',     id:'CID 6029'},
+    ]
+  },
+  { id:'spike', icon:'\ud83d\udfe3', color:'#aa77ff', type:'Protein \u00b7 Homotrimer', is_protein:true,
+    name:'Spike Protein (prefusion-stabilized 2P)', sub:'PDB: 6VSB \u00b7 1273 aa/chain',
+    badges:[{text:'Vaccine antigen',color:'#aa77ff'},{text:'RBD\u2013ACE2 binding',color:'#ff4488'},{text:'Nobel 2023',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'6VSB',
+    nih_link:'https://www.rcsb.org/structure/6VSB',
+    mechanism:'K986P/V987P (2P) prolines lock spike in prefusion conformation \u2014 preserving the RBD and NTD neutralizing epitopes that collapse in the post-fusion state. McLellan lab stabilization strategy used in all approved COVID-19 vaccines.',
+    properties:{'PDB':'6VSB','Resolution':'2.8 \u00c5 (cryo-EM)','Chain':'Homotrimer','MW':'~440 kDa','2P mutations':'K986P / V987P','ACE2 Kd':'~15 nM','Glycosylation':'22 sites/chain'},
+    property_flags:{'Resolution':'good','2P mutations':'good'},
+    interaction:{ title:'Spike\u2013ACE2 and Immune Targeting',
+      nodes:[
+        {id:'sp',  x:220,y:150,r:36,color:'#aa77ff',label:'Spike\nRBD',sub:'opens/closes'},
+        {id:'ace2',x:390,y:100,r:26,color:'#ff4488',label:'ACE2',     sub:'host receptor'},
+        {id:'nab', x:390,y:220,r:22,color:'#00ff99',label:'NAb',      sub:'neutralizing Ab'},
+        {id:'mhc', x:60, y:90, r:22,color:'#ffd700',label:'MHC-I',   sub:'peptide display'},
+        {id:'ctl', x:60, y:210,r:22,color:'#00e5ff',label:'CTL',      sub:'CD8+ T cell'},
+      ],
+      edges:[
+        {from:'sp', to:'ace2',color:'#ff4488',label:'viral entry',    dashed:false},
+        {from:'nab',to:'sp',  color:'#00ff99',label:'blocks ACE2',    dashed:false},
+        {from:'sp', to:'mhc', color:'#ffd700',label:'MHC-I peptides', dashed:true},
+        {from:'mhc',to:'ctl', color:'#00e5ff',label:'CTL activation', dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2020',journal:'Science',impact:'IF 56',title:'Cryo-EM structure of the 2019-nCoV spike in the prefusion conformation',abstract:'First spike structure at 2.8\u00c5. 2P stabilization and 10\u201320\u00d7 higher ACE2 affinity than SARS-CoV-1 explained.'},
+      {year:'2020',journal:'NEJM',  impact:'IF 176',title:'An mRNA Vaccine against SARS-CoV-2 \u2014 Phase 1 (mRNA-1273)',abstract:'First human mRNA vaccine trial. Robust neutralizing antibody and T cell responses at all tested doses.'},
+    ],
+    rel_molecules:[{icon:'\ud83d\udd34',name:'ACE2',role:'Host receptor\nentry target',id:'PDB: 1R42'},{icon:'\ud83d\udfe2',name:'Furin',role:'S1/S2 cleavage',id:'PDB: 4RYD'}],
+    domains:[
+      {color:'#ff4488',name:'N-terminal domain (NTD)',        pos:'14\u2013685',   fn:'Alternative receptor binding; supersite for non-RBD Abs'},
+      {color:'#aa77ff',name:'Receptor-binding domain (RBD)',  pos:'319\u2013541',  fn:'ACE2 contact; primary neutralizing epitope'},
+      {color:'#ffd700',name:'Furin cleavage (S1/S2)',         pos:'682\u2013685',  fn:'RRAR \u2014 absent in SARS-CoV-1; key virulence factor'},
+      {color:'#00e5ff',name:'Fusion peptide',                 pos:'816\u2013833',  fn:'Membrane fusion; conserved across betacoronaviruses'},
+      {color:'#00ff99',name:'Heptad repeats (HR1+2)',         pos:'912\u20131162', fn:'2P mutations here; 6-helix bundle post-fusion'},
+    ]
+  },
+  { id:'sm102', icon:'\ud83d\udfe0', color:'#ff8844', type:'Lipid \u00b7 Ionizable', is_protein:false,
+    name:'SM-102 (ionizable lipid)', sub:'PubChem CID: 137500165 \u00b7 Moderna LNP core',
+    badges:[{text:'Ionizable lipid',color:'#ff8844'},{text:'LNP delivery',color:'#aa77ff'},{text:'pKa ~6.6',color:'#00e5ff'}],
+    pubchem_cid:137500165, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/137500165',
+    mechanism:'Neutral at pH 7.4 (low toxicity in circulation). Re-protonates in endosome (pH 5.5) causing membrane disruption and mRNA cytoplasmic release. pKa ~6.6 is the key design parameter matching the pH window between plasma and endosome.',
+    properties:{'MW':'710.2 g/mol','Formula':'C\u2084\u2084H\u2088\u2087NO\u2085','pKa':'~6.6','pH 7.4 charge':'Neutral','pH 5.5 charge':'Cationic','XLogP':'~12','Biodegradable':'Yes (ester bonds)'},
+    property_flags:{'pH 7.4 charge':'good','Biodegradable':'good','XLogP':'warn'},
+    interaction:{ title:'SM-102 pH-Dependent Ionization',
+      nodes:[
+        {id:'acid',x:100,y:100,r:26,color:'#ff8844',label:'pH 4\nFormulation', sub:'cationic'},
+        {id:'neut',x:300,y:100,r:26,color:'#00ff99',label:'pH 7.4\nBlood',    sub:'neutral'},
+        {id:'endo',x:200,y:240,r:26,color:'#ff4488',label:'pH 5.5\nEndosome', sub:'re-protonated'},
+        {id:'mrna',x:380,y:220,r:22,color:'#00e5ff',label:'mRNA',             sub:'released'},
+      ],
+      edges:[
+        {from:'acid',to:'neut',color:'#8888b0',label:'pH rise',                dashed:false},
+        {from:'neut',to:'endo',color:'#ff4488',label:'endocytosis\npH drops',  dashed:false},
+        {from:'endo',to:'mrna',color:'#00e5ff',label:'membrane disruption',    dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2019',journal:'J Am Chem Soc',impact:'IF 16',title:'Role of lipid components in LNPs for vaccines and gene therapy',abstract:'Optimal ionizable lipid pKa window 6.2\u20136.8 matches endosomal pH kinetics for maximum cytoplasmic delivery efficiency.'},
+      {year:'2021',journal:'NEJM',         impact:'IF 176',title:'Efficacy and Safety of mRNA-1273 SARS-CoV-2 Vaccine (COVE trial)',abstract:'94.1% vaccine efficacy against symptomatic COVID-19. Clinical validation of SM-102 LNP platform at scale.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe1',name:'ALC-0315',  role:'Pfizer/BioNTech\nionizable lipid',id:'CID 2311914'},
+      {icon:'\ud83d\udd35',name:'DSPC',      role:'Helper lipid\nbilayer stability', id:'CID 5497103'},
+    ]
+  },
+];
+
+// ── Mechanism phases ─────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 mRNA Design & Codon Optimization',   color:'#00ff99', mol:'psu'},
+  {label:'Phase 1 \u2014 LNP Formulation',                   color:'#00e5ff', mol:'sm102'},
+  {label:'Phase 2 \u2014 Endosomal Escape',                  color:'#ffd700', mol:null},
+  {label:'Phase 3 \u2014 Translation & Spike Biogenesis',    color:'#aa77ff', mol:'spike'},
+  {label:'Phase 4 \u2014 Adaptive Immune Priming',           color:'#ff4488', mol:null},
+];
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+document.querySelectorAll('.mod-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panelId = 'panel-' + tab.dataset.tab;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (tab.dataset.tab === 'connections') drawConnections();
+  });
+});
+
+// ── Mechanism canvas animation ────────────────────────────────────────────────
+const mechCv = document.getElementById('mech-canvas');
+let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
+
+function mechDraw(phase, t) {
+  const cv = mechCv;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+
+  if (phase === 0) {
+    // mRNA strand with colored nucleosides
+    ctx.strokeStyle = '#00e5ff44'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(60, cy); ctx.lineTo(W - 60, cy); ctx.stroke();
+    for (let i = 0; i < 18; i++) {
+      const x = 60 + i * ((W - 120) / 17);
+      const col = (i % 3 === 1) ? '#00e5ff' : '#33335a'; // m1Psi highlighted
+      ctx.beginPath(); ctx.arc(x, cy, 8, 0, Math.PI * 2);
+      ctx.fillStyle = col + 'cc'; ctx.fill();
+      ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+    ctx.fillStyle = '#00e5ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('m1\u03a8-modified mRNA (codon-optimized)', cx, cy - 26);
+  } else if (phase === 1) {
+    // LNP circle with mRNA core
+    const r = 55; const angle = t * 0.02;
+    const grad = ctx.createRadialGradient(cx, cy, 8, cx, cy, r);
+    grad.addColorStop(0, '#ff884422'); grad.addColorStop(1, '#ff884410');
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = grad; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    // Inner mRNA coil
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let a = 0; a < Math.PI * 4; a += 0.2) {
+      const x = cx + (15 + a * 2) * Math.cos(a + angle) / (Math.PI * 4) * 2.5;
+      const y = cy + 8 * Math.sin(a * 2.5);
+      a === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.fillStyle = '#ff884499'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Lipid Nanoparticle (SM-102 core)', cx, cy + r + 16);
+  } else if (phase === 2) {
+    // Endosomal escape
+    const esc = (Math.sin(t * 0.04) + 1) / 2;
+    // Endosome
+    ctx.beginPath(); ctx.arc(cx, cy, 65, 0, Math.PI * 2);
+    ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 2; ctx.setLineDash([4, 4]); ctx.stroke();
+    ctx.setLineDash([]);
+    // Escaping mRNA dot
+    const escX = cx + 90 * Math.cos(t * 0.05);
+    const escY = cy + 40 * Math.sin(t * 0.05);
+    ctx.beginPath(); ctx.arc(escX, escY, 8, 0, Math.PI * 2);
+    ctx.fillStyle = '#00e5ff'; ctx.fill();
+    ctx.fillStyle = '#ff448899'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Endosomal escape (~1-2% efficiency)', cx, cy + 85);
+  } else if (phase === 3) {
+    // Ribosome + spike biogenesis
+    const ribY = cy - 20;
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(cx - 15, ribY - 8, 22, 0, Math.PI * 2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx + 15, ribY + 8, 18, 0, Math.PI * 2); ctx.stroke();
+    // Growing spike
+    const spikeH = 20 + (t % 80) * 0.8;
+    ctx.fillStyle = '#aa77ff'; ctx.beginPath();
+    ctx.moveTo(cx, ribY + 24); ctx.lineTo(cx - 12, ribY + 24 + spikeH); ctx.lineTo(cx + 12, ribY + 24 + spikeH); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#aa77ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Ribosome translates mRNA \u2192 Spike protein', cx, cy + 80);
+  } else if (phase === 4) {
+    // Immune cells orbiting antigen
+    const orbit = 65;
+    ['#00e5ff','#00ff99','#ffd700'].forEach((col, i) => {
+      const a = t * 0.025 + i * (Math.PI * 2 / 3);
+      const x = cx + orbit * Math.cos(a), y = cy + orbit * Math.sin(a);
+      ctx.beginPath(); ctx.arc(x, y, 16, 0, Math.PI * 2);
+      ctx.fillStyle = col + '33'; ctx.fill();
+      ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.stroke();
+    });
+    ctx.beginPath(); ctx.arc(cx, cy, 20, 0, Math.PI * 2);
+    ctx.fillStyle = '#aa77ff33'; ctx.fill(); ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#aa77ff'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('Ag', cx, cy + 4);
+    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('B cells + T cells primed by dendritic cell', cx, cy + 100);
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  animT = 0; animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
+  animT = 0; mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ───────────────────────────────────────────────────
+(function buildMechPanels() {
+  const container = document.getElementById('mech-panels');
+  const panelData = [
+    { title:'Phase 0 \u2014 mRNA Design', color:'#00ff99', mol:'psu',
+      body:'<strong>Codon optimization</strong> replaces synonymous codons with human-preferred codons, maximizing ribosome processivity. <strong>N1-methylpseudouridine (m1\u03a8)</strong> replaces every uridine \u2014 ablating TLR innate sensing while paradoxically increasing translation efficiency ~10\u00d7. The mRNA 5\u2019 cap (m7G or CleanCap\u00ae analog) anchors eIF4E for cap-dependent translation initiation.'},
+    { title:'Phase 1 \u2014 LNP Formulation', color:'#00e5ff', mol:'sm102',
+      body:'mRNA is encapsulated in <strong>lipid nanoparticles (LNPs)</strong>: ionizable lipid (SM-102, pKa ~6.6) + DSPC + cholesterol + PEG-lipid. N:P ratio ~6. At formulation pH ~4, SM-102 is cationic, binding negatively charged mRNA via electrostatic interactions. Extruded to ~80-100 nm. PEG-lipid provides colloidal stability and stealth from opsonization.'},
+    { title:'Phase 2 \u2014 Endosomal Escape', color:'#ffd700', mol:null,
+      body:'Intramuscular injection \u2192 macropinocytosis and clathrin-mediated endocytosis by myocytes and dendritic cells. In maturing endosome, pH drops from 7.4 \u2192 5.5. SM-102 reprotonates (pKa ~6.6), becomes cationic, and disrupts the endosomal membrane by forming non-bilayer structures. Only ~1-2% of LNPs escape \u2014 but each released mRNA molecule is amplified 10\u00b3\u2013\u2076\u00d7 by the ribosomal machinery.'},
+    { title:'Phase 3 \u2014 Translation & Spike Biogenesis', color:'#aa77ff', mol:'spike',
+      body:'Spike mRNA is translated by 80S ribosomes in the rough ER. The signal peptide targets it to the translocon. Co-translational glycosylation adds 22 N-linked glycans per chain. 2P mutations (K986P/V987P) stabilize the prefusion trimer. Spike traffics to the plasma membrane and is displayed on the surface of transfected cells for T and B cell recognition.'},
+    { title:'Phase 4 \u2014 Adaptive Immune Priming', color:'#ff4488', mol:null,
+      body:'Transfected myocytes and dendritic cells display spike peptides on MHC-I (CTL priming) and MHC-II (Tfh priming). LNP adjuvant effect drives strong germinal center reactions in draining lymph nodes. Tfh cells help B cells undergo affinity maturation \u2192 high-affinity IgG against RBD (neutralizing) and NTD. Long-lived plasma cells and memory B/T cells persist for months to years.'},
+  ];
+
+  panelData.forEach(p => {
+    const panel = document.createElement('div');
+    panel.className = 'mech-panel';
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    const bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    const titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+    const body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    // Parse simple <strong> tags safely (developer-controlled content)
+    const parts = p.body.split(/<strong>|<\/strong>/);
+    parts.forEach((part, i) => {
+      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
+      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
+    });
+    // Molecule chip if specified
+    if (p.mol) {
+      const chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      const mol = MODULE_MOLS.find(m => m.id === p.mol);
+      if (mol) {
+        const chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.type.toLowerCase().includes('protein') ? ' protein' : mol.type.toLowerCase().includes('lipid') ? ' lipid' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  const grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(mol => {
+    const card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
+    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
+    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
+    const role = document.createElement('div'); role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
+    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
+    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ────────────────────────────────────────────────────────────
+(function buildStory() {
+  const container = document.getElementById('story-content');
+  const events = [
+    {year:'1961', text:'Nirenberg & Matthaei: poly-U mRNA translates poly-Phe \u2014 proof that mRNA encodes protein. The central dogma validated biochemically.'},
+    {year:'1987', text:'Malone, Felgner, Bhattacharya: cationic lipids (DOTMA) transfect cells with mRNA in vitro \u2014 first mRNA delivery proof of concept.'},
+    {year:'1990', text:'Wolff et al. (Science): naked mRNA injected intramuscularly in mice produces protein for days. The founding observation of in vivo mRNA expression.'},
+    {year:'1992', text:'Karik\u00f3 joins Penn, pursuing therapeutic mRNA. Faces repeated grant rejections \u2014 NIH study sections dismiss mRNA as too unstable and immunogenic for therapy.'},
+    {year:'1997\u20132004', text:'Karik\u00f3 & Weissman collaborate. Discovery that innate immune activation is the critical barrier. Years of methodical nucleoside modification testing.'},
+    {year:'2005', text:'Karik\u00f3, Buckstein, Ni, Weissman (Immunity): Pseudouridine (\u03a8) modification suppresses TLR3/7/8 activation of exogenous mRNA. The Nobel insight. Initial reception is skeptical.'},
+    {year:'2008', text:'Karik\u00f3 et al. (Mol Ther): \u03a8-modified mRNA is both non-immunogenic AND more efficiently translated \u2014 the dual advantage critical for therapy.'},
+    {year:'2010', text:'Moderna co-founded. BioNTech founded 2008. Both license mRNA modification technology. Ionizable LNP technology (from Cullis lab) converges with mRNA modification.'},
+    {year:'2013', text:'Moderna secures $240M Series B \u2014 largest biotech Series B at the time. mRNA-1273 (COVID vaccine candidate) enters IND-enabling studies.'},
+    {year:'2020', text:'SARS-CoV-2 pandemic. mRNA-1273 (Moderna) and BNT162b2 (Pfizer/BioNTech) enter Phase 3. EUA in December 2020. 3.5 billion doses administered globally by end of 2021.'},
+    {year:'2023', text:'Nobel Prize in Physiology or Medicine awarded to Katalin Karik\u00f3 and Drew Weissman "for their discoveries concerning nucleoside base modifications that enabled the development of effective mRNA vaccines against COVID-19."'},
+  ];
+  events.forEach(ev => {
+    const block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    const yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    const text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  const container = document.getElementById('frontiers-content');
+  const groups = [
+    { title:'Clinical Pipeline (2024\u20132026)', items:[
+      {title:'mRNA-4157/V940 (Merck + Moderna) \u2014 Personalized Cancer Vaccine', body:'Phase IIb KEYNOTE-942: 44% reduction in melanoma recurrence/death vs pembrolizumab alone (2023). Patient-specific neoantigens encoded in mRNA cocktail. Regulatory filing expected 2025. First personalized therapeutic cancer vaccine to show Phase 2 efficacy.'},
+      {title:'saRNA COVID vaccines (ARCT-154, HDT-301)', body:'Self-amplifying RNA encodes nsP1-4 replicase + spike. Dose-sparing: 1-5 \u03bcg vs 30-100 \u03bcg conventional mRNA. ARCT-154 approved Japan 2023 (first approved saRNA vaccine globally). HDT-301 Phase 1 ongoing.'},
+      {title:'Influenza mRNA vaccine (mRNA-1010)', body:'Quadrivalent seasonal flu mRNA vaccine. Phase 3 enrollment 2023-2024. First potential competition for egg-based manufacturing. Faster reformulation to match circulating strains \u2014 critical for antigenic drift.'},
+    ]},
+    { title:'AI & Computational Approaches', items:[
+      {title:'LinearDesign (Zhang lab + BioNTech, 2023)', body:'Dynamic programming algorithm jointly optimizing mRNA secondary structure (MFE) and codon usage in O(n\u00b3) time. Generates mRNAs with 5-fold higher protein expression and improved thermostability vs standard approaches. Deployed for BNT162b3 optimization.'},
+      {title:'CodonBERT + GNN-based stability prediction', body:'Transformer models trained on in vivo expression data predict optimal codon usage, UTR design, and poly-A tail length. AI-designed UTRs increase expression 3-8\u00d7 in liver targeting. Google DeepMind + Pfizer collaboration 2024.'},
+    ]},
+    { title:'Open Questions', items:[
+      {title:'Durability \u2014 why do mRNA vaccine responses wane faster than live-attenuated vaccines?', body:'Hypothesis: lack of viral replication prevents prolonged antigen exposure needed for long-lived plasma cell generation. saRNA and circular RNA approaches may extend expression duration. Counter-argument: LNP-driven DC activation creates strong GC reactions.'},
+      {title:'LNP organ tropism and off-target effects', body:'Standard LNP-IM formulations primarily hit muscle and draining lymph nodes, with 5-15% liver uptake via ApoE adsorption. Ionizable lipid chemistry and targeting ligands can redirect to spleen (lymphocyte targeting), lung (inhaled delivery), or CNS. Determining the therapeutic window for liver-targeted mRNA (Hepatitis B, alpha-1-antitrypsin deficiency).'},
+    ]},
+    { title:'Industry & Translational Applications', items:[
+      {title:'mRNA as protein replacement therapy', body:'Propionic acidemia: Moderna MRT5201 (mRNA encoding propionyl-CoA carboxylase) Phase 2 2024. Methylmalonic acidemia: MRT5009. Glycogen storage disease 1a (Arctus). mRNA enables repeat dosing for enzyme replacement \u2014 unlike gene therapy, no integration risk.'},
+      {title:'mRNA for in vivo CAR-T cell engineering', body:'Transient mRNA-encoded CAR in T cells (no viral vector required). Intellia + Caribou Biosciences approach. CD19 CAR-mRNA in T cells: 3-5 day expression window \u2014 sufficient for tumor kill but self-limiting, reducing CRS risk. Enables outpatient CAR-T without lymphodepletion.'},
+    ]},
+  ];
+  groups.forEach(g => {
+    const section = document.createElement('div');
+    section.className = 'frontier-group';
+    const title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'frontier-item';
+      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
+      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
+      card.appendChild(it); card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ────────────────────────────────────────────────────────
+(function buildRsidebar() {
+  // Key molecules list
+  const molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(mol => {
+    const item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
+    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
+    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
+    const id = document.createElement('div'); id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name); nameCol.appendChild(id);
+    item.appendChild(icon); item.appendChild(nameCol);
+    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  // Papers
+  const paperList = document.getElementById('rsb-papers');
+  const papers = [
+    {year:'2005', journal:'Immunity', title:'Suppression of RNA Recognition by TLRs: Nucleoside Modification'},
+    {year:'2008', journal:'Mol Ther', title:'Pseudouridine into mRNA \u2014 Superior Nonimmunogenic Vector'},
+    {year:'2020', journal:'NEJM', title:'mRNA-1273 Vaccine \u2014 Phase 1 results'},
+  ];
+  papers.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
+    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
+    item.appendChild(year); item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas (force-directed network) ───────────────────────────────
+function drawConnections() {
+  const cv = document.getElementById('conn-canvas');
+  cv.width = cv.offsetWidth || 600;
+  cv.height = cv.offsetHeight || 360;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+
+  const nodes = [
+    {id:'mrna', x:W*.5,  y:H*.5,  r:32, color:'#44ffcc', label:'mRNA\nVaccines',     sub:'2023'},
+    {id:'imm',  x:W*.75, y:H*.28, r:24, color:'#ff4488', label:'Checkpoint\nImmuno', sub:'2018'},
+    {id:'mir',  x:W*.25, y:H*.28, r:24, color:'#aa77ff', label:'micro\nRNA',          sub:'2024'},
+    {id:'hif',  x:W*.8,  y:H*.7,  r:22, color:'#ff8844', label:'HIF\nO2',             sub:'2019'},
+    {id:'auto', x:W*.2,  y:H*.7,  r:22, color:'#00e5ff', label:'Auto\nphagy',         sub:'2016'},
+    {id:'hcv',  x:W*.5,  y:H*.85, r:20, color:'#44ffcc', label:'HCV',                 sub:'2020'},
+  ];
+  const edges = [
+    {from:'mrna',to:'imm', color:'#ff448855',label:'cancer\nvaccine combo'},
+    {from:'mrna',to:'mir', color:'#aa77ff55',label:'ncRNA\nbiology'},
+    {from:'mrna',to:'hif', color:'#ff884455',label:'hypoxia\nresponse'},
+    {from:'mrna',to:'auto',color:'#00e5ff55',label:'mTOR\ncontrol'},
+    {from:'mrna',to:'hcv', color:'#44ffcc55',label:'IRES vs\ncap-dep'},
+  ];
+
+  const ns = {}; nodes.forEach(n => ns[n.id] = n);
+  edges.forEach(e => {
+    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
+    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
+    if(e.label) {
+      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
+      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
+    }
+  });
+  nodes.forEach(n => {
+    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+    ctx.fillStyle = n.color + '22'; ctx.fill();
+    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
+    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
+    ctx.fillText(n.sub, n.x, n.y+n.r+11);
+  });
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+</body>
+</html>
