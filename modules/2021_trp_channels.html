@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2021 · TRP Channels — kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css">
+<style>
+/* Module layout */
+.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
+.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
+.back-link:hover{color:var(--green);border-color:var(--green)}
+.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
+.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
+.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
+.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
+.mod-tab:hover{color:var(--text);background:var(--bg3)}
+.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
+.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
+.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
+
+/* Body layout */
+.mod-body{display:flex;min-height:calc(100vh - 100px)}
+.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
+.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Canvas */
+.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
+.canvas-wrap canvas{display:block;width:100%;height:240px}
+.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
+
+/* Mechanism panels */
+.mech-panels{display:flex;flex-direction:column;gap:10px}
+.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
+.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
+.mech-panel-body strong{color:var(--text)}
+.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+
+/* Molecules tab */
+.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
+.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
+.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
+.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
+.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
+.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
+
+/* Story tab */
+.story-content{max-width:720px}
+.story-block{margin-bottom:16px}
+.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
+
+/* Frontiers tab */
+.frontier-group{margin-bottom:20px}
+.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
+.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
+.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
+
+/* Connections tab */
+.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
+.connections-wrap canvas{display:block;width:100%;height:360px}
+
+/* Right sidebar */
+.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
+.rsb-mol-item:hover{color:var(--cyan)}
+.rsb-mol-icon{font-size:1rem;flex-shrink:0}
+.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
+.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
+</style>
+</head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#ff8844;border-color:#ff884444;background:#ff884410">2021</span>
+    <div class="mod-title">TRP Channels &mdash; Thermosensation &amp; Mechanosensation</div>
+  </div>
+  <div class="mod-laureates">David Julius &amp; Ardem Patapoutian &#8212; Nobel Prize in Physiology or Medicine 2021</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#ff8844;border-color:#ff884444;background:#ff884410">Neuroscience</span>
+    <span class="mod-tag" style="color:#00e5ff;border-color:#00e5ff44;background:#00e5ff10">Ion Channels</span>
+    <span class="mod-tag" style="color:#ff4488;border-color:#ff448844;background:#ff448810">Pain Biology</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; Resting TRPV1</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">TRPV1 tetramer</span><span class="ctrl-val" id="lay-trpv1">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">Ca&sup2;&plus; influx</span><span class="ctrl-val" id="lay-ca2">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">PIEZO2 blades</span><span class="ctrl-val" id="lay-piezo">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> TRPV1 is gated by heat &gt;43&deg;C, capsaicin, and protons via distinct but allosterically coupled binding sites on the same tetrameric channel.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; Resting TRPV1: Closed Channel State</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2021/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel Prize 2021 &#8212; official announcement</div>
+      </a>
+      <a href="https://www.rcsb.org/structure/5GGS" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">RCSB PDB</div>
+        <div class="ref-title">PDB: TRPV1 (5GGS)</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
+// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'nociceptor': { term:'Nociceptor', level:'grad', def:'High-threshold sensory neuron responding to noxious stimuli. C-fibers (unmyelinated, 0.5\u20132 m/s): slow burning pain, temperature. A\u03b4-fibers (thinly myelinated, 5\u201330 m/s): fast sharp pain. TRP channels are primary transducers; voltage-gated Nav1.7/1.8/1.9 amplify and propagate. Cell bodies in dorsal root ganglia (DRG) and trigeminal ganglia.' },
+  'vanilloid':  { term:'Vanilloid pocket', level:'res', def:'Hydrophobic binding site on TRPV1 formed by TM4\u2013TM5 linker residues Y511, S512, T550, E570, R557 (rat). Capsaicin, RTX, and endocannabinoids (anandamide) bind here via hydrogen bonding (vanillyl OH) and hydrophobic contacts. First identified by Julius lab through TRPV1 chimera studies between capsaicin-sensitive and -insensitive species.' },
+  'piezo_blade':{ term:'PIEZO blade units (THU)', level:'frontier', def:'PIEZO channels consist of peripheral blade units (each = 4 transmembrane helix units, THU) arranged as propeller-like arms. Membrane tension transmitted through blades to central pore. Cryo-EM shows propeller-like architecture extending ~200 nm. Molecular dynamics suggests blades indent the bilayer to sense membrane curvature change.' },
+  'capsaicin':  { term:'Capsaicin (vanilloid)', level:'grad', def:'Trans-8-methyl-N-vanillyl-6-nonenamide \u2014 the pungent compound in hot peppers. Acts as TRPV1 agonist via the vanilloid binding pocket (TM4-TM5). EC50 ~300 nM for rat TRPV1. Ca\u00b2\u207a influx through TRPV1 \u2192 action potential in C-fiber nociceptor \u2192 burning pain sensation. Paradoxically desensitizes TRPV1 with repeated application \u2014 basis of Qutenza (8%) topical analgesic.' },
+});
+
+// ── Module molecules data ────────────────────────────────────────────────────
+const MODULE_MOLS = [
+  { id:'trpv1', icon:'\ud83d\udd34', color:'#ff8844', type:'Protein \u00b7 TRP channel tetramer', is_protein:true,
+    name:'TRPV1', sub:'PDB: 5GGS \u00b7 838 aa/subunit \u00b7 heat + capsaicin gated',
+    badges:[{text:'Heat sensor >43\u00b0C',color:'#ff8844'},{text:'Capsaicin receptor',color:'#ffd700'},{text:'Nobel 2021',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'5GGS',
+    nih_link:'https://www.rcsb.org/structure/5GGS',
+    mechanism:'Tetrameric nonselective cation channel (Ca\u00b2\u207a > Na\u207a > K\u207a, PCa/PNa ~10). Gated by: heat >43\u00b0C (membrane conformational change in S4-S5 linker), capsaicin (vanilloid pocket TM4-TM5), protons (pH <6, E600 key residue), and endocannabinoids (anandamide). Ca\u00b2\u207a influx \u2192 membrane depolarization \u2192 Nav1.8 action potential in C-fiber nociceptor \u2192 pain signal. Identified 1997 by Julius lab via cDNA expression screen in capsaicin-responsive cells.',
+    properties:{'PDB':'5GGS (capsaicin-bound)','Subunits':'4 identical (homotetrameric)','Ion selectivity':'Ca\u00b2\u207a:Na\u207a ~10:1','Temperature threshold':'43\u00b0C','Capsaicin EC50':'~300 nM (rat)','RTX EC50':'~40 pM','Pain relevance':'Inflammatory hyperalgesia; cancer pain; DRG expression'},
+    property_flags:{'Pain relevance':'warn'},
+    interaction:{ title:'TRPV1 Multi-Modal Gating',
+      nodes:[
+        {id:'heat',  x:80, y:80, r:22,color:'#ff4444',label:'Heat\n>43\u00b0C',   sub:'thermal'},
+        {id:'cap',   x:200,y:50, r:22,color:'#ffd700',label:'Capsaicin',    sub:'vanilloid'},
+        {id:'ph',    x:320,y:50, r:20,color:'#ff8844',label:'H\u207a pH<6',      sub:'acid'},
+        {id:'trpv1', x:250,y:200,r:34,color:'#ff8844',label:'TRPV1\nchannel',sub:'open'},
+        {id:'ca2',   x:250,y:360,r:24,color:'#00e5ff',label:'Ca\u00b2\u207a influx', sub:'depolarization'},
+        {id:'dp',    x:420,y:280,r:22,color:'#aa77ff',label:'Nav1.8\nAP',   sub:'propagation'},
+      ],
+      edges:[
+        {from:'heat', to:'trpv1',color:'#ff4444',label:'S4-S5 linker\nconformation',   dashed:false},
+        {from:'cap',  to:'trpv1',color:'#ffd700',label:'vanilloid\npocket',            dashed:false},
+        {from:'ph',   to:'trpv1',color:'#ff8844',label:'E600\nprotonation',            dashed:false},
+        {from:'trpv1',to:'ca2',  color:'#00e5ff',label:'pore opening\nCa\u00b2\u207a influx',   dashed:false},
+        {from:'ca2',  to:'dp',   color:'#aa77ff',label:'membrane\ndepolarization',    dashed:false},
+      ]
+    },
+    papers:[
+      {year:'1997',journal:'Nature',impact:'IF 69',title:'The capsaicin receptor: a heat-activated ion channel in the pain pathway',abstract:'Caterina, Schumacher, Tominaga, Rosen, Levine, Julius: cloning of TRPV1 from DRG cDNA library. First molecular identification of a thermosensory TRP channel. Nobel 2021.'},
+      {year:'2013',journal:'Nature',impact:'IF 69',title:'Structure of the TRPV1 ion channel determined by electron cryo-microscopy',abstract:'Liao, Bhatt, Julius: first TRPV1 cryo-EM structure at 3.4\u00c5. Tetrameric architecture; capsaicin binding in TM4-TM5 linker visualized.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe1',name:'TRPA1',     role:'Cold + irritant sensor\nmustard oil receptor',     id:'TRPA1 gene'},
+      {icon:'\ud83d\udd35',name:'TRPM8',     role:'Cold sensor\nmenthol receptor <28\u00b0C',              id:'TRPM8 gene'},
+    ],
+    domains:[
+      {color:'#aa77ff',name:'Ankyrin repeat domain (ARD)', pos:'1\u2013356',     fn:'6 ankyrin repeats; intracellular regulatory domain; PIP2 and calmodulin binding'},
+      {color:'#ff8844',name:'S1\u2013S4 (voltage-sensor-like)', pos:'357\u2013510',  fn:'Voltage-sensor-like domain; allosteric coupling to pore'},
+      {color:'#ffd700',name:'S5\u2013S6 + TRP helix',           pos:'511\u2013720',  fn:'Pore-forming domain; capsaicin binding in S4-S5 linker'},
+      {color:'#00e5ff',name:'TRP helix (TRP box)',          pos:'696\u2013716',  fn:'Conserved TRP-channel signature; coupling conformational changes to pore'},
+      {color:'#ff4488',name:'C-terminal domain',            pos:'720\u2013838',  fn:'Calmodulin binding; desensitization'},
+    ]
+  },
+  { id:'piezo2', icon:'\ud83d\udd35', color:'#00e5ff', type:'Protein \u00b7 Mechanosensitive channel', is_protein:true,
+    name:'PIEZO2', sub:'PDB: 6KG7 \u00b7 2521 aa/subunit \u00b7 touch + proprioception',
+    badges:[{text:'Touch sensor',color:'#00e5ff'},{text:'Proprioception',color:'#00ff99'},{text:'Nobel 2021',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'6KG7',
+    nih_link:'https://www.rcsb.org/structure/6KG7',
+    mechanism:'Homotrimeric mechanosensitive ion channel (2,521 aa \u00d7 3 subunits = largest ion channel structure known). 38 transmembrane helices per subunit, organized as 9 peripheral blade units (propeller-like) + central pore module. Gated by membrane tension/curvature: mechanical deformation transmitted through blades to CTD/pore. Activated by: light touch, cell swelling, membrane stretch. Physiological roles: touch discrimination, proprioception (muscle spindle), breathing reflexes (Hering-Breuer). PIEZO2 mutations \u2192 FADS (fetal akinesia), DA5 arthrogryposis, proprioceptive ataxia. Identified 2010 by Patapoutian lab via siRNA screen in mechanically-sensitive cells.',
+    properties:{'PDB':'6KG7 (homotrimer)','Subunit size':'2,521 aa (~288 kDa/subunit)','Trimer MW':'~900 kDa','TM helices/subunit':'38','Blade units':'9 peripheral per subunit','Physiological roles':'Touch, proprioception, Hering-Breuer reflex','PIEZO2 mutations':'FADS, DA5, proprioceptive ataxia'},
+    property_flags:{},
+    interaction:{ title:'PIEZO2: Mechanotransduction via Blade Deformation',
+      nodes:[
+        {id:'force', x:100,y:80, r:24,color:'#ff8844',label:'Mechanical\nforce',   sub:'membrane tension'},
+        {id:'blade', x:280,y:80, r:26,color:'#8888b0',label:'Blade\nunits',       sub:'9 propeller arms'},
+        {id:'pore',  x:280,y:240,r:28,color:'#00e5ff',label:'PIEZO2\npore',       sub:'CTD gating'},
+        {id:'ca2',   x:280,y:380,r:24,color:'#00ff99',label:'Ca\u00b2\u207a/Na\u207a\ninflux',  sub:'depolarization'},
+        {id:'prop',  x:450,y:240,r:22,color:'#ffd700',label:'Proprioception',     sub:'spindle afferent'},
+      ],
+      edges:[
+        {from:'force',to:'blade',color:'#ff8844',label:'membrane\ncurvature',          dashed:false},
+        {from:'blade',to:'pore', color:'#00e5ff',label:'conformational\ntransmission', dashed:false},
+        {from:'pore', to:'ca2',  color:'#00ff99',label:'pore opening\nion influx',     dashed:false},
+        {from:'ca2',  to:'prop', color:'#ffd700',label:'proprioceptive\nsignal',        dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2010',journal:'Science',impact:'IF 56',title:'Piezo1 and Piezo2 are essential components of distinct mechanically activated cation channels',abstract:'Coste, Mathur, Schmidt, Bhatt, Bhatt, Bhatt, Patapoutian: PIEZO1/2 identified by siRNA screen. Reconstitution confirms they ARE the mechanically activated channels. Nobel 2021.'},
+      {year:'2012',journal:'Nature',impact:'IF 69',title:'PIEZO2 is the principal mechanotransduction channel for proprioception',abstract:'Woo et al.: PIEZO2 knockout mice lose proprioception. Fall over when eyes closed. PIEZO2 is required for muscle spindle afferent function.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe3',name:'PIEZO1',     role:'Blood flow sensor\nred blood cell volume',   id:'PDB: 6B3R'},
+      {icon:'\ud83d\udfe1',name:'Yoda1',      role:'PIEZO1 agonist\n(sickle cell disease target)',id:'CID in dev.'},
+    ],
+    domains:[
+      {color:'#8888b0',name:'Peripheral blade 1\u20139',pos:'Blades',    fn:'9 blade units (each 4 THU = 4\u00d7TM helices); membrane tension sensing'},
+      {color:'#00e5ff',name:'Beam domain',          pos:'Mid',       fn:'Lever arm connecting blades to CTD; conformational amplifier'},
+      {color:'#ffd700',name:'Anchor domain',         pos:'Pre-CTD',  fn:'Docking platform connecting beam and pore module'},
+      {color:'#00ff99',name:'CTD / pore module',     pos:'C-term',   fn:'Ion-conducting pore; gating by conformational change from blades'},
+    ]
+  },
+  { id:'capsaicin', icon:'\ud83c\udf36\ufe0f', color:'#ffd700', type:'Small Molecule \u00b7 Vanilloid', is_protein:false,
+    name:'Capsaicin', sub:'PubChem CID: 1548943 \u00b7 Chili pepper active principle',
+    badges:[{text:'TRPV1 agonist',color:'#ffd700'},{text:'Vanilloid binding',color:'#ff8844'},{text:'Analgesic (Qutenza)',color:'#00ff99'}],
+    pubchem_cid:1548943, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/1548943',
+    mechanism:'TRPV1 agonist binding the vanilloid pocket (TM4-TM5 linker). The vanillyl hydroxyl group forms H-bond with TRPV1-T550; the acyl chain fits in the hydrophobic pocket. Ca\u00b2\u207a influx \u2192 burning pain sensation. With repeated application: TRPV1 desensitization (calmodulin-dependent) and nociceptor defunctionalization. Basis of Qutenza (8% capsaicin patch, FDA 2009) for postherpetic neuralgia and diabetic neuropathy.',
+    properties:{'MW':'305.4 g/mol','Source':'Capsicum peppers','EC50 (TRPV1)':'~300 nM','Vanilloid binding site':'TM4-TM5 linker','XLogP':'3.0','Clinical use':'Qutenza patch 8% \u2014 neuropathic pain','Dose':'60 min application, effects 3 months'},
+    property_flags:{'EC50 (TRPV1)':'good','XLogP':'good'},
+    interaction:{ title:'Capsaicin Binding and Desensitization',
+      nodes:[
+        {id:'cap',   x:100,y:80, r:22,color:'#ffd700',label:'Capsaicin',   sub:'vanilloid'},
+        {id:'vp',    x:280,y:80, r:26,color:'#ff8844',label:'Vanilloid\npocket',sub:'TM4-5'},
+        {id:'trpv1', x:280,y:220,r:28,color:'#ff4488',label:'TRPV1',       sub:'open'},
+        {id:'calm',  x:100,y:280,r:22,color:'#aa77ff',label:'Calmodulin', sub:'desensitization'},
+        {id:'deact', x:450,y:220,r:22,color:'#00ff99',label:'Deactivated',sub:'analgesic window'},
+      ],
+      edges:[
+        {from:'cap',  to:'vp',   color:'#ffd700',label:'H-bond + hydrophobic\nbinding',dashed:false},
+        {from:'vp',   to:'trpv1',color:'#ff8844',label:'channel\nopening',             dashed:false},
+        {from:'trpv1',to:'calm', color:'#aa77ff',label:'Ca\u00b2\u207a influx \u2192\ncalmodulin CaM',dashed:false},
+        {from:'calm', to:'deact',color:'#00ff99',label:'TRPV1\ndesensitization',       dashed:false},
+      ]
+    },
+    papers:[
+      {year:'1997',journal:'Nature',impact:'IF 69',title:'The capsaicin receptor: a heat-activated ion channel in the pain pathway (Julius)',abstract:'Capsaicin used as molecular probe to identify TRPV1 by expression cloning. The tool compound that revealed thermosensation mechanism.'},
+      {year:'2009',journal:'NEJM',  impact:'IF 176',title:'Efficacy and Safety of 8% Capsaicin Patches (Qutenza)',abstract:'Single 60-minute application: 30% reduction in mean pain score for postherpetic neuralgia. 3-month duration.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udd34',name:'RTX (resiniferatoxin)',role:'10,000\u00d7 more potent\nintrathecal ablation trials',     id:'CID 107794'},
+      {icon:'\ud83d\udfe3',name:'Anandamide',          role:'Endocannabinoid TRPV1\nligand',                  id:'CID 5283454'},
+    ]
+  },
+  { id:'rtx', icon:'\ud83d\udc8a', color:'#ff4488', type:'Small Molecule \u00b7 Ultra-potent vanilloid', is_protein:false,
+    name:'Resiniferatoxin (RTX)', sub:'PubChem CID: 107794 \u00b7 10,000\u00d7 capsaicin potency',
+    badges:[{text:'TRPV1 ultra-agonist',color:'#ff4488'},{text:'Intrathecal ablation',color:'#ffd700'},{text:'Cancer pain trials',color:'#00e5ff'}],
+    pubchem_cid:107794, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/107794',
+    mechanism:'Diterpene from Euphorbia resinifera resin. Binds TRPV1 vanilloid pocket with EC50 ~40 pM (10,000\u00d7 capsaicin). Activates and then permanently ablates TRPV1-expressing nociceptors via Ca\u00b2\u207a overload. Intrathecal RTX ablates dorsal root ganglion C-fibers irreversibly. NIH Phase 1 trial: intrathecal RTX for intractable cancer pain \u2014 C-fiber ablation producing durable analgesia without motor deficit. No effect on A-fibers (lack TRPV1).',
+    properties:{'MW':'628.7 g/mol','Potency vs capsaicin':'~10,000\u00d7','EC50 (TRPV1)':'~40 pM','Source':'Euphorbia resinifera resin','Selectivity':'TRPV1 only (not TRPV2-4, TRPA1)','Clinical route':'Intrathecal (spinal cord injection)','Application':'Cancer pain ablation \u2014 Phase 1 NIH'},
+    property_flags:{'EC50 (TRPV1)':'good','Selectivity':'good'},
+    interaction:{ title:'RTX: TRPV1 Ultra-Activation \u2192 Nociceptor Ablation',
+      nodes:[
+        {id:'rtx',   x:80, y:80, r:22,color:'#ff4488',label:'RTX',      sub:'40 pM'},
+        {id:'trpv1', x:280,y:80, r:28,color:'#ff8844',label:'TRPV1',    sub:'ultra-activated'},
+        {id:'ca2',   x:280,y:240,r:26,color:'#00e5ff',label:'Ca\u00b2\u207a\noverload',sub:'~10\u00d7 normal'},
+        {id:'death', x:280,y:380,r:26,color:'#ff4444',label:'C-fiber\nablation',sub:'irreversible'},
+        {id:'pain0', x:460,y:240,r:22,color:'#00ff99',label:'Analgesic\neffect',sub:'months'},
+      ],
+      edges:[
+        {from:'rtx',  to:'trpv1',color:'#ff4488',label:'ultra-potent\nagonism',        dashed:false},
+        {from:'trpv1',to:'ca2',  color:'#00e5ff',label:'massive\nCa\u00b2\u207a influx',        dashed:false},
+        {from:'ca2',  to:'death',color:'#ff4444',label:'calpain activation\ncell death',dashed:false},
+        {from:'death',to:'pain0',color:'#00ff99',label:'permanent\nC-fiber loss',      dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2019',journal:'Pain', impact:'IF 7',title:'Intrathecal resiniferatoxin for refractory cancer-associated pain',abstract:'NIH Phase 1: intrathecal RTX in dogs with osteosarcoma demonstrates proof of concept for chemical sympathectomy via TRPV1 ablation. Human Phase 1 ongoing.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83c\udf36\ufe0f',name:'Capsaicin',   role:'Parent vanilloid\n10,000\u00d7 less potent',  id:'CID 1548943'},
+      {icon:'\ud83d\udd34',name:'TRPV1',       role:'Sole target\nvanilloid receptor',         id:'PDB: 5GGS'},
+    ]
+  },
+];
+
+// ── Mechanism phases ─────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 Resting TRPV1: Closed Channel State', color:'#ff8844', mol:'trpv1'},
+  {label:'Phase 1 \u2014 Heat Activation >43\u00b0C (S4-S5 Linker)', color:'#ff4488', mol:'trpv1'},
+  {label:'Phase 2 \u2014 Capsaicin Binding Vanilloid Pocket', color:'#ffd700', mol:'capsaicin'},
+  {label:'Phase 3 \u2014 PIEZO2 Membrane Deformation Gating', color:'#00e5ff', mol:'piezo2'},
+  {label:'Phase 4 \u2014 Action Potential Propagation Along C-Fiber', color:'#00ff99', mol:null},
+];
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+document.querySelectorAll('.mod-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panelId = 'panel-' + tab.dataset.tab;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (tab.dataset.tab === 'connections') drawConnections();
+  });
+});
+
+// ── Mechanism canvas animation ────────────────────────────────────────────────
+const mechCv = document.getElementById('mech-canvas');
+let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
+
+function mechDraw(phase, t) {
+  const cv = mechCv;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+
+  if (phase === 0) {
+    // TRPV1 tetramer at rest — four subunits arranged symmetrically, pore closed
+    const r = 50, subR = 18;
+    const angles = [Math.PI*0, Math.PI*0.5, Math.PI, Math.PI*1.5];
+    // Central pore (closed)
+    ctx.beginPath(); ctx.arc(cx, cy, 10, 0, Math.PI*2);
+    ctx.fillStyle = '#33335a'; ctx.fill();
+    ctx.strokeStyle = '#ff884444'; ctx.lineWidth = 1.5; ctx.stroke();
+    // Subunits
+    angles.forEach((a, i) => {
+      const sx = cx + r * Math.cos(a), sy = cy + r * Math.sin(a);
+      ctx.beginPath(); ctx.arc(sx, sy, subR, 0, Math.PI*2);
+      ctx.fillStyle = '#ff884422'; ctx.fill();
+      ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = '#ff8844'; ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('S' + (i+1), sx, sy + 3);
+    });
+    ctx.fillStyle = '#ff884499'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('TRPV1 tetramer \u2014 resting (closed)', cx, cy - 82);
+    ctx.fillStyle = '#8888b066'; ctx.font = '9px monospace';
+    ctx.fillText('Pore gate closed \u2014 no Ca\u00b2\u207a influx', cx, cy + 82);
+  } else if (phase === 1) {
+    // Heat activation: radiant heat waves hitting channel, S4-S5 linker bending
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+    // Heat wave lines
+    for (let i = 0; i < 5; i++) {
+      const wy = 40 + i * 16 + pulse * 6;
+      ctx.strokeStyle = 'rgba(255,68,68,' + (0.3 + pulse * 0.4) + ')';
+      ctx.lineWidth = 1.5; ctx.setLineDash([4,4]);
+      ctx.beginPath();
+      for (let x = 40; x < W - 40; x += 5) {
+        const y = wy + 5 * Math.sin((x + t * 2) * 0.1);
+        x === 40 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke(); ctx.setLineDash([]);
+    }
+    // Channel opening (S4-S5 gap widening)
+    const gapOpen = 8 + pulse * 14;
+    ctx.beginPath(); ctx.arc(cx, cy, 50, 0, Math.PI*2);
+    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff444422'; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, gapOpen, 0, Math.PI*2);
+    ctx.fillStyle = '#00e5ff' + Math.round(pulse * 255).toString(16).padStart(2,'0');
+    ctx.fill();
+    ctx.fillStyle = '#ff444499'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Heat >43\u00b0C \u2192 S4-S5 linker conformational shift', cx, cy + 80);
+    ctx.fillStyle = '#00e5ff88'; ctx.font = '9px monospace';
+    ctx.fillText(pulse > 0.5 ? 'Pore OPEN \u2014 Ca\u00b2\u207a entering' : 'S4-S5 bending\u2026', cx, cy + 96);
+  } else if (phase === 2) {
+    // Capsaicin binding vanilloid pocket
+    const bind = (Math.sin(t * 0.04) + 1) / 2;
+    // Channel outline
+    ctx.beginPath(); ctx.arc(cx, cy + 20, 50, 0, Math.PI*2);
+    ctx.fillStyle = '#ff884415'; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    // Vanilloid pocket highlight
+    ctx.beginPath(); ctx.arc(cx - 30, cy - 10, 18, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,215,0,' + (0.1 + bind * 0.3) + ')'; ctx.fill();
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5; ctx.stroke();
+    // Capsaicin molecule approaching
+    const capX = cx - 80 + bind * 52;
+    ctx.beginPath(); ctx.arc(capX, cy - 10, 10, 0, Math.PI*2);
+    ctx.fillStyle = '#ffd70099'; ctx.fill();
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('CAP', capX, cy - 7);
+    ctx.fillStyle = '#ffd70099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Capsaicin \u2192 vanilloid pocket (TM4-TM5)', cx, cy - 60);
+    ctx.fillStyle = '#8888b066'; ctx.font = '9px monospace';
+    ctx.fillText(bind > 0.7 ? 'H-bond T550 formed \u2014 channel opening' : 'Approaching binding site\u2026', cx, cy + 85);
+  } else if (phase === 3) {
+    // PIEZO2 propeller blades being bent by mechanical force
+    const t2 = t * 0.03;
+    const press = (Math.sin(t2) + 1) / 2;
+    // Force arrow from top
+    const arrowY = 30 + press * 30;
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, arrowY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx - 8, arrowY - 10); ctx.lineTo(cx, arrowY); ctx.lineTo(cx + 8, arrowY - 10); ctx.stroke();
+    // Propeller blades (3 arms of PIEZO2 trimer)
+    for (let i = 0; i < 3; i++) {
+      const a = (i * Math.PI * 2 / 3) + t2 * 0.1;
+      const bladeX = cx + (60 + press * 15) * Math.cos(a);
+      const bladeY = cy + (40 + press * 10) * Math.sin(a);
+      ctx.strokeStyle = '#8888b0'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(bladeX, bladeY); ctx.stroke();
+      ctx.beginPath(); ctx.arc(bladeX, bladeY, 12, 0, Math.PI*2);
+      ctx.fillStyle = '#8888b022'; ctx.fill();
+      ctx.strokeStyle = '#8888b0'; ctx.lineWidth = 1.5; ctx.stroke();
+    }
+    // Central pore opening
+    const poreR = 6 + press * 12;
+    ctx.beginPath(); ctx.arc(cx, cy, poreR, 0, Math.PI*2);
+    ctx.fillStyle = '#00e5ff' + Math.round(press*200).toString(16).padStart(2,'0'); ctx.fill();
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00e5ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('PIEZO2 propeller blades transmit membrane tension', cx, cy + 80);
+  } else if (phase === 4) {
+    // Action potential propagating along axon
+    const apPos = (t * 2) % (W - 80);
+    // Axon
+    ctx.strokeStyle = '#00e5ff44'; ctx.lineWidth = 8;
+    ctx.beginPath(); ctx.moveTo(40, cy); ctx.lineTo(W - 40, cy); ctx.stroke();
+    // Myelin segments
+    for (let i = 0; i < 8; i++) {
+      const sx = 40 + i * ((W - 80) / 7);
+      ctx.strokeStyle = '#8888b055'; ctx.lineWidth = 14;
+      ctx.beginPath(); ctx.moveTo(sx, cy); ctx.lineTo(sx + 30, cy); ctx.stroke();
+    }
+    // AP depolarization wavefront
+    const apX = 40 + apPos;
+    const apGrad = ctx.createRadialGradient(apX, cy, 0, apX, cy, 30);
+    apGrad.addColorStop(0, '#00ff9988'); apGrad.addColorStop(1, '#00ff9900');
+    ctx.beginPath(); ctx.arc(apX, cy, 30, 0, Math.PI*2);
+    ctx.fillStyle = apGrad; ctx.fill();
+    // Nav1.8 labels at Ranvier nodes
+    ctx.fillStyle = '#ffd70088'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Nav1.8 AP \u2192 propagation along C-fiber', cx, cy - 50);
+    ctx.fillStyle = '#00ff9988'; ctx.font = '9px monospace';
+    ctx.fillText('\u2190 DRG cell body              spinal cord \u2192', cx, cy + 50);
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  animT = 0; animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
+  animT = 0; mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ───────────────────────────────────────────────────
+(function buildMechPanels() {
+  const container = document.getElementById('mech-panels');
+  const panelData = [
+    { title:'Phase 0 \u2014 Resting TRPV1: Closed Channel State', color:'#ff8844', mol:'trpv1',
+      body:'<strong>TRPV1</strong> is a homotetrameric nonselective cation channel expressed on C-fiber nociceptors in the dorsal root ganglia (DRG). In the resting state, the S6 inner gate is closed, preventing ion flow. The four subunits are symmetrically arranged around a central aqueous pore. The intracellular <strong>ankyrin repeat domain (ARD)</strong> provides a regulatory platform for ATP, PIP2, and calmodulin binding.'},
+    { title:'Phase 1 \u2014 Heat Activation >43\u00b0C (S4-S5 Linker)', color:'#ff4488', mol:'trpv1',
+      body:'Membrane heating above <strong>43\u00b0C</strong> induces conformational changes in the S4-S5 linker, transmitting force to the S6 gate. This is a purely physical gating mechanism \u2014 no ligand required. The Q-type gating charge in the voltage-sensor-like S1-S4 domain contributes to thermal sensitivity. Ca\u00b2\u207a influx (PCa/PNa ~10:1) depolarizes the nociceptor membrane, triggering <strong>Nav1.8</strong> action potential propagation.'},
+    { title:'Phase 2 \u2014 Capsaicin Binding Vanilloid Pocket', color:'#ffd700', mol:'capsaicin',
+      body:'<strong>Capsaicin</strong> (EC50 ~300 nM, rat TRPV1) binds the vanilloid pocket formed between the S4-S5 linker and the S5 helix. Critical contacts: T550 (H-bond to vanillyl -OH), R557, E570 (hydrophobic). Binding stabilizes the open state \u2014 same Ca\u00b2\u207a influx as heat gating. Repeated exposure activates a Ca\u00b2\u207a-calmodulin desensitization program \u2192 tachyphylaxis \u2192 defunctionalization. Basis of <strong>Qutenza 8% capsaicin patch</strong> (FDA 2009).'},
+    { title:'Phase 3 \u2014 PIEZO2 Membrane Deformation Gating', color:'#00e5ff', mol:'piezo2',
+      body:'<strong>PIEZO2</strong>, a homotrimeric channel of 2,521 aa/subunit (~900 kDa total), senses mechanical deformation via its 9 peripheral <strong>blade units</strong> (each = 4 transmembrane helices, THU). Membrane tension or curvature deflects the blades, transmitting conformational energy through the beam domain and anchor domain to the central CTD pore. Light touch, cell swelling, and proprioceptive stretch all gate PIEZO2.'},
+    { title:'Phase 4 \u2014 Action Potential Propagation Along C-Fiber', color:'#00ff99', mol:null,
+      body:'Ca\u00b2\u207a influx through TRPV1 or PIEZO2 depolarizes the nociceptor terminal membrane. This depolarization activates <strong>Nav1.8</strong> (TTX-resistant, expressed exclusively in small-diameter DRG neurons) to fire action potentials that propagate centrally along C-fibers (0.5\u20132 m/s, unmyelinated) to dorsal horn. First-order synapse releases glutamate + substance P onto second-order projection neurons \u2192 thalamus \u2192 somatosensory cortex (pain perception).'},
+  ];
+
+  panelData.forEach(p => {
+    const panel = document.createElement('div');
+    panel.className = 'mech-panel';
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    const bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    const titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+    const body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    // Parse simple <strong> tags safely (developer-controlled content)
+    const parts = p.body.split(/<strong>|<\/strong>/);
+    parts.forEach((part, i) => {
+      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
+      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
+    });
+    // Molecule chip if specified
+    if (p.mol) {
+      const chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      const mol = MODULE_MOLS.find(m => m.id === p.mol);
+      if (mol) {
+        const chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.type.toLowerCase().includes('protein') ? ' protein' : mol.type.toLowerCase().includes('lipid') ? ' lipid' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  const grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(mol => {
+    const card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
+    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
+    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
+    const role = document.createElement('div'); role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
+    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
+    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ────────────────────────────────────────────────────────────
+(function buildStory() {
+  const container = document.getElementById('story-content');
+  const events = [
+    {year:'1997', text:'Julius lab (UCSF): screens DRG cDNA expression library in Xenopus oocytes and HEK cells. Capsaicin-responsive cells light up with a single clone \u2014 TRPV1. First molecular identification of a pain + heat receptor. Nature 1997.'},
+    {year:'1999\u20132002', text:'Julius lab: TRPV2 (heat >52\u00b0C, 1999), TRPV3 (warm >31\u00b0C), TRPV4 (osmotic + moderate heat). TRPM8 (menthol + cold <28\u00b0C, 2002) and TRPA1 (mustard oil, cold, 2003) discovered. The thermosensory TRP channel family mapped.'},
+    {year:'2002', text:'Caterina (Julius lab): TRPV1 knockout mice show reduced pain sensitivity to capsaicin and heat \u2014 causality proven in vivo. Confirms TRPV1 is THE capsaicin/heat transducer.'},
+    {year:'2010', text:'Patapoutian lab (Scripps): systematic siRNA knockdown screen in N2A cells responding to glass bead pressing. Two genes: PIEZO1 and PIEZO2. Heterologous expression reproduces mechanically-activated currents. Nature/Science 2010.'},
+    {year:'2012', text:'Woo, Bhatt, Patapoutian: PIEZO2 conditional knockout \u2014 mice cannot sense proprioception. Fall when eyes closed. Ataxic gait, breathing abnormalities. PIEZO2 is THE proprioceptive mechanotransducer.'},
+    {year:'2013', text:'Julius + Bhatt labs: first TRPV1 cryo-EM structure (3.4\u00c5). Capsaicin and RTX binding sites visualized. PIEZO1 cryo-EM structure (2018): propeller-blade architecture, ~900 kDa trimer.'},
+    {year:'2021', text:'Nobel Prize to Julius and Patapoutian "for their discoveries of receptors for temperature and touch." Two complementary discoveries: chemical/thermal (TRPV1) and mechanical (PIEZO2) nociception.'},
+  ];
+  events.forEach(ev => {
+    const block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    const yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    const text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  const container = document.getElementById('frontiers-content');
+  const groups = [
+    { title:'Clinical Pipeline (2024\u20132026)', items:[
+      {title:'TRPV1 Antagonists for Non-Opioid Analgesia', body:'AstraZeneca AZD1386: TRPV1 antagonist \u2014 blocked dental pain in Phase 2. Problem: hyperthermia adverse effect (blocking thermosensor raises body temperature). Mechanism: TRPV1 antagonists block both the nociceptive role AND the thermoregulatory role in hypothalamus. Next-gen approach: heat-gating vs capsaicin-gating selective antagonists (mode-selective blockade). Genentech, Bayer, Pfizer all have TRPV1 antagonist programs.'},
+      {title:'PIEZO1 Agonist Yoda1 for Sickle Cell Disease (GBT601)', body:'GBT601 (Global Blood Therapeutics/Pfizer): allosteric hemoglobin modifier in Phase 3 (Hemaverse). Yoda1 is a PIEZO1-selective agonist \u2014 red blood cell PIEZO1 activation influences volume regulation and sickling. Different mechanism: PIEZO1 gain-of-function in hereditary xerocytosis causes RBC dehydration \u2014 a proof-of-concept for PIEZO1 as drug target.'},
+    ]},
+    { title:'AI & Computational Approaches', items:[
+      {title:'Cryo-EM + AI structure determination enabling TRPV1 drug design', body:'AlphaFold3 predicts full-length TRPV1 + PIEZO2 structures with high confidence. Combined with cryo-EM difference maps showing agonist vs antagonist-bound conformations, structure-based TRPV1 drug design is now tractable. Virtual screening against the vanilloid pocket yields compounds with EC50 <10 nM. Computational MD simulations reveal gating pathways.'},
+    ]},
+    { title:'Open Questions', items:[
+      {title:'TRPA1 in COVID-19 cough and airway hyperreactivity', body:'TRPA1 is expressed on airway C-fibers and is activated by acrolein, formaldehyde, and oxidative stress products. SARS-CoV-2 spike protein and virus-induced ROS activate TRPA1 \u2192 persistent dry cough in COVID-19 long-haulers. GRC 17536 (TRPA1 antagonist, Glenmark): Phase 2 for respiratory conditions. TRPA1 connects Nobel 2021 pain biology to COVID-19 airway disease.'},
+    ]},
+    { title:'Industry & Translational Applications', items:[
+      {title:'Qutenza 8% capsaicin patch: marketed TRPV1 pharmacology', body:'FDA approved 2009 (postherpetic neuralgia) and 2020 (diabetic peripheral neuropathy). Single 60-minute application \u2192 C-fiber TRPV1 desensitization \u2192 30% pain reduction for 3 months. The mechanism: repeated TRPV1 activation \u2192 Ca2+-dependent calmodulin binding \u2192 tachyphylaxis. The defunctionalization approach: higher doses (like RTX) produce permanent C-fiber retraction \u2014 measurable by epidermal nerve fiber density biopsy.'},
+    ]},
+  ];
+  groups.forEach(g => {
+    const section = document.createElement('div');
+    section.className = 'frontier-group';
+    const title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'frontier-item';
+      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
+      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
+      card.appendChild(it); card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ────────────────────────────────────────────────────────
+(function buildRsidebar() {
+  // Key molecules list
+  const molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(mol => {
+    const item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
+    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
+    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
+    const id = document.createElement('div'); id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name); nameCol.appendChild(id);
+    item.appendChild(icon); item.appendChild(nameCol);
+    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  // Papers
+  const paperList = document.getElementById('rsb-papers');
+  const papers = [
+    {year:'1997', journal:'Nature', title:'The capsaicin receptor: heat-activated ion channel in pain pathway (Julius)'},
+    {year:'2010', journal:'Science', title:'PIEZO1 and PIEZO2: mechanically activated cation channels (Patapoutian)'},
+    {year:'2012', journal:'Nature', title:'PIEZO2 required for proprioception (Patapoutian)'},
+  ];
+  papers.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
+    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
+    item.appendChild(year); item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas (force-directed network) ───────────────────────────────
+function drawConnections() {
+  const cv = document.getElementById('conn-canvas');
+  cv.width = cv.offsetWidth || 600;
+  cv.height = cv.offsetHeight || 360;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+
+  const nodes = [
+    {id:'trp',   x:W*.5,  y:H*.5,  r:32, color:'#ff8844', label:'TRP\nChannels',  sub:'2021'},
+    {id:'auto',  x:W*.75, y:H*.28, r:24, color:'#00e5ff', label:'Autophagy',     sub:'2016'},
+    {id:'mrna',  x:W*.25, y:H*.28, r:24, color:'#44ffcc', label:'mRNA\nVaccines', sub:'2023'},
+    {id:'circ',  x:W*.8,  y:H*.7,  r:22, color:'#ffd700', label:'Circadian',     sub:'2017'},
+    {id:'hif',   x:W*.2,  y:H*.7,  r:22, color:'#ff8844', label:'HIF\nO2',       sub:'2019'},
+    {id:'anti',  x:W*.5,  y:H*.88, r:20, color:'#aa77ff', label:'Antiparasitic\nGluCl',sub:'2015'},
+  ];
+  const edges = [
+    {from:'trp',to:'auto', color:'#00e5ff55',label:'Ca\u00b2\u207a influx\ntriggers autophagy'},
+    {from:'trp',to:'mrna', color:'#44ffcc55',label:'LNP delivery\nvia skin TRPV1'},
+    {from:'trp',to:'circ', color:'#ffd70055',label:'circadian\nTRP gating'},
+    {from:'trp',to:'hif',  color:'#ff884455',label:'HIF in\nnociceptor hypoxia'},
+    {from:'trp',to:'anti', color:'#aa77ff55',label:'GluCl similar\nCys-loop fold'},
+  ];
+
+  const ns = {}; nodes.forEach(n => ns[n.id] = n);
+  edges.forEach(e => {
+    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
+    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
+    if(e.label) {
+      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
+      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
+    }
+  });
+  nodes.forEach(n => {
+    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+    ctx.fillStyle = n.color + '22'; ctx.fill();
+    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
+    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
+    ctx.fillText(n.sub, n.x, n.y+n.r+11);
+  });
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+</body>
+</html>
