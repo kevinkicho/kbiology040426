@@ -1,0 +1,34 @@
+{
+  "compounds": [
+    {"cid":135398513,"name":"N1-methylpseudouridine","topic":"2023_mrna"},
+    {"cid":137500165,"name":"SM-102",                "topic":"2023_mrna"},
+    {"cid":5497103,  "name":"DSPC",                  "topic":"2023_mrna"},
+    {"cid":2723949,  "name":"capsaicin",             "topic":"2021_trp"},
+    {"cid":6321424,  "name":"ivermectin",            "topic":"2015_antiparasitic"},
+    {"cid":68827,    "name":"artemisinin",           "topic":"2015_antiparasitic"},
+    {"cid":45375808, "name":"sofosbuvir",            "topic":"2020_hcv"},
+    {"cid":67683433, "name":"glecaprevir",           "topic":"2020_hcv"}
+  ],
+  "proteins": [
+    {"pdb_id":"6VSB", "name":"SARS-CoV-2 spike prefusion","topic":"2023_mrna"},
+    {"pdb_id":"1EJ1", "name":"eIF4E cap-binding",         "topic":"2023_mrna"},
+    {"pdb_id":"4ZQK", "name":"PD-1/PD-L1 complex",       "topic":"2018_immunotherapy"},
+    {"pdb_id":"3OSS", "name":"CTLA-4/B7-1",              "topic":"2018_immunotherapy"},
+    {"pdb_id":"5GGS", "name":"TRPV1",                    "topic":"2021_trp"},
+    {"pdb_id":"1LM8", "name":"HIF-1a PAS-B",             "topic":"2019_hif"},
+    {"pdb_id":"1LQB", "name":"VHL/HIF peptide",          "topic":"2019_hif"},
+    {"pdb_id":"4OLA", "name":"Argonaute-2 (AGO2)",       "topic":"2024_microrna"},
+    {"pdb_id":"1QSY", "name":"HCV NS5B polymerase",      "topic":"2020_hcv"},
+    {"pdb_id":"3RHW", "name":"GluCl channel",            "topic":"2015_antiparasitic"}
+  ],
+  "pubmed_ids": [
+    {"pmid":16111902,"topic":"2023_mrna",        "note":"Kariko 2005 pseudouridine"},
+    {"pmid":18439535,"topic":"2023_mrna",        "note":"Kariko 2008 superior mRNA vector"},
+    {"pmid":20525419,"topic":"2018_immunotherapy","note":"Hodi 2010 ipilimumab"},
+    {"pmid":22658416,"topic":"2018_immunotherapy","note":"Topalian 2012 anti-PD-1"},
+    {"pmid":23543530,"topic":"2016_autophagy",   "note":"Mizushima autophagy review"},
+    {"pmid":20951344,"topic":"2019_hif",         "note":"Semenza HIF review"},
+    {"pmid":23792629,"topic":"2024_microrna",    "note":"Ambros lin-4 miRNA"},
+    {"pmid":26360583,"topic":"2021_trp",         "note":"Julius TRP channels review"}
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "135398513": {
+    "cid": 135398513,
+    "formula": "C8H11N5O3",
+    "weight": "225.20",
+    "xlogp": -1.9,
+    "hbd": 3,
+    "hba": 5,
+    "tpsa": 115,
+    "iupac": "2-amino-9-(2-hydroxyethoxymethyl)-1H-purin-6-one",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/135398513",
+    "topic": "2023_mrna"
+  },
+  "137500165": {
+    "cid": 137500165,
+    "formula": "C11H13FN2O3S",
+    "weight": "272.30",
+    "xlogp": 1.2,
+    "hbd": 1,
+    "hba": 6,
+    "tpsa": 96.5,
+    "iupac": "ethyl 5-(1-fluorocyclopropyl)-2-(formamidomethyl)-1,3-thiazole-4-carboxylate",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/137500165",
+    "topic": "2023_mrna"
+  },
+  "5497103": {
+    "cid": 5497103,
+    "formula": "C42H82NO8P",
+    "weight": "760.1",
+    "xlogp": 13.6,
+    "hbd": 0,
+    "hba": 8,
+    "tpsa": 111,
+    "iupac": "[(2R)-3-hexadecanoyloxy-2-[(Z)-octadec-9-enoyl]oxypropyl] 2-(trimethylazaniumyl)ethyl phosphate",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/5497103",
+    "topic": "2023_mrna"
+  },
+  "2723949": {
+    "cid": 2723949,
+    "formula": "C2H5NS",
+    "weight": "75.14",
+    "xlogp": -0.3,
+    "hbd": 1,
+    "hba": 1,
+    "tpsa": 58.1,
+    "iupac": "ethanethioamide",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/2723949",
+    "topic": "2021_trp"
+  },
+  "6321424": {
+    "cid": 6321424,
+    "formula": "C48H74O14",
+    "weight": "875.1",
+    "xlogp": 4.1,
+    "hbd": 3,
+    "hba": 14,
+    "tpsa": 170,
+    "iupac": "(1R,4S,5'S,6R,6'R,8R,10E,12S,13S,14E,16E,20R,21R,24S)-6'-[(2S)-butan-2-yl]-21,24-dihydroxy-12-[(2R,4S,5S,6S)-5-[(2S,4S,5S,6S)-5-hydroxy-4-methoxy-6-methyloxan-2-yl]oxy-4-methoxy-6-methyloxan-2-yl]oxy-5',11,13,22-tetramethylspiro[3,7,19-trioxatetracyclo[15.6.1.14,8.020,24]pentacosa-10,14,16,22-tetraene-6,2'-oxane]-2-one",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/6321424",
+    "topic": "2015_antiparasitic"
+  },
+  "68827": {
+    "cid": 68827,
+    "formula": "C15H22O5",
+    "weight": "282.33",
+    "xlogp": 2.8,
+    "hbd": 0,
+    "hba": 5,
+    "tpsa": 54,
+    "iupac": "(1R,4S,5R,8S,9R,12S,13R)-1,5,9-trimethyl-11,14,15,16-tetraoxatetracyclo[10.3.1.04,13.08,13]hexadecan-10-one",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/68827",
+    "topic": "2015_antiparasitic"
+  },
+  "45375808": {
+    "cid": 45375808,
+    "formula": "C22H29FN3O9P",
+    "weight": "529.5",
+    "xlogp": 1,
+    "hbd": 3,
+    "hba": 11,
+    "tpsa": 153,
+    "iupac": "propan-2-yl (2S)-2-[[[(2R,3R,4R,5R)-5-(2,4-dioxopyrimidin-1-yl)-4-fluoro-3-hydroxy-4-methyloxolan-2-yl]methoxy-phenoxyphosphoryl]amino]propanoate",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/45375808",
+    "topic": "2020_hcv"
+  },
+  "67683433": {
+    "cid": 67683433,
+    "formula": "C9H9NO4",
+    "weight": "195.17",
+    "xlogp": -0.4,
+    "hbd": 3,
+    "hba": 5,
+    "tpsa": 90.7,
+    "iupac": "(E)-3-[3-hydroxy-6-(hydroxymethyl)-2-pyridinyl]prop-2-enoic acid",
+    "url": "https://pubchem.ncbi.nlm.nih.gov/compound/67683433",
+    "topic": "2020_hcv"
+  }
+}

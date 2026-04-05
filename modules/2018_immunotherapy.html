@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2018 · Checkpoint Immunotherapy — kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css">
+<style>
+/* Module layout */
+.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
+.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
+.back-link:hover{color:var(--green);border-color:var(--green)}
+.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
+.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
+.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
+.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
+.mod-tab:hover{color:var(--text);background:var(--bg3)}
+.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
+.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
+.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
+
+/* Body layout */
+.mod-body{display:flex;min-height:calc(100vh - 100px)}
+.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
+.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Canvas */
+.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
+.canvas-wrap canvas{display:block;width:100%;height:240px}
+.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
+
+/* Mechanism panels */
+.mech-panels{display:flex;flex-direction:column;gap:10px}
+.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
+.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
+.mech-panel-body strong{color:var(--text)}
+.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+
+/* Molecules tab */
+.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
+.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
+.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
+.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
+.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
+.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
+
+/* Story tab */
+.story-content{max-width:720px}
+.story-block{margin-bottom:16px}
+.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
+
+/* Frontiers tab */
+.frontier-group{margin-bottom:20px}
+.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
+.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
+.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
+
+/* Connections tab */
+.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
+.connections-wrap canvas{display:block;width:100%;height:360px}
+
+/* Right sidebar */
+.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
+.rsb-mol-item:hover{color:var(--cyan)}
+.rsb-mol-icon{font-size:1rem;flex-shrink:0}
+.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
+.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
+</style>
+</head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#ff4488;border-color:#ff448844;background:#ff448810">2018</span>
+    <div class="mod-title">Checkpoint Immunotherapy</div>
+  </div>
+  <div class="mod-laureates">James P. Allison &amp; Tasuku Honjo &#8212; Nobel Prize in Physiology or Medicine 2018</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#ff4488;border-color:#ff448844;background:#ff448810">Immunology</span>
+    <span class="mod-tag" style="color:#ff8844;border-color:#ff884444;background:#ff884410">Oncology</span>
+    <span class="mod-tag" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">Cancer Therapy</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; T Cell Priming</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">CTLA-4 pathway</span><span class="ctrl-val" id="lay-ctla4">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">PD-1 pathway</span><span class="ctrl-val" id="lay-pd1">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">Antibody blocks</span><span class="ctrl-val" id="lay-ab">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> CTLA-4 brakes T cell priming at the lymph node; PD-1 silences T cells inside the tumor. Dual blockade unleashes anti-tumor immunity at both checkpoints.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; T Cell Priming at APC</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2018/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel 2018 &#8212; official announcement</div>
+      </a>
+      <a href="https://www.rcsb.org/structure/4ZQK" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">RCSB PDB</div>
+        <div class="ref-title">PDB: PD-1/PD-L1 complex (4ZQK)</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
+// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'itim': { term:'ITIM (Immunoreceptor Tyrosine-based Inhibitory Motif)', level:'res', def:'6-aa motif I/L/VxYxxL/V in cytoplasmic tails of inhibitory receptors (PD-1, CTLA-4, KIR). When phosphorylated by Lck, recruits SHP-1/SHP-2 phosphatases that dephosphorylate TCR signaling components including ZAP-70 and LAT.' },
+  'cd28': { term:'CD28 co-stimulatory receptor', level:'grad', def:'T cell co-stimulatory receptor \u2014 binds CD80/CD86 (B7-1/B7-2) on APCs. PI3K/AKT/mTOR activation via CD28 provides the second signal for full T cell activation (Signal 1 = TCR, Signal 2 = CD28). Without CD28, TCR signal alone induces anergy or deletion.' },
+  'tme':  { term:'Tumor microenvironment (TME)', level:'res', def:'Complex milieu of cancer cells, CAFs, TAMs, TILs, MDSCs, vasculature, and ECM. Immunosuppressive TME features: high Tregs, M2 TAMs, IDO/TDO expression, TGF-\u03b2, VEGF, IL-10. Principal driver of checkpoint therapy resistance. T cell exhaustion is the end-stage of TME suppression.' },
+  'irAE': { term:'Immune-related adverse events (irAEs)', level:'res', def:'Autoimmune toxicities from checkpoint blockade \u2014 loss of self-tolerance due to T cell activation against normal tissues. Grade 3/4 incidence: ~30% (ipilimumab), ~15% (anti-PD-1), ~55% (combination). Management: high-dose corticosteroids, infliximab for steroid-refractory colitis. Pneumonitis, hepatitis, endocrinopathies most dangerous.' },
+});
+
+// ── Module molecules data ────────────────────────────────────────────────────
+const MODULE_MOLS = [
+  { id:'ctla4', icon:'\ud83d\udd34', color:'#ff4488', type:'Protein \u00b7 IgSF', is_protein:true,
+    name:'CTLA-4 (CD152)', sub:'PDB: 3OSS \u00b7 223 aa extracellular',
+    badges:[{text:'Inhibitory checkpoint',color:'#ff4488'},{text:'B7 competitor',color:'#ffd700'},{text:'Treg marker',color:'#aa77ff'}],
+    pubchem_cid:null, pdb_id:'3OSS',
+    nih_link:'https://www.rcsb.org/structure/3OSS',
+    mechanism:'Constitutively expressed on Tregs; transiently upregulated on activated T cells. Outcompetes CD28 for CD80/CD86 (B7) with ~10\u201320\u00d7 higher affinity. Delivers inhibitory signal via ITSM/ITIM recruitment of SHP-1/SHP-2 and PP2A. Also depletes CD80/CD86 from APC surface via transendocytosis. 2018 Nobel (Allison).',
+    properties:{'PDB':'3OSS','Structure':'IgSF V-type fold','Ligands':'CD80/CD86 (B7-1/B7-2)','Affinity (CD80)':'Kd ~0.4 \u00b5M','Expression':'Constitutive Tregs; induced eff. T cells','Ipilimumab target':'Yes \u2014 IgG1\u03ba'},
+    property_flags:{'Affinity (CD80)':'warn'},
+    interaction:{ title:'CTLA-4 vs CD28: B7 Competition',
+      nodes:[
+        {id:'ctla4',x:120,y:160,r:28,color:'#ff4488',label:'CTLA-4',   sub:'high affinity'},
+        {id:'cd28', x:380,y:160,r:26,color:'#00ff99',label:'CD28',     sub:'co-stimulatory'},
+        {id:'b7',   x:250,y:80, r:28,color:'#ffd700',label:'CD80/CD86',sub:'APC surface'},
+        {id:'ipi',  x:120,y:300,r:22,color:'#00e5ff',label:'Ipilimumab',sub:'blocks CTLA-4'},
+        {id:'treg', x:380,y:300,r:22,color:'#aa77ff',label:'Treg',     sub:'suppressor'},
+      ],
+      edges:[
+        {from:'ctla4',to:'b7',  color:'#ff4488',label:'10-20\u00d7 affinity\noutcompetes CD28',dashed:false},
+        {from:'cd28', to:'b7',  color:'#00ff9966',label:'activation\nsignal',                  dashed:true},
+        {from:'ipi',  to:'ctla4',color:'#00e5ff',label:'blocks\nbinding',                      dashed:false},
+        {from:'ctla4',to:'treg',color:'#aa77ff44',label:'constitutive\nexpr.',                 dashed:true},
+      ]
+    },
+    papers:[
+      {year:'1996',journal:'Science',impact:'IF 56',title:'Enhancement of Antitumor Immunity by CTLA-4 Blockade',abstract:'Allison et al.: anti-CTLA-4 antibody cures established tumors in mice. First demonstration that checkpoint blockade produces anti-tumor immunity.'},
+      {year:'2010',journal:'NEJM',  impact:'IF 176',title:'Improved Survival with Ipilimumab in Patients with Metastatic Melanoma',abstract:'Hodi et al. Phase 3: ipilimumab improves overall survival in metastatic melanoma. First immunotherapy to show OS benefit in a solid tumor.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe2',name:'CD28',       role:'Competing\nco-stimulatory receptor',id:'CD28 gene'},
+      {icon:'\ud83d\udd35',name:'Ipilimumab', role:'Anti-CTLA-4 mAb\nipilimumab (Yervoy)',id:'FDA 2011'},
+    ],
+    domains:[
+      {color:'#ff4488',name:'Signal peptide',       pos:'1\u201335',   fn:'Cleavage during secretory pathway'},
+      {color:'#ffd700',name:'Extracellular IgV',     pos:'36\u2013161', fn:'CD80/CD86 binding \u2014 MYPPPY motif critical'},
+      {color:'#00e5ff',name:'Stalk region',          pos:'162\u2013186',fn:'Cysteine-mediated homodimerization'},
+      {color:'#aa77ff',name:'Transmembrane domain',  pos:'187\u2013207',fn:'Type I TM; palmitoylated cysteines'},
+      {color:'#00ff99',name:'Cytoplasmic tail (YVKM)',pos:'208\u2013223',fn:'YVKM motif recruits PP2A; ITIM-like'},
+    ]
+  },
+  { id:'pd1', icon:'\ud83d\udfe0', color:'#ff8844', type:'Protein \u00b7 IgSF', is_protein:true,
+    name:'PD-1 (CD279)', sub:'PDB: 4ZQK \u00b7 288 aa',
+    badges:[{text:'Inhibitory checkpoint',color:'#ff8844'},{text:'TIL exhaustion',color:'#ff4488'},{text:'Nobel 2018',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'4ZQK',
+    nih_link:'https://www.rcsb.org/structure/4ZQK',
+    mechanism:'Inhibitory receptor on activated T cells, NK cells, B cells. Binds PD-L1 (CD274) and PD-L2 (CD273). Cytoplasmic ITIM/ITSM recruit SHP-2 to dephosphorylate CD3\u03b6 and ZAP-70. PD-L1 upregulated on tumors by IFN-\u03b3 from infiltrating T cells \u2014 adaptive immune resistance. 2018 Nobel (Honjo).',
+    properties:{'PDB':'4ZQK','Ligands':'PD-L1/PD-L2','SHP-2 motif':'ITSM (YxxL)','Pembrolizumab Kd':'~27 pM','Nivolumab Kd':'~2.6 nM','Indications (pembrolizumab)':'>40 cancer types (2024)'},
+    property_flags:{'Pembrolizumab Kd':'good'},
+    interaction:{ title:'PD-1/PD-L1 and Pembrolizumab Blockade',
+      nodes:[
+        {id:'pd1',  x:150,y:200,r:28,color:'#ff8844',label:'PD-1',    sub:'TIL surface'},
+        {id:'pdl1', x:350,y:200,r:28,color:'#ff4488',label:'PD-L1',   sub:'tumor surface'},
+        {id:'pemb', x:150,y:50, r:22,color:'#00ff99',label:'Pembro',  sub:'anti-PD-1'},
+        {id:'shp2', x:80, y:300,r:20,color:'#aa77ff',label:'SHP-2',   sub:'phosphatase'},
+        {id:'tumor',x:350,y:320,r:24,color:'#ff444488',label:'Tumor', sub:'IFN-\u03b3 response'},
+      ],
+      edges:[
+        {from:'pd1',  to:'pdl1',color:'#ff8844',label:'inhibitory\nbinding',             dashed:false},
+        {from:'pemb', to:'pd1', color:'#00ff99',label:'blocks PD-1\nbinding',            dashed:false},
+        {from:'pd1',  to:'shp2',color:'#aa77ff',label:'ITSM \u2192 SHP-2\nrecruitment', dashed:true},
+        {from:'tumor',to:'pdl1',color:'#ff448877',label:'IFN-\u03b3 induces\nPD-L1 upregulation',dashed:true},
+      ]
+    },
+    papers:[
+      {year:'1992',journal:'EMBO J',  impact:'IF 11',title:'Cloning and characterization of the CD28 ligand B7',abstract:'Honjo lab identifies PD-1 in activated T cells undergoing programmed cell death \u2014 originally named for its association with apoptosis.'},
+      {year:'2012',journal:'NEJM',    impact:'IF 176',title:'Safety, Activity, and Immune Correlates of Anti-PD-1 Antibody in Cancer',abstract:'Topalian et al.: pembrolizumab/nivolumab show durable responses in melanoma, NSCLC, RCC. PD-L1 expression correlates with response.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe1',name:'PD-L1 (CD274)',role:'Primary PD-1 ligand\ntumor immune evasion',id:'CD274 gene'},
+      {icon:'\ud83d\udfe2',name:'Pembrolizumab',role:'Anti-PD-1 mAb\n>40 FDA indications',      id:'FDA 2014'},
+    ],
+    domains:[
+      {color:'#ff8844',name:'Extracellular IgV',    pos:'1\u2013150',   fn:'PD-L1/PD-L2 binding interface'},
+      {color:'#ffd700',name:'Stalk',                pos:'151\u2013170', fn:'Cysteine-mediated homodimerization'},
+      {color:'#00e5ff',name:'Transmembrane',         pos:'171\u2013191', fn:'Type I TM'},
+      {color:'#aa77ff',name:'Cytoplasmic ITIM',      pos:'192\u2013231', fn:'ITIM (YxxL) \u2014 recruits SHP-1'},
+      {color:'#00ff99',name:'Cytoplasmic ITSM',      pos:'232\u2013268', fn:'ITSM (YxxL) \u2014 recruits SHP-2; primary signaling'},
+    ]
+  },
+  { id:'ipilimumab', icon:'\ud83d\udfe2', color:'#00ff99', type:'Antibody \u00b7 IgG1\u03ba', is_protein:false,
+    name:'Ipilimumab (Yervoy)', sub:'Anti-CTLA-4 monoclonal antibody',
+    badges:[{text:'Anti-CTLA-4',color:'#ff4488'},{text:'FDA 2011',color:'#ffd700'},{text:'First checkpoint Ab',color:'#00ff99'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://www.fda.gov/drugs/drug-approvals-and-databases/drug-trials-snapshots-yervoy',
+    mechanism:'Fully human IgG1\u03ba monoclonal antibody blocking CTLA-4. Prevents CTLA-4 binding to CD80/CD86 on APCs \u2014 releases the priming-phase brake on T cells. ADCC-mediated depletion of intratumoral Tregs (which highly express CTLA-4) may contribute to efficacy. First FDA-approved checkpoint inhibitor (melanoma, 2011).',
+    properties:{'Type':'IgG1\u03ba mAb','Target':'CTLA-4 extracellular domain','Kd (CTLA-4)':'~6 nM','FDA approved':'2011','Indication':'Melanoma (adjuvant + metastatic), RCC, NSCLC, HCC (combo)','Dose':'3 mg/kg q3w \u00d7 4 (melanoma)'},
+    property_flags:{'Kd (CTLA-4)':'good'},
+    interaction:{ title:'Ipilimumab Mechanism: Releasing the Priming Brake',
+      nodes:[
+        {id:'ipi',  x:250,y:60, r:26,color:'#00ff99',label:'Ipilimumab',sub:'IgG1\u03ba'},
+        {id:'ctla4',x:150,y:200,r:26,color:'#ff4488',label:'CTLA-4',   sub:'target'},
+        {id:'b7',   x:380,y:180,r:24,color:'#ffd700',label:'CD80/86',  sub:'costimulator'},
+        {id:'cd28', x:380,y:300,r:24,color:'#00e5ff',label:'CD28',     sub:'reactivated'},
+        {id:'tcell',x:150,y:320,r:26,color:'#aa77ff',label:'T cell',   sub:'primed'},
+      ],
+      edges:[
+        {from:'ipi',  to:'ctla4',color:'#00ff99',label:'blocks',                     dashed:false},
+        {from:'ctla4',to:'b7',   color:'#ff448866',label:'normally\ncompetes here',  dashed:true},
+        {from:'b7',   to:'cd28', color:'#00e5ff',label:'costimulation\nrestored',    dashed:false},
+        {from:'cd28', to:'tcell',color:'#aa77ff',label:'full T cell\nactivation',    dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2010',journal:'NEJM',impact:'IF 176',title:'Improved Survival with Ipilimumab in Patients with Metastatic Melanoma (MDX010-20)',abstract:'3.5 month improvement in median OS; 10-15% durable long-term survival beyond 10 years in melanoma. First checkpoint inhibitor OS benefit.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udd34',name:'CTLA-4',     role:'Target receptor',             id:'PDB: 3OSS'},
+      {icon:'\ud83d\udd35',name:'Pembrolizumab',role:'Anti-PD-1; combined in IO', id:'Keytruda'},
+    ]
+  },
+  { id:'pembrolizumab', icon:'\ud83d\udd35', color:'#00e5ff', type:'Antibody \u00b7 humanized IgG4\u03ba', is_protein:false,
+    name:'Pembrolizumab (Keytruda)', sub:'Anti-PD-1 monoclonal antibody',
+    badges:[{text:'Anti-PD-1',color:'#ff8844'},{text:'FDA 2014',color:'#ffd700'},{text:'>40 indications',color:'#00e5ff'}],
+    pubchem_cid:null, pdb_id:null,
+    nih_link:'https://www.fda.gov/drugs/resources-information-approved-drugs/keytruda-pembrolizumab',
+    mechanism:'Humanized IgG4\u03ba monoclonal antibody blocking PD-1/PD-L1 and PD-1/PD-L2 interaction. Restores T cell effector function in the tumor. Biomarkers predictive of response: TMB (tumor mutational burden), MSI-H (microsatellite instability-high), PD-L1 CPS \u22651. Most prescribed immuno-oncology drug globally (~$25B annual revenue 2023).',
+    properties:{'Type':'humanized IgG4\u03ba','Target':'PD-1 extracellular IgV','FDA approved':'2014 (accelerated)','Indications (2024)':'>40 cancer types','Mechanism':'Blocks PD-1/PD-L1 and PD-1/PD-L2','Biomarkers':'TMB-H, MSI-H, PD-L1 CPS'},
+    property_flags:{},
+    interaction:{ title:'Pembrolizumab: Restoring TIL Function',
+      nodes:[
+        {id:'pemb', x:250,y:60, r:26,color:'#00e5ff',label:'Pembrolizumab',sub:'IgG4\u03ba'},
+        {id:'pd1',  x:150,y:200,r:26,color:'#ff8844',label:'PD-1',          sub:'TIL'},
+        {id:'pdl1', x:380,y:200,r:24,color:'#ff4488',label:'PD-L1',         sub:'tumor'},
+        {id:'eff',  x:150,y:320,r:26,color:'#00ff99',label:'Effector\nT cell',sub:'reactivated'},
+        {id:'tumor',x:380,y:320,r:24,color:'#ff444466',label:'Tumor',        sub:'targeted'},
+      ],
+      edges:[
+        {from:'pemb', to:'pd1',  color:'#00e5ff',label:'blocks\nPD-1',              dashed:false},
+        {from:'pd1',  to:'pdl1', color:'#ff884466',label:'normally\nbinds',          dashed:true},
+        {from:'eff',  to:'tumor',color:'#00ff99',label:'granzyme/perforin\nkill',    dashed:false},
+        {from:'pdl1', to:'pd1',  color:'#ff448822',label:'tumor evasion\nblocked',   dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2012',journal:'NEJM',  impact:'IF 176',title:'Safety, Activity of Anti-PD-1 Antibody in Patients with Advanced Cancer',abstract:'Phase 1 pembrolizumab: 28% ORR in melanoma, 18% NSCLC. PD-L1 expression enriches responders. Launched the checkpoint blockade era.'},
+      {year:'2015',journal:'NEJM',  impact:'IF 176',title:'Pembrolizumab versus Ipilimumab in Advanced Melanoma (KEYNOTE-006)',abstract:'Pembrolizumab superior to ipilimumab for PFS and OS in advanced melanoma; lower irAE rate. Established anti-PD-1 as frontline for melanoma.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe0',name:'PD-1',      role:'Target receptor\nTIL surface',   id:'PDB: 4ZQK'},
+      {icon:'\ud83d\udfe1',name:'Nivolumab', role:'Anti-PD-1 mAb\nalternate agent', id:'Opdivo'},
+    ]
+  },
+];
+
+// ── Mechanism phases ─────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 T Cell Priming at APC',             color:'#ff4488', mol:'ctla4'},
+  {label:'Phase 1 \u2014 CTLA-4 Upregulation & Braking',    color:'#ffd700', mol:'ctla4'},
+  {label:'Phase 2 \u2014 Tumor PD-L1 Induction by IFN-\u03b3',color:'#ff8844', mol:'pd1'},
+  {label:'Phase 3 \u2014 PD-1/PD-L1 T Cell Exhaustion',     color:'#aa77ff', mol:'pd1'},
+  {label:'Phase 4 \u2014 Dual Checkpoint Blockade',          color:'#00ff99', mol:'ipilimumab'},
+];
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+document.querySelectorAll('.mod-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panelId = 'panel-' + tab.dataset.tab;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (tab.dataset.tab === 'connections') drawConnections();
+  });
+});
+
+// ── Mechanism canvas animation ────────────────────────────────────────────────
+const mechCv = document.getElementById('mech-canvas');
+let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
+
+function drawCell(ctx, x, y, r, color, label, sub, dim) {
+  const alpha = dim ? '33' : '22';
+  const strokeAlpha = dim ? '66' : 'ff';
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = color + alpha; ctx.fill();
+  ctx.strokeStyle = dim ? color + '55' : color; ctx.lineWidth = 2; ctx.stroke();
+  ctx.fillStyle = dim ? color + '66' : color;
+  ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+  label.split('\n').forEach((ln, i, arr) => ctx.fillText(ln, x, y + (i - arr.length / 2 + 0.5) * 12));
+  if (sub) {
+    ctx.fillStyle = (dim ? color + '44' : color + '99');
+    ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText(sub, x, y + r + 12);
+  }
+}
+
+function drawArrow(ctx, x1, y1, x2, y2, color, dashed) {
+  ctx.save();
+  ctx.strokeStyle = color; ctx.lineWidth = 1.5;
+  if (dashed) ctx.setLineDash([4, 4]); else ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  ctx.setLineDash([]);
+  // arrowhead
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - 8 * Math.cos(angle - 0.4), y2 - 8 * Math.sin(angle - 0.4));
+  ctx.lineTo(x2 - 8 * Math.cos(angle + 0.4), y2 - 8 * Math.sin(angle + 0.4));
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function drawYShape(ctx, x, y, color, label) {
+  ctx.save();
+  ctx.strokeStyle = color; ctx.lineWidth = 3;
+  // stem
+  ctx.beginPath(); ctx.moveTo(x, y + 20); ctx.lineTo(x, y); ctx.stroke();
+  // left arm
+  ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x - 16, y - 14); ctx.stroke();
+  // right arm
+  ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 16, y - 14); ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.font = 'bold 8px sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText(label, x, y + 32);
+  ctx.restore();
+}
+
+function mechDraw(phase, t) {
+  const cv = mechCv;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+
+  if (phase === 0) {
+    // APC on left, T cell on right, activation arrow
+    const apcX = cx - 130, tcX = cx + 130;
+    drawCell(ctx, apcX, cy, 40, '#ffd700', 'APC', 'MHC-peptide', false);
+    drawCell(ctx, tcX, cy, 40, '#00e5ff', 'T cell', 'TCR + CD28', false);
+    // MHC-TCR arrow
+    drawArrow(ctx, apcX + 40, cy - 10, tcX - 40, cy - 10, '#ffd700cc', false);
+    ctx.fillStyle = '#ffd70099'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Signal 1: MHC-peptide \u2192 TCR', cx, cy - 22);
+    // CD80/CD86 -> CD28
+    drawArrow(ctx, apcX + 40, cy + 12, tcX - 40, cy + 12, '#00ff9999', false);
+    ctx.fillStyle = '#00ff9999'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Signal 2: CD80/86 \u2192 CD28', cx, cy + 28);
+    ctx.fillStyle = '#8888b066'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Full T cell priming: both signals delivered', cx, cy + 58);
+
+  } else if (phase === 1) {
+    // CTLA-4 upregulated on T cell — outcompetes CD28, T cell dims
+    const apcX = cx - 130, tcX = cx + 130;
+    drawCell(ctx, apcX, cy, 40, '#ffd700', 'APC', 'CD80/CD86', false);
+    drawCell(ctx, tcX, cy, 40, '#00e5ff', 'T cell', 'CTLA-4 \u2191', true);
+    // CTLA-4 wins over CD28
+    drawArrow(ctx, tcX - 40, cy - 10, apcX + 40, cy - 10, '#ff4488', false);
+    ctx.fillStyle = '#ff448899'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CTLA-4 outcompetes CD28 (10-20\u00d7 higher affinity)', cx, cy - 22);
+    // CD28 signal blocked
+    ctx.strokeStyle = '#ff444444'; ctx.lineWidth = 1.5; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(apcX + 40, cy + 12); ctx.lineTo(tcX - 40, cy + 12); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#ff444466'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CD28 signal lost \u2014 anergy', cx, cy + 28);
+    // Braking label
+    ctx.fillStyle = '#ff448899'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Checkpoint Phase 1: CTLA-4 brakes T cell priming at lymph node', cx, cy + 58);
+
+  } else if (phase === 2) {
+    // Tumor cell with IFN-g arrow inducing PD-L1
+    const tumX = cx + 110, tilX = cx - 110;
+    drawCell(ctx, tilX, cy - 20, 32, '#00e5ff', 'TIL', 'secretes IFN-\u03b3', false);
+    drawArrow(ctx, tilX + 32, cy - 20, tumX - 36, cy - 20, '#ff884499', false);
+    ctx.fillStyle = '#ff884499'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('IFN-\u03b3', cx, cy - 32);
+    drawCell(ctx, tumX, cy, 40, '#ff8844', 'Tumor', 'PD-L1 \u2191', false);
+    // PD-L1 label with upregulation indicator
+    const pdl1Y = cy - 55;
+    ctx.fillStyle = '#ff448888';
+    ctx.fillRect(tumX - 30, pdl1Y - 10, 60, 18);
+    ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 1; ctx.strokeRect(tumX - 30, pdl1Y - 10, 60, 18);
+    ctx.fillStyle = '#ff4488'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PD-L1 upregulated', tumX, pdl1Y + 4);
+    ctx.fillStyle = '#8888b066'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Adaptive immune resistance: IFN-\u03b3 from TILs drives tumor PD-L1', cx, cy + 60);
+
+  } else if (phase === 3) {
+    // PD-1 on TIL binds tumor PD-L1; T cell dims (exhaustion X)
+    const tilX = cx - 120, tumX = cx + 120;
+    drawCell(ctx, tilX, cy, 38, '#ff8844', 'TIL', 'PD-1 \u2191', true);
+    drawCell(ctx, tumX, cy, 38, '#ff4488', 'Tumor', 'PD-L1', false);
+    drawArrow(ctx, tilX + 38, cy, tumX - 38, cy, '#aa77ff', false);
+    ctx.fillStyle = '#aa77ffcc'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('PD-1 \u2192 PD-L1 binding', cx, cy - 14);
+    // Exhaustion X on TIL
+    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(tilX - 14, cy - 14); ctx.lineTo(tilX + 14, cy + 14); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(tilX + 14, cy - 14); ctx.lineTo(tilX - 14, cy + 14); ctx.stroke();
+    ctx.fillStyle = '#aa77ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('SHP-2 recruited \u2192 TCR signal dephosphorylated \u2192 T cell exhaustion', cx, cy + 60);
+
+  } else if (phase === 4) {
+    // Both checkpoints blocked: ipilimumab on CTLA-4, pembrolizumab on PD-1; both T cells brighten
+    const apcX = 80, tcX = cx - 20, tumX = W - 80, tilX = cx + 80;
+    // Left scene: ipilimumab blocks CTLA-4
+    drawCell(ctx, apcX, cy - 30, 30, '#ffd700', 'APC', 'B7', false);
+    drawCell(ctx, tcX, cy - 30, 30, '#00ff99', 'T cell', 'activated', false);
+    drawYShape(ctx, tcX - 10, cy - 88, '#00ff99', 'Ipi');
+    ctx.fillStyle = '#ff448866'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CTLA-4\nblocked', tcX - 10, cy - 50);
+    drawArrow(ctx, apcX + 30, cy - 30, tcX - 30, cy - 30, '#00ff9999', false);
+    ctx.fillStyle = '#00ff9988'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CD28 costim\nrestored', (apcX + tcX) / 2, cy - 44);
+    // Right scene: pembrolizumab blocks PD-1
+    drawCell(ctx, tilX, cy + 40, 30, '#00e5ff', 'TIL', 'reactivated', false);
+    drawCell(ctx, tumX, cy + 40, 30, '#ff4488', 'Tumor', 'PD-L1', true);
+    drawYShape(ctx, tilX + 10, cy - 20, '#00e5ff', 'Pembro');
+    ctx.fillStyle = '#ff884466'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('PD-1\nblocked', tilX + 10, cy + 16);
+    drawArrow(ctx, tilX + 30, cy + 40, tumX - 30, cy + 40, '#ff444488', false);
+    ctx.fillStyle = '#ff444488'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('granzyme/\nperforin kill', (tilX + tumX) / 2, cy + 56);
+    ctx.fillStyle = '#00ff9999'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Dual blockade: priming brake + tumor brake both released', cx, H - 14);
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  animT = 0; animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
+  animT = 0; mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ───────────────────────────────────────────────────
+(function buildMechPanels() {
+  const container = document.getElementById('mech-panels');
+  const panelData = [
+    { title:'Phase 0 \u2014 T Cell Priming at APC', color:'#ff4488', mol:'ctla4',
+      body:'<strong>Signal 1</strong> (TCR\u2013MHC-peptide) and <strong>Signal 2</strong> (CD28\u2013CD80/CD86) are both delivered. Full PI3K/AKT/mTOR co-stimulation drives T cell proliferation and effector differentiation. CTLA-4 expression is minimal at rest.'},
+    { title:'Phase 1 \u2014 CTLA-4 Upregulation & Braking', color:'#ffd700', mol:'ctla4',
+      body:'Hours after activation, <strong>CTLA-4 is upregulated</strong> on the T cell surface (FOXP3-driven on Tregs). CTLA-4 outcompetes CD28 for CD80/CD86 with 10\u201320\u00d7 higher affinity \u2014 removing the co-stimulatory signal. CTLA-4 YVKM/ITIM recruits PP2A and SHP-2, and <strong>transendocytosis</strong> strips CD80/CD86 from APC surface.'},
+    { title:'Phase 2 \u2014 Tumor PD-L1 Induction by IFN-\u03b3', color:'#ff8844', mol:'pd1',
+      body:'Tumor-infiltrating lymphocytes (TILs) secrete <strong>IFN-\u03b3</strong>, which activates JAK1/JAK2\u2013STAT1 signaling in tumor cells, transcriptionally inducing <strong>PD-L1 (CD274)</strong> expression. This is adaptive immune resistance \u2014 the tumor co-opts the T cell\u2019s own cytokines to silence it.'},
+    { title:'Phase 3 \u2014 PD-1/PD-L1 T Cell Exhaustion', color:'#aa77ff', mol:'pd1',
+      body:'PD-1 ITSM recruits <strong>SHP-2</strong>, which dephosphorylates CD3\u03b6 and ZAP-70, blocking TCR downstream signaling. Chronic PD-1 engagement drives the <strong>exhaustion transcriptional program</strong> (TOX, TCF7, NR4A). T cells progressively lose effector function: first IL-2, then IFN-\u03b3, then cytotoxicity.'},
+    { title:'Phase 4 \u2014 Dual Checkpoint Blockade', color:'#00ff99', mol:'ipilimumab',
+      body:'<strong>Ipilimumab</strong> (anti-CTLA-4 IgG1\u03ba) restores CD28 co-stimulation at the lymph node. <strong>Pembrolizumab/nivolumab</strong> (anti-PD-1) restores TIL effector function within the tumor. Combination blockade is synergistic but increases Grade 3/4 irAE rate to ~55%. Dual blockade is standard of care for metastatic melanoma and MSI-H tumors.'},
+  ];
+
+  panelData.forEach(p => {
+    const panel = document.createElement('div');
+    panel.className = 'mech-panel';
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    const bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    const titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+    const body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    // Parse simple <strong> tags safely (developer-controlled content)
+    const parts = p.body.split(/<strong>|<\/strong>/);
+    parts.forEach((part, i) => {
+      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
+      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
+    });
+    // Molecule chip if specified
+    if (p.mol) {
+      const chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      const mol = MODULE_MOLS.find(m => m.id === p.mol);
+      if (mol) {
+        const chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.type.toLowerCase().includes('protein') ? ' protein' : mol.type.toLowerCase().includes('lipid') ? ' lipid' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  const grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(mol => {
+    const card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
+    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
+    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
+    const role = document.createElement('div'); role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
+    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
+    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ────────────────────────────────────────────────────────────
+(function buildStory() {
+  const container = document.getElementById('story-content');
+  const events = [
+    {year:'1987', text:'Allison joins UC Berkeley, studies T cell activation. Identifies CTLA-4 as inhibitory receptor (with Brunet, 1987) \u2014 thought to be an activating receptor initially.'},
+    {year:'1992', text:'Honjo lab (Kyoto): PD-1 discovered in T cells undergoing programmed cell death. Initial function unknown \u2014 named for the phenotype, not the mechanism.'},
+    {year:'1995', text:'Allison\u2019s insight: if CTLA-4 is a brake on T cell activation, blocking it with antibody might unleash anti-tumor immunity. Tests anti-CTLA-4 Ab in established mouse tumors \u2014 cures them.'},
+    {year:'1996', text:'Allison et al. (Science): anti-CTLA-4 antibody cures established tumors in mice. Pharma companies initially uninterested \u2014 no mechanism-based drug target.'},
+    {year:'1999', text:'Honjo lab: PD-1 knockout mice develop lupus-like autoimmunity \u2014 first functional evidence that PD-1 suppresses immune responses.'},
+    {year:'2000', text:'Honjo lab identifies PD-L1 as the PD-1 ligand. Freeman/Bhattacharya independently identify the same ligand. PD-L1 expression on tumors established.'},
+    {year:'2006\u20132010', text:'Clinical trials for ipilimumab (anti-CTLA-4) and nivolumab/pembrolizumab (anti-PD-1). Initial skepticism \u2014 no biomarker, unpredictable responses.'},
+    {year:'2010', text:'MDX010-20 Phase 3 (NEJM): ipilimumab improves OS in metastatic melanoma. First immunotherapy to improve OS in a solid tumor. FDA approved March 2011.'},
+    {year:'2012', text:'Topalian et al. (NEJM): pembrolizumab/nivolumab show durable responses across multiple cancer types. PD-L1 expression correlates with response. IO revolution begins.'},
+    {year:'2018', text:'Nobel Prize in Physiology or Medicine to Allison and Honjo "for their discovery of cancer therapy by inhibition of negative immune regulation." Pembrolizumab is the world\u2019s top-selling drug.'},
+  ];
+  events.forEach(ev => {
+    const block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    const yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    const text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  const container = document.getElementById('frontiers-content');
+  const groups = [
+    { title:'Clinical Pipeline (2024\u20132026)', items:[
+      {title:'CAR-T + Checkpoint Blockade Combinations', body:'CART cells in the TME upregulate PD-1, leading to exhaustion. Adding anti-PD-1 to CD19 CAR-T (axicabtagene ciloleucel + pembrolizumab) trials show improved persistence. Problem: irAEs compound CAR-T toxicity (CRS). Optimizing sequence and timing is active research.'},
+      {title:'Bispecific PD-1\u00d7CTLA-4 Antibodies (AstraZeneca AZD2936)', body:'Single molecule blocking both checkpoints simultaneously. AZD2936 Phase 1/2 2024. Advantage: dual blockade at lower doses than combination monotherapy; potentially lower irAE burden. Competing bispecifics: Roche RG7769, Merus MCLA-145.'},
+      {title:'TIL Therapy (Lifileucel \u2014 FDA 2024)', body:'First approved TIL therapy (Iovance Lifileucel) for metastatic melanoma post-anti-PD-1. Tumor-infiltrating lymphocytes expanded ex vivo and reinfused after lymphodepletion. ORR 31.4% in checkpoint-refractory melanoma. Represents cellular therapy building on checkpoint biology.'},
+    ]},
+    { title:'AI & Computational Approaches', items:[
+      {title:'AI-predicted Biomarkers: TMB, MSI-H, IFN-\u03b3 signatures', body:'Beyond PD-L1 CPS: whole-genome TMB (MSK-ACCESS), microsatellite instability by next-gen sequencing, IFN-\u03b3 gene expression profiling (KEYNOTE-158). Machine learning integration of multi-omic data (WES, WTS, TCR-seq) predicts pembrolizumab response better than any single biomarker (AUC ~0.75 vs ~0.6 for PD-L1 alone).'},
+    ]},
+    { title:'Open Questions', items:[
+      {title:'Resistance: \u03b22-microglobulin loss and antigen presentation failure', body:'20\u201330% of initial responders develop acquired resistance. Common mechanism: \u03b22M or B2M mutations eliminating MHC-I expression, making tumors invisible to CD8+ CTLs. CD8 T cell therapy (via MHC-II) or NK cell approaches may overcome this. \u03b22M loss frequency increases with checkpoint pressure.'},
+    ]},
+    { title:'Industry & Translational Applications', items:[
+      {title:'Pembrolizumab as platform: >40 indications driving $25B/year', body:'Keytruda is the world\u2019s best-selling drug (2023). First-line pembrolizumab approved for: melanoma, NSCLC (PD-L1 \u226550%), TNBC, ESCC, MSI-H solid tumors (tissue-agnostic), endometrial, TMB-H. KEYNOTE trial program covers virtually every solid tumor type.'},
+    ]},
+  ];
+  groups.forEach(g => {
+    const section = document.createElement('div');
+    section.className = 'frontier-group';
+    const title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'frontier-item';
+      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
+      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
+      card.appendChild(it); card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ────────────────────────────────────────────────────────
+(function buildRsidebar() {
+  // Key molecules list
+  const molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(mol => {
+    const item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
+    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
+    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
+    const id = document.createElement('div'); id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name); nameCol.appendChild(id);
+    item.appendChild(icon); item.appendChild(nameCol);
+    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  // Papers
+  const paperList = document.getElementById('rsb-papers');
+  const papers = [
+    {year:'1996', journal:'Science', title:'CTLA-4 Blockade Enhances Antitumor Immunity (Allison)'},
+    {year:'2010', journal:'NEJM', title:'Improved Survival with Ipilimumab in Metastatic Melanoma'},
+    {year:'2012', journal:'NEJM', title:'Safety and Activity of Anti-PD-1 Antibody (Topalian)'},
+  ];
+  papers.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
+    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
+    item.appendChild(year); item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas (force-directed network) ───────────────────────────────
+function drawConnections() {
+  const cv = document.getElementById('conn-canvas');
+  cv.width = cv.offsetWidth || 600;
+  cv.height = cv.offsetHeight || 360;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+
+  const nodes = [
+    {id:'imm',   x:W*.5,  y:H*.5,  r:32, color:'#ff4488', label:'Checkpoint\nImmuno',   sub:'2018'},
+    {id:'car',   x:W*.75, y:H*.28, r:24, color:'#00ff99', label:'CAR-T',                sub:'adjacent'},
+    {id:'mrna',  x:W*.25, y:H*.28, r:24, color:'#44ffcc', label:'mRNA\nVaccines',        sub:'2023'},
+    {id:'mir',   x:W*.8,  y:H*.7,  r:22, color:'#aa77ff', label:'microRNA',              sub:'2024'},
+    {id:'hif',   x:W*.2,  y:H*.7,  r:22, color:'#ff8844', label:'HIF\nTME',              sub:'2019'},
+    {id:'auto',  x:W*.5,  y:H*.88, r:20, color:'#00e5ff', label:'Autophagy',             sub:'2016'},
+  ];
+  const edges = [
+    {from:'imm',to:'car', color:'#00ff9955',label:'CAR-T exhaustion\nneeds checkpoint'},
+    {from:'imm',to:'mrna',color:'#44ffcc55',label:'cancer mRNA\nvaccine combos'},
+    {from:'imm',to:'mir', color:'#aa77ff55',label:'PD-L1 miRNA\nregulation'},
+    {from:'imm',to:'hif', color:'#ff884455',label:'HIF drives\nPD-L1 in TME'},
+    {from:'imm',to:'auto',color:'#00e5ff55',label:'autophagy\nin T cell survival'},
+  ];
+
+  const ns = {}; nodes.forEach(n => ns[n.id] = n);
+  edges.forEach(e => {
+    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
+    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
+    if(e.label) {
+      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
+      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
+    }
+  });
+  nodes.forEach(n => {
+    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+    ctx.fillStyle = n.color + '22'; ctx.fill();
+    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
+    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
+    ctx.fillText(n.sub, n.x, n.y+n.r+11);
+  });
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+</body>
+</html>

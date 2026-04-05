@@ -1,0 +1,89 @@
+#mol-overlay {
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(0,0,0,.78); backdrop-filter:blur(5px);
+  align-items:center; justify-content:center; padding:16px;
+}
+#mol-overlay.open { display:flex; }
+
+#mol-shell {
+  background:var(--bg2); border:1px solid var(--border); border-radius:12px;
+  width:100%; max-width:920px; max-height:90vh; overflow:hidden;
+  display:flex; flex-direction:column;
+  box-shadow:0 20px 80px rgba(0,0,0,.9);
+  animation:molIn .2s ease;
+}
+@keyframes molIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+#mol-hdr {
+  background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 60%,var(--bg) 100%);
+  padding:14px 16px 0; border-bottom:1px solid var(--border);
+  flex-shrink:0; position:relative; overflow:hidden;
+}
+#mol-charge-bar {
+  position:absolute; top:0; left:0; height:3px;
+  background:linear-gradient(90deg,var(--mol-color,#00e5ff) 0%,#fff 50%,var(--mol-color,#00e5ff) 100%);
+  box-shadow:0 0 14px var(--mol-color,#00e5ff),0 0 28px rgba(255,255,255,.35);
+  border-radius:12px 12px 0 0; animation:molcharge .8s ease forwards;
+}
+@keyframes molcharge { from{width:0%} to{width:100%} }
+
+.mol-hdr-row { display:flex; align-items:flex-start; gap:12px; margin-bottom:10px; }
+.mol-hdr-icon { width:46px; height:46px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0; border:1px solid var(--border); }
+.mol-hdr-meta { flex:1; }
+.mol-hdr-name { font-size:1.05rem; font-weight:700; color:var(--bright); letter-spacing:.04em; }
+.mol-hdr-sub  { font-size:.7rem; color:var(--dim); margin-top:2px; font-family:monospace; }
+.mol-badges   { display:flex; gap:5px; flex-wrap:wrap; margin-top:5px; }
+.mol-badge    { font-size:.6rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:2px 8px; border-radius:4px; border:1px solid; }
+.mol-close    { background:none; border:none; color:var(--muted); font-size:1.2rem; cursor:pointer; padding:4px 8px; border-radius:4px; transition:.15s; flex-shrink:0; }
+.mol-close:hover { color:var(--text); background:var(--border); }
+
+.mol-viz-tabs { display:flex; gap:2px; }
+.mol-viz-tab  { padding:6px 14px; border:1px solid transparent; border-bottom:none; background:transparent; color:var(--muted); font-size:.74rem; border-radius:5px 5px 0 0; cursor:pointer; transition:.15s; position:relative; top:1px; user-select:none; }
+.mol-viz-tab:hover  { color:var(--text); background:var(--bg3); }
+.mol-viz-tab.active { color:var(--mol-color,var(--cyan)); background:var(--bg3); border-color:var(--border); }
+
+#mol-body { flex:1; overflow-y:auto; background:var(--bg3); }
+
+.mol-panel { display:none; padding:14px 16px; }
+.mol-panel.active { display:grid; gap:12px; }
+
+.mol-canvas-wrap { background:var(--bg); border:1px solid var(--border); border-radius:8px; padding:8px; display:flex; align-items:center; justify-content:center; min-height:200px; position:relative; }
+.mol-canvas-lbl  { position:absolute; bottom:7px; left:50%; transform:translateX(-50%); font-size:.6rem; color:var(--muted); font-family:monospace; white-space:nowrap; }
+.mol-prop-sect   { background:var(--bg4); border:1px solid var(--border); border-radius:6px; padding:10px 11px; }
+.mol-prop-title  { font-size:.62rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:7px; }
+.mol-mech        { font-size:.74rem; color:#8888b0; line-height:1.6; }
+
+.mol-interaction-wrap { background:var(--bg); border:1px solid var(--border); border-radius:8px; min-height:280px; display:flex; align-items:center; justify-content:center; position:relative; }
+.mol-legend      { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-top:6px; }
+.mol-leg-item    { display:flex; align-items:center; gap:6px; font-size:.7rem; color:#8888b0; }
+.mol-leg-dot     { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+.mol-paper-item  { padding:10px 12px; border-bottom:1px solid var(--border2); cursor:pointer; transition:.1s; }
+.mol-paper-item:hover { background:var(--bg4); }
+.mol-paper-meta  { display:flex; gap:8px; align-items:center; margin-bottom:4px; }
+.mol-paper-year  { font-size:.62rem; font-family:monospace; color:var(--muted); background:var(--bg); padding:1px 6px; border-radius:3px; border:1px solid var(--border); }
+.mol-paper-jrnl  { font-size:.62rem; color:#44447a; font-style:italic; }
+.mol-paper-if    { font-size:.6rem; color:var(--gold); border:1px solid rgba(255,215,0,.2); background:rgba(255,215,0,.05); padding:1px 5px; border-radius:3px; }
+.mol-paper-title { font-size:.76rem; color:var(--text); line-height:1.4; margin-bottom:3px; }
+.mol-paper-abs   { font-size:.7rem; color:var(--dim); line-height:1.5; }
+
+.mol-rel-card    { background:var(--bg4); border:1px solid var(--border); border-radius:7px; padding:10px; cursor:pointer; transition:.15s; text-align:center; }
+.mol-rel-card:hover { border-color:var(--mol-color,var(--cyan)); background:var(--bg); }
+.mol-rel-icon { font-size:1.5rem; margin-bottom:5px; }
+.mol-rel-name { font-size:.74rem; color:var(--text); font-weight:600; margin-bottom:3px; }
+.mol-rel-role { font-size:.65rem; color:var(--dim); line-height:1.4; }
+.mol-rel-id   { font-size:.6rem; color:var(--muted); font-family:monospace; margin-top:4px; }
+
+.mol-domain-map { background:var(--bg4); border:1px solid var(--border); border-radius:8px; padding:10px; }
+.mol-domain-row { display:flex; align-items:flex-start; gap:8px; padding:5px 0; border-bottom:1px solid var(--border2); font-size:.7rem; }
+.mol-domain-row:last-child { border-bottom:none; }
+.mol-domain-seg  { width:16px; height:12px; border-radius:2px; flex-shrink:0; margin-top:2px; }
+.mol-domain-name { color:var(--text); font-size:.71rem; font-weight:600; }
+.mol-domain-pos  { font-family:monospace; color:var(--muted); font-size:.62rem; }
+.mol-domain-fn   { color:var(--dim); font-size:.65rem; margin-top:1px; }
+
+#mol-foot { background:var(--bg); border-top:1px solid var(--border); padding:8px 16px; display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.mol-foot-link   { font-size:.7rem; color:var(--cyan); text-decoration:none; transition:.15s; }
+.mol-foot-link:hover { color:var(--bright); }
+.mol-foot-sep    { color:var(--border); }
+.mol-foot-source { font-size:.62rem; color:var(--muted); margin-left:auto; }

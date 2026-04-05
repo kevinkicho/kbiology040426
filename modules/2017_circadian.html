@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2017 · Circadian Clocks — kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css">
+<style>
+/* Module layout */
+.mod-hdr{background:linear-gradient(135deg,#05050f 0%,#08082a 60%,#05050f 100%);border-bottom:1px solid var(--border);padding:12px 18px}
+.mod-hdr-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.back-link{color:var(--dim);text-decoration:none;font-size:.75rem;transition:.15s;padding:4px 8px;border:1px solid var(--border);border-radius:4px}
+.back-link:hover{color:var(--green);border-color:var(--green)}
+.mod-year-badge{font-size:.65rem;font-family:monospace;padding:2px 8px;border-radius:3px;border:1px solid;letter-spacing:.08em}
+.mod-title{font-size:1.1rem;font-weight:700;color:var(--bright);flex:1}
+.mod-tabs{display:flex;gap:3px;flex-wrap:wrap}
+.mod-tab{padding:5px 14px;border:1px solid transparent;border-bottom:none;background:transparent;color:var(--muted);font-size:.76rem;border-radius:5px 5px 0 0;cursor:pointer;transition:.15s;user-select:none;position:relative;top:1px}
+.mod-tab:hover{color:var(--text);background:var(--bg3)}
+.mod-tab.active{color:var(--accent,var(--cyan));background:var(--bg3);border-color:var(--border)}
+.mod-laureates{font-size:.72rem;color:var(--dim);margin-top:2px}
+.mod-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mod-tag{font-size:.6rem;padding:2px 8px;border-radius:3px;border:1px solid}
+
+/* Body layout */
+.mod-body{display:flex;min-height:calc(100vh - 100px)}
+.sidebar{width:196px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+.main{flex:1;padding:14px 16px;overflow-y:auto;background:var(--bg3)}
+.rsidebar{width:208px;flex-shrink:0;background:var(--bg2);border-left:1px solid var(--border);padding:12px 10px;overflow-y:auto}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Canvas */
+.canvas-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative;overflow:hidden}
+.canvas-wrap canvas{display:block;width:100%;height:240px}
+.phase-lbl{padding:6px 10px;font-size:.7rem;color:var(--dim);font-family:monospace;border-top:1px solid var(--border);background:var(--bg4)}
+
+/* Mechanism panels */
+.mech-panels{display:flex;flex-direction:column;gap:10px}
+.mech-panel{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px}
+.mech-panel-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mech-panel-bar{width:8px;height:2px;border-radius:1px;flex-shrink:0}
+.mech-panel-body{font-size:.74rem;color:#8888b0;line-height:1.6}
+.mech-panel-body strong{color:var(--text)}
+.mol-chips-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+
+/* Molecules tab */
+.mol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.mol-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:.15s}
+.mol-card:hover{border-color:var(--accent,var(--cyan));transform:translateY(-1px)}
+.mol-card-icon{font-size:1.4rem;margin-bottom:6px}
+.mol-card-name{font-size:.76rem;color:var(--bright);font-weight:600;margin-bottom:3px}
+.mol-card-type{font-size:.6rem;color:var(--muted);margin-bottom:5px}
+.mol-card-role{font-size:.68rem;color:#8888b0;line-height:1.4}
+
+/* Story tab */
+.story-content{max-width:720px}
+.story-block{margin-bottom:16px}
+.story-year-tag{display:inline-block;font-size:.62rem;font-family:monospace;color:var(--green);border:1px solid rgba(0,255,153,.3);padding:1px 6px;border-radius:3px;margin-right:6px}
+
+/* Frontiers tab */
+.frontier-group{margin-bottom:20px}
+.frontier-group-title{font-size:.8rem;font-weight:700;color:var(--bright);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.frontier-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:10px 12px;margin-bottom:7px}
+.frontier-item-title{font-size:.74rem;color:var(--text);font-weight:600;margin-bottom:3px}
+.frontier-item-body{font-size:.7rem;color:#8888b0;line-height:1.5}
+
+/* Connections tab */
+.connections-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:12px;position:relative}
+.connections-wrap canvas{display:block;width:100%;height:360px}
+
+/* Right sidebar */
+.rsb-mol-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border2);cursor:pointer;transition:.1s}
+.rsb-mol-item:hover{color:var(--cyan)}
+.rsb-mol-icon{font-size:1rem;flex-shrink:0}
+.rsb-mol-name{font-size:.7rem;color:var(--text);flex:1}
+.rsb-mol-id{font-size:.6rem;color:var(--muted);font-family:monospace}
+</style>
+</head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">2017</span>
+    <div class="mod-title">Circadian Clocks</div>
+  </div>
+  <div class="mod-laureates">Jeffrey C. Hall, Michael Rosbash &amp; Michael W. Young &#8212; Nobel Prize 2017</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">Genetics</span>
+    <span class="mod-tag" style="color:#00e5ff;border-color:#00e5ff44;background:#00e5ff10">Chronobiology</span>
+    <span class="mod-tag" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">Pharmacology</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; CLOCK:BMAL1 Transcription</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">CLOCK:BMAL1</span><span class="ctrl-val" id="lay-cb">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">PER/CRY complex</span><span class="ctrl-val" id="lay-per">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">CKI&#948; timer</span><span class="ctrl-val" id="lay-cki">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> The ~24h period is set by delayed negative feedback — PER/CRY proteins accumulate over hours, then repress their own transcription via CLOCK:BMAL1.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; CLOCK:BMAL1 E-box Transcription (Day)</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2017/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel Prize 2017 &#8212; official announcement</div>
+      </a>
+      <a href="https://www.circadiandisruption.org/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">circadiandisruption.org</div>
+        <div class="ref-title">Circadian resource</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ───────
+// NOTE: This runs before glossary-data.js loads, so use window.GLOSS = ... || {}
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'ebox':       { term:'E-box (enhancer box)', level:'grad', def:'Palindromic DNA motif CACGTG bound by bHLH (basic helix-loop-helix) transcription factors. CLOCK:BMAL1 heterodimer binds canonical E-boxes in promoters of PER1/2/3, CRY1/2, REV-ERB\u03b1/\u03b2, and ~5,000 circadian output genes including VEGF, p21, metabolic enzymes. Non-canonical E-box (CATGTG) also bound with lower affinity.' },
+  'fasps':      { term:'Familial Advanced Sleep Phase Syndrome (FASPS)', level:'res', def:'Autosomal dominant circadian disorder: sleep onset ~9:30pm, wake ~4:30am. No jetlag (period matches sleep pressure). Caused by PER2-S662G mutation (reduces CKI\u03b4 phosphorylation, extends PER2 half-life \u2192 shortened free-running period of ~22h). CKI\u03b4-T44A missense also reported. Proof-of-concept that CKI\u03b4 inhibitors might treat circadian disorders.' },
+  'zeitgeber':  { term:'Zeitgeber (time-giver)', level:'grad', def:'Environmental cue entraining the circadian clock to the ~24h light-dark cycle. Principal zeitgeber: light (via melanopsin retinal ganglion cells \u2192 retinohypothalamic tract \u2192 suprachiasmatic nucleus \u2192 CRY degradation/stabilization). Secondary zeitgebers: temperature, food timing, exercise, social interactions. SCN is the master pacemaker synchronizing peripheral tissue clocks.' },
+  'cki_delta':  { term:'CKI\u03b4 (Casein kinase 1 delta)', level:'res', def:'Serine/threonine kinase phosphorylating PER proteins at multiple sites. Progressive phosphorylation destabilizes PER (\u03b2-TrCP recruitment \u2192 SCF-E3 ubiquitin ligase \u2192 proteasomal degradation). A delay in PER degradation extends the circadian period. CKI\u03b4 mutations cause FASPS (shortened period). CKI\u03b4 inhibitors (LH846) lengthen the period \u2014 potential circadian therapeutics.' },
+});
+
+// ── Module molecules data ────────────────────────────────────────────────────
+const MODULE_MOLS = [
+  { id:'clock_bmal1', icon:'\ud83d\udfe1', color:'#ffd700', type:'Protein heterodimer \u00b7 bHLH-PAS', is_protein:true,
+    name:'CLOCK:BMAL1 heterodimer', sub:'PDB: 4F3L \u00b7 positive limb transcription factor',
+    badges:[{text:'Positive loop driver',color:'#ffd700'},{text:'E-box binder',color:'#00e5ff'},{text:'Nobel 2017',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'4F3L',
+    nih_link:'https://www.rcsb.org/structure/4F3L',
+    mechanism:'CLOCK:BMAL1 bHLH-PAS heterodimer binds E-box elements (CACGTG) in promoters of PER1/2/3, CRY1/2, REV-ERB\u03b1/\u03b2 \u2014 the positive limb of the circadian feedback loop. CLOCK has intrinsic HAT (histone acetyltransferase) activity acetylating BMAL1-K537 and H3K9 at clock gene promoters. REV-ERB\u03b1/\u03b2 (repressors) and ROR\u03b1/\u03b3 (activators) compete for RRE elements controlling BMAL1 expression amplitude. BMAL1 knockout mice are arrhythmic, obese, and have shortened lifespan.',
+    properties:{'PDB':'4F3L (CLOCK-BMAL1 PAS-B dimer)','Binding motif':'E-box CACGTG','CLOCK HAT activity':'H3K9 and BMAL1-K537 acetylation','Period effect':'CLOCK mutation \u2192 27h period (hamster tau mutant)','BMAL1 KO phenotype':'Arrhythmic + metabolic syndrome + shortened lifespan','Target genes':'>5,000 circadian output genes (~10% of transcriptome)'},
+    property_flags:{},
+    interaction:{ title:'CLOCK:BMAL1 \u2014 Positive Transcriptional Limb',
+      nodes:[
+        {id:'cb',   x:250,y:80, r:30,color:'#ffd700',label:'CLOCK\nBMAL1',  sub:'E-box binder'},
+        {id:'per',  x:100,y:220,r:24,color:'#00e5ff',label:'PER1/2/3',     sub:'transcribed'},
+        {id:'cry',  x:250,y:240,r:24,color:'#aa77ff',label:'CRY1/2',       sub:'transcribed'},
+        {id:'rev',  x:400,y:220,r:22,color:'#ff8844',label:'REV-ERB\u03b1/\u03b2',   sub:'repressor feedback'},
+        {id:'bmal', x:400,y:320,r:22,color:'#ffd70088',label:'BMAL1\nexpr.',sub:'RRE regulated'},
+      ],
+      edges:[
+        {from:'cb',  to:'per', color:'#00e5ff',label:'E-box\nactivation',   dashed:false},
+        {from:'cb',  to:'cry', color:'#aa77ff',label:'E-box\nactivation',   dashed:false},
+        {from:'cb',  to:'rev', color:'#ff8844',label:'E-box\nactivation',   dashed:false},
+        {from:'rev', to:'bmal',color:'#ff884488',label:'RRE repression\nof BMAL1',dashed:false},
+      ]
+    },
+    papers:[
+      {year:'1997',journal:'Cell',impact:'IF 66',title:'Positional cloning of the mouse circadian clock gene (Takahashi)',abstract:'Clock mutant mouse phenotype: 27h free-running period \u2192 progressive arrhythmia. CLOCK gene cloned \u2014 bHLH-PAS transcription factor. Nobel 2017 context.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udd35',name:'PER2',       role:'Negative limb repressor\nphosphorylated by CKI\u03b4',id:'PDB: 3GDI'},
+      {icon:'\ud83d\udd35',name:'CRY1',       role:'Negative limb repressor\nbinds CLOCK:BMAL1',     id:'PDB: 4MX3'},
+    ],
+    domains:[
+      {color:'#ffd700',name:'CLOCK bHLH',     pos:'1\u201387',     fn:'DNA binding to E-box CACGTG'},
+      {color:'#ff8844',name:'CLOCK PAS-A',    pos:'93\u2013165',   fn:'Heterodimerization with BMAL1 PAS-A'},
+      {color:'#aa77ff',name:'CLOCK PAS-B',    pos:'175\u2013355',  fn:'FAD binding; secondary dimerization surface'},
+      {color:'#00e5ff',name:'BMAL1 bHLH',    pos:'1\u201387',     fn:'Heterodimer half of E-box binding'},
+      {color:'#00ff99',name:'BMAL1 TAD',     pos:'580\u2013626',  fn:'K537 acetylation site; p300/CBP coactivator binding'},
+    ]
+  },
+  { id:'per2', icon:'\ud83d\udd35', color:'#00e5ff', type:'Protein \u00b7 Period repressor', is_protein:true,
+    name:'PER2', sub:'PDB: 3GDI \u00b7 1257 aa \u00b7 core negative limb protein',
+    badges:[{text:'Negative limb repressor',color:'#00e5ff'},{text:'CKI\u03b4 substrate',color:'#ffd700'},{text:'FASPS gene',color:'#aa77ff'}],
+    pubchem_cid:null, pdb_id:'3GDI',
+    nih_link:'https://www.rcsb.org/structure/3GDI',
+    mechanism:'PER2 (Period 2) accumulates in cytoplasm during the day; enters nucleus at night (with CRY1/2) to repress CLOCK:BMAL1 transcription \u2014 the negative limb. CKI\u03b4/\u03b5 progressively phosphorylates PER2 at multiple serines \u2192 \u03b2-TrCP-SCF E3 ligase recognizes pS478-pS482 \u2192 polyubiquitination \u2192 proteasomal degradation. Degradation delay determines the ~24h period length. PER2-S662G mutation in FASPS reduces CKI\u03b4 phosphorylation \u2192 extended PER2 half-life \u2192 shortened period (~22h).',
+    properties:{'PDB':'3GDI (PAS-AB domain)','Key domains':'PAS-A, PAS-B (CRY1 binding), CLD (CKI\u03b4 binding), CC helix','CKI\u03b4 sites':'>20 phosphorylation sites; pS478/482 key for \u03b2-TrCP','FASPS mutation':'S662G \u2014 reduces CKI\u03b4 phosphorylation','Nuclear entry':'With CRY1/2; CLOCK:BMAL1 complex repression','Stability':'Progressive CKI\u03b4 phosphorylation \u2192 12\u201316h half-life cycle'},
+    property_flags:{},
+    interaction:{ title:'PER2 Progressive Phosphorylation and Degradation',
+      nodes:[
+        {id:'ckid',  x:80, y:80, r:22,color:'#ff8844',label:'CKI\u03b4',       sub:'kinase'},
+        {id:'per2',  x:280,y:150,r:30,color:'#00e5ff',label:'PER2',       sub:'multiple pSer'},
+        {id:'btrcp', x:450,y:150,r:24,color:'#aa77ff',label:'\u03b2-TrCP\nSCF',sub:'E3 ligase'},
+        {id:'cry1',  x:280,y:300,r:24,color:'#aa77ff',label:'CRY1',       sub:'stabilizes PER'},
+        {id:'prot',  x:450,y:280,r:22,color:'#ff4444',label:'26S Proteasome',sub:'degradation'},
+      ],
+      edges:[
+        {from:'ckid', to:'per2', color:'#ff8844',label:'progressive\nphosphorylation',  dashed:false},
+        {from:'per2', to:'btrcp',color:'#aa77ff',label:'pS478/S482\nrecognized',        dashed:false},
+        {from:'btrcp',to:'prot', color:'#ff4444',label:'polyUb \u2192\ndegradation',         dashed:false},
+        {from:'cry1', to:'per2', color:'#aa77ff',label:'CRY1 binding\nstabilizes PER2', dashed:true},
+      ]
+    },
+    papers:[
+      {year:'1998',journal:'Cell',impact:'IF 66',title:'A self-consistent oscillator explains circadian period (Dunlap)',abstract:'Period of Drosophila circadian clock depends on PER protein levels. Feedback of PER on its own transcription (via dCLOCK/CYCLE) closes the loop. Hall and Rosbash independently. Nobel 2017.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe1',name:'CLOCK:BMAL1',  role:'Transcription factor repressed\nby PER2:CRY1 nuclear complex',id:'PDB: 4F3L'},
+      {icon:'\ud83d\udfe0',name:'CKI\u03b4',         role:'Kinase progressively degrading\nPER2 to set period length',  id:'PDB: 1CKJ'},
+    ],
+    domains:[
+      {color:'#00e5ff',name:'PAS-A domain',  pos:'1\u2013130',    fn:'Protein-protein interaction'},
+      {color:'#aa77ff',name:'PAS-B domain',  pos:'140\u2013280',  fn:'CRY1 direct binding \u2014 nuclear repression complex'},
+      {color:'#ffd700',name:'CLD domain',    pos:'450\u2013550',  fn:'CKI\u03b4/\u03b5 binding domain \u2014 kinase docking site'},
+      {color:'#00ff99',name:'CC helix',      pos:'900\u2013950',  fn:'Nuclear localization and export signals'},
+    ]
+  },
+  { id:'cry1', icon:'\ud83d\udd35', color:'#aa77ff', type:'Protein \u00b7 Cryptochrome repressor', is_protein:true,
+    name:'CRY1', sub:'PDB: 4MX3 \u00b7 586 aa \u00b7 central negative limb repressor',
+    badges:[{text:'CLOCK:BMAL1 repressor',color:'#aa77ff'},{text:'Period elongator',color:'#00e5ff'},{text:'Light-signaling homolog',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'4MX3',
+    nih_link:'https://www.rcsb.org/structure/4MX3',
+    mechanism:'CRY1 (Cryptochrome 1) is the primary molecular repressor of CLOCK:BMAL1 transcriptional activity. Enters nucleus with PER2 \u2192 interacts with CLOCK:BMAL1 through its PHR (photolyase homology region) domain face-to-face with BMAL1 PAS-B \u2192 displaces coactivators. CRY1-specific feature: the C-terminal tail (CTT) undergoes disorder-to-order transition upon CLOCK:BMAL1 binding \u2014 tightening the interaction. CRY1 alone can elongate the circadian period; CRY2 shortens it. Mammalian CRY does not absorb light (unlike plant/insect CRY homologs). FBXL3 E3 ligase targets CRY1 for degradation.',
+    properties:{'PDB':'4MX3 (PHR domain)','Photolyase homology':'Yes \u2014 but mammalian CRY is light-insensitive','CLOCK:BMAL1 binding':'PHR domain face interacts with BMAL1 PAS-B','CTT':'C-terminal tail \u2014 disorder-to-order upon complex binding','Period effect':'CRY1 KO: shorter period (22h); CRY2 KO: longer period (25h)','Degradation E3':'FBXL3 (SCF-FBXL3 complex recognizes CRY)'},
+    property_flags:{},
+    interaction:{ title:'CRY1 Repression of CLOCK:BMAL1',
+      nodes:[
+        {id:'cry1', x:250,y:80, r:28,color:'#aa77ff',label:'CRY1',       sub:'PHR domain'},
+        {id:'per2', x:100,y:200,r:24,color:'#00e5ff',label:'PER2',       sub:'nuclear complex'},
+        {id:'cb',   x:400,y:200,r:28,color:'#ffd700',label:'CLOCK\nBMAL1',sub:'repressed'},
+        {id:'ebox', x:400,y:330,r:22,color:'#33334a',label:'E-box\ngenes',sub:'transcription off'},
+        {id:'fbxl3',x:100,y:330,r:22,color:'#ff4488',label:'FBXL3',      sub:'CRY1 degrader'},
+      ],
+      edges:[
+        {from:'cry1',to:'per2',color:'#00e5ff',label:'nuclear\ncomplex',              dashed:false},
+        {from:'per2',to:'cb',  color:'#ffd70088',label:'represses\nCLOCK:BMAL1',    dashed:false},
+        {from:'cry1',to:'cb',  color:'#aa77ff',label:'PHR face\nbinds BMAL1 PAS-B', dashed:false},
+        {from:'cb',  to:'ebox',color:'#33334a88',label:'transcription\noff',          dashed:true},
+        {from:'fbxl3',to:'cry1',color:'#ff4488',label:'SCF-FBXL3\ndegrades CRY1',   dashed:false},
+      ]
+    },
+    papers:[
+      {year:'1998',journal:'Cell',impact:'IF 66',title:'Role of mammalian cryptochrome in circadian clock (Takahashi/Sancar)',abstract:'Mammalian CRY1/2 identified as light-independent transcriptional repressors \u2014 unlike Drosophila TIM. CRY functions in the negative limb of the mammalian clock.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe1',name:'CLOCK:BMAL1', role:'Transcription factor complex\nthat CRY1 represses',    id:'PDB: 4F3L'},
+      {icon:'\ud83d\udd34',name:'FBXL3',       role:'SCF E3 ligase\ndegrading CRY1 to reset the clock',    id:'PDB: 4I6J'},
+    ],
+    domains:[
+      {color:'#aa77ff',name:'Photolyase homology (PHR)',pos:'1\u2013490', fn:'CLOCK:BMAL1 binding interface; FAD-binding cavity (empty in mammalian CRY)'},
+      {color:'#00e5ff',name:'C-terminal tail (CTT)',    pos:'491\u2013586',fn:'Intrinsically disordered; undergoes folding upon CLOCK:BMAL1 binding \u2014 enhances affinity and specificity'},
+    ]
+  },
+  { id:'ck1d', icon:'\ud83d\udfe0', color:'#ff8844', type:'Protein \u00b7 Ser/Thr kinase', is_protein:true,
+    name:'CKI\u03b4 (CSNK1D)', sub:'PDB: 1CKJ \u00b7 415 aa \u00b7 PER degradation timer',
+    badges:[{text:'PER phosphorylation timer',color:'#ff8844'},{text:'FASPS kinase',color:'#ffd700'},{text:'Drug target',color:'#aa77ff'}],
+    pubchem_cid:null, pdb_id:'1CKJ',
+    nih_link:'https://www.rcsb.org/structure/1CKJ',
+    mechanism:'CKI\u03b4 (casein kinase 1 delta) is the molecular timer of the circadian clock. Progressively phosphorylates multiple serine residues on PER1/2/3, determining their stability and nuclear entry timing. Key regulatory switch: S662 phosphorylation promotes nuclear accumulation; pS478/482 phosphorylation recruits \u03b2-TrCP for proteasomal degradation. CKI\u03b4 itself oscillates in activity by autophosphorylation of its C-terminal regulatory domain (autoinhibition). FASPS: CKI\u03b4-T44A gain-of-function \u2192 shorter period. CKI\u03b4 inhibitors (LH846, PF-670462) lengthen the circadian period in vivo.',
+    properties:{'PDB':'1CKJ (apo)','Family':'Casein kinase 1 (CK1)','PER phosphorylation':'pS478/482 (\u03b2-TrCP), pS662 (nuclear import)','Autoinhibitory domain':'C-terminal autophosphorylation sites','FASPS mutation':'T44A (gain of function \u2192 shortened period)','Inhibitor LH846':'Lengthens period from 24h to ~27h in cultured cells'},
+    property_flags:{},
+    interaction:{ title:'CKI\u03b4 as Molecular Clock Timer',
+      nodes:[
+        {id:'ckid', x:100,y:150,r:28,color:'#ff8844',label:'CKI\u03b4',       sub:'timer kinase'},
+        {id:'per2', x:300,y:150,r:28,color:'#00e5ff',label:'PER2',       sub:'~20 pSer sites'},
+        {id:'nuc',  x:300,y:300,r:24,color:'#aa77ff',label:'Nuclear\nentry',sub:'S662-P promotes'},
+        {id:'deg',  x:480,y:220,r:22,color:'#ff4444',label:'Degradation', sub:'pS478/482 \u2192 SCF'},
+        {id:'auto', x:100,y:300,r:22,color:'#ffd700',label:'CKI\u03b4\nautoinhibition',sub:'C-term phos.'},
+      ],
+      edges:[
+        {from:'ckid',to:'per2',color:'#ff8844',label:'progressive\nmultiple pSer',   dashed:false},
+        {from:'per2',to:'nuc', color:'#aa77ff',label:'pS662 promotes\nnuclear entry', dashed:false},
+        {from:'per2',to:'deg', color:'#ff4444',label:'pS478/482\n\u03b2-TrCP recognition',dashed:false},
+        {from:'auto',to:'ckid',color:'#ffd700',label:'autophosphorylation\nreduces activity',dashed:true},
+      ]
+    },
+    papers:[
+      {year:'2001',journal:'Nature',impact:'IF 69',title:'Casein kinase I\u03b5 phosphorylates the Drosophila period protein and is coupled to the circadian oscillator (Young)',abstract:'Young lab identifies doubletime (CKI\u03b5 homolog) as the Drosophila PER kinase. CKI\u03b4/\u03b5 are the molecular timers of the circadian clock. Nobel 2017.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udd35',name:'PER2',   role:'Primary substrate\n~20 phosphorylation sites',    id:'PDB: 3GDI'},
+      {icon:'\ud83d\udfe1',name:'LH846',  role:'CKI\u03b4 selective inhibitor\nlengthens period ~3h',    id:'preclinical'},
+    ],
+    domains:[
+      {color:'#ff8844',name:'N-lobe (kinase)',          pos:'1\u201395',    fn:'ATP binding; conserved kinase N-lobe'},
+      {color:'#ffd700',name:'C-lobe (kinase)',           pos:'96\u2013295',  fn:'Substrate peptide binding; catalytic aspartate D136'},
+      {color:'#aa77ff',name:'Activation segment',       pos:'172\u2013198', fn:'DFG motif; activation loop \u2014 DFG-in = active'},
+      {color:'#00e5ff',name:'C-terminal regulatory',    pos:'296\u2013415', fn:'Autophosphorylation sites \u2014 autoinhibitory regulation of kinase activity'},
+    ]
+  },
+];
+
+// ── Mechanism phases ─────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 CLOCK:BMAL1 E-box Transcription (Day)', color:'#ffd700', mol:'clock_bmal1'},
+  {label:'Phase 1 \u2014 PER/CRY Cytoplasmic Accumulation',      color:'#00e5ff', mol:'per2'},
+  {label:'Phase 2 \u2014 CKI\u03b4 Progressive PER Phosphorylation',  color:'#ff8844', mol:'ck1d'},
+  {label:'Phase 3 \u2014 PER:CRY Nuclear Entry + CLOCK:BMAL1 Repression (Night)', color:'#aa77ff', mol:'cry1'},
+  {label:'Phase 4 \u2014 PER/CRY Degradation Resets Cycle (~24h)', color:'#00ff99', mol:null},
+];
+
+// ── Tab switching ────────────────────────────────────────────────────────────
+document.querySelectorAll('.mod-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const panelId = 'panel-' + tab.dataset.tab;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+    if (tab.dataset.tab === 'connections') drawConnections();
+  });
+});
+
+// ── Mechanism canvas animation ────────────────────────────────────────────────
+const mechCv = document.getElementById('mech-canvas');
+let animRunning = false, animPhase = 0, animT = 0, animSpeed = 1;
+
+function mechDraw(phase, t) {
+  const cv = mechCv;
+  cv.width = cv.offsetWidth || 600; cv.height = cv.offsetHeight || 240;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+  const cx = W / 2, cy = H / 2;
+
+  if (phase === 0) {
+    // CLOCK:BMAL1 binding E-box and driving transcription
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+    // Nucleus boundary
+    ctx.beginPath(); ctx.arc(cx, cy, 70, 0, Math.PI * 2);
+    ctx.strokeStyle = '#ffd70033'; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]); ctx.stroke(); ctx.setLineDash([]);
+    // CLOCK:BMAL1 heterodimer
+    ctx.beginPath(); ctx.arc(cx - 20, cy - 20, 22, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffd70022'; ctx.fill();
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx + 20, cy - 20, 18, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffd70022'; ctx.fill();
+    ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 2; ctx.stroke();
+    // E-box DNA
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx - 50, cy + 30); ctx.lineTo(cx + 50, cy + 30); ctx.stroke();
+    // Transcription arrow
+    const arrowX = cx + 50 + pulse * 40;
+    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx + 50, cy + 30); ctx.lineTo(arrowX, cy + 30); ctx.stroke();
+    ctx.fillStyle = '#ffd700'; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('CLOCK', cx - 20, cy - 16);
+    ctx.fillStyle = '#ffd70088'; ctx.fillText('BMAL1', cx + 20, cy - 16);
+    ctx.fillStyle = '#00e5ff99'; ctx.font = '9px monospace'; ctx.fillText('E-box CACGTG', cx, cy + 44);
+    ctx.fillStyle = '#00ff9999'; ctx.font = '9px monospace'; ctx.fillText('PER/CRY transcription \u2192', cx + 60, cy + 26);
+  } else if (phase === 1) {
+    // PER/CRY cytoplasmic accumulation — protein dots building up
+    const count = Math.floor((t % 120) / 8) + 1;
+    ctx.beginPath(); ctx.arc(cx, cy, 75, 0, Math.PI * 2);
+    ctx.strokeStyle = '#33334a'; ctx.lineWidth = 1; ctx.setLineDash([3,6]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#8888b055'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Cytoplasm', cx, cy - 82);
+    for (let i = 0; i < Math.min(count, 8); i++) {
+      const angle = (i / 8) * Math.PI * 2 + t * 0.01;
+      const r = 45 + (i % 3) * 10;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2);
+      ctx.fillStyle = i % 2 === 0 ? '#00e5ff33' : '#aa77ff33'; ctx.fill();
+      ctx.strokeStyle = i % 2 === 0 ? '#00e5ff' : '#aa77ff'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = i % 2 === 0 ? '#00e5ff' : '#aa77ff';
+      ctx.font = '7px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(i % 2 === 0 ? 'PER' : 'CRY', x, y + 3);
+    }
+    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('PER/CRY accumulate in cytoplasm (daytime)', cx, cy + 100);
+  } else if (phase === 2) {
+    // CKId progressive phosphorylation of PER2
+    const pCount = Math.floor((t % 100) / 10);
+    // PER2 protein
+    ctx.beginPath(); ctx.arc(cx, cy, 35, 0, Math.PI * 2);
+    ctx.fillStyle = '#00e5ff22'; ctx.fill();
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00e5ff'; ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PER2', cx, cy + 4);
+    // CKId kinase
+    ctx.beginPath(); ctx.arc(cx - 100, cy - 30, 22, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff884422'; ctx.fill();
+    ctx.strokeStyle = '#ff8844'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff8844'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('CKI\u03b4', cx - 100, cy - 26);
+    // Phosphate marks
+    for (let i = 0; i < Math.min(pCount, 8); i++) {
+      const angle = (i / 8) * Math.PI * 2;
+      const px = cx + 42 * Math.cos(angle);
+      const py = cy + 42 * Math.sin(angle);
+      ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffd700'; ctx.fill();
+      ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 1; ctx.stroke();
+    }
+    ctx.fillStyle = '#8888b099'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CKI\u03b4 adds phosphate groups (pSer) \u2014 timer', cx, cy + 85);
+  } else if (phase === 3) {
+    // Nuclear entry and CLOCK:BMAL1 repression
+    const nX = cx, nY = cy;
+    // Nucleus
+    ctx.beginPath(); ctx.arc(nX, nY, 65, 0, Math.PI * 2);
+    ctx.fillStyle = '#1a1a3a'; ctx.fill();
+    ctx.strokeStyle = '#8888b0'; ctx.lineWidth = 1.5; ctx.stroke();
+    // CLOCK:BMAL1 (repressed — dimmer)
+    ctx.beginPath(); ctx.arc(nX - 15, nY - 10, 20, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffd70011'; ctx.fill();
+    ctx.strokeStyle = '#ffd70055'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#ffd70055'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('CLOCK\nBMAL1', nX - 15, nY - 6);
+    // PER:CRY complex coming in
+    const angle2 = t * 0.02;
+    const ex = nX + 55 * Math.cos(angle2);
+    const ey = nY + 55 * Math.sin(angle2);
+    ctx.beginPath(); ctx.arc(ex, ey, 14, 0, Math.PI * 2);
+    ctx.fillStyle = '#00e5ff33'; ctx.fill();
+    ctx.strokeStyle = '#00e5ff'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#00e5ff'; ctx.font = '7px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('PER\nCRY', ex, ey + 1);
+    ctx.fillStyle = '#aa77ff99'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('PER:CRY represses CLOCK:BMAL1 (night)', cx, cy + 90);
+  } else if (phase === 4) {
+    // Degradation and cycle reset
+    const fade = (Math.sin(t * 0.04) + 1) / 2;
+    ctx.beginPath(); ctx.arc(cx, cy - 20, 28, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(0,229,255,${0.1 + fade * 0.2})`; ctx.fill();
+    ctx.strokeStyle = `rgba(0,229,255,${0.3 + fade * 0.5})`; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = `rgba(0,229,255,${0.4 + fade * 0.5})`; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText('PER:CRY', cx, cy - 16);
+    // Proteasome
+    ctx.beginPath(); ctx.arc(cx + 90, cy + 20, 24, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff444422'; ctx.fill();
+    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = '#ff4444'; ctx.font = '8px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('26S\nProteasome', cx + 90, cy + 23);
+    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(cx + 28, cy - 10); ctx.lineTo(cx + 66, cy + 10); ctx.stroke(); ctx.setLineDash([]);
+    // Reset arrow
+    ctx.strokeStyle = '#00ff9988'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(cx - 40, cy + 50, 30, Math.PI * 0.9, Math.PI * 0.1, true);
+    ctx.stroke();
+    ctx.fillStyle = '#00ff9999'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Degradation \u2192 cycle reset (~24h)', cx, cy + 95);
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  animT = 0; animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + PHASES[animPhase].label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = PHASES[animPhase].label;
+  animT = 0; mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ───────────────────────────────────────────────────
+(function buildMechPanels() {
+  const container = document.getElementById('mech-panels');
+  const panelData = [
+    { title:'Phase 0 \u2014 CLOCK:BMAL1 E-box Transcription (Day)', color:'#ffd700', mol:'clock_bmal1',
+      body:'<strong>CLOCK:BMAL1 heterodimer</strong> binds E-box elements (CACGTG) in promoters of PER1/2/3, CRY1/2, and REV-ERB\u03b1/\u03b2. CLOCK has intrinsic HAT (histone acetyltransferase) activity, acetylating BMAL1-K537 and H3K9 at target gene promoters. This drives transcription of the negative limb components \u2014 initiating the feedback loop. Over 5,000 circadian output genes (~10% of the transcriptome) carry E-box elements and are controlled by this positive limb.'},
+    { title:'Phase 1 \u2014 PER/CRY Cytoplasmic Accumulation', color:'#00e5ff', mol:'per2',
+      body:'<strong>PER1/2/3 and CRY1/2 proteins</strong> are translated from their mRNAs in the cytoplasm during daytime. They heterodimerize (PER:CRY) in the cytoplasm before nuclear entry. CKI\u03b4/\u03b5 binds PER2 via the CLD domain and begins progressive phosphorylation. CRY1 binding to PER2 partially protects PER2 from rapid degradation, allowing accumulation over several hours \u2014 the critical temporal delay of the feedback loop.'},
+    { title:'Phase 2 \u2014 CKI\u03b4 Progressive PER Phosphorylation', color:'#ff8844', mol:'ck1d',
+      body:'<strong>CKI\u03b4 (casein kinase 1 delta)</strong> is the molecular timer of the circadian clock. It progressively phosphorylates >20 serine residues on PER2. pS662 promotes nuclear import; pS478/482 recruits \u03b2-TrCP SCF E3 ubiquitin ligase \u2192 polyubiquitination \u2192 proteasomal degradation. The rate of this phosphorylation cascade determines period length. FASPS mutations (PER2-S662G, CKI\u03b4-T44A) shorten the period to ~22h. CKI\u03b4 inhibitors (LH846) lengthen period to ~27h.'},
+    { title:'Phase 3 \u2014 PER:CRY Nuclear Entry + CLOCK:BMAL1 Repression (Night)', color:'#aa77ff', mol:'cry1',
+      body:'At night, accumulated <strong>PER:CRY complexes</strong> translocate into the nucleus. CRY1\'s PHR domain engages the BMAL1 PAS-B domain face-to-face, displacing coactivators (p300/CBP) and blocking CLOCK:BMAL1 transcriptional activity. CRY1 CTT undergoes disorder-to-order transition, tightening the repressor complex. Repression of E-box genes reduces new PER/CRY mRNA synthesis, beginning the transcriptional off period.'},
+    { title:'Phase 4 \u2014 PER/CRY Degradation Resets Cycle (~24h)', color:'#00ff99', mol:null,
+      body:'CKI\u03b4-phosphorylated PER2 (pS478/482) is recognized by \u03b2-TrCP SCF E3 ligase \u2192 K48-linked polyubiquitin chain \u2192 degraded by 26S proteasome. CRY1 is targeted by SCF-FBXL3 (pS588 recognition). Degradation of the repressor complex releases CLOCK:BMAL1 inhibition, allowing a new round of E-box transcription. The complete cycle takes ~24h. Zeitgebers (light, temperature, food) entrain the cycle by modulating protein stability and nuclear localization.'},
+  ];
+
+  panelData.forEach(p => {
+    const panel = document.createElement('div');
+    panel.className = 'mech-panel';
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    const bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    const titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+    const body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    // Parse simple <strong> tags safely (developer-controlled content)
+    const parts = p.body.split(/<strong>|<\/strong>/);
+    parts.forEach((part, i) => {
+      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
+      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
+    });
+    // Molecule chip if specified
+    if (p.mol) {
+      const chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      const mol = MODULE_MOLS.find(m => m.id === p.mol);
+      if (mol) {
+        const chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.type.toLowerCase().includes('protein') ? ' protein' : mol.type.toLowerCase().includes('lipid') ? ' lipid' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  const grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(mol => {
+    const card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
+    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
+    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
+    const role = document.createElement('div'); role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
+    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
+    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ────────────────────────────────────────────────────────────
+(function buildStory() {
+  const container = document.getElementById('story-content');
+  const events = [
+    {year:'1971', text:'Konopka and Benzer (Caltech): Drosophila period (per) mutants \u2014 short period (19h), long period (29h), arrhythmic. First genetic evidence for a circadian clock gene. Hall and Rosbash joined the field.'},
+    {year:'1984', text:'Hall (Brandeis) and Rosbash (Brandeis) simultaneously with Young (Rockefeller): Drosophila period (per) gene cloned. Neither group knew what it encoded \u2014 the mechanism was unknown.'},
+    {year:'1988', text:'Hardin, Hall, Rosbash: PER protein levels oscillate. The feedback loop hypothesis: PER protein feeds back to repress per gene transcription. Mechanism proposed but not yet proven.'},
+    {year:'1994', text:'Young lab clones timeless (tim). PER-TIM physical interaction demonstrated \u2014 the molecular basis of feedback delay. CKI\u03b5 (doubletime) identified 1998 as the PER kinase controlling stability.'},
+    {year:'1997', text:'Takahashi (HHMI): mammalian CLOCK gene cloned via positional cloning of the Clock hamster mutant. bHLH-PAS transcription factor \u2014 connects Drosophila and mammalian clock mechanisms.'},
+    {year:'1998\u20132001', text:'Mammalian PER1/2/3, CRY1/2, BMAL1 identified. CLOCK:BMAL1 E-box binding established. Complete mammalian feedback loop: CLOCK:BMAL1 \u2192 PER/CRY transcription \u2192 PER:CRY nuclear repression \u2192 degradation \u2192 restart. CKI\u03b4/\u03b5 as timers.'},
+    {year:'2007', text:'BMAL1 knockout mice: arrhythmic (no clock), metabolic syndrome, premature aging, shortened lifespan. Circadian clock is essential for health \u2014 not just timekeeping. Shift work classified IARC Group 2A carcinogen.'},
+    {year:'2017', text:'Nobel Prize in Physiology or Medicine to Hall, Rosbash, Young "for their discoveries of molecular mechanisms controlling the circadian rhythm." Honored for 30+ year program from Drosophila genetics to mechanism.'},
+  ];
+  events.forEach(ev => {
+    const block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    const yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    const text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  const container = document.getElementById('frontiers-content');
+  const groups = [
+    { title:'Clinical Pipeline (2024\u20132026)', items:[
+      {title:'Chronopharmacology: TIME-C Trial (Cisplatin + Circadian Timing)', body:'The Time-cancer consortium: Phase 3 trial delivering FOLFOX chemotherapy at the chronomodulated circadian peak (4-5am for oxaliplatin). ~25% reduction in toxicity with equal or greater efficacy vs flat infusion in colorectal cancer. mCRC patients with strong circadian amplitude (wearable actigraphy-measured) respond best. FDA guidance on chronotherapy awaited.'},
+      {title:'CKI\u03b4 Inhibitors for FASPS and Circadian Disorders', body:'LH846 (UC San Diego + Salk) and PF-670462 (Pfizer): selective CKI\u03b4/\u03b5 inhibitors that lengthen the free-running period from 24h to ~27h in cultured cells and mouse models. Potential applications: FASPS (too-short period), jetlag treatment (phase-shifting), and cancer chronotherapy sensitization. IND applications pending.'},
+    ]},
+    { title:'AI & Computational Approaches', items:[
+      {title:'TimeZero: AI-predicted circadian biomarker from single blood draw', body:'Blood can be drawn at any time; machine learning models using ~100 clock gene transcripts (DLMO, cortisol, clock gene expression ratios) predict the internal circadian time (ICT) with \u00b11h accuracy. This enables personalized chronotherapy without requiring continuous monitoring. TimeSignature algorithm (Rosemary Braun, Northwestern) uses 41 transcripts from blood. Commercial circadian molecular clock tests entering clinical development 2024.'},
+    ]},
+    { title:'Open Questions', items:[
+      {title:'Peripheral clock-SCN uncoupling in disease and aging', body:'SCN is the master pacemaker, but peripheral tissue clocks (liver, heart, immune) can uncouple from SCN via food timing, temperature, and hormonal signals. In aging: SCN amplitude declines, peripheral clocks drift. In metabolic disease: high-fat feeding shifts liver clock 12h relative to SCN. Time-restricted eating (TRE) resets peripheral clocks \u2014 benefits for metabolic health demonstrated in humans. Mechanism unclear: FGF21, glucocorticoids, and body temperature as synchronizing agents.'},
+    ]},
+    { title:'Industry & Translational Applications', items:[
+      {title:'Shift work and circadian disruption: IARC Group 2A carcinogen', body:'Night shift work for >10 years associated with increased breast cancer (RR ~1.5), colorectal cancer (RR ~1.3), and metabolic syndrome risk. Mechanistic link: disrupted BMAL1-controlled cell cycle gene expression (p21, WEE1), impaired DNA damage response timing, disrupted melatonin suppression of tumor growth. Occupational health regulations and light-at-night exposure guidelines under development.'},
+    ]},
+  ];
+  groups.forEach(g => {
+    const section = document.createElement('div');
+    section.className = 'frontier-group';
+    const title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'frontier-item';
+      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
+      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
+      card.appendChild(it); card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ────────────────────────────────────────────────────────
+(function buildRsidebar() {
+  // Key molecules list
+  const molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(mol => {
+    const item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
+    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
+    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
+    const id = document.createElement('div'); id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name); nameCol.appendChild(id);
+    item.appendChild(icon); item.appendChild(nameCol);
+    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  // Papers
+  const paperList = document.getElementById('rsb-papers');
+  const papers = [
+    {year:'1984', journal:'Cell', title:'Cloning of the Drosophila period gene (Hall, Rosbash, Young)'},
+    {year:'1988', journal:'Nature', title:'Feedback of PER protein on per transcription (Hall/Rosbash)'},
+    {year:'1998', journal:'Cell', title:'CLOCK/BMAL1 E-box binding drives circadian transcription'},
+  ];
+  papers.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
+    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
+    item.appendChild(year); item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas (force-directed network) ───────────────────────────────
+function drawConnections() {
+  const cv = document.getElementById('conn-canvas');
+  cv.width = cv.offsetWidth || 600;
+  cv.height = cv.offsetHeight || 360;
+  const ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  ctx.fillStyle = '#07071e'; ctx.fillRect(0, 0, W, H);
+
+  const nodes = [
+    {id:'circ', x:W*.5,  y:H*.5,  r:32, color:'#ffd700', label:'Circadian\nClocks',  sub:'2017'},
+    {id:'auto', x:W*.75, y:H*.28, r:24, color:'#00e5ff', label:'Autophagy',          sub:'2016'},
+    {id:'mrna', x:W*.25, y:H*.28, r:24, color:'#44ffcc', label:'mRNA\nVaccines',     sub:'2023'},
+    {id:'hif',  x:W*.8,  y:H*.7,  r:22, color:'#ff8844', label:'HIF\nO2',            sub:'2019'},
+    {id:'imm',  x:W*.2,  y:H*.7,  r:22, color:'#ff4488', label:'Checkpoint\nImmuno', sub:'2018'},
+    {id:'mir',  x:W*.5,  y:H*.88, r:20, color:'#aa77ff', label:'microRNA',           sub:'2024'},
+  ];
+  const edges = [
+    {from:'circ',to:'auto',color:'#00e5ff55',label:'BMAL1 controls\nautophagy genes'},
+    {from:'circ',to:'mrna',color:'#44ffcc55',label:'circadian mRNA\nstability'},
+    {from:'circ',to:'hif', color:'#ff884455',label:'BMAL1 regulates\nHIF-1\u03b1'},
+    {from:'circ',to:'imm', color:'#ff448855',label:'immune cell\ncircadian gating'},
+    {from:'circ',to:'mir', color:'#aa77ff55',label:'miR-146a\nclock regulation'},
+  ];
+
+  const ns = {}; nodes.forEach(n => ns[n.id] = n);
+  edges.forEach(e => {
+    const a = ns[e.from], b = ns[e.to]; if(!a||!b) return;
+    ctx.strokeStyle = e.color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); ctx.setLineDash([]);
+    if(e.label) {
+      const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      ctx.fillStyle=e.color; ctx.font='8px monospace'; ctx.textAlign='center';
+      e.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln,mx,my+(i-arr.length/2+.5)*11));
+    }
+  });
+  nodes.forEach(n => {
+    ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+    ctx.fillStyle = n.color + '22'; ctx.fill();
+    ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = n.color; ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center';
+    n.label.split('\n').forEach((ln,i,arr) => ctx.fillText(ln, n.x, n.y+(i-arr.length/2+.5)*12));
+    ctx.fillStyle = n.color+'99'; ctx.font = '8px monospace';
+    ctx.fillText(n.sub, n.x, n.y+n.r+11);
+  });
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+</body>
+</html>
