@@ -5,8 +5,35 @@
 (function () {
   'use strict';
 
+  // Year-to-module map mirrors the list in index.html. A node whose `sub`
+  // field is a matching year becomes a navigable cross-link without any
+  // change to per-module code.
+  var YEAR_TO_MODULE = {
+    '2015': '2015_antiparasitic.html',
+    '2016': '2016_autophagy.html',
+    '2017': '2017_circadian.html',
+    '2018': '2018_immunotherapy.html',
+    '2019': '2019_hif_oxygen.html',
+    '2020': '2020_hepatitis_c.html',
+    '2021': '2021_trp_channels.html',
+    '2022': '2022_paleogenomics.html',
+    '2023': '2023_mrna.html',
+    '2024': '2024_microrna.html',
+  };
+
+  function deriveHref(n) {
+    if (n.href) return n.href;
+    var key = (n.sub || '').trim();
+    var file = YEAR_TO_MODULE[key];
+    if (!file) return null;
+    // Suppress self-links so clicking the current module's own node is a no-op.
+    if (location.pathname.replace(/\\/g, '/').endsWith('/modules/' + file)) return null;
+    return file;
+  }
+
   window.initConnMap = function (cv, nodes, edges, W, H) {
     H = H || 360;
+    nodes.forEach(function (n) { n.href = deriveHref(n); });
     // HiDPI setup
     const dpr = window.devicePixelRatio || 1;
     cv.width  = W * dpr;
@@ -109,22 +136,52 @@
 
     draw();
 
-    // Pan + zoom
+    // Hit-test: world-space coords → topmost node under pointer (or null).
+    // Nodes may supply an optional `href` to become navigable.
+    function nodeAt(clientX, clientY) {
+      var rect = cv.getBoundingClientRect();
+      var lx = (clientX - rect.left) * (W / rect.width);
+      var ly = (clientY - rect.top)  * (H / rect.height);
+      var wx = (lx - tx.panX) / tx.scale;
+      var wy = (ly - tx.panY) / tx.scale;
+      // Reverse iteration so the visually-topmost node wins.
+      for (var i = nodes.length - 1; i >= 0; i--) {
+        var n = nodes[i];
+        if (!n.href) continue;
+        var dx = wx - n.x, dy = wy - n.y;
+        if (dx * dx + dy * dy <= n.r * n.r) return n;
+      }
+      return null;
+    }
+
+    // Pan + zoom + click-to-navigate
     cv.style.cursor = 'grab';
-    var sx, sy, spx, spy;
+    var sx, sy, spx, spy, didDrag = false;
+    var DRAG_PX = 4;
     cv.addEventListener('pointerdown', function (e) {
       cv.setPointerCapture(e.pointerId);
       sx = e.clientX; sy = e.clientY;
       spx = tx.panX;  spy = tx.panY;
+      didDrag = false;
       cv.style.cursor = 'grabbing';
     });
     cv.addEventListener('pointermove', function (e) {
-      if (!e.buttons) return;
-      tx.panX = spx + (e.clientX - sx);
-      tx.panY = spy + (e.clientY - sy);
-      draw();
+      if (e.buttons) {
+        if (Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy) > DRAG_PX) didDrag = true;
+        tx.panX = spx + (e.clientX - sx);
+        tx.panY = spy + (e.clientY - sy);
+        draw();
+      } else {
+        // Hover feedback — pointer turns into a hand over navigable nodes.
+        cv.style.cursor = nodeAt(e.clientX, e.clientY) ? 'pointer' : 'grab';
+      }
     });
-    cv.addEventListener('pointerup', function () { cv.style.cursor = 'grab'; });
+    cv.addEventListener('pointerup', function (e) {
+      cv.style.cursor = 'grab';
+      if (didDrag) return;
+      var hit = nodeAt(e.clientX, e.clientY);
+      if (hit && hit.href) window.location.href = hit.href;
+    });
     cv.addEventListener('wheel', function (e) {
       e.preventDefault();
       var rect = cv.getBoundingClientRect();

@@ -96,6 +96,7 @@ html,body{height:100%;overflow-x:hidden}
     <div class="info-bar">
       <div class="info-stat">Explored: <span id="stat-visited">0</span>/10</div>
       <div class="info-stat">Category: <span id="stat-cat">All</span></div>
+      <a href="#" id="reset-progress" class="info-stat" style="margin-left:auto;color:var(--dim);text-decoration:none;border-bottom:1px dashed var(--border);cursor:pointer">Reset progress</a>
     </div>
   </div>
 
@@ -163,10 +164,6 @@ const CATEGORIES = {
     desc:'HCV characterization enabling curative direct-acting antivirals, and nucleoside-modified mRNA with lipid nanoparticle delivery for rapid vaccine platforms.',
     topics:[{year:'2020',name:'HCV — NS5A/NS5B targets, pan-genotypic DAAs'},{year:'2023',name:'mRNA — pseudouridine mod, LNP formulation'}],
     link:'https://www.niaid.nih.gov/'},
-  compbio:{name:'Computational Bio',color:'#88aaff',badge:'2 prizes',
-    desc:'Paleogenomics relies on ancient DNA assembly and admixture modeling. microRNA target prediction drove first-wave bioinformatics tools for ncRNA.',
-    topics:[{year:'2022',name:'Paleogenomics — ADMIXTURE, ancient DNA pipelines'},{year:'2024',name:'microRNA — TargetScan, miRBase, ceRNA networks'}],
-    link:'https://www.ncbi.nlm.nih.gov/'},
 };
 
 // ── localStorage progress ─────────────────────────────────────────────────
@@ -195,7 +192,7 @@ function updateProgress() {
 // ── Build filter chips ───────────────────────────────────────────────────────
 let activeCat = 'all';
 const filterRow = document.getElementById('filter-row');
-const CHIP_COLORS = {all:'#00ff99',immunology:'#ff4488',cell:'#00e5ff',genetics:'#ffd700',pharmacology:'#aa77ff',neuroscience:'#ff8844',biotech:'#44ffcc',compbio:'#88aaff'};
+const CHIP_COLORS = {all:'#00ff99',immunology:'#ff4488',cell:'#00e5ff',genetics:'#ffd700',pharmacology:'#aa77ff',neuroscience:'#ff8844',biotech:'#44ffcc'};
 
 Object.entries(CATEGORIES).forEach(([catKey, cat]) => {
   const chip = document.createElement('span');
@@ -398,6 +395,16 @@ document.addEventListener('click', e => {
 })();
 
 updateProgress();
+
+// ── Reset progress ──────────────────────────────────────────────────────────
+document.getElementById('reset-progress').addEventListener('click', e => {
+  e.preventDefault();
+  if (!visited.size) return;
+  if (!confirm(`Reset learning progress? (${visited.size} module${visited.size === 1 ? '' : 's'} marked visited)`)) return;
+  visited = new Set();
+  saveVisited(visited);
+  updateProgress();
+});
 </script>
 </body>
 </html>

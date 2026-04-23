@@ -29,6 +29,13 @@
     const phLabel  = document.getElementById('phase-label');
     if (!cv || !cw) return;
 
+    // Shared phase-dot and theater-bar features depend on a module-scoped
+    // `PHASES` array. Guard rails below tolerate its absence, but a missing
+    // definition is almost always a bug — surface it so it doesn't go silent.
+    if (typeof PHASES === 'undefined') {
+      console.warn('[mech-theater] PHASES is undefined — phase dots and theater pips will be skipped for this module.');
+    }
+
     /* ── 1. HUD overlay ───────────────────────────────────────── */
     const vizPhaseName = el('span', { id: 'viz-phase-name', className: 'viz-phase-name' });
     const theaterBtn   = el('button', {

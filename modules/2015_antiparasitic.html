@@ -1,1080 +1,1081 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2015 · Avermectin &amp; Artemisinin — kbiology Nobel Frontier</title>
-<link rel="stylesheet" href="../shared/theme.css">
-<link rel="stylesheet" href="../shared/module-layout.css">
-<link rel="stylesheet" href="../shared/molecule-modal.css"></head>
-<body>
-<!-- Module header -->
-<div class="mod-hdr">
-  <div class="mod-hdr-top">
-    <a href="../index.html" class="back-link">&#8592; Hub</a>
-    <span class="mod-year-badge" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">2015</span>
-    <div class="mod-title">Avermectin &amp; Artemisinin</div>
-  </div>
-  <div class="mod-laureates">William C. Campbell, Satoshi \u014cmura &amp; Youyou Tu &#8212; Nobel Prize in Physiology or Medicine 2015</div>
-  <div class="mod-tags">
-    <span class="mod-tag" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">Pharmacology</span>
-    <span class="mod-tag" style="color:#00ff99;border-color:#00ff9944;background:#00ff9910">Drug Discovery</span>
-    <span class="mod-tag" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">Natural Products</span>
-  </div>
-  <div class="mod-tabs" id="mod-tabs">
-    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
-    <div class="mod-tab" data-tab="story">&#128214; Story</div>
-    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
-    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
-    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
-  </div>
-</div>
-
-<!-- Module body -->
-<div class="mod-body">
-  <!-- Left sidebar: animation controls -->
-  <div class="sidebar" id="sidebar-left">
-    <div class="sidebar-block">
-      <span class="sec-lbl">Animation</span>
-      <div class="btn-row">
-        <button class="btn primary" id="btn-play">&#9654; Play</button>
-        <button class="btn" id="btn-reset">&#8634;</button>
-      </div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Phase</span>
-      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
-      <div class="val-disp" id="phase-label">Phase 0 &mdash; Soil Collection</div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Speed</span>
-      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
-      <div class="val-disp" id="speed-label">3&times;</div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Layers</span>
-      <div class="ctrl-row"><span class="ctrl-lbl">GluCl channel</span><span class="ctrl-val" id="lay-glucl">ON</span></div>
-      <div class="ctrl-row"><span class="ctrl-lbl">Endoperoxide activation</span><span class="ctrl-val" id="lay-endo">ON</span></div>
-      <div class="ctrl-row"><span class="ctrl-lbl">Resistance mechanisms</span><span class="ctrl-val" id="lay-res">ON</span></div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Info</span>
-      <div class="callout">
-        <strong>Key insight:</strong> Two entirely different natural products, two entirely different mechanisms, two entirely different parasites &mdash; yet both discovered through systematic screening of traditional resources. Ethnopharmacology meets molecular pharmacology.
-      </div>
-    </div>
-  </div>
-
-  <!-- Main content area -->
-  <div class="main" id="main-content">
-    <!-- Tab 1: Mechanism -->
-    <div class="tab-panel active" id="panel-mechanism">
-      <div class="canvas-wrap" id="canvas-wrap">
-        <canvas id="mech-canvas"></canvas>
-        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; \u014cmura Soil Collection &amp; Streptomyces Isolation</div>
-      </div>
-      <div class="mech-panels" id="mech-panels"></div>
-    </div>
-
-    <!-- Tab 2: Story -->
-    <div class="tab-panel" id="panel-story">
-      <div class="story-content" id="story-content"></div>
-    </div>
-
-    <!-- Tab 3: Molecules -->
-    <div class="tab-panel" id="panel-molecules">
-      <div class="mol-grid" id="mol-grid"></div>
-    </div>
-
-    <!-- Tab 4: Frontiers -->
-    <div class="tab-panel" id="panel-frontiers">
-      <div id="frontiers-content"></div>
-    </div>
-
-    <!-- Tab 5: Connections -->
-    <div class="tab-panel" id="panel-connections">
-      <div class="connections-wrap">
-        <canvas id="conn-canvas"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right sidebar -->
-  <div class="rsidebar" id="sidebar-right">
-    <div class="sidebar-block">
-      <span class="sec-lbl">Key Molecules</span>
-      <div id="rsb-mols"></div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">Landmark Papers</span>
-      <div id="rsb-papers"></div>
-    </div>
-    <div class="sidebar-block">
-      <span class="sec-lbl">External Links</span>
-      <a href="https://www.nobelprize.org/prizes/medicine/2015/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
-        <div class="ref-year">nobelprize.org</div>
-        <div class="ref-title">Nobel Prize 2015 &#8212; official announcement</div>
-      </a>
-      <a href="https://www.rcsb.org/structure/3RHW" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
-        <div class="ref-year">RCSB PDB</div>
-        <div class="ref-title">PDB: GluCl + ivermectin (3RHW)</div>
-      </a>
-      <a href="https://pubchem.ncbi.nlm.nih.gov/compound/68827" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
-        <div class="ref-year">PubChem</div>
-        <div class="ref-title">Artemisinin CID 68827</div>
-      </a>
-    </div>
-  </div>
-</div>
-
-<script>
-// ── Accent color ─────────────────────────────────────────────────────────────
-document.documentElement.style.setProperty('--accent', '#aa77ff');
-
-// ── Module-specific glossary terms (augments shared/glossary-data.js) ────────
-window.GLOSS = window.GLOSS || {};
-Object.assign(window.GLOSS, {
-  'glucl': { term:'GluCl (Glutamate-gated Cl\u207b channel)', level:'grad', def:'Invertebrate-specific Cys-loop LGIC. Subunits GluCl\u03b1 (AVRD-1) and GluCl\u03b2 (GLC-2 in C. elegans). L-glutamate gates Cl\u207b influx \u2192 hyperpolarization \u2192 flaccid paralysis. Ivermectin binds at transmembrane subunit interface (non-competitive, allosteric agonism). Absent in vertebrates \u2014 explains ivermectin\'s outstanding therapeutic index (>100:1 in mammals at antiparasitic doses). PDB: 3RHW (homomeric GluCl\u03b1 + ivermectin).' },
-  'endoperoxide': { term:'Endoperoxide bridge (artemisinin)', level:'res', def:'1,2,4-trioxane ring system in artemisinin. Fe(II)-mediated Fenton-like homolytic cleavage generates carbon-centered radicals and reactive oxygen species. Heme iron in parasite food vacuole (from Hb digestion) provides Fe(II). Radical alkylates PfKelch13 and EXP2, disrupting ring-stage parasite. Synthetic endoperoxides (OZ277, OZ439) mimic the pharmacophore without the sesquiterpene scaffold.' },
-  'act': { term:'ACT (Artemisinin Combination Therapy)', level:'grad', def:'WHO-recommended treatment: artemisinin or derivative (fast-acting, short half-life) + partner drug (lumefantrine, amodiaquine, piperaquine, mefloquine). Rapid initial parasite clearance by artemisinin (log 4 reduction first 24h); partner drug kills residual parasites over 3-7 days. Prevents artemisinin resistance selection by combination pharmacodynamics. ~700M treatments/year globally.' },
-  'pfkelch13': { term:'PfKelch13 (K13)', level:'res', def:'P. falciparum kelch protein, propeller domain. Mutations at C580Y, R539T, Y493H etc. confer artemisinin partial resistance (ART-R) \u2014 ring-stage survival assay >1% survival. K13 regulates PI3P homeostasis via PI3K ubiquitylation; ART-R mutations decrease K13-mediated PI3K ubiquitylation \u2192 elevated PI3P \u2192 ring-stage tolerance to artemisinin. Dominant ART-R genotype in Southeast Asia (Greater Mekong), emerging in Africa (C580Y Rwanda 2014).' },
-  'natural_product': { term:'Natural product drug discovery', level:'grad', def:'~50% of approved drugs 1981-2019 are natural products or derivatives (Newman & Cragg 2020). Screening strategy: soil microorganism libraries (\u014cmura approach \u2014 50,000+ actinomycetes isolates), ethnobotanical leads (Tu approach \u2014 2,000+ traditional medicine compounds screened). High chemical diversity (>100K carbon skeleton types) exceeds synthetic libraries. Modern AI/ML-guided screening (BERT-based structure prediction) now applied to natural product libraries.' },
-});
-
-// ── Module molecules data ─────────────────────────────────────────────────────
-window.MODULE_MOLS = [
-  {
-    id:'ivermectin', icon:'\ud83d\udfe3', color:'#aa77ff', type:'Small Molecule \u00b7 Macrolide lactone', is_protein:false,
-    name:'Ivermectin', sub:'PubChem CID: 6321424 \u00b7 C48H74O14 (B1a component)',
-    badges:[{text:'GluCl agonist',color:'#aa77ff'},{text:'WHO Essential',color:'#00ff99'},{text:'Antiparasitic',color:'#ffd700'}],
-    pubchem_cid:6321424, pdb_id:null,
-    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/6321424',
-    mechanism:'22,23-dihydroavermectin B1a \u2014 semi-synthetic derivative of avermectin B1a from Streptomyces avermitilis. Binds at the transmembrane interface between adjacent GluCl subunits (non-competitive allosteric agonism site). Locks channel in open state causing sustained Cl\u207b influx \u2192 irreversible hyperpolarization \u2192 flaccid paralysis \u2192 death of nematodes and ectoparasites. BBB exclusion via P-gp efflux explains mammalian safety margin. 17.4 mg ivermectin/year for onchocerciasis (river blindness) prevention \u2014 Mectizan donation program eliminated disease in 11 African countries.',
-    properties:{'MW':'875.1 g/mol','Formula':'C48H74O14','XLogP':'4.5','HBD':'1','HBA':'14','TPSA':'208 \u00c5\u00b2','P-gp substrate':'Yes (CNS excluded)','Bioavailability':'~60% oral'},
-    property_flags:{'P-gp substrate':'good','Bioavailability':'good'},
-    interaction:{
-      title:'Ivermectin\u2013GluCl Channel Mechanism',
-      nodes:[
-        {id:'ivm', x:100,y:150,r:28,color:'#aa77ff',label:'Ivermectin',sub:'allosteric site'},
-        {id:'glu', x:300,y:80, r:30,color:'#00e5ff',label:'GluCl\nchannel',sub:'Cl\u207b gated'},
-        {id:'cl',  x:300,y:220,r:22,color:'#ffd700',label:'Cl\u207b flux',  sub:'hyperpolarize'},
-        {id:'ner', x:440,y:150,r:22,color:'#ff4488',label:'Nerve/\nmuscle',sub:'paralyzed'},
-        {id:'pgp', x:100,y:260,r:20,color:'#00ff99',label:'P-gp',     sub:'BBB excluded'},
-      ],
-      edges:[
-        {from:'ivm',to:'glu', color:'#aa77ff',label:'locks open',dashed:false},
-        {from:'glu',to:'cl',  color:'#00e5ff',label:'sustained',  dashed:false},
-        {from:'cl', to:'ner', color:'#ff4488',label:'paralysis', dashed:false},
-        {from:'pgp',to:'ivm', color:'#00ff9944',label:'brain excluded',dashed:true},
-      ]
-    },
-    papers:[
-      {year:'1981',journal:'Antimicrob Agents Chemother',impact:'IF 5',title:'Ivermectin: a new broad-spectrum antiparasitic agent',abstract:'First characterization of ivermectin antiparasitic activity. GluCl mechanism identified. 400\u00d7 more potent than thiabendazole in C. elegans assays.'},
-      {year:'2003',journal:'J Biol Chem',impact:'IF 5',title:'Structural basis for ivermectin binding at transmembrane interface of GluCl receptor',abstract:'Crystal structure of C. elegans GluCl\u03b1 (homopentamer) with ivermectin \u2014 reveals transmembrane binding site between M1 and M3 helices of adjacent subunits.'},
-    ],
-    rel_molecules:[
-      {icon:'\ud83d\udfe2',name:'Avermectin B1a',role:'Parent compound\nStreptomyces product',id:'CID 9908089'},
-      {icon:'\ud83d\udd35',name:'Moxidectin',    role:'Newer milbemycin\nonce-yearly dosing',  id:'CID 9832750'},
-    ]
-  },
-  {
-    id:'artemisinin', icon:'\ud83d\udfe1', color:'#ffd700', type:'Small Molecule \u00b7 Sesquiterpene endoperoxide', is_protein:false,
-    name:'Artemisinin (\u9752\u84bf\u7d20)', sub:'PubChem CID: 68827 \u00b7 C15H22O5',
-    badges:[{text:'Endoperoxide',color:'#ffd700'},{text:'PfKRS1 target',color:'#ff4488'},{text:'WHO Essential',color:'#00ff99'}],
-    pubchem_cid:68827, pdb_id:null,
-    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/68827',
-    mechanism:'Sesquiterpene lactone isolated from Artemisia annua (sweet wormwood). Active pharmacophore: 1,2,4-trioxane ring containing the endoperoxide bridge. Fe(II) from heme in parasite food vacuole cleaves the O-O bond homolytically, generating carbon radicals. These alkylate heme, lipids, and parasite proteins including PfKRS1 (lysyl-tRNA synthetase) and EXP2 (nutrient channel). Ring-stage selectivity matches parasite hemoglobin digestion kinetics. Semi-synthetic derivatives with improved PK: artesunate (IV/IM for severe malaria), artemether (oil-based IM), dihydroartemisinin (oral, active metabolite).',
-    properties:{'MW':'282.3 g/mol','Formula':'C15H22O5','XLogP':'2.3','HBD':'0','HBA':'5','TPSA':'63 \u00c5\u00b2','t\u00bd':'~1 hour','Extraction':'35\u00b0C ethanol'},
-    property_flags:{'XLogP':'good'},
-    interaction:{
-      title:'Artemisinin Activation by Heme Fe(II)',
-      nodes:[
-        {id:'art', x:110,y:130,r:28,color:'#ffd700',label:'Artemisinin\nprodrug',sub:'inactive'},
-        {id:'fe2', x:280,y:80, r:24,color:'#ff8844',label:'Fe(II)\nheme',      sub:'parasite vacuole'},
-        {id:'rad', x:280,y:220,r:26,color:'#ff4488',label:'C-radical',         sub:'activated'},
-        {id:'krs', x:420,y:130,r:24,color:'#aa77ff',label:'PfKRS1',            sub:'alkylation target'},
-        {id:'art2',x:110,y:260,r:22,color:'#00e5ff',label:'Artesunate',        sub:'better PK derivative'},
-      ],
-      edges:[
-        {from:'art', to:'fe2',color:'#ff8844',label:'Fe(II) cleaves\nO-O bond',dashed:false},
-        {from:'fe2', to:'rad',color:'#ff4488',label:'radical\ngenerated',       dashed:false},
-        {from:'rad', to:'krs',color:'#aa77ff',label:'alkylates',               dashed:false},
-        {from:'art2',to:'art',color:'#00e5ff',label:'IV/IM prodrug',           dashed:true},
-      ]
-    },
-    papers:[
-      {year:'1979',journal:'Kexue Tongbao',impact:'Historical',title:'A new sesquiterpene peroxide from Artemisia annua \u2014 isolation and crystal structure of qinghaosu',abstract:'Tu Youyou reports artemisinin structure. Low-temperature ethanol extraction critical \u2014 high-temp destroys endoperoxide. Confirmed antimalarial activity in animal models.'},
-      {year:'2015',journal:'Nat Commun',impact:'IF 17',title:'Artemisinin resistance in Plasmodium falciparum associates with an altered cellular response to heme stress',abstract:'K13 mutations confer resistance by elevating PI3P, activating ring-stage unfolded protein response that tolerates artemisinin-induced protein damage. Mechanism independent of drug activation.'},
-    ],
-    rel_molecules:[
-      {icon:'\ud83d\udd35',name:'Artesunate',   role:'IV/IM severe\nmalaria drug',       id:'CID 5464098'},
-      {icon:'\ud83d\udfe3',name:'Lumefantrine', role:'ACT partner\nlumefantrine',         id:'CID 6437380'},
-    ]
-  },
-  {
-    id:'glucl', icon:'\ud83d\udd35', color:'#00e5ff', type:'Protein \u00b7 Ligand-gated ion channel', is_protein:true,
-    name:'GluCl Channel (GluCl\u03b1 homomeric)', sub:'PDB: 3RHW \u00b7 5 subunits \u00d7 457 aa',
-    badges:[{text:'Cys-loop LGIC',color:'#00e5ff'},{text:'Invertebrate-specific',color:'#00ff99'},{text:'Ivermectin site',color:'#aa77ff'}],
-    pubchem_cid:null, pdb_id:'3RHW',
-    nih_link:'https://www.rcsb.org/structure/3RHW',
-    mechanism:'Homomeric pentameric Cys-loop ligand-gated ion channel from C. elegans (GluCl\u03b1 AVRD-1). Structural breakthrough: first Cys-loop receptor crystal structure with bound substrate + allosteric modulator simultaneously. Each subunit: N-terminal extracellular domain (ECD, binding glutamate at subunit interface), 4-TM domain (TM2 lines pore). Ivermectin binds in the transmembrane domain at the intersubunit interface between M1 and M3 helices \u2014 contacts: Y228, Y232, L234, Y240, A288, A291, A292 (TM2/TM3). Wedge action locks channel in expanded-open conformation. Absent in vertebrates (unique invertebrate gene lineage).',
-    properties:{'PDB':'3RHW','Resolution':'3.3 \u00c5 (X-ray)','Oligomer':'Homopentamer','Ion selectivity':'Cl\u207b (anion)','Agonist':'L-glutamate (EC50 ~0.3mM)','Ivermectin site':'TM1-M3 interface','Organism':'C. elegans AVRD-1'},
-    property_flags:{'Resolution':'good'},
-    interaction:{
-      title:'GluCl Activation and Ivermectin Binding',
-      nodes:[
-        {id:'glu', x:100,y:120,r:26,color:'#00ff99',label:'L-Glu',    sub:'orthosteric agonist'},
-        {id:'chan',x:280,y:150,r:38,color:'#00e5ff',label:'GluCl\npentamer',sub:'5-fold symmetry'},
-        {id:'ivm', x:100,y:240,r:26,color:'#aa77ff',label:'Ivermectin',sub:'TM interface'},
-        {id:'cl',  x:440,y:150,r:22,color:'#ffd700',label:'Cl\u207b flux', sub:'hyperpolarize'},
-      ],
-      edges:[
-        {from:'glu', to:'chan',color:'#00ff99',label:'orthosteric\nactivation',dashed:false},
-        {from:'ivm', to:'chan',color:'#aa77ff',label:'allosteric\nlock open', dashed:false},
-        {from:'chan',to:'cl',  color:'#00e5ff',label:'sustained\ninflux',     dashed:false},
-      ]
-    },
-    papers:[
-      {year:'2011',journal:'Nature',impact:'IF 65',title:'X-ray structure of a pentameric ligand-gated ion channel in an apparently open conformation',abstract:'3RHW: 3.3\u00c5 homomeric GluCl\u03b1 with glutamate and ivermectin. First Cys-loop receptor structure. Ivermectin binding site defined. Explained invertebrate selectivity mechanism.'},
-      {year:'1982',journal:'J Exp Biol',impact:'IF 3',title:'Ivermectin-induced paralysis of nematode motor function: role of glutamate-gated chloride channels',abstract:'Electrophysiology demonstrating GluCl as ivermectin target in Ascaris suum. Cl\u207b conductance sustained \u2014 non-competitive with glutamate.'},
-    ],
-    rel_molecules:[
-      {icon:'\ud83d\udfe3',name:'GABA-A receptor',role:'Vertebrate LGIC\nstructural homolog', id:'PDB: 6D6U'},
-      {icon:'\ud83d\udfe2',name:'nAChR',          role:'Cys-loop\nAChR family member',       id:'PDB: 2BG9'},
-    ],
-    domains:[
-      {color:'#00e5ff',name:'ECD (extracellular domain)',   pos:'1\u2013215',   fn:'\u03b2-sandwich fold; glutamate binds at subunit interface in principal/complementary faces; loop C, loop F key contacts'},
-      {color:'#aa77ff',name:'TM1',                          pos:'216\u2013240', fn:'Outer TM helix; ivermectin contacts Y228, Y232, L234'},
-      {color:'#00ff99',name:'TM2 (pore-lining)',            pos:'241\u2013268', fn:'2\' position (I239) \u2014 hydrophobic gate; 13\' Lys+ ring critical for Cl\u207b selectivity over cations'},
-      {color:'#ffd700',name:'TM3',                          pos:'269\u2013297', fn:'Ivermectin contacts A288-A292; TM3 movement linked to TM1 during gating'},
-      {color:'#ff4488',name:'TM4 + ICD',                   pos:'298\u2013457', fn:'Cytoplasmic loop (MA-helix) faces; amphipathic helix important for gating and trafficking'},
-    ]
-  },
-  {
-    id:'pfkelch13', icon:'\ud83d\udd34', color:'#ff4488', type:'Protein \u00b7 Kelch propeller', is_protein:true,
-    name:'PfKelch13 (K13)', sub:'PDB: 4YY8 \u00b7 726 aa \u00b7 propeller domain aa 444\u2013726',
-    badges:[{text:'ART-R marker',color:'#ff4488'},{text:'PI3K regulator',color:'#aa77ff'},{text:'Drug resistance',color:'#ffd700'}],
-    pubchem_cid:null, pdb_id:'4YY8',
-    nih_link:'https://www.rcsb.org/structure/4YY8',
-    mechanism:'P. falciparum kelch-domain protein required for ubiquitin-mediated degradation of PI3-kinase (PfPI3K). K13 wild-type acts as adaptor for Cullin3-RING ubiquitin E3 ligase \u2192 PI3K ubiquitylation \u2192 proteasomal degradation \u2192 low PI3P. Mutations C580Y, R539T, Y493H etc. impair K13-PI3K interaction \u2192 elevated PI3P \u2192 activated PI3P-dependent processes including unfolded protein response and autophagy-related pathways that tolerate artemisinin-induced protein damage. Not a direct artemisinin target \u2014 K13 mutations modulate the cellular context of ring-stage tolerance.',
-    properties:{'PDB':'4YY8','Resolution':'2.2 \u00c5','Fold':'6-blade kelch propeller','BTB domain':'Yes (dimerization)','Resistance mutations':'C580Y, R539T, Y493H, I543T','Function':'CRL3 adaptor for PI3K ubiquitylation','ART-R SE Asia freq':'C580Y >90%'},
-    property_flags:{'Resolution':'good'},
-    interaction:{
-      title:'K13-Mediated PI3K Regulation and ART-R',
-      nodes:[
-        {id:'k13', x:220,y:150,r:34,color:'#ff4488',label:'K13\n(WT)',  sub:'CRL3 adaptor'},
-        {id:'pi3k',x:380,y:80, r:26,color:'#aa77ff',label:'PfPI3K',    sub:'ubiquitylated'},
-        {id:'pi3p',x:380,y:240,r:26,color:'#ffd700',label:'PI3P',      sub:'low \u2192 parasite dies'},
-        {id:'mut', x:80, y:150,r:28,color:'#ff8844',label:'K13\nC580Y',sub:'ART-R mutant'},
-        {id:'res', x:80, y:260,r:22,color:'#ff4488',label:'Ring\nsurvival',sub:'>1% survival'},
-      ],
-      edges:[
-        {from:'k13',to:'pi3k',color:'#aa77ff',label:'ubiquitylates\n\u2192 degrades',dashed:false},
-        {from:'pi3k',to:'pi3p',color:'#ffd700',label:'low PI3P',               dashed:false},
-        {from:'mut',to:'pi3k',color:'#ff884488',label:'impaired\nubiquitylation',dashed:true},
-        {from:'mut',to:'res', color:'#ff4488',label:'elevated PI3P\nUPR tolerance',dashed:false},
-      ]
-    },
-    papers:[
-      {year:'2014',journal:'Nature',impact:'IF 65',title:'A molecular marker of artemisinin-resistant Plasmodium falciparum malaria',abstract:'K13 (PF3D7_1343700) mutations C580Y, R539T, I543T, Y493H correlate with clinical ART-R in Greater Mekong subregion. Ring-stage survival assay validated.'},
-      {year:'2015',journal:'PLoS Pathog',impact:'IF 7',title:'PfKelch13 crystal structure and ART-R mutations affect PI3K ubiquitylation',abstract:'K13 4YY8 structure \u2014 6-blade propeller. C580Y impairs PI3K binding. PI3P elevation as mechanism independent of heme-mediated artemisinin activation.'},
-    ],
-    rel_molecules:[
-      {icon:'\ud83d\udfe1',name:'PfPI3K',     role:'PI3-kinase\nK13 substrate', id:'No structure'},
-      {icon:'\ud83d\udfe2',name:'Piperaquine',role:'ACT partner\nresistance marker',id:'CID 122767'},
-    ],
-    domains:[
-      {color:'#ff4488',name:'BTB/POZ domain',     pos:'1\u2013343',   fn:'Cullin3 binding; dimerization interface; F-box-like adaptor function for CRL3 E3 ubiquitin ligase'},
-      {color:'#aa77ff',name:'BACK domain',         pos:'344\u2013443', fn:'5-helix bundle bridging BTB to kelch; ART-R mutations here (I543T in BACK, not propeller)'},
-      {color:'#ffd700',name:'Kelch propeller',     pos:'444\u2013726', fn:'6-blade \u03b2-propeller; PI3K interaction face; most ART-R mutations (C580Y, R539T, Y493H, M476I)'},
-    ]
-  },
-];
-
-// ── Phase labels ──────────────────────────────────────────────────────────────
-const PHASES = [
-  {label:'Phase 0 \u2014 \u014cmura Soil Collection & Streptomyces Isolation',  color:'#aa77ff', mol:'ivermectin'},
-  {label:'Phase 1 \u2014 Avermectin Discovery & GluCl Mechanism',              color:'#00e5ff', mol:'glucl'},
-  {label:'Phase 2 \u2014 Tu Traditional Medicine Screen & Artemisinin',         color:'#ffd700', mol:'artemisinin'},
-  {label:'Phase 3 \u2014 Artemisinin Endoperoxide Radical Activation',          color:'#ff4488', mol:'artemisinin'},
-  {label:'Phase 4 \u2014 ACT Resistance: PfKelch13 & Drug Pipeline',            color:'#ff8844', mol:'pfkelch13'},
-];
-
-// ── Tab switching ─────────────────────────────────────────────────────────────
-document.getElementById('mod-tabs').addEventListener('click', function(e) {
-  const tab = e.target.closest('.mod-tab');
-  if (!tab) return;
-  const target = tab.dataset.tab;
-  document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  tab.classList.add('active');
-  const panel = document.getElementById('panel-' + target);
-  if (panel) panel.classList.add('active');
-  if (target === 'connections') { setTimeout(drawConnections, 50); }
-});
-
-// ── Canvas animation ──────────────────────────────────────────────────────────
-let animRunning = false, animT = 0, animPhase = 0, animSpeed = 3;
-const layerState = { glucl: true, endo: true, res: true };
-
-['glucl','endo','res'].forEach(id => {
-  const el = document.getElementById('lay-' + id);
-  if (el) el.addEventListener('click', () => {
-    layerState[id] = !layerState[id];
-    el.textContent = layerState[id] ? 'ON' : 'OFF';
-    el.style.color = layerState[id] ? '' : 'var(--muted)';
-  });
-});
-
-// roundRect polyfill for older browsers
-if (!CanvasRenderingContext2D.prototype.roundRect) {
-  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
-    r = Math.min(r, w/2, h/2);
-    this.beginPath();
-    this.moveTo(x+r, y);
-    this.lineTo(x+w-r, y); this.arcTo(x+w, y, x+w, y+r, r);
-    this.lineTo(x+w, y+h-r); this.arcTo(x+w, y+h, x+w-r, y+h, r);
-    this.lineTo(x+r, y+h); this.arcTo(x, y+h, x, y+h-r, r);
-    this.lineTo(x, y+r); this.arcTo(x, y, x+r, y, r);
-    this.closePath();
-  };
-}
-
-function mechDraw(phase, t) {
-  const cv = document.getElementById('mech-canvas');
-  if (!cv) return;
-  cv.width = cv.offsetWidth || 700;
-  cv.height = cv.offsetHeight || 280;
-  const ctx = cv.getContext('2d');
-  const W = cv.width, H = cv.height;
-  const cx = W / 2, cy = H / 2;
-
-  // ── shared helpers ──────────────────────────────────────────────────────
-  function ap_label(x, y, text, color, align) {
-    ctx.save();
-    ctx.font = '8px monospace'; ctx.textAlign = align || 'center';
-    const mw = ctx.measureText(text).width;
-    const tx = align === 'left' ? x : align === 'right' ? x - mw : x - mw/2;
-    ctx.fillStyle = 'rgba(7,7,30,0.75)';
-    ctx.fillRect(tx - 2, y - 9, mw + 4, 13);
-    ctx.fillStyle = color || '#ffffff'; ctx.textAlign = align || 'center';
-    ctx.fillText(text, x, y);
-    ctx.restore();
-  }
-  function ap_particle(x, y, r, colInner, colOuter) {
-    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0, colInner); g.addColorStop(1, colOuter);
-    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
-    ctx.fillStyle = g; ctx.fill();
-  }
-  function drawSoilMembrane(yTop, yBot) {
-    // layered soil strata
-    const gSoil = ctx.createLinearGradient(0, yTop, 0, yBot);
-    gSoil.addColorStop(0,   '#4a3520cc');
-    gSoil.addColorStop(0.4, '#3a2a14cc');
-    gSoil.addColorStop(1,   '#2a1a08cc');
-    ctx.fillStyle = gSoil;
-    ctx.fillRect(0, yTop, W, yBot - yTop);
-    // grain texture dots
-    for (let i = 0; i < 60; i++) {
-      const gx = 30 + (i * 73 % (W - 60));
-      const gy = yTop + 4 + (i * 47 % (yBot - yTop - 8));
-      ctx.beginPath(); ctx.arc(gx, gy, 1.5, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(200,160,80,0.18)'; ctx.fill();
-    }
-  }
-  function drawMembrane2(yMid, thick) {
-    // lipid bilayer cross-section
-    const outer = yMid - thick/2, inner = yMid + thick/2;
-    const gMem = ctx.createLinearGradient(0, outer - 6, 0, inner + 6);
-    gMem.addColorStop(0,   '#00e5ff44');
-    gMem.addColorStop(0.25,'#00e5ffcc');
-    gMem.addColorStop(0.5, '#001a2288');
-    gMem.addColorStop(0.75,'#00e5ffcc');
-    gMem.addColorStop(1,   '#00e5ff44');
-    ctx.fillStyle = gMem;
-    ctx.fillRect(0, outer - 6, W, thick + 12);
-    // phospholipid heads as dots
-    for (let x = 10; x < W; x += 18) {
-      ctx.beginPath(); ctx.arc(x, outer, 3.5, 0, Math.PI*2);
-      ctx.fillStyle = '#00e5ffcc'; ctx.fill();
-      ctx.beginPath(); ctx.arc(x, inner, 3.5, 0, Math.PI*2);
-      ctx.fillStyle = '#00e5ffcc'; ctx.fill();
-      // tails
-      ctx.strokeStyle = '#00e5ff44'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(x, outer+3.5); ctx.lineTo(x, yMid-2); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x, inner-3.5); ctx.lineTo(x, yMid+2); ctx.stroke();
-    }
-  }
-
-  ctx.fillStyle = '#07071e';
-  ctx.fillRect(0, 0, W, H);
-
-  if (phase === 0) {
-    // ── Soil ecosystem cross-section: Streptomyces hyphae + fermentation ──
-    const pulse = (Math.sin(t * 0.04) + 1) / 2;
-
-    // Sky / surface gradient (top quarter)
-    const gSky = ctx.createLinearGradient(0, 0, 0, 60);
-    gSky.addColorStop(0, '#0a0a1e'); gSky.addColorStop(1, '#1a1408');
-    ctx.fillStyle = gSky; ctx.fillRect(0, 0, W, 60);
-
-    // Soil cross-section (lower 3/4)
-    drawSoilMembrane(60, H - 38);
-
-    // Streptomyces hyphae branching network
-    ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 1.5;
-    const hyp = [
-      [80, 100, 160, 140], [160, 140, 200, 110], [160, 140, 175, 175],
-      [200, 110, 260, 130], [200, 110, 220, 80],
-      [80, 100, 90, 140], [90, 140, 120, 165],
-    ];
-    hyp.forEach(([x1,y1,x2,y2]) => {
-      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
-    });
-    // Spore clusters at branch tips
-    [[220,80],[260,130],[175,175],[120,165]].forEach(([sx,sy], i) => {
-      const sp = (Math.sin(t*0.05 + i*1.2) + 1) / 2;
-      for (let k = 0; k < 5; k++) {
-        const a = (k/5)*Math.PI*2 + t*0.008;
-        ap_particle(sx + 7*Math.cos(a), sy + 7*Math.sin(a), 2.5,
-          'rgba(0,255,153,' + (0.6+sp*0.4) + ')', 'rgba(0,255,153,0)');
-      }
-    });
-    ap_label(170, 170, 'S. avermitilis hyphae', '#00ff99cc');
-
-    // Erlenmeyer flask (culture step)
-    const fkX = cx + 80, fkTop = 35, fkBot = H - 55;
-    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.fillStyle = '#aa77ff08';
-    ctx.beginPath();
-    ctx.moveTo(fkX - 14, fkTop); ctx.lineTo(fkX + 14, fkTop);
-    ctx.lineTo(fkX + 14, fkTop + 28);
-    ctx.lineTo(fkX + 58, fkBot);
-    ctx.lineTo(fkX - 58, fkBot);
-    ctx.lineTo(fkX - 14, fkTop + 28);
-    ctx.closePath(); ctx.fill(); ctx.stroke();
-    // Broth (green liquid)
-    const brewY = fkBot - 55;
-    ctx.beginPath();
-    ctx.moveTo(fkX - 45, brewY);
-    ctx.lineTo(fkX + 45, brewY);
-    ctx.lineTo(fkX + 58, fkBot);
-    ctx.lineTo(fkX - 58, fkBot);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(0,255,153,0.08)'; ctx.fill();
-    // Avermectin hexagon molecules inside flask
-    [[-14, -20], [10, -8], [-8, 8]].forEach(([dx, dy]) => {
-      const mx = fkX + dx, my = (brewY + fkBot)/2 + dy;
-      ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1;
-      ctx.beginPath();
-      for (let i = 0; i < 6; i++) {
-        const a = (i/6)*Math.PI*2 - Math.PI/6;
-        const nx = mx + 8*Math.cos(a), ny = my + 8*Math.sin(a);
-        i === 0 ? ctx.moveTo(nx, ny) : ctx.lineTo(nx, ny);
-      }
-      ctx.closePath(); ctx.stroke();
-    });
-    ap_label(fkX, fkBot + 16, 'Fermentation flask', '#aa77ffcc');
-    ap_label(fkX, fkBot + 28, '50,000+ isolates screened', '#aa77ff88');
-
-    // Arrow: soil → flask
-    ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]);
-    ctx.beginPath(); ctx.moveTo(265, 135); ctx.lineTo(fkX - 60, 120); ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.beginPath(); ctx.moveTo(fkX-67, 115); ctx.lineTo(fkX-60, 120); ctx.lineTo(fkX-67, 125); ctx.stroke();
-
-    ap_label(cx, H - 22, '\u014cmura 1974 \u2014 Kawana soil \u2192 S. avermitilis \u2192 avermectin B1a/B1b', '#aa77ffcc');
-    ap_label(cx, H - 8, '18 mg/kg oral dose: 99% microfilariae clearance in onchocerciasis trials', '#aa77ff88');
-
-  } else if (phase === 1) {
-    // ── Nematode neuromuscular junction: GluCl pentamer + Cl⁻ influx ──
-    const pulse = (Math.sin(t * 0.05) + 1) / 2;
-    const memY = cy;
-
-    // Draw the nematode nerve-muscle membrane (lipid bilayer)
-    drawMembrane2(memY, 28);
-
-    // "Outside" and "Inside" labels
-    ap_label(50, memY - 36, 'Synapse cleft (+)', '#00e5ffaa', 'left');
-    ap_label(50, memY + 36, 'Muscle cell cytoplasm (–)', '#00e5ffaa', 'left');
-
-    if (layerState.glucl) {
-      // GluCl pentameric channel embedded in membrane
-      const chanX = cx + 10;
-      for (let i = 0; i < 5; i++) {
-        const a = (i / 5) * Math.PI * 2 - Math.PI / 2;
-        const sx = chanX + 32 * Math.cos(a);
-        const sy = memY + 20 * Math.sin(a);
-        ctx.beginPath(); ctx.ellipse(sx, sy, 12, 18, 0, 0, Math.PI*2);
-        ctx.fillStyle = i === 1 ? '#aa77ff1a' : '#00e5ff12'; ctx.fill();
-        ctx.strokeStyle = i === 1 ? '#aa77ff' : '#00e5ffaa';
-        ctx.lineWidth = i === 1 ? 2 : 1.5; ctx.stroke();
-        ctx.fillStyle = i === 1 ? '#aa77ff' : '#00e5ffcc';
-        ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
-        ctx.fillText('TM'+i, sx, sy + 3);
-      }
-
-      // Pore lumen (open) with glow
-      const poreR = 7 + pulse * 9;
-      const pg = ctx.createRadialGradient(chanX, memY, 0, chanX, memY, poreR + 6);
-      pg.addColorStop(0, 'rgba(0,229,255,0.5)'); pg.addColorStop(1, 'rgba(0,229,255,0)');
-      ctx.beginPath(); ctx.arc(chanX, memY, poreR + 6, 0, Math.PI*2);
-      ctx.fillStyle = pg; ctx.fill();
-
-      // Ivermectin molecule wedged at subunit 1–2 interface
-      const ivm_a = (0.5 / 5) * Math.PI * 2 - Math.PI / 2;
-      const ivX = chanX + 38 * Math.cos(ivm_a), ivY = memY + 22 * Math.sin(ivm_a);
-      ap_particle(ivX, ivY, 9, 'rgba(170,119,255,0.8)', 'rgba(170,119,255,0)');
-      ap_label(ivX + 18, ivY - 12, 'IVM', '#aa77ff');
-      // dashed arrow
-      ctx.setLineDash([2,2]); ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(ivX + 10, ivY); ctx.lineTo(chanX + 24, memY - 8); ctx.stroke();
-      ctx.setLineDash([]);
-
-      ap_label(chanX, memY - 52, 'GluCl pentamer (locked OPEN)', '#00e5ffcc');
-    }
-
-    // Cl⁻ ions streaming inward (outside → inside)
-    if (layerState.glucl) {
-      for (let i = 0; i < 5; i++) {
-        const prog = ((t * 1.2 + i * 55) % 160) / 160;
-        const ionY = (memY - 70) + prog * 150;
-        const ionX = cx + 10 + (i - 2) * 9;
-        if (ionY > memY - 70 && ionY < memY + 70) {
-          ap_particle(ionX, ionY, 5.5, 'rgba(255,215,0,0.85)', 'rgba(255,215,0,0)');
-          ctx.fillStyle = '#221800'; ctx.font = 'bold 5.5px sans-serif'; ctx.textAlign = 'center';
-          ctx.fillText('Cl\u207b', ionX, ionY + 2);
-        }
-      }
-      ap_label(W - 60, memY - 50, 'Cl\u207b influx', '#ffd700cc');
-      // downward arrow
-      ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(W-60, memY-38); ctx.lineTo(W-60, memY+38); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(W-65, memY+30); ctx.lineTo(W-60, memY+38); ctx.lineTo(W-55, memY+30); ctx.stroke();
-    }
-
-    // Membrane potential bar
-    const mpX = 60, mpY1 = memY - 55, mpY2 = memY + 55;
-    ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(mpX, mpY1); ctx.lineTo(mpX, mpY2); ctx.stroke();
-    const hyper = pulse;
-    const mvY = mpY1 + (1 - hyper) * (mpY2 - mpY1) * 0.75;
-    ctx.fillStyle = '#ffd70033';
-    ctx.fillRect(mpX - 8, mvY, 8, mpY2 - mvY);
-    ap_label(mpX - 12, mpY2 + 12, 'Vm: \u221260\u2192\u2212100 mV', '#ffd700aa', 'left');
-
-    ap_label(cx, H - 22, 'Ivermectin allosteric agonist \u2014 locks GluCl OPEN \u2192 sustained Cl\u207b influx', '#00e5ffcc');
-    ap_label(cx, H - 8, 'Hyperpolarization \u2192 flaccid paralysis \u2192 nematode death; mammals lack GluCl', '#00e5ff88');
-
-  } else if (phase === 2) {
-    // ── Project 523: Artemisia plant cell → extraction → artemisinin crystal ──
-    const pulse = (Math.sin(t * 0.04) + 1) / 2;
-
-    // Plant cell context (left panel)
-    const cellX = 90, cellY = cy, cellR = 55;
-    ctx.beginPath(); ctx.ellipse(cellX, cellY, cellR, cellR * 0.75, 0, 0, Math.PI*2);
-    ctx.fillStyle = '#00380c18'; ctx.fill();
-    ctx.strokeStyle = '#00cc4488'; ctx.lineWidth = 2; ctx.stroke();
-
-    // Vacuole (large central vacuole of plant cell)
-    ctx.beginPath(); ctx.ellipse(cellX, cellY, cellR * 0.6, cellR * 0.45, 0, 0, Math.PI*2);
-    ctx.fillStyle = '#00aa3318'; ctx.fill();
-    ctx.strokeStyle = '#00aa3344'; ctx.lineWidth = 1.5; ctx.stroke();
-
-    // Glandular trichome (artemisinin secretory structure) at top
-    const tX = cellX + 30, tY = cellY - cellR * 0.7 - 10;
-    ctx.beginPath(); ctx.arc(tX, tY, 10, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(255,215,0,0.25)'; ctx.fill();
-    ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 1.5; ctx.stroke();
-    ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(tX, tY + 10); ctx.lineTo(tX, cellY - cellR * 0.1); ctx.stroke();
-    ap_label(tX + 14, tY - 4, 'trichome', '#ffd700aa', 'left');
-
-    // Artemisinin granules inside trichome (pulsing)
-    for (let i = 0; i < 5; i++) {
-      const a = (i/5)*Math.PI*2 + t*0.012;
-      ap_particle(tX + 5*Math.cos(a), tY + 5*Math.sin(a), 2,
-        'rgba(255,215,0,' + (0.5+pulse*0.4) + ')', 'rgba(255,215,0,0)');
-    }
-    ap_label(cellX, cellY + cellR + 12, 'Artemisia annua cell', '#00cc44cc');
-
-    // Extraction temperature decision (center)
-    const tempX = cx + 10;
-    ctx.strokeStyle = '#888888'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(tempX, 25); ctx.lineTo(tempX, H - 50); ctx.stroke();
-
-    // 100°C = rejected
-    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(tempX - 5, 35); ctx.lineTo(tempX + 5, 45); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(tempX + 5, 35); ctx.lineTo(tempX - 5, 45); ctx.stroke();
-    ctx.fillStyle = '#ff4444bb'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
-    ctx.fillText('100\u00b0C \u2014 destroys -O-O-', tempX + 10, 44);
-
-    // 35°C = selected
-    const y35 = H - 100;
-    const gCheck = ctx.createRadialGradient(tempX, y35, 0, tempX, y35, 10);
-    gCheck.addColorStop(0, 'rgba(0,255,153,0.5)'); gCheck.addColorStop(1, 'rgba(0,255,153,0)');
-    ctx.beginPath(); ctx.arc(tempX, y35, 10, 0, Math.PI*2);
-    ctx.fillStyle = gCheck; ctx.fill();
-    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(tempX - 6, y35); ctx.lineTo(tempX - 2, y35 + 5); ctx.lineTo(tempX + 7, y35 - 6); ctx.stroke();
-    ctx.fillStyle = '#00ff99cc'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
-    ctx.fillText('35\u00b0C \u2014 preserves endoperoxide', tempX + 14, y35 + 3);
-
-    ap_label(tempX, H - 46, '\u2191 temperature', '#88888888');
-    ap_label(tempX - 30, H - 46, 'low', '#00ff9988', 'right');
-    ap_label(tempX - 30, 38, 'high', '#ff444488', 'right');
-
-    // Artemisinin trioxane ring (right panel)
-    const artX = W - 90, artY = cy;
-    // Outer hexagon
-    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5;
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const a1 = (i/6)*Math.PI*2 - Math.PI/6, a2 = ((i+1)/6)*Math.PI*2 - Math.PI/6;
-      i===0 ? ctx.moveTo(artX + 26*Math.cos(a1), artY + 26*Math.sin(a1))
-            : ctx.lineTo(artX + 26*Math.cos(a1), artY + 26*Math.sin(a1));
-    }
-    ctx.closePath(); ctx.stroke();
-    // Inner peroxide bridge triangle
-    ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 2;
-    ctx.beginPath();
-    for (let i = 0; i < 3; i++) {
-      const a1 = (i/3)*Math.PI*2 - Math.PI/2, a2 = ((i+1)/3)*Math.PI*2 - Math.PI/2;
-      i===0 ? ctx.moveTo(artX + 13*Math.cos(a1), artY + 13*Math.sin(a1))
-            : ctx.lineTo(artX + 13*Math.cos(a1), artY + 13*Math.sin(a1));
-    }
-    ctx.closePath(); ctx.stroke();
-    // Pulsing endoperoxide center glow
-    ap_particle(artX, artY, 6 + pulse*4, 'rgba(255,68,136,' + (0.4+pulse*0.5) + ')', 'rgba(255,68,136,0)');
-    ap_label(artX, artY - 34, '1,2,4-trioxane', '#ffd700cc');
-    ap_label(artX, artY + 4, '-O-O-', '#ff4488cc');
-    ap_label(artX, artY + 36, 'endoperoxide bridge', '#ff448888');
-
-    ap_label(cx, H - 22, 'Project 523 (1967\u20131972) \u2014 2,000 herbs screened \u2192 Qinghao extract hit', '#ffd700cc');
-    ap_label(cx, H - 8, 'Key insight: 35\u00b0C ether extraction preserves thermolabile -O-O- bridge', '#ffd70088');
-
-  } else if (phase === 3) {
-    // ── Plasmodium falciparum food vacuole: Fe²⁺ activation → radical ──
-    const pulse = (Math.sin(t * 0.05) + 1) / 2;
-    const spark = (Math.sin(t * 0.12) + 1) / 2;
-
-    // RBC outline (host cell context)
-    ctx.beginPath(); ctx.ellipse(cx - 50, cy, 110, 75, 0, 0, Math.PI*2);
-    ctx.fillStyle = '#ff220008'; ctx.fill();
-    ctx.strokeStyle = '#ff220033'; ctx.lineWidth = 2; ctx.stroke();
-    ap_label(cx - 50, cy - 82, 'Erythrocyte', '#ff4444aa');
-
-    // Parasite body (trophozoite)
-    ctx.beginPath(); ctx.arc(cx - 50, cy, 60, 0, Math.PI*2);
-    ctx.fillStyle = '#aa448808'; ctx.fill();
-    ctx.strokeStyle = '#aa448844'; ctx.lineWidth = 1.5; ctx.stroke();
-
-    // Food vacuole (digestive organelle inside parasite)
-    const vacX = cx - 65, vacY = cy + 5;
-    ctx.beginPath(); ctx.arc(vacX, vacY, 38, 0, Math.PI*2);
-    const gVac = ctx.createRadialGradient(vacX, vacY, 0, vacX, vacY, 38);
-    gVac.addColorStop(0, '#3a0a0a'); gVac.addColorStop(1, '#1a0505');
-    ctx.fillStyle = gVac; ctx.fill();
-    ctx.strokeStyle = '#ff884488'; ctx.lineWidth = 2; ctx.stroke();
-    ap_label(vacX, vacY - 44, 'Food vacuole', '#ff8844cc');
-
-    // Heme (hemozoin precursor) squares inside vacuole
-    if (layerState.endo) {
-      const hemes = [[vacX-15, vacY-18],[vacX+10, vacY-12],[vacX-18, vacY+10],[vacX+8, vacY+16]];
-      hemes.forEach(([hx, hy]) => {
-        ctx.fillStyle = '#cc440033'; ctx.strokeStyle = '#cc6600'; ctx.lineWidth = 1;
-        ctx.fillRect(hx - 7, hy - 7, 14, 14); ctx.strokeRect(hx - 7, hy - 7, 14, 14);
-        ctx.fillStyle = '#ff8800cc'; ctx.font = '6px sans-serif'; ctx.textAlign = 'center';
-        ctx.fillText('Fe\u00b2\u207a', hx, hy + 2.5);
-      });
-    }
-
-    // ART entering vacuole (pulsing yellow circle)
-    const artInX = vacX + 24, artInY = vacY - 20;
-    ap_particle(artInX, artInY, 8 + pulse*2, 'rgba(255,215,0,0.6)', 'rgba(255,215,0,0)');
-    ctx.fillStyle = '#221800'; ctx.font = '6px monospace'; ctx.textAlign = 'center';
-    ctx.fillText('ART', artInX, artInY + 2.5);
-
-    // Reaction arrow (Fe²⁺ + ART → radical)
-    ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(cx - 22, cy); ctx.lineTo(cx + 22, cy); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx+15, cy-5); ctx.lineTo(cx+22, cy); ctx.lineTo(cx+15, cy+5); ctx.stroke();
-
-    // Carbon radical starburst (animated spikes)
-    const starX = cx + 28, starY = cy;
-    for (let i = 0; i < 10; i++) {
-      const a = (i/10)*Math.PI*2 + t*0.04;
-      const rLen = 10 + spark * 12;
-      ctx.strokeStyle = 'rgba(255,68,136,' + (0.35 + spark*0.6) + ')';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(starX, starY);
-      ctx.lineTo(starX + rLen*Math.cos(a), starY + rLen*Math.sin(a)); ctx.stroke();
-    }
-    ap_particle(starX, starY, 6 + spark*3, 'rgba(255,68,136,' + (0.6+spark*0.4) + ')', 'rgba(255,68,136,0)');
-    ap_label(starX, starY + 30, 'C\u00b7 radical', '#ff4488cc');
-    ap_label(starX, starY + 42, 'high reactivity', '#ff448888');
-
-    // Target proteins (alkylation victims — right side)
-    const targets = [
-      {label:'PfKRS1', sub:'K320', y: cy - 30},
-      {label:'PfPI3K', sub:'PI3K', y: cy + 5},
-      {label:'PfATP6', sub:'SERCA', y: cy + 40},
-    ];
-    targets.forEach(({label, sub, y}) => {
-      const tx = cx + 120;
-      ctx.beginPath(); ctx.ellipse(tx, y, 32, 14, 0, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(170,119,255,' + (0.08 + pulse*0.12) + ')'; ctx.fill();
-      ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1.5; ctx.stroke();
-      ap_label(tx, y + 2, label, '#aa77ffcc');
-      // dotted arrow from star
-      ctx.setLineDash([2,2]); ctx.strokeStyle = '#ff448855'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(starX + 16, starY); ctx.lineTo(tx - 34, y); ctx.stroke();
-      ctx.setLineDash([]);
-    });
-    ap_label(cx + 120, cy - 46, 'alkylation targets', '#aa77ff88');
-
-    ap_label(cx, H - 22, 'Fe(II)-heme cleaves -O-O- \u2192 C\u00b7 radical \u2192 alkylates Pf proteins', '#ff4488cc');
-    ap_label(cx, H - 8, 'IC50 1\u201310 nM; log4 parasite reduction in 24 h (ring/trophozo\u00efte stages)', '#ff448888');
-
-  } else if (phase === 4) {
-    // ── K13 propeller domain: C580Y resistance + drug pipeline ──
-    const pulse = (Math.sin(t * 0.04) + 1) / 2;
-
-    // K13 protein domain bar (left panel)
-    const domY = cy - 12, domX0 = 28, domW = 210, domH = 22;
-
-    // BTB/POZ domain
-    ctx.fillStyle = '#ff448822'; ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 1.5;
-    ctx.fillRect(domX0, domY, 70, domH); ctx.strokeRect(domX0, domY, 70, domH);
-    ap_label(domX0 + 35, domY + 14, 'BTB/POZ', '#ff4488cc');
-
-    // BACK domain
-    ctx.fillStyle = '#aa77ff22'; ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5;
-    ctx.fillRect(domX0 + 70, domY, 45, domH); ctx.strokeRect(domX0 + 70, domY, 45, domH);
-    ap_label(domX0 + 92, domY + 14, 'BACK', '#aa77ffcc');
-
-    // Kelch propeller
-    ctx.fillStyle = '#ffd70022'; ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5;
-    ctx.fillRect(domX0 + 115, domY, 95, domH); ctx.strokeRect(domX0 + 115, domY, 95, domH);
-    ap_label(domX0 + 163, domY + 14, 'Kelch \u03b2-propeller', '#ffd700cc');
-    ap_label(domX0 + 109, domY - 10, '444', '#ffffff44');
-    ap_label(domX0 + 209, domY - 10, '726', '#ffffff44');
-
-    // C580Y mutation site marker
-    const c580x = domX0 + 115 + (580 - 444) / (726 - 444) * 95;
-    const glowG = ctx.createRadialGradient(c580x, domY + domH/2, 0, c580x, domY + domH/2, 18);
-    glowG.addColorStop(0, 'rgba(255,68,68,' + (0.4+pulse*0.5) + ')');
-    glowG.addColorStop(1, 'rgba(255,68,68,0)');
-    ctx.beginPath(); ctx.arc(c580x, domY + domH/2, 18, 0, Math.PI*2);
-    ctx.fillStyle = glowG; ctx.fill();
-    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(c580x, domY - 2); ctx.lineTo(c580x, domY + domH + 2); ctx.stroke();
-    ap_label(c580x, domY - 20, 'C580Y', '#ff4444cc');
-
-    // PI3K ubiquitylation pathway (center)
-    const pi3kY = cy + 70;
-    // Normal: K13 → ubiquitylates PI3K → PI3P low
-    ap_label(cx - 80, pi3kY - 25, 'WT K13', '#00ff9988');
-    ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(cx-55, pi3kY-20); ctx.lineTo(cx-10, pi3kY-20); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx-13, pi3kY-25); ctx.lineTo(cx-6, pi3kY-20); ctx.lineTo(cx-13, pi3kY-15); ctx.fill();
-    ap_label(cx + 20, pi3kY - 18, 'PI3K \u2193\u2193 (ubiquitylated)', '#00ff9988');
-
-    // C580Y impaired
-    ap_label(cx - 80, pi3kY + 12, 'C580Y', '#ff4444cc');
-    ctx.strokeStyle = '#ff444466'; ctx.lineWidth = 1.5; ctx.setLineDash([3,2]);
-    ctx.beginPath(); ctx.moveTo(cx-55, pi3kY+17); ctx.lineTo(cx-10, pi3kY+17); ctx.stroke();
-    ctx.setLineDash([]);
-    // X block
-    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(cx-18, pi3kY+10); ctx.lineTo(cx-8, pi3kY+24); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx-8, pi3kY+10); ctx.lineTo(cx-18, pi3kY+24); ctx.stroke();
-    ap_label(cx + 20, pi3kY + 20, 'PI3P elevated \u2192 UPR', '#ff8844cc');
-
-    // Drug pipeline (right panel)
-    const pipeX0 = W - 190, pipeY0 = 30;
-    ap_label(pipeX0 + 85, pipeY0 + 8, 'Drug pipeline', '#ff8844cc');
-    const drugs = [
-      {name:'Artesunate',color:'#ffd700',  sub:'water-soluble IV'},
-      {name:'Artemether', color:'#aa77ff', sub:'oil-soluble oral'},
-      {name:'OZ439',      color:'#ff8844', sub:'synthetic (Phase 2)'},
-    ];
-    drugs.forEach(({name, color, sub}, i) => {
-      const dy = pipeY0 + 28 + i * 38;
-      ctx.fillStyle = color + '18'; ctx.strokeStyle = color + '88';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.roundRect(pipeX0, dy, 170, 28, 4); ctx.fill(); ctx.stroke();
-      ap_label(pipeX0 + 85, dy + 12, name, color + 'cc');
-      ap_label(pipeX0 + 85, dy + 23, sub, color + '88');
-      if (i < drugs.length - 1) {
-        ctx.strokeStyle = color + '66'; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(pipeX0 + 85, dy + 28);
-        ctx.lineTo(pipeX0 + 85, dy + 38); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(pipeX0+80, dy+34); ctx.lineTo(pipeX0+85, dy+38); ctx.lineTo(pipeX0+90, dy+34); ctx.fill();
-      }
-    });
-
-    // K13 C580Y ripple in SE Asia (bottom)
-    if (layerState.res) {
-      const seaSites = [[cx-60,H-60],[cx-42,H-52],[cx-55,H-38],[cx-35,H-65],[cx-70,H-45]];
-      seaSites.forEach(([sx,sy], i) => {
-        const rp = (Math.sin(t*0.06 + i*0.9)+1)/2;
-        ap_particle(sx, sy, 5+rp*5, 'rgba(255,68,68,' + (0.25+rp*0.5) + ')', 'rgba(255,68,68,0)');
-      });
-      ap_label(cx - 52, H - 24, 'K13 C580Y spread (SE Asia \u2192 Africa)', '#ff4444cc');
-    }
-
-    ap_label(cx, H - 10, 'C580Y impairs PI3K ubiquitylation \u2192 PI3P \u2191 \u2192 UPR tolerance \u2192 ART-R', '#ff884488');
-  }
-}
-
-document.getElementById('btn-play').addEventListener('click', function() {
-  animRunning = !animRunning;
-  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
-  if (animRunning) requestAnimationFrame(animLoop);
-});
-document.getElementById('btn-reset').addEventListener('click', () => {
-  animT = 0; animRunning = false;
-  document.getElementById('btn-play').textContent = '\u25b6 Play';
-  mechDraw(animPhase, 0);
-});
-document.getElementById('phase-slider').addEventListener('input', function() {
-  animPhase = +this.value;
-  const ph = PHASES[animPhase];
-  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + ph.label.split('\u2014')[1].trim();
-  document.getElementById('phase-desc').textContent = ph.label;
-  animT = 0; mechDraw(animPhase, 0);
-});
-document.getElementById('speed-slider').addEventListener('input', function() {
-  animSpeed = +this.value;
-  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
-});
-
-function animLoop() {
-  if (!animRunning) return;
-  animT += animSpeed;
-  mechDraw(animPhase, animT);
-  requestAnimationFrame(animLoop);
-}
-mechDraw(0, 0);
-
-// ── Build mechanism panels ────────────────────────────────────────────────────
-(function buildMechPanels() {
-  const container = document.getElementById('mech-panels');
-  const panelData = [
-    { title:'Phase 0 \u2014 Soil Sampling & S. avermitilis Discovery', color:'#aa77ff', mol:'ivermectin',
-      body:'Satoshi \u014cmura\'s systematic soil sampling program collected ~50,000 actinomycetes strains near golf courses in Kawana, Japan (Streptomyces avermitilis \u2014 first isolated 1974). Serial dilution plating on starch-casein agar. Primary screens: anthelmintic activity against C. elegans, Nematospiroides dubius in mice. Merck collaboration (Campbell): avermectin B1a (15-membered macrolide) from S. avermitilis fermentation; semi-synthetic 22,23-dihydrogenation \u2192 ivermectin. First veterinary use 1981; human use (Mectizan) 1987.'},
-    { title:'Phase 1 \u2014 GluCl Mechanism & Invertebrate Selectivity', color:'#00e5ff', mol:'glucl',
-      body:'Ivermectin binds at the transmembrane subunit interface of homomeric/heteromeric GluCl receptors (Cys-loop LGIC family). Non-competitive allosteric mechanism: enhances glutamate sensitivity 100\u00d7 AND locks channel open independently of agonist. 3RHW crystal structure (Hibbs & Bhatt 2011, Nature): Y228 and Y232 on TM1, A288-A292 on TM3 form the binding pocket. P-glycoprotein (MDR1/ABCB1) at the blood-brain barrier extrudes ivermectin from CNS \u2014 explains >100:1 therapeutic index. P-gp null mice show CNS toxicity at doses safe in WT.'},
-    { title:'Phase 2 \u2014 Project 523, Traditional Medicine Screen & Artemisinin Isolation', color:'#ffd700', mol:'artemisinin',
-      body:'Youyou Tu screened 2,000+ traditional Chinese medicine compounds under Project 523 (1969-1972, secret military program for Vietnam War). Key insight from Ge Hong\'s 4th-century text (\u845b\u6d2a\u300a\u8098\u5f8c\u5099\u6025\u65b9\u300b): "A handful of qinghao immersed with two sheng of water, wring out the juice, and drink it all." The low-temperature ethanol extraction (35\u00b0C) preserved the thermolabile endoperoxide \u2014 high-temperature decoctions failed. Artemisinin crystal structure solved 1979 (Liu Jingming): unique 1,2,4-trioxane lactone with gem-dimethyl group.'},
-    { title:'Phase 3 \u2014 Endoperoxide Activation: Fe(II) Fenton Radical Chemistry', color:'#ff4488', mol:'artemisinin',
-      body:'Artemisinin activation requires Fe(II) \u2014 present at >100\u03bcM in the parasite food vacuole (Hb digestion releasing heme). Fe(II) cleaves the O-O bond homolytically (Fenton mechanism): artemisinin + Fe(II) \u2192 carbon-centered radical (C4 position) + Fe(III). Radical alkylates parasite proteins: PfKRS1 (lysyl-tRNA synthetase \u2014 Li et al. 2022 Nature Commun.) with K320 as primary alkylation site, EXP2 (nutrient channel), and heme itself. IC50 1-10 nM against ring/trophozoite stages. Rapid action: log 4 parasite reduction in 24h. Short half-life (~1h) prevents long-term resistance pressure \u2014 basis of ACT rationale.'},
-    { title:'Phase 4 \u2014 ACT Resistance: PfKelch13 & PI3P Pathway', color:'#ff8844', mol:'pfkelch13',
-      body:'PfKelch13 C580Y emerged in Cambodia ~2008, now dominates SE Asia (>90% in Myanmar, Vietnam, Thailand). Spread via partial selective sweep in PfKelch13 C580Y + PfCoronin background. ART-R \u2260 treatment failure alone: ACT partner resistance (piperaquine resistance via PfPlasmepsin 2/3 amplification) causes true ASMQ/DHA-PPQ failures. WHO 2024: C580Y detected in Rwanda, Uganda \u2014 first sub-Saharan Africa ART-R. OZ439 (artefenomel): fully synthetic endoperoxide, 3-day single dose, Phase 2 \u2014 potential artemisinin replacement for C580Y-prevalent regions.'},
-  ];
-
-  panelData.forEach(p => {
-    const panel = document.createElement('div');
-    panel.className = 'mech-panel';
-    const titleDiv = document.createElement('div');
-    titleDiv.className = 'mech-panel-title';
-    const bar = document.createElement('div');
-    bar.className = 'mech-panel-bar';
-    bar.style.background = p.color;
-    const titleText = document.createElement('span');
-    titleText.textContent = p.title;
-    titleText.style.color = p.color;
-    titleDiv.appendChild(bar);
-    titleDiv.appendChild(titleText);
-    const body = document.createElement('div');
-    body.className = 'mech-panel-body';
-    const parts = p.body.split(/<strong>|<\/strong>/);
-    parts.forEach((part, i) => {
-      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
-      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
-    });
-    if (p.mol) {
-      const chipRow = document.createElement('div');
-      chipRow.className = 'mol-chips-row';
-      const mol = MODULE_MOLS.find(m => m.id === p.mol);
-      if (mol) {
-        const chip = document.createElement('span');
-        chip.className = 'mol-chip' + (mol.is_protein ? ' protein' : ' small');
-        chip.style.borderColor = mol.color + '44';
-        chip.style.color = mol.color;
-        chip.textContent = mol.icon + ' ' + mol.name;
-        chip.style.cursor = 'pointer';
-        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
-        chipRow.appendChild(chip);
-        body.appendChild(chipRow);
-      }
-    }
-    panel.appendChild(titleDiv);
-    panel.appendChild(body);
-    container.appendChild(panel);
-  });
-})();
-
-// ── Build molecules tab ───────────────────────────────────────────────────────
-(function buildMolGrid() {
-  const grid = document.getElementById('mol-grid');
-  MODULE_MOLS.forEach(mol => {
-    const card = document.createElement('div');
-    card.className = 'mol-card';
-    card.style.setProperty('--accent', mol.color);
-    card.style.borderColor = mol.color + '33';
-    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
-    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
-    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
-    const role = document.createElement('div'); role.className = 'mol-card-role';
-    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
-    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
-    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
-    grid.appendChild(card);
-  });
-})();
-
-// ── Build story tab ───────────────────────────────────────────────────────────
-(function buildStory() {
-  const container = document.getElementById('story-content');
-  const events = [
-    {year:'1974', text:'\u014cmura isolates Streptomyces avermitilis OS-3153 from soil near Kawana golf course, Japan. Sends to William Campbell at Merck Research Laboratories for anthelmintic screening. One of ~50,000 actinomycetes isolates in the \u014cmura library.'},
-    {year:'1979', text:'Campbell at Merck confirms potent avermectin activity against nematodes. Semi-synthetic 22,23-dihydrogenation produces ivermectin \u2014 superior stability and potency. "Wonder drug" emerges. In parallel, Youyou Tu publishes artemisinin crystal structure (Kexue Tongbao 1979) after Project 523 isolation.'},
-    {year:'1987', text:'Mectizan Donation Program launched (Merck/WHO) \u2014 free ivermectin to countries endemic for onchocerciasis (river blindness). First mass drug administration program of its kind. Tu\'s artemisinin work suppressed for 20 years by secrecy around Project 523 (classified military program). No Western publications, no patents in her name.'},
-    {year:'1994\u20132001', text:'WHO recommends ACT (artemisinin combination therapy) after artemisinin monotherapy failures. Artesunate, artemether, dihydroartemisinin developed as improved derivatives. 700M ACT treatments per year by 2015. River blindness eliminated from 11 African countries via Mectizan MDA.'},
-    {year:'2008', text:'ART-R first documented clinically in Cambodia (Noedl et al., NEJM). Patients on artesunate show slow parasite clearance. PfKelch13 mutations identified 2014 as molecular marker (Ariey et al., Nature) \u2014 C580Y, R539T, Y493H, I543T in kelch propeller domain.'},
-    {year:'2015', text:'Nobel Prize awarded to Campbell, \u014cmura, and Tu \u2014 "for discoveries concerning novel therapies against infections caused by roundworm parasites and for her discoveries concerning a novel therapy against malaria." Tu never published in Western peer-reviewed journals during Project 523; discovered through declassification and Miller (2011) investigation.'},
-  ];
-  events.forEach(ev => {
-    const block = document.createElement('div');
-    block.className = 'story-block panel-card';
-    const yearTag = document.createElement('span');
-    yearTag.className = 'story-year-tag';
-    yearTag.textContent = ev.year;
-    const text = document.createElement('span');
-    text.style.fontSize = '.76rem';
-    text.style.color = '#8888b0';
-    text.style.lineHeight = '1.6';
-    text.textContent = ev.text;
-    block.appendChild(yearTag);
-    block.appendChild(text);
-    container.appendChild(block);
-  });
-})();
-
-// ── Build frontiers tab ───────────────────────────────────────────────────────
-(function buildFrontiers() {
-  const container = document.getElementById('frontiers-content');
-  const groups = [
-    { title:'Clinical Pipeline (2023\u20132026)', items:[
-      {title:'OZ439 (artefenomel) \u2014 Synthetic Endoperoxide', body:'Fully synthetic ozonide endoperoxide. Phase 2 completed 2023. Single 3-day oral dose \u2014 designed for non-ACT use in K13-resistant areas. OZ439/ferroquine combination FALCI trial: 91% cure rate in GT3 (>2 day parasite clearance time, enriched ART-R). No sesquiterpene scaffold \u2014 chemically stable, manufacturable without Artemisia annua farming.'},
-      {title:'Moxidectin \u2014 Long-Acting GluCl Agonist', body:'New milbemycin (same GluCl mechanism as ivermectin) with longer half-life (t\u00bd 20 days vs 12h ivermectin). FDA approved 2018 for river blindness. Single dose vs 2-dose annual ivermectin. Lymphatic filariasis (elephantiasis) MDA programs ongoing. Higher CNS penetration in CF-1 mice (lower P-gp expression) \u2014 safety monitoring required.'},
-      {title:'Ivermectin for Malaria Transmission Blocking', body:'Ivermectin in human blood is toxic to Anopheles mosquitoes that blood-feed. IVCC mass drug administration trials (RIMDAMAL II, 2023): 40% reduction in mosquito survival, 30% malaria incidence reduction. Potential adjunct tool in ACT-resistant endemic regions. Dose: 300 \u03bcg/kg \u00d7 3 days monthly \u2014 safe, well-tolerated.'},
-    ]},
-    { title:'AI & Computational Approaches', items:[
-      {title:'ML-Guided Natural Product Library Dereplication', body:'GNPS (Global Natural Products Social Molecular Networking) + GNN models identify novel bioactive metabolites from Streptomyces metagenomes without culture. Predicted 3,000+ novel siderophores and macrolides from soil metagenomes (2023). Avoids rediscovery of known compounds \u2014 critical bottleneck in natural product screening programs.'},
-      {title:'AlphaFold3 \u2014 K13 Propeller-PI3K Interface', body:'AlphaFold3 predicted PfKelch13 propeller\u2013PI3K interface dynamics \u2014 revealing cryptic binding pocket for small molecule PI3K-K13 disruptors as potential resistance-reversal agents. MD simulations show C580Y opens a groove not present in WT \u2014 druggable cavity for "resistance breaker" compounds.'},
-    ]},
-    { title:'Open Questions', items:[
-      {title:'Why is C580Y the dominant ART-R allele?', body:'C580Y dominates SE Asia despite R539T and Y493H conferring higher RSA (ring-stage survival assay) scores in vitro. Fitness cost landscape vs. genetic background polymorphisms (PfCoronin, PfCRT, kelch background) not fully resolved. Possible explanation: C580Y has lower fitness cost in field isolate backgrounds than higher-RSA alleles.'},
-      {title:'Ivermectin mechanism in ectoparasites', body:'GluCl absent in insects \u2014 alternative target? GluCl-like GABA receptors or glutamate-gated receptors in Drosophila used as proxy but louse/tick mechanism poorly characterized. Possible role: ivermectin binding to insect GluCl orthologs (Drosophila GluCl\u03b1) with lower affinity, or ABC transporter modulation.'},
-      {title:'Artemisinin target hierarchy \u2014 PfKRS1 vs. 120+ protein adducts', body:'Proteomic pulldown studies identify 120+ artemisinin\u2013protein adducts. PfKRS1 (K320 alkylation, Li et al. 2022) is leading candidate but causal sufficiency not proven. EXP2 nutrient channel alkylation may contribute independently. Target hierarchy and dose-response relationship for each adduct site unclear.'},
-    ]},
-    { title:'Industry & Translational Applications', items:[
-      {title:'Macrolide Natural Product Platform', body:'Avermectin\'s success drove systematic screening of all Streptomyces classes. Modern analogs: spinosad (insecticide, Saccharopolyspora spinosa), emamectin, selamectin (veterinary). The avermectin scaffold generates ~$1B/year commercial value. Spinosad approved as first-line head lice treatment (Natroba) \u2014 GluCl mechanism in insects via different subunit composition.'},
-      {title:'Artemisinin Supply Chain: Yeast Semi-Synthesis', body:'80% of artemisinin from Artemisia annua farming (China, Vietnam) \u2014 seasonal supply variability. Sanofi/Amyris semi-synthetic artemisinic acid from engineered yeast (CYP71AV1, ADH1, ALDH1 pathway) \u2014 35 tonnes/year capacity since 2014. Addresses supply shortage and price volatility. WHO prequalified artesunate uses semi-synthetic route.'},
-    ]},
-  ];
-  groups.forEach(g => {
-    const section = document.createElement('div');
-    section.className = 'frontier-group';
-    const title = document.createElement('div');
-    title.className = 'frontier-group-title';
-    title.textContent = g.title;
-    section.appendChild(title);
-    g.items.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'frontier-item';
-      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
-      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
-      card.appendChild(it); card.appendChild(ib);
-      section.appendChild(card);
-    });
-    container.appendChild(section);
-  });
-})();
-
-// ── Build right sidebar ───────────────────────────────────────────────────────
-(function buildRsidebar() {
-  const molList = document.getElementById('rsb-mols');
-  MODULE_MOLS.forEach(mol => {
-    const item = document.createElement('div');
-    item.className = 'rsb-mol-item';
-    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
-    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
-    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
-    const id = document.createElement('div'); id.className = 'rsb-mol-id';
-    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
-    nameCol.appendChild(name); nameCol.appendChild(id);
-    item.appendChild(icon); item.appendChild(nameCol);
-    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
-    molList.appendChild(item);
-  });
-
-  const paperList = document.getElementById('rsb-papers');
-  const papers = [
-    {year:'1979', journal:'Kexue Tongbao', title:'A new sesquiterpene peroxide from Artemisia annua (qinghaosu) \u2014 isolation and structure \u2014 Youyou Tu et al.'},
-    {year:'1981', journal:'Antimicrob Agents Chemother', title:'Ivermectin: a new broad-spectrum antiparasitic \u2014 Campbell, \u014cmura'},
-    {year:'2011', journal:'Nature', title:'X-ray structure of pentameric LGIC in open conformation (GluCl 3RHW) \u2014 Hibbs, Bhatt'},
-    {year:'2014', journal:'Nature', title:'A molecular marker of artemisinin-resistant P. falciparum \u2014 Ariey, Witkowski, Amaratunga'},
-  ];
-  papers.forEach(p => {
-    const item = document.createElement('div');
-    item.className = 'ref-item';
-    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
-    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
-    item.appendChild(year); item.appendChild(title);
-    paperList.appendChild(item);
-  });
-})();
-
-// ── Connections canvas ────────────────────────────────────────────────────────
-function drawConnections() {
-  const cv = document.getElementById('conn-canvas');
-  const W = cv.offsetWidth || 600, H = 360;
-
-  const nodes = [
-    {id:'anti',   x:W*.5,  y:H*.5,  r:38, color:'#aa77ff', label:'Antiparasitic\n2015',    sub:'Nobel 2015'},
-    {id:'trp',    x:W*.2,  y:H*.2,  r:26, color:'#ff8844', label:'2021 TRP\nChannels',      sub:'Ion channel pharmacology'},
-    {id:'mrna',   x:W*.78, y:H*.2,  r:26, color:'#44ffcc', label:'2023 mRNA\nVaccines',     sub:'Vaccine adjuvants'},
-    {id:'glucl',  x:W*.1,  y:H*.55, r:22, color:'#00e5ff', label:'GluCl\nTarget',           sub:'LGIC drug target'},
-    {id:'actr',   x:W*.88, y:H*.55, r:22, color:'#ff4488', label:'ACT\nResistance',         sub:'WHO 2030 threat'},
-    {id:'np',     x:W*.28, y:H*.85, r:22, color:'#ffd700', label:'Natural\nProducts',        sub:'~50% approved drugs'},
-    {id:'strep',  x:W*.7,  y:H*.85, r:22, color:'#00ff99', label:'Streptomyces\nPlatform',  sub:'Avermectin \u2192 spinosad'},
-    {id:'ntd',    x:W*.5,  y:H*.08, r:22, color:'#aa77ff', label:'WHO NTD\nProgram',        sub:'Mectizan donation'},
-  ];
-  const edges = [
-    {from:'anti',to:'trp',   color:'#ff884455', label:'GluCl/TRPV1\nboth targeted by\nnatural products'},
-    {from:'anti',to:'mrna',  color:'#44ffcc55', label:'mRNA vaccines +\nivermectin\nimmunostimulant hypothesis'},
-    {from:'anti',to:'glucl', color:'#00e5ff55', label:'LGIC\ndrug target\nfamily'},
-    {from:'anti',to:'actr',  color:'#ff448855', label:'K13 C580Y\nART-R clinical\nchallenge'},
-    {from:'anti',to:'np',    color:'#ffd70055', label:'~50% approved\ndrugs from\nnatural products'},
-    {from:'anti',to:'strep', color:'#00ff9955', label:'Avermectin\u2192spinosad\n\u2192erythromycin family'},
-    {from:'anti',to:'ntd',   color:'#aa77ff55', label:'Mectizan donation\nriver blindness\nelimination'},
-  ];
-
-  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
-}
-</script>
-
-<!-- Shared infrastructure (load after module data) -->
-<script src="../shared/glossary-data.js"></script>
-<script src="../shared/glossary-tooltip.js"></script>
-<script src="../shared/connections.js"></script>
-<script src="../shared/molecule-modal.js"></script>
-<script src="../shared/auto-start.js"></script>
-<script src="../shared/mech-theater.js" defer></script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2015 · Avermectin &amp; Artemisinin — kbiology Nobel Frontier</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/module-layout.css">
+<link rel="stylesheet" href="../shared/molecule-modal.css">
+<script src="../shared/roundrect-polyfill.js"></script></head>
+<body>
+<!-- Module header -->
+<div class="mod-hdr">
+  <div class="mod-hdr-top">
+    <a href="../index.html" class="back-link">&#8592; Hub</a>
+    <span class="mod-year-badge" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">2015</span>
+    <div class="mod-title">Avermectin &amp; Artemisinin</div>
+  </div>
+  <div class="mod-laureates">William C. Campbell, Satoshi \u014cmura &amp; Youyou Tu &#8212; Nobel Prize in Physiology or Medicine 2015</div>
+  <div class="mod-tags">
+    <span class="mod-tag" style="color:#aa77ff;border-color:#aa77ff44;background:#aa77ff10">Pharmacology</span>
+    <span class="mod-tag" style="color:#00ff99;border-color:#00ff9944;background:#00ff9910">Drug Discovery</span>
+    <span class="mod-tag" style="color:#ffd700;border-color:#ffd70044;background:#ffd70010">Natural Products</span>
+  </div>
+  <div class="mod-tabs" id="mod-tabs">
+    <div class="mod-tab active" data-tab="mechanism">&#9881; Mechanism</div>
+    <div class="mod-tab" data-tab="story">&#128214; Story</div>
+    <div class="mod-tab" data-tab="molecules">&#128300; Molecules</div>
+    <div class="mod-tab" data-tab="frontiers">&#128640; Frontiers</div>
+    <div class="mod-tab" data-tab="connections">&#128279; Connections</div>
+  </div>
+</div>
+
+<!-- Module body -->
+<div class="mod-body">
+  <!-- Left sidebar: animation controls -->
+  <div class="sidebar" id="sidebar-left">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Animation</span>
+      <div class="btn-row">
+        <button class="btn primary" id="btn-play">&#9654; Play</button>
+        <button class="btn" id="btn-reset">&#8634;</button>
+      </div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Phase</span>
+      <input type="range" id="phase-slider" min="0" max="4" value="0" step="1">
+      <div class="val-disp" id="phase-label">Phase 0 &mdash; Soil Collection</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Speed</span>
+      <input type="range" id="speed-slider" min="1" max="5" value="3" step="1">
+      <div class="val-disp" id="speed-label">3&times;</div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Layers</span>
+      <div class="ctrl-row"><span class="ctrl-lbl">GluCl channel</span><span class="ctrl-val" id="lay-glucl">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">Endoperoxide activation</span><span class="ctrl-val" id="lay-endo">ON</span></div>
+      <div class="ctrl-row"><span class="ctrl-lbl">Resistance mechanisms</span><span class="ctrl-val" id="lay-res">ON</span></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Info</span>
+      <div class="callout">
+        <strong>Key insight:</strong> Two entirely different natural products, two entirely different mechanisms, two entirely different parasites &mdash; yet both discovered through systematic screening of traditional resources. Ethnopharmacology meets molecular pharmacology.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content area -->
+  <div class="main" id="main-content">
+    <!-- Tab 1: Mechanism -->
+    <div class="tab-panel active" id="panel-mechanism">
+      <div class="canvas-wrap" id="canvas-wrap">
+        <canvas id="mech-canvas"></canvas>
+        <div class="phase-lbl" id="phase-desc">Phase 0 &mdash; \u014cmura Soil Collection &amp; Streptomyces Isolation</div>
+      </div>
+      <div class="mech-panels" id="mech-panels"></div>
+    </div>
+
+    <!-- Tab 2: Story -->
+    <div class="tab-panel" id="panel-story">
+      <div class="story-content" id="story-content"></div>
+    </div>
+
+    <!-- Tab 3: Molecules -->
+    <div class="tab-panel" id="panel-molecules">
+      <div class="mol-grid" id="mol-grid"></div>
+    </div>
+
+    <!-- Tab 4: Frontiers -->
+    <div class="tab-panel" id="panel-frontiers">
+      <div id="frontiers-content"></div>
+    </div>
+
+    <!-- Tab 5: Connections -->
+    <div class="tab-panel" id="panel-connections">
+      <div class="connections-wrap">
+        <canvas id="conn-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right sidebar -->
+  <div class="rsidebar" id="sidebar-right">
+    <div class="sidebar-block">
+      <span class="sec-lbl">Key Molecules</span>
+      <div id="rsb-mols"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">Landmark Papers</span>
+      <div id="rsb-papers"></div>
+    </div>
+    <div class="sidebar-block">
+      <span class="sec-lbl">External Links</span>
+      <a href="https://www.nobelprize.org/prizes/medicine/2015/summary/" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">nobelprize.org</div>
+        <div class="ref-title">Nobel Prize 2015 &#8212; official announcement</div>
+      </a>
+      <a href="https://www.rcsb.org/structure/3RHW" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">RCSB PDB</div>
+        <div class="ref-title">PDB: GluCl + ivermectin (3RHW)</div>
+      </a>
+      <a href="https://pubchem.ncbi.nlm.nih.gov/compound/68827" target="_blank" rel="noopener" class="ref-item" style="display:block;text-decoration:none">
+        <div class="ref-year">PubChem</div>
+        <div class="ref-title">Artemisinin CID 68827</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Accent color ─────────────────────────────────────────────────────────────
+document.documentElement.style.setProperty('--accent', '#aa77ff');
+
+// ── Module-specific glossary terms (augments shared/glossary-data.js) ────────
+window.GLOSS = window.GLOSS || {};
+Object.assign(window.GLOSS, {
+  'glucl': { term:'GluCl (Glutamate-gated Cl\u207b channel)', level:'grad', def:'Invertebrate-specific Cys-loop LGIC. Subunits GluCl\u03b1 (AVRD-1) and GluCl\u03b2 (GLC-2 in C. elegans). L-glutamate gates Cl\u207b influx \u2192 hyperpolarization \u2192 flaccid paralysis. Ivermectin binds at transmembrane subunit interface (non-competitive, allosteric agonism). Absent in vertebrates \u2014 explains ivermectin\'s outstanding therapeutic index (>100:1 in mammals at antiparasitic doses). PDB: 3RHW (homomeric GluCl\u03b1 + ivermectin).' },
+  'endoperoxide': { term:'Endoperoxide bridge (artemisinin)', level:'res', def:'1,2,4-trioxane ring system in artemisinin. Fe(II)-mediated Fenton-like homolytic cleavage generates carbon-centered radicals and reactive oxygen species. Heme iron in parasite food vacuole (from Hb digestion) provides Fe(II). Radical alkylates PfKelch13 and EXP2, disrupting ring-stage parasite. Synthetic endoperoxides (OZ277, OZ439) mimic the pharmacophore without the sesquiterpene scaffold.' },
+  'act': { term:'ACT (Artemisinin Combination Therapy)', level:'grad', def:'WHO-recommended treatment: artemisinin or derivative (fast-acting, short half-life) + partner drug (lumefantrine, amodiaquine, piperaquine, mefloquine). Rapid initial parasite clearance by artemisinin (log 4 reduction first 24h); partner drug kills residual parasites over 3-7 days. Prevents artemisinin resistance selection by combination pharmacodynamics. ~700M treatments/year globally.' },
+  'pfkelch13': { term:'PfKelch13 (K13)', level:'res', def:'P. falciparum kelch protein, propeller domain. Mutations at C580Y, R539T, Y493H etc. confer artemisinin partial resistance (ART-R) \u2014 ring-stage survival assay >1% survival. K13 regulates PI3P homeostasis via PI3K ubiquitylation; ART-R mutations decrease K13-mediated PI3K ubiquitylation \u2192 elevated PI3P \u2192 ring-stage tolerance to artemisinin. Dominant ART-R genotype in Southeast Asia (Greater Mekong), emerging in Africa (C580Y Rwanda 2014).' },
+  'natural_product': { term:'Natural product drug discovery', level:'grad', def:'~50% of approved drugs 1981-2019 are natural products or derivatives (Newman & Cragg 2020). Screening strategy: soil microorganism libraries (\u014cmura approach \u2014 50,000+ actinomycetes isolates), ethnobotanical leads (Tu approach \u2014 2,000+ traditional medicine compounds screened). High chemical diversity (>100K carbon skeleton types) exceeds synthetic libraries. Modern AI/ML-guided screening (BERT-based structure prediction) now applied to natural product libraries.' },
+});
+
+// ── Module molecules data ─────────────────────────────────────────────────────
+window.MODULE_MOLS = [
+  {
+    id:'ivermectin', icon:'\ud83d\udfe3', color:'#aa77ff', type:'Small Molecule \u00b7 Macrolide lactone', is_protein:false,
+    name:'Ivermectin', sub:'PubChem CID: 6321424 \u00b7 C48H74O14 (B1a component)',
+    badges:[{text:'GluCl agonist',color:'#aa77ff'},{text:'WHO Essential',color:'#00ff99'},{text:'Antiparasitic',color:'#ffd700'}],
+    pubchem_cid:6321424, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/6321424',
+    mechanism:'22,23-dihydroavermectin B1a \u2014 semi-synthetic derivative of avermectin B1a from Streptomyces avermitilis. Binds at the transmembrane interface between adjacent GluCl subunits (non-competitive allosteric agonism site). Locks channel in open state causing sustained Cl\u207b influx \u2192 irreversible hyperpolarization \u2192 flaccid paralysis \u2192 death of nematodes and ectoparasites. BBB exclusion via P-gp efflux explains mammalian safety margin. 17.4 mg ivermectin/year for onchocerciasis (river blindness) prevention \u2014 Mectizan donation program eliminated disease in 11 African countries.',
+    properties:{'MW':'875.1 g/mol','Formula':'C48H74O14','XLogP':'4.5','HBD':'1','HBA':'14','TPSA':'208 \u00c5\u00b2','P-gp substrate':'Yes (CNS excluded)','Bioavailability':'~60% oral'},
+    property_flags:{'P-gp substrate':'good','Bioavailability':'good'},
+    interaction:{
+      title:'Ivermectin\u2013GluCl Channel Mechanism',
+      nodes:[
+        {id:'ivm', x:100,y:150,r:28,color:'#aa77ff',label:'Ivermectin',sub:'allosteric site'},
+        {id:'glu', x:300,y:80, r:30,color:'#00e5ff',label:'GluCl\nchannel',sub:'Cl\u207b gated'},
+        {id:'cl',  x:300,y:220,r:22,color:'#ffd700',label:'Cl\u207b flux',  sub:'hyperpolarize'},
+        {id:'ner', x:440,y:150,r:22,color:'#ff4488',label:'Nerve/\nmuscle',sub:'paralyzed'},
+        {id:'pgp', x:100,y:260,r:20,color:'#00ff99',label:'P-gp',     sub:'BBB excluded'},
+      ],
+      edges:[
+        {from:'ivm',to:'glu', color:'#aa77ff',label:'locks open',dashed:false},
+        {from:'glu',to:'cl',  color:'#00e5ff',label:'sustained',  dashed:false},
+        {from:'cl', to:'ner', color:'#ff4488',label:'paralysis', dashed:false},
+        {from:'pgp',to:'ivm', color:'#00ff9944',label:'brain excluded',dashed:true},
+      ]
+    },
+    papers:[
+      {year:'1981',journal:'Antimicrob Agents Chemother',impact:'IF 5',title:'Ivermectin: a new broad-spectrum antiparasitic agent',abstract:'First characterization of ivermectin antiparasitic activity. GluCl mechanism identified. 400\u00d7 more potent than thiabendazole in C. elegans assays.'},
+      {year:'2003',journal:'J Biol Chem',impact:'IF 5',title:'Structural basis for ivermectin binding at transmembrane interface of GluCl receptor',abstract:'Crystal structure of C. elegans GluCl\u03b1 (homopentamer) with ivermectin \u2014 reveals transmembrane binding site between M1 and M3 helices of adjacent subunits.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe2',name:'Avermectin B1a',role:'Parent compound\nStreptomyces product',id:'CID 9908089'},
+      {icon:'\ud83d\udd35',name:'Moxidectin',    role:'Newer milbemycin\nonce-yearly dosing',  id:'CID 9832750'},
+    ]
+  },
+  {
+    id:'artemisinin', icon:'\ud83d\udfe1', color:'#ffd700', type:'Small Molecule \u00b7 Sesquiterpene endoperoxide', is_protein:false,
+    name:'Artemisinin (\u9752\u84bf\u7d20)', sub:'PubChem CID: 68827 \u00b7 C15H22O5',
+    badges:[{text:'Endoperoxide',color:'#ffd700'},{text:'PfKRS1 target',color:'#ff4488'},{text:'WHO Essential',color:'#00ff99'}],
+    pubchem_cid:68827, pdb_id:null,
+    nih_link:'https://pubchem.ncbi.nlm.nih.gov/compound/68827',
+    mechanism:'Sesquiterpene lactone isolated from Artemisia annua (sweet wormwood). Active pharmacophore: 1,2,4-trioxane ring containing the endoperoxide bridge. Fe(II) from heme in parasite food vacuole cleaves the O-O bond homolytically, generating carbon radicals. These alkylate heme, lipids, and parasite proteins including PfKRS1 (lysyl-tRNA synthetase) and EXP2 (nutrient channel). Ring-stage selectivity matches parasite hemoglobin digestion kinetics. Semi-synthetic derivatives with improved PK: artesunate (IV/IM for severe malaria), artemether (oil-based IM), dihydroartemisinin (oral, active metabolite).',
+    properties:{'MW':'282.3 g/mol','Formula':'C15H22O5','XLogP':'2.3','HBD':'0','HBA':'5','TPSA':'63 \u00c5\u00b2','t\u00bd':'~1 hour','Extraction':'35\u00b0C ethanol'},
+    property_flags:{'XLogP':'good'},
+    interaction:{
+      title:'Artemisinin Activation by Heme Fe(II)',
+      nodes:[
+        {id:'art', x:110,y:130,r:28,color:'#ffd700',label:'Artemisinin\nprodrug',sub:'inactive'},
+        {id:'fe2', x:280,y:80, r:24,color:'#ff8844',label:'Fe(II)\nheme',      sub:'parasite vacuole'},
+        {id:'rad', x:280,y:220,r:26,color:'#ff4488',label:'C-radical',         sub:'activated'},
+        {id:'krs', x:420,y:130,r:24,color:'#aa77ff',label:'PfKRS1',            sub:'alkylation target'},
+        {id:'art2',x:110,y:260,r:22,color:'#00e5ff',label:'Artesunate',        sub:'better PK derivative'},
+      ],
+      edges:[
+        {from:'art', to:'fe2',color:'#ff8844',label:'Fe(II) cleaves\nO-O bond',dashed:false},
+        {from:'fe2', to:'rad',color:'#ff4488',label:'radical\ngenerated',       dashed:false},
+        {from:'rad', to:'krs',color:'#aa77ff',label:'alkylates',               dashed:false},
+        {from:'art2',to:'art',color:'#00e5ff',label:'IV/IM prodrug',           dashed:true},
+      ]
+    },
+    papers:[
+      {year:'1979',journal:'Kexue Tongbao',impact:'Historical',title:'A new sesquiterpene peroxide from Artemisia annua \u2014 isolation and crystal structure of qinghaosu',abstract:'Tu Youyou reports artemisinin structure. Low-temperature ethanol extraction critical \u2014 high-temp destroys endoperoxide. Confirmed antimalarial activity in animal models.'},
+      {year:'2015',journal:'Nat Commun',impact:'IF 17',title:'Artemisinin resistance in Plasmodium falciparum associates with an altered cellular response to heme stress',abstract:'K13 mutations confer resistance by elevating PI3P, activating ring-stage unfolded protein response that tolerates artemisinin-induced protein damage. Mechanism independent of drug activation.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udd35',name:'Artesunate',   role:'IV/IM severe\nmalaria drug',       id:'CID 5464098'},
+      {icon:'\ud83d\udfe3',name:'Lumefantrine', role:'ACT partner\nlumefantrine',         id:'CID 6437380'},
+    ]
+  },
+  {
+    id:'glucl', icon:'\ud83d\udd35', color:'#00e5ff', type:'Protein \u00b7 Ligand-gated ion channel', is_protein:true,
+    name:'GluCl Channel (GluCl\u03b1 homomeric)', sub:'PDB: 3RHW \u00b7 5 subunits \u00d7 457 aa',
+    badges:[{text:'Cys-loop LGIC',color:'#00e5ff'},{text:'Invertebrate-specific',color:'#00ff99'},{text:'Ivermectin site',color:'#aa77ff'}],
+    pubchem_cid:null, pdb_id:'3RHW',
+    nih_link:'https://www.rcsb.org/structure/3RHW',
+    mechanism:'Homomeric pentameric Cys-loop ligand-gated ion channel from C. elegans (GluCl\u03b1 AVRD-1). Structural breakthrough: first Cys-loop receptor crystal structure with bound substrate + allosteric modulator simultaneously. Each subunit: N-terminal extracellular domain (ECD, binding glutamate at subunit interface), 4-TM domain (TM2 lines pore). Ivermectin binds in the transmembrane domain at the intersubunit interface between M1 and M3 helices \u2014 contacts: Y228, Y232, L234, Y240, A288, A291, A292 (TM2/TM3). Wedge action locks channel in expanded-open conformation. Absent in vertebrates (unique invertebrate gene lineage).',
+    properties:{'PDB':'3RHW','Resolution':'3.3 \u00c5 (X-ray)','Oligomer':'Homopentamer','Ion selectivity':'Cl\u207b (anion)','Agonist':'L-glutamate (EC50 ~0.3mM)','Ivermectin site':'TM1-M3 interface','Organism':'C. elegans AVRD-1'},
+    property_flags:{'Resolution':'good'},
+    interaction:{
+      title:'GluCl Activation and Ivermectin Binding',
+      nodes:[
+        {id:'glu', x:100,y:120,r:26,color:'#00ff99',label:'L-Glu',    sub:'orthosteric agonist'},
+        {id:'chan',x:280,y:150,r:38,color:'#00e5ff',label:'GluCl\npentamer',sub:'5-fold symmetry'},
+        {id:'ivm', x:100,y:240,r:26,color:'#aa77ff',label:'Ivermectin',sub:'TM interface'},
+        {id:'cl',  x:440,y:150,r:22,color:'#ffd700',label:'Cl\u207b flux', sub:'hyperpolarize'},
+      ],
+      edges:[
+        {from:'glu', to:'chan',color:'#00ff99',label:'orthosteric\nactivation',dashed:false},
+        {from:'ivm', to:'chan',color:'#aa77ff',label:'allosteric\nlock open', dashed:false},
+        {from:'chan',to:'cl',  color:'#00e5ff',label:'sustained\ninflux',     dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2011',journal:'Nature',impact:'IF 65',title:'X-ray structure of a pentameric ligand-gated ion channel in an apparently open conformation',abstract:'3RHW: 3.3\u00c5 homomeric GluCl\u03b1 with glutamate and ivermectin. First Cys-loop receptor structure. Ivermectin binding site defined. Explained invertebrate selectivity mechanism.'},
+      {year:'1982',journal:'J Exp Biol',impact:'IF 3',title:'Ivermectin-induced paralysis of nematode motor function: role of glutamate-gated chloride channels',abstract:'Electrophysiology demonstrating GluCl as ivermectin target in Ascaris suum. Cl\u207b conductance sustained \u2014 non-competitive with glutamate.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe3',name:'GABA-A receptor',role:'Vertebrate LGIC\nstructural homolog', id:'PDB: 6D6U'},
+      {icon:'\ud83d\udfe2',name:'nAChR',          role:'Cys-loop\nAChR family member',       id:'PDB: 2BG9'},
+    ],
+    domains:[
+      {color:'#00e5ff',name:'ECD (extracellular domain)',   pos:'1\u2013215',   fn:'\u03b2-sandwich fold; glutamate binds at subunit interface in principal/complementary faces; loop C, loop F key contacts'},
+      {color:'#aa77ff',name:'TM1',                          pos:'216\u2013240', fn:'Outer TM helix; ivermectin contacts Y228, Y232, L234'},
+      {color:'#00ff99',name:'TM2 (pore-lining)',            pos:'241\u2013268', fn:'2\' position (I239) \u2014 hydrophobic gate; 13\' Lys+ ring critical for Cl\u207b selectivity over cations'},
+      {color:'#ffd700',name:'TM3',                          pos:'269\u2013297', fn:'Ivermectin contacts A288-A292; TM3 movement linked to TM1 during gating'},
+      {color:'#ff4488',name:'TM4 + ICD',                   pos:'298\u2013457', fn:'Cytoplasmic loop (MA-helix) faces; amphipathic helix important for gating and trafficking'},
+    ]
+  },
+  {
+    id:'pfkelch13', icon:'\ud83d\udd34', color:'#ff4488', type:'Protein \u00b7 Kelch propeller', is_protein:true,
+    name:'PfKelch13 (K13)', sub:'PDB: 4YY8 \u00b7 726 aa \u00b7 propeller domain aa 444\u2013726',
+    badges:[{text:'ART-R marker',color:'#ff4488'},{text:'PI3K regulator',color:'#aa77ff'},{text:'Drug resistance',color:'#ffd700'}],
+    pubchem_cid:null, pdb_id:'4YY8',
+    nih_link:'https://www.rcsb.org/structure/4YY8',
+    mechanism:'P. falciparum kelch-domain protein required for ubiquitin-mediated degradation of PI3-kinase (PfPI3K). K13 wild-type acts as adaptor for Cullin3-RING ubiquitin E3 ligase \u2192 PI3K ubiquitylation \u2192 proteasomal degradation \u2192 low PI3P. Mutations C580Y, R539T, Y493H etc. impair K13-PI3K interaction \u2192 elevated PI3P \u2192 activated PI3P-dependent processes including unfolded protein response and autophagy-related pathways that tolerate artemisinin-induced protein damage. Not a direct artemisinin target \u2014 K13 mutations modulate the cellular context of ring-stage tolerance.',
+    properties:{'PDB':'4YY8','Resolution':'2.2 \u00c5','Fold':'6-blade kelch propeller','BTB domain':'Yes (dimerization)','Resistance mutations':'C580Y, R539T, Y493H, I543T','Function':'CRL3 adaptor for PI3K ubiquitylation','ART-R SE Asia freq':'C580Y >90%'},
+    property_flags:{'Resolution':'good'},
+    interaction:{
+      title:'K13-Mediated PI3K Regulation and ART-R',
+      nodes:[
+        {id:'k13', x:220,y:150,r:34,color:'#ff4488',label:'K13\n(WT)',  sub:'CRL3 adaptor'},
+        {id:'pi3k',x:380,y:80, r:26,color:'#aa77ff',label:'PfPI3K',    sub:'ubiquitylated'},
+        {id:'pi3p',x:380,y:240,r:26,color:'#ffd700',label:'PI3P',      sub:'low \u2192 parasite dies'},
+        {id:'mut', x:80, y:150,r:28,color:'#ff8844',label:'K13\nC580Y',sub:'ART-R mutant'},
+        {id:'res', x:80, y:260,r:22,color:'#ff4488',label:'Ring\nsurvival',sub:'>1% survival'},
+      ],
+      edges:[
+        {from:'k13',to:'pi3k',color:'#aa77ff',label:'ubiquitylates\n\u2192 degrades',dashed:false},
+        {from:'pi3k',to:'pi3p',color:'#ffd700',label:'low PI3P',               dashed:false},
+        {from:'mut',to:'pi3k',color:'#ff884488',label:'impaired\nubiquitylation',dashed:true},
+        {from:'mut',to:'res', color:'#ff4488',label:'elevated PI3P\nUPR tolerance',dashed:false},
+      ]
+    },
+    papers:[
+      {year:'2014',journal:'Nature',impact:'IF 65',title:'A molecular marker of artemisinin-resistant Plasmodium falciparum malaria',abstract:'K13 (PF3D7_1343700) mutations C580Y, R539T, I543T, Y493H correlate with clinical ART-R in Greater Mekong subregion. Ring-stage survival assay validated.'},
+      {year:'2015',journal:'PLoS Pathog',impact:'IF 7',title:'PfKelch13 crystal structure and ART-R mutations affect PI3K ubiquitylation',abstract:'K13 4YY8 structure \u2014 6-blade propeller. C580Y impairs PI3K binding. PI3P elevation as mechanism independent of heme-mediated artemisinin activation.'},
+    ],
+    rel_molecules:[
+      {icon:'\ud83d\udfe1',name:'PfPI3K',     role:'PI3-kinase\nK13 substrate', id:'No structure'},
+      {icon:'\ud83d\udfe2',name:'Piperaquine',role:'ACT partner\nresistance marker',id:'CID 122767'},
+    ],
+    domains:[
+      {color:'#ff4488',name:'BTB/POZ domain',     pos:'1\u2013343',   fn:'Cullin3 binding; dimerization interface; F-box-like adaptor function for CRL3 E3 ubiquitin ligase'},
+      {color:'#aa77ff',name:'BACK domain',         pos:'344\u2013443', fn:'5-helix bundle bridging BTB to kelch; ART-R mutations here (I543T in BACK, not propeller)'},
+      {color:'#ffd700',name:'Kelch propeller',     pos:'444\u2013726', fn:'6-blade \u03b2-propeller; PI3K interaction face; most ART-R mutations (C580Y, R539T, Y493H, M476I)'},
+    ]
+  },
+];
+
+// ── Phase labels ──────────────────────────────────────────────────────────────
+const PHASES = [
+  {label:'Phase 0 \u2014 \u014cmura Soil Collection & Streptomyces Isolation',  color:'#aa77ff', mol:'ivermectin'},
+  {label:'Phase 1 \u2014 Avermectin Discovery & GluCl Mechanism',              color:'#00e5ff', mol:'glucl'},
+  {label:'Phase 2 \u2014 Tu Traditional Medicine Screen & Artemisinin',         color:'#ffd700', mol:'artemisinin'},
+  {label:'Phase 3 \u2014 Artemisinin Endoperoxide Radical Activation',          color:'#ff4488', mol:'artemisinin'},
+  {label:'Phase 4 \u2014 ACT Resistance: PfKelch13 & Drug Pipeline',            color:'#ff8844', mol:'pfkelch13'},
+];
+
+// ── Tab switching ─────────────────────────────────────────────────────────────
+document.getElementById('mod-tabs').addEventListener('click', function(e) {
+  const tab = e.target.closest('.mod-tab');
+  if (!tab) return;
+  const target = tab.dataset.tab;
+  document.querySelectorAll('.mod-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  tab.classList.add('active');
+  const panel = document.getElementById('panel-' + target);
+  if (panel) panel.classList.add('active');
+  if (target === 'connections') { setTimeout(drawConnections, 50); }
+});
+
+// ── Canvas animation ──────────────────────────────────────────────────────────
+let animRunning = false, animT = 0, animPhase = 0, animSpeed = 3;
+const layerState = { glucl: true, endo: true, res: true };
+
+['glucl','endo','res'].forEach(id => {
+  const el = document.getElementById('lay-' + id);
+  if (el) el.addEventListener('click', () => {
+    layerState[id] = !layerState[id];
+    el.textContent = layerState[id] ? 'ON' : 'OFF';
+    el.style.color = layerState[id] ? '' : 'var(--muted)';
+  });
+});
+
+// roundRect polyfill for older browsers
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    r = Math.min(r, w/2, h/2);
+    this.beginPath();
+    this.moveTo(x+r, y);
+    this.lineTo(x+w-r, y); this.arcTo(x+w, y, x+w, y+r, r);
+    this.lineTo(x+w, y+h-r); this.arcTo(x+w, y+h, x+w-r, y+h, r);
+    this.lineTo(x+r, y+h); this.arcTo(x, y+h, x, y+h-r, r);
+    this.lineTo(x, y+r); this.arcTo(x, y, x+r, y, r);
+    this.closePath();
+  };
+}
+
+function mechDraw(phase, t) {
+  const cv = document.getElementById('mech-canvas');
+  if (!cv) return;
+  cv.width = cv.offsetWidth || 700;
+  cv.height = cv.offsetHeight || 280;
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const cx = W / 2, cy = H / 2;
+
+  // ── shared helpers ──────────────────────────────────────────────────────
+  function ap_label(x, y, text, color, align) {
+    ctx.save();
+    ctx.font = '8px monospace'; ctx.textAlign = align || 'center';
+    const mw = ctx.measureText(text).width;
+    const tx = align === 'left' ? x : align === 'right' ? x - mw : x - mw/2;
+    ctx.fillStyle = 'rgba(7,7,30,0.75)';
+    ctx.fillRect(tx - 2, y - 9, mw + 4, 13);
+    ctx.fillStyle = color || '#ffffff'; ctx.textAlign = align || 'center';
+    ctx.fillText(text, x, y);
+    ctx.restore();
+  }
+  function ap_particle(x, y, r, colInner, colOuter) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, colInner); g.addColorStop(1, colOuter);
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.fillStyle = g; ctx.fill();
+  }
+  function drawSoilMembrane(yTop, yBot) {
+    // layered soil strata
+    const gSoil = ctx.createLinearGradient(0, yTop, 0, yBot);
+    gSoil.addColorStop(0,   '#4a3520cc');
+    gSoil.addColorStop(0.4, '#3a2a14cc');
+    gSoil.addColorStop(1,   '#2a1a08cc');
+    ctx.fillStyle = gSoil;
+    ctx.fillRect(0, yTop, W, yBot - yTop);
+    // grain texture dots
+    for (let i = 0; i < 60; i++) {
+      const gx = 30 + (i * 73 % (W - 60));
+      const gy = yTop + 4 + (i * 47 % (yBot - yTop - 8));
+      ctx.beginPath(); ctx.arc(gx, gy, 1.5, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(200,160,80,0.18)'; ctx.fill();
+    }
+  }
+  function drawMembrane2(yMid, thick) {
+    // lipid bilayer cross-section
+    const outer = yMid - thick/2, inner = yMid + thick/2;
+    const gMem = ctx.createLinearGradient(0, outer - 6, 0, inner + 6);
+    gMem.addColorStop(0,   '#00e5ff44');
+    gMem.addColorStop(0.25,'#00e5ffcc');
+    gMem.addColorStop(0.5, '#001a2288');
+    gMem.addColorStop(0.75,'#00e5ffcc');
+    gMem.addColorStop(1,   '#00e5ff44');
+    ctx.fillStyle = gMem;
+    ctx.fillRect(0, outer - 6, W, thick + 12);
+    // phospholipid heads as dots
+    for (let x = 10; x < W; x += 18) {
+      ctx.beginPath(); ctx.arc(x, outer, 3.5, 0, Math.PI*2);
+      ctx.fillStyle = '#00e5ffcc'; ctx.fill();
+      ctx.beginPath(); ctx.arc(x, inner, 3.5, 0, Math.PI*2);
+      ctx.fillStyle = '#00e5ffcc'; ctx.fill();
+      // tails
+      ctx.strokeStyle = '#00e5ff44'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x, outer+3.5); ctx.lineTo(x, yMid-2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x, inner-3.5); ctx.lineTo(x, yMid+2); ctx.stroke();
+    }
+  }
+
+  ctx.fillStyle = '#07071e';
+  ctx.fillRect(0, 0, W, H);
+
+  if (phase === 0) {
+    // ── Soil ecosystem cross-section: Streptomyces hyphae + fermentation ──
+    const pulse = (Math.sin(t * 0.04) + 1) / 2;
+
+    // Sky / surface gradient (top quarter)
+    const gSky = ctx.createLinearGradient(0, 0, 0, 60);
+    gSky.addColorStop(0, '#0a0a1e'); gSky.addColorStop(1, '#1a1408');
+    ctx.fillStyle = gSky; ctx.fillRect(0, 0, W, 60);
+
+    // Soil cross-section (lower 3/4)
+    drawSoilMembrane(60, H - 38);
+
+    // Streptomyces hyphae branching network
+    ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 1.5;
+    const hyp = [
+      [80, 100, 160, 140], [160, 140, 200, 110], [160, 140, 175, 175],
+      [200, 110, 260, 130], [200, 110, 220, 80],
+      [80, 100, 90, 140], [90, 140, 120, 165],
+    ];
+    hyp.forEach(([x1,y1,x2,y2]) => {
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+    });
+    // Spore clusters at branch tips
+    [[220,80],[260,130],[175,175],[120,165]].forEach(([sx,sy], i) => {
+      const sp = (Math.sin(t*0.05 + i*1.2) + 1) / 2;
+      for (let k = 0; k < 5; k++) {
+        const a = (k/5)*Math.PI*2 + t*0.008;
+        ap_particle(sx + 7*Math.cos(a), sy + 7*Math.sin(a), 2.5,
+          'rgba(0,255,153,' + (0.6+sp*0.4) + ')', 'rgba(0,255,153,0)');
+      }
+    });
+    ap_label(170, 170, 'S. avermitilis hyphae', '#00ff99cc');
+
+    // Erlenmeyer flask (culture step)
+    const fkX = cx + 80, fkTop = 35, fkBot = H - 55;
+    ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 2; ctx.fillStyle = '#aa77ff08';
+    ctx.beginPath();
+    ctx.moveTo(fkX - 14, fkTop); ctx.lineTo(fkX + 14, fkTop);
+    ctx.lineTo(fkX + 14, fkTop + 28);
+    ctx.lineTo(fkX + 58, fkBot);
+    ctx.lineTo(fkX - 58, fkBot);
+    ctx.lineTo(fkX - 14, fkTop + 28);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    // Broth (green liquid)
+    const brewY = fkBot - 55;
+    ctx.beginPath();
+    ctx.moveTo(fkX - 45, brewY);
+    ctx.lineTo(fkX + 45, brewY);
+    ctx.lineTo(fkX + 58, fkBot);
+    ctx.lineTo(fkX - 58, fkBot);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(0,255,153,0.08)'; ctx.fill();
+    // Avermectin hexagon molecules inside flask
+    [[-14, -20], [10, -8], [-8, 8]].forEach(([dx, dy]) => {
+      const mx = fkX + dx, my = (brewY + fkBot)/2 + dy;
+      ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const a = (i/6)*Math.PI*2 - Math.PI/6;
+        const nx = mx + 8*Math.cos(a), ny = my + 8*Math.sin(a);
+        i === 0 ? ctx.moveTo(nx, ny) : ctx.lineTo(nx, ny);
+      }
+      ctx.closePath(); ctx.stroke();
+    });
+    ap_label(fkX, fkBot + 16, 'Fermentation flask', '#aa77ffcc');
+    ap_label(fkX, fkBot + 28, '50,000+ isolates screened', '#aa77ff88');
+
+    // Arrow: soil → flask
+    ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(265, 135); ctx.lineTo(fkX - 60, 120); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(fkX-67, 115); ctx.lineTo(fkX-60, 120); ctx.lineTo(fkX-67, 125); ctx.stroke();
+
+    ap_label(cx, H - 22, '\u014cmura 1974 \u2014 Kawana soil \u2192 S. avermitilis \u2192 avermectin B1a/B1b', '#aa77ffcc');
+    ap_label(cx, H - 8, '18 mg/kg oral dose: 99% microfilariae clearance in onchocerciasis trials', '#aa77ff88');
+
+  } else if (phase === 1) {
+    // ── Nematode neuromuscular junction: GluCl pentamer + Cl⁻ influx ──
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+    const memY = cy;
+
+    // Draw the nematode nerve-muscle membrane (lipid bilayer)
+    drawMembrane2(memY, 28);
+
+    // "Outside" and "Inside" labels
+    ap_label(50, memY - 36, 'Synapse cleft (+)', '#00e5ffaa', 'left');
+    ap_label(50, memY + 36, 'Muscle cell cytoplasm (–)', '#00e5ffaa', 'left');
+
+    if (layerState.glucl) {
+      // GluCl pentameric channel embedded in membrane
+      const chanX = cx + 10;
+      for (let i = 0; i < 5; i++) {
+        const a = (i / 5) * Math.PI * 2 - Math.PI / 2;
+        const sx = chanX + 32 * Math.cos(a);
+        const sy = memY + 20 * Math.sin(a);
+        ctx.beginPath(); ctx.ellipse(sx, sy, 12, 18, 0, 0, Math.PI*2);
+        ctx.fillStyle = i === 1 ? '#aa77ff1a' : '#00e5ff12'; ctx.fill();
+        ctx.strokeStyle = i === 1 ? '#aa77ff' : '#00e5ffaa';
+        ctx.lineWidth = i === 1 ? 2 : 1.5; ctx.stroke();
+        ctx.fillStyle = i === 1 ? '#aa77ff' : '#00e5ffcc';
+        ctx.font = 'bold 7px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText('TM'+i, sx, sy + 3);
+      }
+
+      // Pore lumen (open) with glow
+      const poreR = 7 + pulse * 9;
+      const pg = ctx.createRadialGradient(chanX, memY, 0, chanX, memY, poreR + 6);
+      pg.addColorStop(0, 'rgba(0,229,255,0.5)'); pg.addColorStop(1, 'rgba(0,229,255,0)');
+      ctx.beginPath(); ctx.arc(chanX, memY, poreR + 6, 0, Math.PI*2);
+      ctx.fillStyle = pg; ctx.fill();
+
+      // Ivermectin molecule wedged at subunit 1–2 interface
+      const ivm_a = (0.5 / 5) * Math.PI * 2 - Math.PI / 2;
+      const ivX = chanX + 38 * Math.cos(ivm_a), ivY = memY + 22 * Math.sin(ivm_a);
+      ap_particle(ivX, ivY, 9, 'rgba(170,119,255,0.8)', 'rgba(170,119,255,0)');
+      ap_label(ivX + 18, ivY - 12, 'IVM', '#aa77ff');
+      // dashed arrow
+      ctx.setLineDash([2,2]); ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(ivX + 10, ivY); ctx.lineTo(chanX + 24, memY - 8); ctx.stroke();
+      ctx.setLineDash([]);
+
+      ap_label(chanX, memY - 52, 'GluCl pentamer (locked OPEN)', '#00e5ffcc');
+    }
+
+    // Cl⁻ ions streaming inward (outside → inside)
+    if (layerState.glucl) {
+      for (let i = 0; i < 5; i++) {
+        const prog = ((t * 1.2 + i * 55) % 160) / 160;
+        const ionY = (memY - 70) + prog * 150;
+        const ionX = cx + 10 + (i - 2) * 9;
+        if (ionY > memY - 70 && ionY < memY + 70) {
+          ap_particle(ionX, ionY, 5.5, 'rgba(255,215,0,0.85)', 'rgba(255,215,0,0)');
+          ctx.fillStyle = '#221800'; ctx.font = 'bold 5.5px sans-serif'; ctx.textAlign = 'center';
+          ctx.fillText('Cl\u207b', ionX, ionY + 2);
+        }
+      }
+      ap_label(W - 60, memY - 50, 'Cl\u207b influx', '#ffd700cc');
+      // downward arrow
+      ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(W-60, memY-38); ctx.lineTo(W-60, memY+38); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(W-65, memY+30); ctx.lineTo(W-60, memY+38); ctx.lineTo(W-55, memY+30); ctx.stroke();
+    }
+
+    // Membrane potential bar
+    const mpX = 60, mpY1 = memY - 55, mpY2 = memY + 55;
+    ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(mpX, mpY1); ctx.lineTo(mpX, mpY2); ctx.stroke();
+    const hyper = pulse;
+    const mvY = mpY1 + (1 - hyper) * (mpY2 - mpY1) * 0.75;
+    ctx.fillStyle = '#ffd70033';
+    ctx.fillRect(mpX - 8, mvY, 8, mpY2 - mvY);
+    ap_label(mpX - 12, mpY2 + 12, 'Vm: \u221260\u2192\u2212100 mV', '#ffd700aa', 'left');
+
+    ap_label(cx, H - 22, 'Ivermectin allosteric agonist \u2014 locks GluCl OPEN \u2192 sustained Cl\u207b influx', '#00e5ffcc');
+    ap_label(cx, H - 8, 'Hyperpolarization \u2192 flaccid paralysis \u2192 nematode death; mammals lack GluCl', '#00e5ff88');
+
+  } else if (phase === 2) {
+    // ── Project 523: Artemisia plant cell → extraction → artemisinin crystal ──
+    const pulse = (Math.sin(t * 0.04) + 1) / 2;
+
+    // Plant cell context (left panel)
+    const cellX = 90, cellY = cy, cellR = 55;
+    ctx.beginPath(); ctx.ellipse(cellX, cellY, cellR, cellR * 0.75, 0, 0, Math.PI*2);
+    ctx.fillStyle = '#00380c18'; ctx.fill();
+    ctx.strokeStyle = '#00cc4488'; ctx.lineWidth = 2; ctx.stroke();
+
+    // Vacuole (large central vacuole of plant cell)
+    ctx.beginPath(); ctx.ellipse(cellX, cellY, cellR * 0.6, cellR * 0.45, 0, 0, Math.PI*2);
+    ctx.fillStyle = '#00aa3318'; ctx.fill();
+    ctx.strokeStyle = '#00aa3344'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    // Glandular trichome (artemisinin secretory structure) at top
+    const tX = cellX + 30, tY = cellY - cellR * 0.7 - 10;
+    ctx.beginPath(); ctx.arc(tX, tY, 10, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,215,0,0.25)'; ctx.fill();
+    ctx.strokeStyle = '#ffd70088'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.strokeStyle = '#ffd70044'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(tX, tY + 10); ctx.lineTo(tX, cellY - cellR * 0.1); ctx.stroke();
+    ap_label(tX + 14, tY - 4, 'trichome', '#ffd700aa', 'left');
+
+    // Artemisinin granules inside trichome (pulsing)
+    for (let i = 0; i < 5; i++) {
+      const a = (i/5)*Math.PI*2 + t*0.012;
+      ap_particle(tX + 5*Math.cos(a), tY + 5*Math.sin(a), 2,
+        'rgba(255,215,0,' + (0.5+pulse*0.4) + ')', 'rgba(255,215,0,0)');
+    }
+    ap_label(cellX, cellY + cellR + 12, 'Artemisia annua cell', '#00cc44cc');
+
+    // Extraction temperature decision (center)
+    const tempX = cx + 10;
+    ctx.strokeStyle = '#888888'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(tempX, 25); ctx.lineTo(tempX, H - 50); ctx.stroke();
+
+    // 100°C = rejected
+    ctx.strokeStyle = '#ff444488'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(tempX - 5, 35); ctx.lineTo(tempX + 5, 45); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(tempX + 5, 35); ctx.lineTo(tempX - 5, 45); ctx.stroke();
+    ctx.fillStyle = '#ff4444bb'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('100\u00b0C \u2014 destroys -O-O-', tempX + 10, 44);
+
+    // 35°C = selected
+    const y35 = H - 100;
+    const gCheck = ctx.createRadialGradient(tempX, y35, 0, tempX, y35, 10);
+    gCheck.addColorStop(0, 'rgba(0,255,153,0.5)'); gCheck.addColorStop(1, 'rgba(0,255,153,0)');
+    ctx.beginPath(); ctx.arc(tempX, y35, 10, 0, Math.PI*2);
+    ctx.fillStyle = gCheck; ctx.fill();
+    ctx.strokeStyle = '#00ff99'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(tempX - 6, y35); ctx.lineTo(tempX - 2, y35 + 5); ctx.lineTo(tempX + 7, y35 - 6); ctx.stroke();
+    ctx.fillStyle = '#00ff99cc'; ctx.font = '8px monospace'; ctx.textAlign = 'left';
+    ctx.fillText('35\u00b0C \u2014 preserves endoperoxide', tempX + 14, y35 + 3);
+
+    ap_label(tempX, H - 46, '\u2191 temperature', '#88888888');
+    ap_label(tempX - 30, H - 46, 'low', '#00ff9988', 'right');
+    ap_label(tempX - 30, 38, 'high', '#ff444488', 'right');
+
+    // Artemisinin trioxane ring (right panel)
+    const artX = W - 90, artY = cy;
+    // Outer hexagon
+    ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const a1 = (i/6)*Math.PI*2 - Math.PI/6, a2 = ((i+1)/6)*Math.PI*2 - Math.PI/6;
+      i===0 ? ctx.moveTo(artX + 26*Math.cos(a1), artY + 26*Math.sin(a1))
+            : ctx.lineTo(artX + 26*Math.cos(a1), artY + 26*Math.sin(a1));
+    }
+    ctx.closePath(); ctx.stroke();
+    // Inner peroxide bridge triangle
+    ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i < 3; i++) {
+      const a1 = (i/3)*Math.PI*2 - Math.PI/2, a2 = ((i+1)/3)*Math.PI*2 - Math.PI/2;
+      i===0 ? ctx.moveTo(artX + 13*Math.cos(a1), artY + 13*Math.sin(a1))
+            : ctx.lineTo(artX + 13*Math.cos(a1), artY + 13*Math.sin(a1));
+    }
+    ctx.closePath(); ctx.stroke();
+    // Pulsing endoperoxide center glow
+    ap_particle(artX, artY, 6 + pulse*4, 'rgba(255,68,136,' + (0.4+pulse*0.5) + ')', 'rgba(255,68,136,0)');
+    ap_label(artX, artY - 34, '1,2,4-trioxane', '#ffd700cc');
+    ap_label(artX, artY + 4, '-O-O-', '#ff4488cc');
+    ap_label(artX, artY + 36, 'endoperoxide bridge', '#ff448888');
+
+    ap_label(cx, H - 22, 'Project 523 (1967\u20131972) \u2014 2,000 herbs screened \u2192 Qinghao extract hit', '#ffd700cc');
+    ap_label(cx, H - 8, 'Key insight: 35\u00b0C ether extraction preserves thermolabile -O-O- bridge', '#ffd70088');
+
+  } else if (phase === 3) {
+    // ── Plasmodium falciparum food vacuole: Fe²⁺ activation → radical ──
+    const pulse = (Math.sin(t * 0.05) + 1) / 2;
+    const spark = (Math.sin(t * 0.12) + 1) / 2;
+
+    // RBC outline (host cell context)
+    ctx.beginPath(); ctx.ellipse(cx - 50, cy, 110, 75, 0, 0, Math.PI*2);
+    ctx.fillStyle = '#ff220008'; ctx.fill();
+    ctx.strokeStyle = '#ff220033'; ctx.lineWidth = 2; ctx.stroke();
+    ap_label(cx - 50, cy - 82, 'Erythrocyte', '#ff4444aa');
+
+    // Parasite body (trophozoite)
+    ctx.beginPath(); ctx.arc(cx - 50, cy, 60, 0, Math.PI*2);
+    ctx.fillStyle = '#aa448808'; ctx.fill();
+    ctx.strokeStyle = '#aa448844'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    // Food vacuole (digestive organelle inside parasite)
+    const vacX = cx - 65, vacY = cy + 5;
+    ctx.beginPath(); ctx.arc(vacX, vacY, 38, 0, Math.PI*2);
+    const gVac = ctx.createRadialGradient(vacX, vacY, 0, vacX, vacY, 38);
+    gVac.addColorStop(0, '#3a0a0a'); gVac.addColorStop(1, '#1a0505');
+    ctx.fillStyle = gVac; ctx.fill();
+    ctx.strokeStyle = '#ff884488'; ctx.lineWidth = 2; ctx.stroke();
+    ap_label(vacX, vacY - 44, 'Food vacuole', '#ff8844cc');
+
+    // Heme (hemozoin precursor) squares inside vacuole
+    if (layerState.endo) {
+      const hemes = [[vacX-15, vacY-18],[vacX+10, vacY-12],[vacX-18, vacY+10],[vacX+8, vacY+16]];
+      hemes.forEach(([hx, hy]) => {
+        ctx.fillStyle = '#cc440033'; ctx.strokeStyle = '#cc6600'; ctx.lineWidth = 1;
+        ctx.fillRect(hx - 7, hy - 7, 14, 14); ctx.strokeRect(hx - 7, hy - 7, 14, 14);
+        ctx.fillStyle = '#ff8800cc'; ctx.font = '6px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText('Fe\u00b2\u207a', hx, hy + 2.5);
+      });
+    }
+
+    // ART entering vacuole (pulsing yellow circle)
+    const artInX = vacX + 24, artInY = vacY - 20;
+    ap_particle(artInX, artInY, 8 + pulse*2, 'rgba(255,215,0,0.6)', 'rgba(255,215,0,0)');
+    ctx.fillStyle = '#221800'; ctx.font = '6px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('ART', artInX, artInY + 2.5);
+
+    // Reaction arrow (Fe²⁺ + ART → radical)
+    ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx - 22, cy); ctx.lineTo(cx + 22, cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx+15, cy-5); ctx.lineTo(cx+22, cy); ctx.lineTo(cx+15, cy+5); ctx.stroke();
+
+    // Carbon radical starburst (animated spikes)
+    const starX = cx + 28, starY = cy;
+    for (let i = 0; i < 10; i++) {
+      const a = (i/10)*Math.PI*2 + t*0.04;
+      const rLen = 10 + spark * 12;
+      ctx.strokeStyle = 'rgba(255,68,136,' + (0.35 + spark*0.6) + ')';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(starX, starY);
+      ctx.lineTo(starX + rLen*Math.cos(a), starY + rLen*Math.sin(a)); ctx.stroke();
+    }
+    ap_particle(starX, starY, 6 + spark*3, 'rgba(255,68,136,' + (0.6+spark*0.4) + ')', 'rgba(255,68,136,0)');
+    ap_label(starX, starY + 30, 'C\u00b7 radical', '#ff4488cc');
+    ap_label(starX, starY + 42, 'high reactivity', '#ff448888');
+
+    // Target proteins (alkylation victims — right side)
+    const targets = [
+      {label:'PfKRS1', sub:'K320', y: cy - 30},
+      {label:'PfPI3K', sub:'PI3K', y: cy + 5},
+      {label:'PfATP6', sub:'SERCA', y: cy + 40},
+    ];
+    targets.forEach(({label, sub, y}) => {
+      const tx = cx + 120;
+      ctx.beginPath(); ctx.ellipse(tx, y, 32, 14, 0, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(170,119,255,' + (0.08 + pulse*0.12) + ')'; ctx.fill();
+      ctx.strokeStyle = '#aa77ff88'; ctx.lineWidth = 1.5; ctx.stroke();
+      ap_label(tx, y + 2, label, '#aa77ffcc');
+      // dotted arrow from star
+      ctx.setLineDash([2,2]); ctx.strokeStyle = '#ff448855'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(starX + 16, starY); ctx.lineTo(tx - 34, y); ctx.stroke();
+      ctx.setLineDash([]);
+    });
+    ap_label(cx + 120, cy - 46, 'alkylation targets', '#aa77ff88');
+
+    ap_label(cx, H - 22, 'Fe(II)-heme cleaves -O-O- \u2192 C\u00b7 radical \u2192 alkylates Pf proteins', '#ff4488cc');
+    ap_label(cx, H - 8, 'IC50 1\u201310 nM; log4 parasite reduction in 24 h (ring/trophozo\u00efte stages)', '#ff448888');
+
+  } else if (phase === 4) {
+    // ── K13 propeller domain: C580Y resistance + drug pipeline ──
+    const pulse = (Math.sin(t * 0.04) + 1) / 2;
+
+    // K13 protein domain bar (left panel)
+    const domY = cy - 12, domX0 = 28, domW = 210, domH = 22;
+
+    // BTB/POZ domain
+    ctx.fillStyle = '#ff448822'; ctx.strokeStyle = '#ff4488'; ctx.lineWidth = 1.5;
+    ctx.fillRect(domX0, domY, 70, domH); ctx.strokeRect(domX0, domY, 70, domH);
+    ap_label(domX0 + 35, domY + 14, 'BTB/POZ', '#ff4488cc');
+
+    // BACK domain
+    ctx.fillStyle = '#aa77ff22'; ctx.strokeStyle = '#aa77ff'; ctx.lineWidth = 1.5;
+    ctx.fillRect(domX0 + 70, domY, 45, domH); ctx.strokeRect(domX0 + 70, domY, 45, domH);
+    ap_label(domX0 + 92, domY + 14, 'BACK', '#aa77ffcc');
+
+    // Kelch propeller
+    ctx.fillStyle = '#ffd70022'; ctx.strokeStyle = '#ffd700'; ctx.lineWidth = 1.5;
+    ctx.fillRect(domX0 + 115, domY, 95, domH); ctx.strokeRect(domX0 + 115, domY, 95, domH);
+    ap_label(domX0 + 163, domY + 14, 'Kelch \u03b2-propeller', '#ffd700cc');
+    ap_label(domX0 + 109, domY - 10, '444', '#ffffff44');
+    ap_label(domX0 + 209, domY - 10, '726', '#ffffff44');
+
+    // C580Y mutation site marker
+    const c580x = domX0 + 115 + (580 - 444) / (726 - 444) * 95;
+    const glowG = ctx.createRadialGradient(c580x, domY + domH/2, 0, c580x, domY + domH/2, 18);
+    glowG.addColorStop(0, 'rgba(255,68,68,' + (0.4+pulse*0.5) + ')');
+    glowG.addColorStop(1, 'rgba(255,68,68,0)');
+    ctx.beginPath(); ctx.arc(c580x, domY + domH/2, 18, 0, Math.PI*2);
+    ctx.fillStyle = glowG; ctx.fill();
+    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(c580x, domY - 2); ctx.lineTo(c580x, domY + domH + 2); ctx.stroke();
+    ap_label(c580x, domY - 20, 'C580Y', '#ff4444cc');
+
+    // PI3K ubiquitylation pathway (center)
+    const pi3kY = cy + 70;
+    // Normal: K13 → ubiquitylates PI3K → PI3P low
+    ap_label(cx - 80, pi3kY - 25, 'WT K13', '#00ff9988');
+    ctx.strokeStyle = '#00ff9966'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(cx-55, pi3kY-20); ctx.lineTo(cx-10, pi3kY-20); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-13, pi3kY-25); ctx.lineTo(cx-6, pi3kY-20); ctx.lineTo(cx-13, pi3kY-15); ctx.fill();
+    ap_label(cx + 20, pi3kY - 18, 'PI3K \u2193\u2193 (ubiquitylated)', '#00ff9988');
+
+    // C580Y impaired
+    ap_label(cx - 80, pi3kY + 12, 'C580Y', '#ff4444cc');
+    ctx.strokeStyle = '#ff444466'; ctx.lineWidth = 1.5; ctx.setLineDash([3,2]);
+    ctx.beginPath(); ctx.moveTo(cx-55, pi3kY+17); ctx.lineTo(cx-10, pi3kY+17); ctx.stroke();
+    ctx.setLineDash([]);
+    // X block
+    ctx.strokeStyle = '#ff4444'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx-18, pi3kY+10); ctx.lineTo(cx-8, pi3kY+24); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-8, pi3kY+10); ctx.lineTo(cx-18, pi3kY+24); ctx.stroke();
+    ap_label(cx + 20, pi3kY + 20, 'PI3P elevated \u2192 UPR', '#ff8844cc');
+
+    // Drug pipeline (right panel)
+    const pipeX0 = W - 190, pipeY0 = 30;
+    ap_label(pipeX0 + 85, pipeY0 + 8, 'Drug pipeline', '#ff8844cc');
+    const drugs = [
+      {name:'Artesunate',color:'#ffd700',  sub:'water-soluble IV'},
+      {name:'Artemether', color:'#aa77ff', sub:'oil-soluble oral'},
+      {name:'OZ439',      color:'#ff8844', sub:'synthetic (Phase 2)'},
+    ];
+    drugs.forEach(({name, color, sub}, i) => {
+      const dy = pipeY0 + 28 + i * 38;
+      ctx.fillStyle = color + '18'; ctx.strokeStyle = color + '88';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.roundRect(pipeX0, dy, 170, 28, 4); ctx.fill(); ctx.stroke();
+      ap_label(pipeX0 + 85, dy + 12, name, color + 'cc');
+      ap_label(pipeX0 + 85, dy + 23, sub, color + '88');
+      if (i < drugs.length - 1) {
+        ctx.strokeStyle = color + '66'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(pipeX0 + 85, dy + 28);
+        ctx.lineTo(pipeX0 + 85, dy + 38); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(pipeX0+80, dy+34); ctx.lineTo(pipeX0+85, dy+38); ctx.lineTo(pipeX0+90, dy+34); ctx.fill();
+      }
+    });
+
+    // K13 C580Y ripple in SE Asia (bottom)
+    if (layerState.res) {
+      const seaSites = [[cx-60,H-60],[cx-42,H-52],[cx-55,H-38],[cx-35,H-65],[cx-70,H-45]];
+      seaSites.forEach(([sx,sy], i) => {
+        const rp = (Math.sin(t*0.06 + i*0.9)+1)/2;
+        ap_particle(sx, sy, 5+rp*5, 'rgba(255,68,68,' + (0.25+rp*0.5) + ')', 'rgba(255,68,68,0)');
+      });
+      ap_label(cx - 52, H - 24, 'K13 C580Y spread (SE Asia \u2192 Africa)', '#ff4444cc');
+    }
+
+    ap_label(cx, H - 10, 'C580Y impairs PI3K ubiquitylation \u2192 PI3P \u2191 \u2192 UPR tolerance \u2192 ART-R', '#ff884488');
+  }
+}
+
+document.getElementById('btn-play').addEventListener('click', function() {
+  animRunning = !animRunning;
+  this.textContent = animRunning ? '\u23f8 Pause' : '\u25b6 Play';
+  if (animRunning) requestAnimationFrame(animLoop);
+});
+document.getElementById('btn-reset').addEventListener('click', () => {
+  animT = 0; animRunning = false;
+  document.getElementById('btn-play').textContent = '\u25b6 Play';
+  mechDraw(animPhase, 0);
+});
+document.getElementById('phase-slider').addEventListener('input', function() {
+  animPhase = +this.value;
+  const ph = PHASES[animPhase];
+  document.getElementById('phase-label').textContent = 'Phase ' + animPhase + ' \u2014 ' + ph.label.split('\u2014')[1].trim();
+  document.getElementById('phase-desc').textContent = ph.label;
+  animT = 0; mechDraw(animPhase, 0);
+});
+document.getElementById('speed-slider').addEventListener('input', function() {
+  animSpeed = +this.value;
+  document.getElementById('speed-label').textContent = animSpeed + '\u00d7';
+});
+
+function animLoop() {
+  if (!animRunning) return;
+  animT += animSpeed;
+  mechDraw(animPhase, animT);
+  requestAnimationFrame(animLoop);
+}
+mechDraw(0, 0);
+
+// ── Build mechanism panels ────────────────────────────────────────────────────
+(function buildMechPanels() {
+  const container = document.getElementById('mech-panels');
+  const panelData = [
+    { title:'Phase 0 \u2014 Soil Sampling & S. avermitilis Discovery', color:'#aa77ff', mol:'ivermectin',
+      body:'Satoshi \u014cmura\'s systematic soil sampling program collected ~50,000 actinomycetes strains near golf courses in Kawana, Japan (Streptomyces avermitilis \u2014 first isolated 1974). Serial dilution plating on starch-casein agar. Primary screens: anthelmintic activity against C. elegans, Nematospiroides dubius in mice. Merck collaboration (Campbell): avermectin B1a (15-membered macrolide) from S. avermitilis fermentation; semi-synthetic 22,23-dihydrogenation \u2192 ivermectin. First veterinary use 1981; human use (Mectizan) 1987.'},
+    { title:'Phase 1 \u2014 GluCl Mechanism & Invertebrate Selectivity', color:'#00e5ff', mol:'glucl',
+      body:'Ivermectin binds at the transmembrane subunit interface of homomeric/heteromeric GluCl receptors (Cys-loop LGIC family). Non-competitive allosteric mechanism: enhances glutamate sensitivity 100\u00d7 AND locks channel open independently of agonist. 3RHW crystal structure (Hibbs & Bhatt 2011, Nature): Y228 and Y232 on TM1, A288-A292 on TM3 form the binding pocket. P-glycoprotein (MDR1/ABCB1) at the blood-brain barrier extrudes ivermectin from CNS \u2014 explains >100:1 therapeutic index. P-gp null mice show CNS toxicity at doses safe in WT.'},
+    { title:'Phase 2 \u2014 Project 523, Traditional Medicine Screen & Artemisinin Isolation', color:'#ffd700', mol:'artemisinin',
+      body:'Youyou Tu screened 2,000+ traditional Chinese medicine compounds under Project 523 (1969-1972, secret military program for Vietnam War). Key insight from Ge Hong\'s 4th-century text (\u845b\u6d2a\u300a\u8098\u5f8c\u5099\u6025\u65b9\u300b): "A handful of qinghao immersed with two sheng of water, wring out the juice, and drink it all." The low-temperature ethanol extraction (35\u00b0C) preserved the thermolabile endoperoxide \u2014 high-temperature decoctions failed. Artemisinin crystal structure solved 1979 (Liu Jingming): unique 1,2,4-trioxane lactone with gem-dimethyl group.'},
+    { title:'Phase 3 \u2014 Endoperoxide Activation: Fe(II) Fenton Radical Chemistry', color:'#ff4488', mol:'artemisinin',
+      body:'Artemisinin activation requires Fe(II) \u2014 present at >100\u03bcM in the parasite food vacuole (Hb digestion releasing heme). Fe(II) cleaves the O-O bond homolytically (Fenton mechanism): artemisinin + Fe(II) \u2192 carbon-centered radical (C4 position) + Fe(III). Radical alkylates parasite proteins: PfKRS1 (lysyl-tRNA synthetase \u2014 Li et al. 2022 Nature Commun.) with K320 as primary alkylation site, EXP2 (nutrient channel), and heme itself. IC50 1-10 nM against ring/trophozoite stages. Rapid action: log 4 parasite reduction in 24h. Short half-life (~1h) prevents long-term resistance pressure \u2014 basis of ACT rationale.'},
+    { title:'Phase 4 \u2014 ACT Resistance: PfKelch13 & PI3P Pathway', color:'#ff8844', mol:'pfkelch13',
+      body:'PfKelch13 C580Y emerged in Cambodia ~2008, now dominates SE Asia (>90% in Myanmar, Vietnam, Thailand). Spread via partial selective sweep in PfKelch13 C580Y + PfCoronin background. ART-R \u2260 treatment failure alone: ACT partner resistance (piperaquine resistance via PfPlasmepsin 2/3 amplification) causes true ASMQ/DHA-PPQ failures. WHO 2024: C580Y detected in Rwanda, Uganda \u2014 first sub-Saharan Africa ART-R. OZ439 (artefenomel): fully synthetic endoperoxide, 3-day single dose, Phase 2 \u2014 potential artemisinin replacement for C580Y-prevalent regions.'},
+  ];
+
+  panelData.forEach(p => {
+    const panel = document.createElement('div');
+    panel.className = 'mech-panel';
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'mech-panel-title';
+    const bar = document.createElement('div');
+    bar.className = 'mech-panel-bar';
+    bar.style.background = p.color;
+    const titleText = document.createElement('span');
+    titleText.textContent = p.title;
+    titleText.style.color = p.color;
+    titleDiv.appendChild(bar);
+    titleDiv.appendChild(titleText);
+    const body = document.createElement('div');
+    body.className = 'mech-panel-body';
+    const parts = p.body.split(/<strong>|<\/strong>/);
+    parts.forEach((part, i) => {
+      if (i % 2 === 0) { body.appendChild(document.createTextNode(part)); }
+      else { const s = document.createElement('strong'); s.textContent = part; body.appendChild(s); }
+    });
+    if (p.mol) {
+      const chipRow = document.createElement('div');
+      chipRow.className = 'mol-chips-row';
+      const mol = MODULE_MOLS.find(m => m.id === p.mol);
+      if (mol) {
+        const chip = document.createElement('span');
+        chip.className = 'mol-chip' + (mol.is_protein ? ' protein' : ' small');
+        chip.style.borderColor = mol.color + '44';
+        chip.style.color = mol.color;
+        chip.textContent = mol.icon + ' ' + mol.name;
+        chip.style.cursor = 'pointer';
+        chip.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+        chipRow.appendChild(chip);
+        body.appendChild(chipRow);
+      }
+    }
+    panel.appendChild(titleDiv);
+    panel.appendChild(body);
+    container.appendChild(panel);
+  });
+})();
+
+// ── Build molecules tab ───────────────────────────────────────────────────────
+(function buildMolGrid() {
+  const grid = document.getElementById('mol-grid');
+  MODULE_MOLS.forEach(mol => {
+    const card = document.createElement('div');
+    card.className = 'mol-card';
+    card.style.setProperty('--accent', mol.color);
+    card.style.borderColor = mol.color + '33';
+    const icon = document.createElement('div'); icon.className = 'mol-card-icon'; icon.textContent = mol.icon;
+    const name = document.createElement('div'); name.className = 'mol-card-name'; name.textContent = mol.name; name.style.color = mol.color;
+    const type = document.createElement('div'); type.className = 'mol-card-type'; type.textContent = mol.type;
+    const role = document.createElement('div'); role.className = 'mol-card-role';
+    role.textContent = (mol.badges || []).map(b => b.text).join(' \u00b7 ');
+    card.appendChild(icon); card.appendChild(name); card.appendChild(type); card.appendChild(role);
+    card.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    grid.appendChild(card);
+  });
+})();
+
+// ── Build story tab ───────────────────────────────────────────────────────────
+(function buildStory() {
+  const container = document.getElementById('story-content');
+  const events = [
+    {year:'1974', text:'\u014cmura isolates Streptomyces avermitilis OS-3153 from soil near Kawana golf course, Japan. Sends to William Campbell at Merck Research Laboratories for anthelmintic screening. One of ~50,000 actinomycetes isolates in the \u014cmura library.'},
+    {year:'1979', text:'Campbell at Merck confirms potent avermectin activity against nematodes. Semi-synthetic 22,23-dihydrogenation produces ivermectin \u2014 superior stability and potency. "Wonder drug" emerges. In parallel, Youyou Tu publishes artemisinin crystal structure (Kexue Tongbao 1979) after Project 523 isolation.'},
+    {year:'1987', text:'Mectizan Donation Program launched (Merck/WHO) \u2014 free ivermectin to countries endemic for onchocerciasis (river blindness). First mass drug administration program of its kind. Tu\'s artemisinin work suppressed for 20 years by secrecy around Project 523 (classified military program). No Western publications, no patents in her name.'},
+    {year:'1994\u20132001', text:'WHO recommends ACT (artemisinin combination therapy) after artemisinin monotherapy failures. Artesunate, artemether, dihydroartemisinin developed as improved derivatives. 700M ACT treatments per year by 2015. River blindness eliminated from 11 African countries via Mectizan MDA.'},
+    {year:'2008', text:'ART-R first documented clinically in Cambodia (Noedl et al., NEJM). Patients on artesunate show slow parasite clearance. PfKelch13 mutations identified 2014 as molecular marker (Ariey et al., Nature) \u2014 C580Y, R539T, Y493H, I543T in kelch propeller domain.'},
+    {year:'2015', text:'Nobel Prize awarded to Campbell, \u014cmura, and Tu \u2014 "for discoveries concerning novel therapies against infections caused by roundworm parasites and for her discoveries concerning a novel therapy against malaria." Tu never published in Western peer-reviewed journals during Project 523; discovered through declassification and Miller (2011) investigation.'},
+  ];
+  events.forEach(ev => {
+    const block = document.createElement('div');
+    block.className = 'story-block panel-card';
+    const yearTag = document.createElement('span');
+    yearTag.className = 'story-year-tag';
+    yearTag.textContent = ev.year;
+    const text = document.createElement('span');
+    text.style.fontSize = '.76rem';
+    text.style.color = '#8888b0';
+    text.style.lineHeight = '1.6';
+    text.textContent = ev.text;
+    block.appendChild(yearTag);
+    block.appendChild(text);
+    container.appendChild(block);
+  });
+})();
+
+// ── Build frontiers tab ───────────────────────────────────────────────────────
+(function buildFrontiers() {
+  const container = document.getElementById('frontiers-content');
+  const groups = [
+    { title:'Clinical Pipeline (2023\u20132026)', items:[
+      {title:'OZ439 (artefenomel) \u2014 Synthetic Endoperoxide', body:'Fully synthetic ozonide endoperoxide. Phase 2 completed 2023. Single 3-day oral dose \u2014 designed for non-ACT use in K13-resistant areas. OZ439/ferroquine combination FALCI trial: 91% cure rate in GT3 (>2 day parasite clearance time, enriched ART-R). No sesquiterpene scaffold \u2014 chemically stable, manufacturable without Artemisia annua farming.'},
+      {title:'Moxidectin \u2014 Long-Acting GluCl Agonist', body:'New milbemycin (same GluCl mechanism as ivermectin) with longer half-life (t\u00bd 20 days vs 12h ivermectin). FDA approved 2018 for river blindness. Single dose vs 2-dose annual ivermectin. Lymphatic filariasis (elephantiasis) MDA programs ongoing. Higher CNS penetration in CF-1 mice (lower P-gp expression) \u2014 safety monitoring required.'},
+      {title:'Ivermectin for Malaria Transmission Blocking', body:'Ivermectin in human blood is toxic to Anopheles mosquitoes that blood-feed. IVCC mass drug administration trials (RIMDAMAL II, 2023): 40% reduction in mosquito survival, 30% malaria incidence reduction. Potential adjunct tool in ACT-resistant endemic regions. Dose: 300 \u03bcg/kg \u00d7 3 days monthly \u2014 safe, well-tolerated.'},
+    ]},
+    { title:'AI & Computational Approaches', items:[
+      {title:'ML-Guided Natural Product Library Dereplication', body:'GNPS (Global Natural Products Social Molecular Networking) + GNN models identify novel bioactive metabolites from Streptomyces metagenomes without culture. Predicted 3,000+ novel siderophores and macrolides from soil metagenomes (2023). Avoids rediscovery of known compounds \u2014 critical bottleneck in natural product screening programs.'},
+      {title:'AlphaFold3 \u2014 K13 Propeller-PI3K Interface', body:'AlphaFold3 predicted PfKelch13 propeller\u2013PI3K interface dynamics \u2014 revealing cryptic binding pocket for small molecule PI3K-K13 disruptors as potential resistance-reversal agents. MD simulations show C580Y opens a groove not present in WT \u2014 druggable cavity for "resistance breaker" compounds.'},
+    ]},
+    { title:'Open Questions', items:[
+      {title:'Why is C580Y the dominant ART-R allele?', body:'C580Y dominates SE Asia despite R539T and Y493H conferring higher RSA (ring-stage survival assay) scores in vitro. Fitness cost landscape vs. genetic background polymorphisms (PfCoronin, PfCRT, kelch background) not fully resolved. Possible explanation: C580Y has lower fitness cost in field isolate backgrounds than higher-RSA alleles.'},
+      {title:'Ivermectin mechanism in ectoparasites', body:'GluCl absent in insects \u2014 alternative target? GluCl-like GABA receptors or glutamate-gated receptors in Drosophila used as proxy but louse/tick mechanism poorly characterized. Possible role: ivermectin binding to insect GluCl orthologs (Drosophila GluCl\u03b1) with lower affinity, or ABC transporter modulation.'},
+      {title:'Artemisinin target hierarchy \u2014 PfKRS1 vs. 120+ protein adducts', body:'Proteomic pulldown studies identify 120+ artemisinin\u2013protein adducts. PfKRS1 (K320 alkylation, Li et al. 2022) is leading candidate but causal sufficiency not proven. EXP2 nutrient channel alkylation may contribute independently. Target hierarchy and dose-response relationship for each adduct site unclear.'},
+    ]},
+    { title:'Industry & Translational Applications', items:[
+      {title:'Macrolide Natural Product Platform', body:'Avermectin\'s success drove systematic screening of all Streptomyces classes. Modern analogs: spinosad (insecticide, Saccharopolyspora spinosa), emamectin, selamectin (veterinary). The avermectin scaffold generates ~$1B/year commercial value. Spinosad approved as first-line head lice treatment (Natroba) \u2014 GluCl mechanism in insects via different subunit composition.'},
+      {title:'Artemisinin Supply Chain: Yeast Semi-Synthesis', body:'80% of artemisinin from Artemisia annua farming (China, Vietnam) \u2014 seasonal supply variability. Sanofi/Amyris semi-synthetic artemisinic acid from engineered yeast (CYP71AV1, ADH1, ALDH1 pathway) \u2014 35 tonnes/year capacity since 2014. Addresses supply shortage and price volatility. WHO prequalified artesunate uses semi-synthetic route.'},
+    ]},
+  ];
+  groups.forEach(g => {
+    const section = document.createElement('div');
+    section.className = 'frontier-group';
+    const title = document.createElement('div');
+    title.className = 'frontier-group-title';
+    title.textContent = g.title;
+    section.appendChild(title);
+    g.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'frontier-item';
+      const it = document.createElement('div'); it.className = 'frontier-item-title'; it.textContent = item.title;
+      const ib = document.createElement('div'); ib.className = 'frontier-item-body'; ib.textContent = item.body;
+      card.appendChild(it); card.appendChild(ib);
+      section.appendChild(card);
+    });
+    container.appendChild(section);
+  });
+})();
+
+// ── Build right sidebar ───────────────────────────────────────────────────────
+(function buildRsidebar() {
+  const molList = document.getElementById('rsb-mols');
+  MODULE_MOLS.forEach(mol => {
+    const item = document.createElement('div');
+    item.className = 'rsb-mol-item';
+    const icon = document.createElement('div'); icon.className = 'rsb-mol-icon'; icon.textContent = mol.icon;
+    const nameCol = document.createElement('div'); nameCol.style.flex = '1';
+    const name = document.createElement('div'); name.className = 'rsb-mol-name'; name.textContent = mol.name;
+    const id = document.createElement('div'); id.className = 'rsb-mol-id';
+    id.textContent = mol.pubchem_cid ? 'CID ' + mol.pubchem_cid : (mol.pdb_id || '');
+    nameCol.appendChild(name); nameCol.appendChild(id);
+    item.appendChild(icon); item.appendChild(nameCol);
+    item.addEventListener('click', () => { if (window.MolModal) MolModal.open(mol); });
+    molList.appendChild(item);
+  });
+
+  const paperList = document.getElementById('rsb-papers');
+  const papers = [
+    {year:'1979', journal:'Kexue Tongbao', title:'A new sesquiterpene peroxide from Artemisia annua (qinghaosu) \u2014 isolation and structure \u2014 Youyou Tu et al.'},
+    {year:'1981', journal:'Antimicrob Agents Chemother', title:'Ivermectin: a new broad-spectrum antiparasitic \u2014 Campbell, \u014cmura'},
+    {year:'2011', journal:'Nature', title:'X-ray structure of pentameric LGIC in open conformation (GluCl 3RHW) \u2014 Hibbs, Bhatt'},
+    {year:'2014', journal:'Nature', title:'A molecular marker of artemisinin-resistant P. falciparum \u2014 Ariey, Witkowski, Amaratunga'},
+  ];
+  papers.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+    const year = document.createElement('div'); year.className = 'ref-year'; year.textContent = p.year + ' \u00b7 ' + p.journal;
+    const title = document.createElement('div'); title.className = 'ref-title'; title.textContent = p.title;
+    item.appendChild(year); item.appendChild(title);
+    paperList.appendChild(item);
+  });
+})();
+
+// ── Connections canvas ────────────────────────────────────────────────────────
+function drawConnections() {
+  const cv = document.getElementById('conn-canvas');
+  const W = cv.offsetWidth || 600, H = 360;
+
+  const nodes = [
+    {id:'anti',   x:W*.5,  y:H*.5,  r:38, color:'#aa77ff', label:'Antiparasitic\n2015',    sub:'Nobel 2015'},
+    {id:'trp',    x:W*.2,  y:H*.2,  r:26, color:'#ff8844', label:'2021 TRP\nChannels',      sub:'Ion channel pharmacology'},
+    {id:'mrna',   x:W*.78, y:H*.2,  r:26, color:'#44ffcc', label:'2023 mRNA\nVaccines',     sub:'Vaccine adjuvants'},
+    {id:'glucl',  x:W*.1,  y:H*.55, r:22, color:'#00e5ff', label:'GluCl\nTarget',           sub:'LGIC drug target'},
+    {id:'actr',   x:W*.88, y:H*.55, r:22, color:'#ff4488', label:'ACT\nResistance',         sub:'WHO 2030 threat'},
+    {id:'np',     x:W*.28, y:H*.85, r:22, color:'#ffd700', label:'Natural\nProducts',        sub:'~50% approved drugs'},
+    {id:'strep',  x:W*.7,  y:H*.85, r:22, color:'#00ff99', label:'Streptomyces\nPlatform',  sub:'Avermectin \u2192 spinosad'},
+    {id:'ntd',    x:W*.5,  y:H*.08, r:22, color:'#aa77ff', label:'WHO NTD\nProgram',        sub:'Mectizan donation'},
+  ];
+  const edges = [
+    {from:'anti',to:'trp',   color:'#ff884455', label:'GluCl/TRPV1\nboth targeted by\nnatural products'},
+    {from:'anti',to:'mrna',  color:'#44ffcc55', label:'mRNA vaccines +\nivermectin\nimmunostimulant hypothesis'},
+    {from:'anti',to:'glucl', color:'#00e5ff55', label:'LGIC\ndrug target\nfamily'},
+    {from:'anti',to:'actr',  color:'#ff448855', label:'K13 C580Y\nART-R clinical\nchallenge'},
+    {from:'anti',to:'np',    color:'#ffd70055', label:'~50% approved\ndrugs from\nnatural products'},
+    {from:'anti',to:'strep', color:'#00ff9955', label:'Avermectin\u2192spinosad\n\u2192erythromycin family'},
+    {from:'anti',to:'ntd',   color:'#aa77ff55', label:'Mectizan donation\nriver blindness\nelimination'},
+  ];
+
+  if (window.initConnMap) { window.initConnMap(cv, nodes, edges, W, H); }
+}
+</script>
+
+<!-- Shared infrastructure (load after module data) -->
+<script src="../shared/glossary-data.js"></script>
+<script src="../shared/glossary-tooltip.js"></script>
+<script src="../shared/connections.js"></script>
+<script src="../shared/molecule-modal.js"></script>
+<script src="../shared/auto-start.js"></script>
+<script src="../shared/mech-theater.js" defer></script>
+</body>
+</html>

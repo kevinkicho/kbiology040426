@@ -5,6 +5,8 @@ Run once: python fetch_data.py
 Requires: pip install requests
 """
 import json, time, sys
+import xml.etree.ElementTree as ET
+from datetime import datetime, timezone
 from pathlib import Path
 
 try:
@@ -17,13 +19,40 @@ DATA.mkdir(exist_ok=True)
 MANIFEST = json.loads((DATA / "molecules_manifest.json").read_text())
 HDR = {"User-Agent": "kbiology-learning-tool/1.0 (educational)"}
 
+def fetch_json(url, timeout=10, tries=3):
+    """GET url as JSON with exponential backoff. Returns {} on final failure."""
+    delay = 0.5
+    for attempt in range(1, tries + 1):
+        try:
+            r = requests.get(url, headers=HDR, timeout=timeout)
+            r.raise_for_status()
+            return r.json()
+        except Exception as e:
+            if attempt == tries:
+                print(f"  WARN {url}: {e}")
+                return {}
+            time.sleep(delay)
+            delay *= 2
+
+def fetch_text(url, timeout=15, tries=3):
+    delay = 0.5
+    for attempt in range(1, tries + 1):
+        try:
+            r = requests.get(url, headers=HDR, timeout=timeout)
+            r.raise_for_status()
+            return r.text
+        except Exception as e:
+            if attempt == tries:
+                print(f"  WARN {url}: {e}")
+                return ""
+            time.sleep(delay)
+            delay *= 2
+
 def pubchem(cid):
     url = f"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/property/MolecularFormula,MolecularWeight,XLogP,HBondDonorCount,HBondAcceptorCount,TPSA,IUPACName/JSON"
-    try:
-        r = requests.get(url, headers=HDR, timeout=10); r.raise_for_status()
-        p = r.json()["PropertyTable"]["Properties"][0]
-    except Exception as e:
-        print(f"  WARN CID {cid}: {e}"); p = {}
+    j = fetch_json(url)
+    props = (j.get("PropertyTable") or {}).get("Properties") or [{}]
+    p = props[0] or {}
     time.sleep(0.4)
     return {"cid":cid,"formula":p.get("MolecularFormula",""),"weight":p.get("MolecularWeight",""),
             "xlogp":p.get("XLogP",""),"hbd":p.get("HBondDonorCount",""),"hba":p.get("HBondAcceptorCount",""),
@@ -32,15 +61,12 @@ def pubchem(cid):
 
 def pdb(pid):
     url = f"https://data.rcsb.org/rest/v1/core/entry/{pid.upper()}"
-    try:
-        r = requests.get(url, headers=HDR, timeout=10); r.raise_for_status(); d = r.json()
-        ref = (d.get("refine") or [{}])[0] or {}
-        res = ref.get("ls_dres_high") or ref.get("ls_d_res_high","")
-        # EM structures use em_3d_reconstruction instead
-        if not res and d.get("em3d_reconstruction"):
-            res = (d["em3d_reconstruction"][0] or {}).get("resolution","")
-    except Exception as e:
-        print(f"  WARN PDB {pid}: {e}"); d = {}; res = ""
+    d = fetch_json(url)
+    ref = (d.get("refine") or [{}])[0] or {}
+    res = ref.get("ls_d_res_high", "")
+    # EM structures use em_3d_reconstruction instead
+    if not res and d.get("em_3d_reconstruction"):
+        res = (d["em_3d_reconstruction"][0] or {}).get("resolution", "")
     time.sleep(0.4)
     return {"pdb_id":pid.upper(),"title":d.get("struct",{}).get("title","") if d.get("struct") else "",
             "method":((d.get("exptl") or [{}])[0] or {}).get("method",""),
@@ -49,16 +75,17 @@ def pdb(pid):
 
 def pubmed(pmid):
     url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id={pmid}&retmode=xml"
-    try:
-        import xml.etree.ElementTree as ET
-        r = requests.get(url, headers=HDR, timeout=15); r.raise_for_status()
-        root = ET.fromstring(r.text); art = root.find(".//Article")
-        title = art.findtext("ArticleTitle","") if art else ""
-        abstract = " ".join(t.text or "" for t in root.findall(".//AbstractText"))
-        year = root.findtext(".//PubDate/Year") or ""
-        journal = art.findtext(".//Journal/Title","") if art else ""
-    except Exception as e:
-        print(f"  WARN PMID {pmid}: {e}"); title=abstract=year=journal=""
+    body = fetch_text(url)
+    title = abstract = year = journal = ""
+    if body:
+        try:
+            root = ET.fromstring(body); art = root.find(".//Article")
+            title = art.findtext("ArticleTitle","") if art else ""
+            abstract = " ".join(t.text or "" for t in root.findall(".//AbstractText"))
+            year = root.findtext(".//PubDate/Year") or ""
+            journal = art.findtext(".//Journal/Title","") if art else ""
+        except Exception as e:
+            print(f"  WARN PMID {pmid} parse: {e}")
     time.sleep(0.4)
     return {"pmid":pmid,"title":title,"abstract":abstract,"year":year,"journal":journal,
             "url":f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"}
@@ -82,7 +109,14 @@ for p in MANIFEST["pubmed_ids"]:
     print(f"  PMID {p['pmid']}")
     papers[str(p["pmid"])] = {**pubmed(p["pmid"]), "topic": p["topic"]}
 
-(DATA/"compounds.json").write_text(json.dumps(compounds, indent=2))
-(DATA/"proteins.json").write_text(json.dumps(proteins,  indent=2))
-(DATA/"papers.json").write_text(json.dumps(papers,     indent=2))
-print(f"\nDone. compounds: {len(compounds)}, proteins: {len(proteins)}, papers: {len(papers)}")
+# Stamp every output with an ISO-8601 UTC timestamp so stale snapshots are
+# detectable without reading git history. `_meta` is namespaced so it can't
+# collide with a real CID/PDB/PMID key.
+now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+def stamp(d):
+    return {"_meta": {"fetched_at": now, "count": len(d)}, **d}
+
+(DATA/"compounds.json").write_text(json.dumps(stamp(compounds), indent=2))
+(DATA/"proteins.json").write_text(json.dumps(stamp(proteins),  indent=2))
+(DATA/"papers.json").write_text(json.dumps(stamp(papers),     indent=2))
+print(f"\nDone. compounds: {len(compounds)}, proteins: {len(proteins)}, papers: {len(papers)}  @ {now}")
